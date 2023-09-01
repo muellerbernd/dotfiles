@@ -1,0 +1,48 @@
+[alias]
+    sla = "!git --no-pager log --oneline --decorate --all --graph -35"
+    pfwl = "push --force-with-lease"
+    pr = "!hub pull-request --browse"
+      # list branches ordered by change time
+    br = "!git for-each-ref --format='%(committerdate:short),%(authorname),%(refname:short)' --sort=committerdate refs/heads/ | column -t -s ','"
+    bra = branch -a
+    ci = commit
+    co = checkout
+    cim = commit -m
+    # Show minimal diffs instead of whole lines changed and highlight trailing whitespace in diffs
+    df = diff --color-words=. --ws-error-highlight=new,old
+    dfs = diff --staged --ws-error-highlight=new,old
+    # Find a string but omit strings with lendth over 400 chars
+    find = "!f() { str=${@}; echo $str; git grep -E -e$str --and --not -e '.{400}'; }; f"
+    i = update-index --assume-unchanged
+    l = log --oneline --graph --decorate
+    lg = log -p
+    ls = ls-files
+    pom = push origin master
+    # push current branch
+    po = "!git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\""
+    st = status
+    # stash unstaged only
+    stuo = "!f() { git stash save --keep-index "Unstaged only" && git stash save "Staged only" && git stash pop && git add . --all && git status; }; f"
+    # uncommit last
+    unc = reset --soft HEAD^
+    unstage = reset HEAD --
+[color]
+    ui = auto
+[user]
+    email = github@muellerbernd.de
+    name = Bernd Müller
+[includeIf "gitdir:~/git/fhg/"] # job needs, like workspace/* so all included projects
+    path = ~/.gitconfig-job
+[includeIf "gitdir:~/work/"] # job needs, like workspace/* so all included projects
+    path = ~/.gitconfig-job
+[credential]
+    helper = store
+[pull]
+    rebase = false
+[init]
+    defaultBranch = main
+
+
+; [url "archlinux-aur:"]
+;     insteadOf = https://aur.archlinux.org/
+

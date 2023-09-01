@@ -1,0 +1,35 @@
+input:
+
+  mode : "single"
+
+  steering_topic_name : "/joy"
+
+  planner_topic_name : "/move_base"
+
+  translation_axis : 1
+
+  rotation_axis : 3
+
+  teleoperation_mode_button : 1 # B
+
+  autonomous_mode_button : 0 # A
+
+  use_dead_man_switch_button : true
+
+  dead_man_switch_button: 3
+
+  maximum_message_hold_duration: 1
+
+drive:
+
+  mode : "ackermann"
+
+  translation_scaling_factor : 0.5
+
+  rotation_scaling_factor : 0.4
+
+output:
+
+  mode : "real_standard"
+
+  topic_name : /cmd_vel

@@ -1,0 +1,7 @@
+/** Basic config file **/
+
+configuration {
+  show-icons:         true;
+  icon-theme:         "OneDark";
+}
+@theme "/home/bernd/.config/rofi/themes/oneDark.rasi"

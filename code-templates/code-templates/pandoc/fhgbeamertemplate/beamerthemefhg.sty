@@ -1,0 +1,53 @@
+% 2019/12/20 FhG LaTeX Beamer Theme according to 2012/09 Fraunhofer Corporate Design
+\mode<presentation>
+
+% Requirement
+\RequirePackage{tikz}
+\usetikzlibrary{positioning, calc}
+\usepackage{pgfplots} % plots in TikZ
+\pgfplotsset{
+    compat=newest,
+    tick label style={/pgf/number format/assume math mode=true}, % custom font in axis tick labels
+}
+
+% Font settings
+% FhG CD (2012/09) font sizes at 254mm x 190.5mm (128mm x 96mm):
+% Type          PPT size    Beamer equivalent   LaTeX 9pt
+% Title:        32pt bold   16.1pt              \Huge (=17.28pt)
+% Frametitle:   24pt bold   12.1pt              \LARGE (=12pt)
+% Body:         18pt        9pt                 base style
+% Pagenumber:   8pt         4pt                 using 5pt footer size \tiny instead
+% Footer:       10pt bold   5pt                 \tiny
+% \usepackage{fontspec} % needs % (!)TeX program = lualatex
+\usefonttheme{serif} % default family is serif
+% \setmainfont[
+%   BoldFont={Frutiger LT Com 65 Bold},
+%   ItalicFont={Frutiger LT Com 56 Italic},
+%   BoldItalicFont={Frutiger LT Com 66 Bold Italic},
+%   ]{Frutiger LT Com 45 Light}
+
+% Page layout
+\setbeamersize{text margin left=6.55mm, text margin right=6.55mm} % 1.3cm*128/254
+
+% Additional variables
+\newcommand{\address}[1]{\def\insertaddress{#1}}
+\address{} % initialize empty
+\newcommand{\homepage}[1]{\def\inserthomepage{#1}}
+\homepage{} % initialize empty
+\newcommand{\skyline}[2]{\def\insertskyline{#1}\def\insertskylinetext{#2}}
+\skyline{}{} % initialize empty, fallback to plain horizontal line
+\newcommand{\institutelogo}[1]{\def\insertinstitutelogo{#1}}
+\institutelogo{fhg} % initialize with unbranded FhG logo
+
+% Settings
+\useinnertheme{fhg}
+\useoutertheme{fhg}
+\usecolortheme{fhg}
+
+\setbeamertemplate{navigation symbols}{} % Remove beamer navigation symbols
+
+% Items
+\setbeamertemplate{items}[square]
+\setbeamertemplate{sections/subsections in toc}[square] % Square bullets for subsections in ToC
+
+\mode<all>

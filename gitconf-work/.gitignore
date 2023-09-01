@@ -1,0 +1,5 @@
+*
+!.gitconfig-job.gpg
+gitconfig-job
+!.gitignore
+!.stow-local-ignore

@@ -1,0 +1,61 @@
+# load theme and other stuff, same for all devices
+include ~/.config/i3/one_for_all.conf
+# set variable because it can not be loaded from parent file
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+# show tray icons on the primary monitor
+bar {
+    tray_output primary
+    status_command i3status --config ~/.config/i3status/config
+}
+
+### SET MODIFIERS ###{{{
+set $mod Mod4
+set $mode_display Ext Screen (v) VGA ON, (h) HDMI ON, (x) VGA OFF, (y) HDMI OFF, (d) DOCK ON, (e) DOCK VGA, (o) DOCK OFF, (p) Presentation
+# }}}
+
+# mode "$mode_display" {
+#     bindsym v exec --no-startup-id xrandr --output DP2 --auto --left-of eDP1, mode "default" ; exec ~/.config/polybar/launch.sh
+#     bindsym h exec --no-startup-id xrandr --output HDMI2 --auto --left-of eDP1, mode "default" ; exec ~/.config/polybar/launch.sh
+#     bindsym p exec --no-startup-id xrandr --output HDMI2 --auto --left-of eDP1, mode "default"
+#     # bindsym p exec --no-startup-id xrandr --output HDMI2 --mode 1920x1080 --output eDP1 --primary --scale-from 1920x1080, mode "default"
+#     bindsym d exec --no-startup-id xrandr --output DP2-1 --auto --left-of eDP1, mode "default" ; exec ~/.config/polybar/launch.sh
+#     bindsym e exec --no-startup-id xrandr --output DP2-3 --auto --left-of eDP1, mode "default" ; exec ~/.config/polybar/launch.sh
+#     bindsym x exec --no-startup-id xrandr --output DP2 --auto --off, mode "default" ; exec ~/.config/polybar/launch.sh
+#     bindsym y exec --no-startup-id xrandr --output HDMI2 --auto --off, mode "default" ; exec ~/.config/polybar/launch.sh
+#     bindsym o exec --no-startup-id xrandr --output DP2-1 --auto --off --output DP2-2 --auto --off --output DP2-3 --auto --off, mode "default" ; exec ~/.config/polybar/launch.sh
+#
+#     # back to normal: Enter or Escape
+#     bindsym Return mode "default"
+#     bindsym Escape mode "default"
+# }
+
+mode "$mode_display" {
+    bindsym v exec --no-startup-id xrandr --output DP2 --auto --left-of eDP1, mode "default"
+    bindsym h exec --no-startup-id xrandr --output HDMI2 --auto --left-of eDP1, mode "default"
+    bindsym p exec --no-startup-id xrandr --output HDMI2 --auto --left-of eDP1, mode "default"
+    # bindsym p exec --no-startup-id xrandr --output HDMI2 --mode 1920x1080 --output eDP1 --primary --scale-from 1920x1080, mode "default"
+    bindsym d exec --no-startup-id xrandr --output DP2-1 --auto --left-of eDP1, mode "default"
+    bindsym e exec --no-startup-id xrandr --output DP2-3 --auto --left-of eDP1, mode "default"
+    bindsym x exec --no-startup-id xrandr --output DP2 --auto --off, mode "default"
+    bindsym y exec --no-startup-id xrandr --output HDMI2 --auto --off, mode "default"
+    bindsym o exec --no-startup-id xrandr --output DP2-1 --auto --off --output DP2-2 --auto --off --output DP2-3 --auto --off, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+x mode "$mode_display"
+
+workspace 2 output DP2 HDMI1
+workspace 1 output DP2-1 DP2-2 DP2-3
+
+exec --no-startup-id redshift -P -O 0
+exec --no-startup-id indicator-keylock
+exec --no-startup-id sleep 6 && nextcloud
+exec --no-startup-id xrandr --output eDP-1 --primary --mode 1920x1080 --auto --pos 0x0 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-2-1 --off --output DP-2-2 --off --output DP-2-3 --off --output HDMI-1 --off --output HDMI-2 --off --output VIRTUAL1 --off
+# Disable DPMS and prevent screen from blanking
+exec --no-startup-id xset s off -dpms
+# exec --no-startup-id systemctl --user start spotifyd.service

@@ -1,0 +1,1 @@
+sudo cp LatexIndent /usr/share/texmf-dist/scripts/latexindent/ -r

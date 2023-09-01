@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package format="2">
+    <name>kate_follow_line</name>
+    <version>0.0.0</version>
+    <description>This node can be used to put KATE in line
+    following mode</description>
+    <author>Bernd Müller</author>
+    <maintainer email="bernd.mueller@iosb-ast.fraunhofer.de">Bernd Müller</maintainer>
+    <maintainer email="bernd@muellerbernd.de">Bernd Müller</maintainer>
+    <license>Fraunhofer proprietary</license>
+    <buildtool_depend>catkin</buildtool_depend>
+    <build_depend>goetting_hg_08230_msgs</build_depend>
+    <build_depend>kate_blinker_interface_msgs</build_depend>
+    <exec_depend>goetting_hg_08230_msgs</exec_depend>
+    <exec_depend>kate_blinker_interface_msgs</exec_depend>
+</package>

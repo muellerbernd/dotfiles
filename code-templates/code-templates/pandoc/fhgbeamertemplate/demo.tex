@@ -1,0 +1,62 @@
+\documentclass{fhgbeamer169}
+
+\title{Fraunhofer \LaTeX~Beamer Template}
+\subtitle{In Corporate Design}
+\author[Mustermann]{Max Mustermann}
+\institute[Fraunhofer Institute] % (short version)
+{% do not remove this line end comment to avoid unintended whitespace
+  Fraunhofer Institute
+}
+\institutelogo{fhg}
+\address{Musterstraße 100\\01069 Dresden\\Germany}
+\homepage{www.fraunhofer.de}
+
+\makeatletter
+\newcommand\thefontsize[2]{{#1 The current \textbackslash #2 font size is: \f@size pt\par}}
+\makeatother
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Font sizes}{Scaled to match PowerPoint style}
+The Beamer 4:3 canvas is 128mm x 96mm while PowerPoint uses 254mm x 190.5mm\\[1\baselineskip]
+\thefontsize\tiny{tiny}
+\thefontsize\scriptsize{scriptsize}
+\thefontsize\footnotesize{footnotesize}
+\thefontsize\small{small}
+\thefontsize\normalsize{normalsize}
+\thefontsize\large{large}
+\thefontsize\Large{Large}
+\thefontsize\LARGE{LARGE}
+\thefontsize\huge{huge}
+\thefontsize\Huge{Huge}
+\end{frame}
+
+\begin{frame}{Objectives}{Create beautiful presentations with \LaTeX~Beamer}
+\begin{itemize}
+\item A nice alternative to PowerPoint
+\end{itemize}
+\begin{columns}[onlytextwidth]
+\column{0.6\textwidth}
+\begin{exampleblock}{How to?}
+\begin{itemize}
+    \item Use \LaTeX~and TikZ to present your cool stuff
+\end{itemize}
+\end{exampleblock}
+\column{0.35\textwidth}
+\begin{alertblock}{Difficulties}
+\begin{itemize}
+    \item Get used to syntax
+\end{itemize}
+\end{alertblock}
+\end{columns}
+\pause
+\begin{block}{Outcome}
+\begin{itemize}
+    \item Beautiful presentations
+\end{itemize}
+\end{block}
+\end{frame}
+
+\end{document}

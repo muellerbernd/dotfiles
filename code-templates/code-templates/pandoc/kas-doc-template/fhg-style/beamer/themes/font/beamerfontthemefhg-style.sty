@@ -1,0 +1,42 @@
+%%
+%% This is file `beamerfontthemefhg-style.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% fhg-style.dtx  (with options: `beamer:theme:font')
+%% 
+%% Der FhG-Stil steht unter dem Copyright des Fraunhofer FOKUS Berlin.
+%% (c) 2002-2010 Fraunhofer ISST Berlin
+%% (c) seit 2012 Fraunhofer FOKUS Berlin
+%% Informationen: Ekkart.Kleinod@fokus.fraunhofer.de
+%% 
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerfontthemefhg-style}
+[2022/01/04 v2.6.0 FhG-Stil]
+\typeout{*** FhG-Beamer-Fonttheme Version 2.6.0 ***}
+\ifxetex
+\RequirePackage{microtype}
+\else
+\RequirePackage[tracking=true]{microtype}
+\SetTracking[no ligatures = f]{encoding = *, shape = sc}{120}
+\fi
+\IfFileExists{frutiger.sty}{
+\RequirePackage{frutiger}
+}{
+\PackageError{fhg-style}{frutiger.sty nicht vorhanden}
+}
+\setbeamerfont{structure}{size=\normalsize, series=\mdseries}
+\setbeamerfont{title}{size=\Large, series=\bfseries, parent=structure}
+\setbeamerfont{subtitle}{size=\Large, parent=structure}
+\setbeamerfont{section in head/foot}{parent=title}
+\setbeamerfont{frametitle}{parent=section in head/foot}
+\setbeamerfont{framesubtitle}{size=\normalsize, parent=section in head/foot}
+\setbeamerfont{footline}{size=\Tiny, parent=structure}
+\setbeamerfont{page number in head/foot}{size=\footnotesize, series=\bfseries, parent=structure}
+\setbeamerfont{description item}{series=\bfseries}
+%% 
+%% (c) 2002-2010 Fraunhofer ISST Berlin
+%% (c) seit 2012 Fraunhofer FOKUS Berlin
+%%
+%% End of file `beamerfontthemefhg-style.sty'.

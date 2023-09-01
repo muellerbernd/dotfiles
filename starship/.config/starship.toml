@@ -1,0 +1,58 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Increase Starship command scan & duration time-outs
+# scan_timeout = 10000
+# # command_timeout = 1000
+command_timeout = 3000
+
+# Do not add new line
+# add_newline = false
+
+# Do not truncate the directory listing
+#[directory]
+#truncation_length = 0
+
+# Show even very fast command executions in terminal (in ms)
+# [cmd_duration]
+# min_time = 5
+# show_milliseconds = true
+
+# Replace the "❯" symbol in the prompt with "➜"
+[character] # The name of the module we are configuring is "character"
+success_symbol = "[➜](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
+error_symbol = "[➜](bold red)"
+
+# Disable the package module, hiding it from the prompt completely
+# [package]
+# disabled = true
+
+[directory]
+truncation_length = 8
+truncation_symbol = "…/"
+
+# [python]
+# symbol = "👾 "
+# pyenv_version_name = false
+# format='via [${symbol}(${version} )(\($virtualenv\) )]($style)'
+# [rust]
+# symbol = " "
+# format = "via [⚙️ $version](red bold)"
+
+# [time]
+# disabled = true
+# time_format = "%R" # Hour:Minute Format
+# style = "bg:#33658A"
+# format = '[[$time](bg:#33658A)]($style)'
+
+# [username]
+# style_user = "white bold"
+# style_root = "black bold"
+# format = "user: [$user]($style) "
+# disabled = false
+# show_always = true
+
+[nix_shell]

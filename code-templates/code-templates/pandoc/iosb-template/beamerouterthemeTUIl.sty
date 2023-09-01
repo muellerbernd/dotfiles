@@ -1,0 +1,49 @@
+% Remove beamer navigation bar
+\beamertemplatenavigationsymbolsempty
+
+% \setbeamertemplate{headline}{%
+%     % \begin{beamercolorbox}[colsep=1.5pt]{upper separation line head}
+%     % \end{beamercolorbox}
+%     % \begin{beamercolorbox}{section in head/foot}
+%     %       \insertnavigation{\paperwidth}
+%     % \end{beamercolorbox}%
+%     \ifbeamer@theme@subsection%
+%         \begin{beamercolorbox}[colsep=1.5pt]{middle separation line head}
+%         \end{beamercolorbox}
+%         \begin{beamercolorbox}[]{subsection in head/foot}
+%             % \usebeamerfont{subsection in head/foot} \hfill\insertsubsectionhead
+%             \usebeamerfont{subsection in head/foot}\hfill\tableofcontents[
+%                 currentsubsection,
+%                 hideothersubsections,
+%                 sectionstyle=show/hide,
+%                 subsectionstyle=show/shaded,
+%             ]
+%         \end{beamercolorbox}%
+%     \fi%
+%     % \begin{beamercolorbox}[colsep=1.5pt]{lower separation line head}
+%     % \end{beamercolorbox}
+% }
+
+% footer/footline definition
+\setbeamertemplate{footline}{
+    \color{TUIl-green}{\rule{\textwidth}{0.3pt}} % Draw line
+    \begin{beamercolorbox}[wd=\textwidth, dp=\footerdp, ht=\footerht]{footer}
+        \begin{minipage}[t]{0.125\paperwidth} % Page number
+            \hspace{7mm}
+            \insertpagenumber
+        \end{minipage}
+        \begin{minipage}[t]{0.4\paperwidth} % Footer content
+            \footercontent
+        \end{minipage}
+        \hfill
+        \begin{minipage}[t]{15mm} % Logo
+            \vspace{-2mm}
+            \includegraphics[width=15mm]{images/Logo_IOSB.jpg}
+        \end{minipage}
+        \hfill
+        \begin{minipage}[t]{42mm} % Logo
+            \vspace{-5mm}
+            \includegraphics[scale=.6]{images/tuil-logo.pdf}
+        \end{minipage}
+    \end{beamercolorbox}
+}

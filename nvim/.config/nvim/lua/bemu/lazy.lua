@@ -1,0 +1,262 @@
+-- Install package manager
+--    https://github.com/folke/lazy.nvim
+--    `:help lazy.nvim.txt` for more info
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system {
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
+    lazypath,
+  }
+end
+vim.opt.rtp:prepend(lazypath)
+
+require('lazy').setup({
+  -- local setup = function(repo, name)
+  --     ({ repo, config = "require('" .. name .. "').setup({})" })
+  -- end
+  -- --[[helpers--]]
+  -- session management
+  'tpope/vim-obsession',
+  -- git in vim
+  'tpope/vim-fugitive',
+  -- autopairs
+  'windwp/nvim-autopairs', -- Autopairs, integrates with both cmp and treesitter
+  --
+  -- A high-performance color highlighter
+  {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require('colorizer').setup {}
+    end,
+  },
+  -- Code formatter.
+  {
+    'sbdchd/neoformat',
+    -- cmd = "Neoformat",
+  },
+  -- commenter
+  {
+    'numToStr/Comment.nvim',
+  },
+  -- Git signs.
+  {
+    'lewis6991/gitsigns.nvim',
+    -- event = "BufRead"
+  },
+  -- run commands asynchronous
+  {
+    'skywind3000/asyncrun.vim',
+  },
+  {
+    'skywind3000/asynctasks.vim',
+  },
+  -- vim-header is a tool that helps us easily add author and license information to the scripts
+  {
+    'alpertuna/vim-header',
+  },
+  -- key helper
+  {
+    'folke/which-key.nvim',
+  },
+  -- nice startup screen
+  {
+    'goolord/alpha-nvim',
+  },
+  -- write with sudo rights
+  'lambdalisue/suda.vim',
+  -- plugin to list todos in code
+  {
+    'folke/todo-comments.nvim',
+    dependencies = 'nvim-lua/plenary.nvim',
+    config = function()
+      require('todo-comments').setup {}
+    end,
+  },
+  -- markdown-previewer
+  {
+    'iamcco/markdown-preview.nvim',
+    build = function()
+      vim.fn['mkdp#util#install']()
+    end,
+    init = function()
+      vim.g.mkdp_filetypes = { 'markdown' }
+    end,
+    ft = { 'markdown' },
+  },
+
+  --[[lsp config --]]
+  {
+    'neovim/nvim-lspconfig',
+  },
+  -- vscode-like pictograms to neovim built-in lsp
+  'onsails/lspkind-nvim',
+  -- Extensions to built-in LSP, for example, providing type inlay hints
+  'nvim-lua/lsp_extensions.nvim',
+  -- LSP signature.
+  -- ({ "ray-x/lsp_signature.nvim" })
+  --  Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
+  -- "jose-elias-alvarez/null-ls.nvim"
+  -- Standalone UI for nvim-lsp progress. Eye candy for the impatient.
+  {
+    'j-hui/fidget.nvim',
+  },
+  -- This is a Neovim plugin/library for generating statusline components from the built-in LSP client.
+  -- ("nvim-lua/lsp-status.nvim")
+  {
+    'folke/neodev.nvim',
+
+    config = function()
+      require('neodev').setup {}
+    end,
+  },
+
+  --[[ autocomplete tool --]]
+  {
+    'hrsh7th/nvim-cmp',
+  },
+  -- cmp plugins
+  'hrsh7th/cmp-buffer', -- buffer completions
+  'hrsh7th/cmp-path', -- path completions
+  'hrsh7th/cmp-cmdline', -- cmdline completions
+  'saadparwaiz1/cmp_luasnip', -- snippet completions
+  'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/cmp-nvim-lsp-signature-help', -- nvim-cmp source for displaying function signatures with the current parameter emphasized
+  'hrsh7th/cmp-nvim-lua', -- nvim-cmp source for neovim Lua API.
+  -- ripgrep source for nvim-cmp
+  'lukas-reineke/cmp-rg',
+  -- nvim-cmp source for treesitter nodes. Using all treesitter highlight nodes as completion candicates. LRU cache is d to improve performance.
+  'ray-x/cmp-treesitter',
+  -- A tiny function for nvim-cmp to better sort completion items that start with one or more underlines.
+  'lukas-reineke/cmp-under-comparator',
+  -- [[ snippets --]]
+  {
+    'L3MON4D3/LuaSnip',
+    config = function()
+      require('luasnip.loaders.from_vscode').lazy_load()
+    end,
+  },
+  -- Snippet engine
+  -- snippets for some languages
+  'rafamadriz/friendly-snippets',
+
+  --[[TreeSitter ]]
+  --
+  {
+    'nvim-treesitter/nvim-treesitter',
+    build = function()
+      pcall(require('nvim-treesitter.install').update { with_sync = true })
+    end,
+  },
+  -- Show code context
+  'nvim-treesitter/nvim-treesitter-context',
+  -- A Neovim plugin for setting the commentstring option based on the cursor location in the file. The location is checked via treesitter queries.
+  'JoosepAlviste/nvim-ts-context-commentstring',
+  -- View treesitter information directly in Neovim!
+  'nvim-treesitter/playground',
+  -- Enable Neovim's builtin spellchecker for buffers with tree-sitter highlighting.
+  'lewis6991/spellsitter.nvim',
+  -- Refactor modules for nvim-treesitter
+  -- ("nvim-treesitter/nvim-treesitter-refactor")
+  -- Syntax aware text-objects, select, move, swap, and peek support.
+  'nvim-treesitter/nvim-treesitter-textobjects',
+  -- A tiny Neovim plugin to deal with treesitter units. A unit is defined as a treesitter node including all its children. It allows you to quickly select, yank, delete or replace language-specific ranges.
+  -- ("David-Kunz/treesitter-unit")
+  'windwp/nvim-ts-autotag',
+
+  --[[telescope ]]
+  --
+  {
+    'nvim-telescope/telescope.nvim',
+    -- tag = "0.1.0",
+    -- or                            , branch = '0.1.x',
+    dependencies = { { 'nvim-lua/plenary.nvim' } },
+  },
+  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+  { 'nvim-telescope/telescope-media-files.nvim' },
+  'nvim-telescope/telescope-packer.nvim',
+  'nvim-telescope/telescope-file-browser.nvim',
+  'nvim-telescope/telescope-dap.nvim',
+  -- It sets vim.ui.select to telescope. That means for example that neovim core stuff can fill the telescope picker. Example would be lua vim.lsp.buf.code_action()
+  { 'nvim-telescope/telescope-ui-select.nvim' },
+
+  --[[ Debugger --]]
+  {
+    'mfussenegger/nvim-dap',
+    dependencies = {
+      'theHamsta/nvim-dap-virtual-text',
+      'rcarriga/nvim-dap-ui',
+    },
+  },
+  -- adapter for python
+  'mfussenegger/nvim-dap-python',
+  -- adapter for the Neovim lua language
+  'jbyuki/one-small-step-for-vimkind',
+
+  --[[ appearance  --]]
+  -- color theme
+  'rktjmp/lush.nvim',
+  -- If you want to display icons, then  one of these plugins:
+  {
+    'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
+    -- "kyazdani42/nvim-web-devicons",
+    config = function()
+      require('nvim-web-devicons').setup {}
+    end,
+  },
+  {
+    'rcarriga/nvim-notify',
+    config = function()
+      vim.notify = require 'notify'
+    end,
+  },
+  -- {
+  --     "folke/noice.nvim",
+  --     event = "VeryLazy",
+  --     opts = {
+  --         -- add any options here
+  --     },
+  --     dependencies = {
+  --         -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+  --         "MunifTanjim/nui.nvim",
+  --         -- OPTIONAL:
+  --         --   `nvim-notify` is only needed, if you want to use the notification view.
+  --         --   If not available, we use `mini` as the fallback
+  --         "rcarriga/nvim-notify",
+  --     },
+  -- },
+  -- Statusline.
+  --  "nvim-lualine/lualine.nvim"
+  -- This plugin adds indentation guides to all lines (including empty lines).
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    -- event = "BufRead",
+  },
+  -- Undo tree
+  {
+    'mbbill/undotree',
+    cmd = 'UndotreeToggle',
+    config = [[vim.g.undotree_SetFocusWhenToggle = 1]],
+  },
+
+  -- [[ custom plugins ]]
+  -- Local plugins,  URL if not locally available
+  -- list my vimwikis via telescope
+  { 'muellerbernd/telescope-list-vimwiki.nvim' },
+  { 'muellerbernd/telescope-list-wikis.nvim' },
+  { 'muellerbernd/latex-previewer.nvim' },
+
+  -- telescope-asynctasks
+  'muellerbernd/telescope-asynctasks.nvim',
+}, {})
+require 'bemu.plugins.colorscheme'
+-- Automatically source and re-compile lazy whenever you save this init.lua
+-- local lazy_group = vim.api.nvim_create_augroup("Lazy", { clear = true })
+-- vim.api.nvim_create_autocmd("BufWritePost", {
+--     command = "source <afile> | Lazy update",
+--     group = lazy_group,
+--     pattern = "lazy.lua",
+-- })

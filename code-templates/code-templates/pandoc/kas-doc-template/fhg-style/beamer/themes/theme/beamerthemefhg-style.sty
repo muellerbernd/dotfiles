@@ -1,0 +1,435 @@
+%%
+%% This is file `beamerthemefhg-style.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% fhg-style.dtx  (with options: `beamer:theme')
+%% 
+%% Der FhG-Stil steht unter dem Copyright des Fraunhofer FOKUS Berlin.
+%% (c) 2002-2010 Fraunhofer ISST Berlin
+%% (c) seit 2012 Fraunhofer FOKUS Berlin
+%% Informationen: Ekkart.Kleinod@fokus.fraunhofer.de
+%% 
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemefhg-style}
+[2022/01/04 v2.6.0 FhG-Stil]
+\typeout{*** FhG-Beamer-Theme Version 2.6.0 ***}
+\RequirePackage{xkeyval}
+\RequirePackage{xifthen}
+\RequirePackage{iftex}
+\DeclareOptionX{accentcolor}{
+\PassOptionsToPackage{accentcolor=#1}{beamercolorthemefhg-style}
+}
+\DeclareOptionX{font}{
+\PassOptionsToPackage{font=#1}{frutiger}
+}
+\DeclareOptionX{glossary}{
+\newcommand{\FhG@gls}{#1}
+\typeout{FhG-Stil-Option 'glossary=\FhG@gls'}
+}
+\newcommand{\FhG@opt@item}{fhg}
+\DeclareOptionX{item}{
+\ifthenelse{\equal{\@empty}{#1}}
+{}
+{
+\ifthenelse{
+\equal{#1}{fhg}\or
+\equal{#1}{linedot}\or
+\equal{#1}{lineline}\or
+\equal{#1}{linesquare}
+}
+{\renewcommand{\FhG@opt@item}{#1}}
+{\PackageWarning{fhg-style}{Aufzaehlung '#1' unbekannt, nutze '\FhG@opt@item'}}
+}
+\typeout{FhG-Stil-Option 'item=\FhG@opt@item'}
+}
+\DeclareOptionX{nofrutiger}{
+\PassOptionsToPackage{nofrutiger}{frutiger}
+}
+\newboolean{FhG@opt@nomarvo}
+\setboolean{FhG@opt@nomarvo}{false}
+\DeclareOptionX{nomarvo}{
+\setboolean{FhG@opt@nomarvo}{true}
+\typeout{FhG-Stil-Option 'nomarvo'}
+}
+\newboolean{FhG@opt@nowasy}
+\setboolean{FhG@opt@nowasy}{false}
+\DeclareOptionX{nowasy}{
+\setboolean{FhG@opt@nowasy}{true}
+\typeout{FhG-Stil-Option 'nowasy'}
+}
+\PassOptionsToPackage{xspace}{dhua}
+\ProcessOptionsX
+\RequirePackage{graphicx}
+\RequirePackage{pdfcolmk}
+\RequirePackage{pict2e}
+\RequirePackage{dashrule}
+\RequirePackage{calc}
+\RequirePackage{fp}
+\IfFileExists{hologo.sty}{
+\RequirePackage{hologo}
+}{
+\PackageWarning{fhg-style}{hologo.sty nicht vorhanden}
+}
+\ifthenelse{\boolean{FhG@opt@nomarvo}}
+{}
+{
+\IfFileExists{marvosym.sty}{
+\RequirePackage{marvosym}
+\mathchardef\Rightarrow="3229
+}{
+\PackageWarning{fhg-style}{marvosym.sty nicht vorhanden}
+}
+}
+\ifthenelse{\boolean{FhG@opt@nowasy}}
+{}
+{
+\IfFileExists{wasysym.sty}{
+\RequirePackage[nointegrals]{wasysym}
+}{
+\PackageWarning{fhg-style}{wasysym.sty nicht vorhanden}
+}
+}
+\RequirePackage[KeepShorthandsActive]{babel}
+\RequirePackage[autostyle=true, german=guillemets]{csquotes}
+\defineshorthand{"`}{\openautoquote}
+\defineshorthand{"'}{\closeautoquote}
+\newcommand{\FhG@fhglogo@createlogokaestchen}[2]{%
+\newsavebox{\FhG@fhglogo@logokaestchen}%
+\savebox{\FhG@fhglogo@logokaestchen}{%
+\setlength{\unitlength}{#2}%
+\begin{picture}(1,1)(0,0)%
+\color{#1}%
+\moveto(0.001, 0.001)%
+\lineto(0.001, 0.999)%
+\lineto(0.999, 0.999)%
+\lineto(0.999, 0.001)%
+\closepath\fillpath%
+\color{white}%
+\moveto(0, 0.667273)%
+\curveto(0.352583, 0.687357)(0.780572, 0.809663)(1, 0.914545)%
+\lineto(1, 0.94)%
+\curveto(0.846024, 0.870822)(0.503212, 0.747894)(0, 0.72)%
+\closepath\fillpath%
+ \moveto(0, 0.48)%
+ \curveto(0.351465, 0.548153)(0.780194, 0.709811)(1, 0.823636)%
+ \lineto(1, 0.863636)%
+ \curveto(0.838199, 0.786633)(0.475264, 0.630927)(0, 0.552727)%
+ \closepath\fillpath%
+\moveto(0, 0.145455)%
+\curveto(0.444250, 0.348872)(0.798080, 0.571642)(1, 0.7)%
+\lineto(1, 0.776364)%
+\curveto(0.795719, 0.654645)(0.480854, 0.479914)(0, 0.285455)%
+\closepath\fillpath%
+\moveto(0.096364, 0)%
+\curveto(0.400148, 0.169396)(0.813290, 0.438210)(1, 0.583636)%
+\lineto(1, 0.610909)%
+\curveto(0.842149, 0.498789)(0.485363, 0.263797)(0, 0)%
+\closepath\fillpath%
+\moveto(0.361818, 0)%
+\curveto(0.633584, 0.193963)(0.799786, 0.316267)(1, 0.487273)%
+\lineto(1, 0.527273)%
+\curveto(0.861942, 0.415237)(0.633711, 0.253203)(0.230909, 0)%
+\closepath\fillpath%
+\end{picture}%
+}%
+}
+\define@choicekey[FhG]{fhglogo}{color}[\val\nr]{normal,negativ,sw,grau}{%
+\ifcase\nr\relax
+\definecolor{FhG@fhglogo@boxcolor}{named}{FhGColorFhGGreen}
+\definecolor{FhG@fhglogo@textcolor}{named}{FhGColorBlack}
+\or
+\definecolor{FhG@fhglogo@boxcolor}{named}{FhGColorFhGGreen}
+\definecolor{FhG@fhglogo@textcolor}{named}{FhGColorWhite}
+\or
+\definecolor{FhG@fhglogo@boxcolor}{named}{FhGColorBlack}
+\definecolor{FhG@fhglogo@textcolor}{named}{FhGColorBlack}
+\or
+\definecolor{FhG@fhglogo@boxcolor}{named}{FhGColorBlack50}
+\definecolor{FhG@fhglogo@textcolor}{named}{FhGColorBlack50}
+\fi
+}
+\define@key[FhG]{fhglogo}{institute}{\def\FhG@fhglogo@institute{#1}}
+\define@choicekey[FhG]{fhglogo}{position}{right,left}{\def\FhG@fhglogo@position{#1}}
+\define@key[FhG]{fhglogo}{width}{\def\FhG@fhglogo@width{#1}}
+\presetkeys[FhG]{fhglogo}{color=normal, institute=\@empty, position=right, width=.14\textwidth}{}
+\newcommand{\fhglogo}[1][\@empty]{
+\setkeys[FhG]{fhglogo}{#1}
+\AtBeginDocument{
+\ifthenelse{\equal{\FhG@fhglogo@institute}{\@empty} \AND \NOT \isundefined\FhG@inst@short}%
+{\def\FhG@fhglogo@institute{\FhG@inst@short}}%
+{}%
+\def\FhG@fhglogo@fraunhofer{\textcolor{FhG@fhglogo@textcolor}{\Huge\textbf{Fraunhofer}}}
+\newlength{\FhG@fhglogo@ref}
+\setlength{\FhG@fhglogo@ref}{\heightof{\FhG@fhglogo@fraunhofer} * \real{0.5}}
+\newlength{\FhG@fhglogo@height}
+\setlength{\FhG@fhglogo@height}{3\FhG@fhglogo@ref}
+\FhG@fhglogo@createlogokaestchen{FhG@fhglogo@boxcolor}{\FhG@fhglogo@height}
+\newsavebox{\FhG@fhglogo@box}
+\savebox{\FhG@fhglogo@box}{%
+\newlength{\FhG@fhglogo@fraunhoferwidth}%
+\setlength{\FhG@fhglogo@fraunhoferwidth}{\widthof{\FhG@fhglogo@fraunhofer}}%
+\newlength{\FhG@fhglogo@totalwidth}%
+\setlength{\FhG@fhglogo@totalwidth}{\FhG@fhglogo@height + \FhG@fhglogo@ref + \FhG@fhglogo@fraunhoferwidth}%
+\parbox[t]{\FhG@fhglogo@totalwidth}{%
+\setlength{\parskip}{0mm}%
+\setlength{\baselineskip}{0mm}%
+\makebox{%
+\makebox[\FhG@fhglogo@height]{%
+\usebox{\FhG@fhglogo@logokaestchen}%
+}%
+\makebox[\FhG@fhglogo@ref]{}%
+\makebox[\FhG@fhglogo@fraunhoferwidth]{%
+\FhG@fhglogo@fraunhofer%
+}%
+}%
+\ifthenelse{\isempty{\FhG@fhglogo@institute}}%
+{}%
+{%
+\par%
+\vspace{\FhG@fhglogo@ref}%
+\ifthenelse{\equal{\FhG@fhglogo@position}{left}}%
+{%
+\hspace{\FhG@fhglogo@height}%
+\hspace{\FhG@fhglogo@ref}%
+\textcolor{FhGColorFhGGreen}{\huge\textbf{\FhG@fhglogo@institute}}%
+}%
+{%
+\hfill%
+\textcolor{FhG@fhglogo@textcolor}{\Large\textbf{\FhG@fhglogo@institute}}%
+}%
+}%
+}% parbox Gesamtlogo
+}% savebox
+}% AtBeginDocument
+\def\fhglogoausgabe{%
+\resizebox{\FhG@fhglogo@width}{!}{\usebox{\FhG@fhglogo@box}}%
+}
+} % end of \newcommand{\fhglogo}
+\let\oinst\institute
+\renewcommand{\institute}[2]{
+\def\FhG@inst@long{#1}
+\def\FhG@inst@short{#2}
+\oinst{\printinstitute}
+}
+\newcommand{\organization}[1]{\def\FhG@organization{#1}}
+\define@key[FhG]{partner}{logo}{\def\FhG@partner@logofile{#1}}
+\define@key[FhG]{partner}{innerlogo}{\def\FhG@partner@innerlogofile{#1}}
+\presetkeys[FhG]{partner}{logo=\@empty}{}
+\presetkeys[FhG]{partner}{innerlogo=\@empty}{}
+\newcommand{\partner}[2][]{
+\setkeys[FhG]{partner}{#1}
+\def\FhG@partner@text{#2}
+}
+\addto\captionsngerman{\def\partnerheadingname{In Zusammenarbeit mit}}
+\addto\captionsgerman{\def\partnerheadingname{In Zusammenarbeit mit}}
+\addto\captionsenglish{\def\partnerheadingname{in cooperation with}}
+\newcommand{\email}[1]{\def\FhG@email{#1}}
+\newcommand{\version}[1]{\def\FhG@version{#1}}
+\newcommand{\itemsquare}[1][FhGColorBlack]{
+\setlength{\unitlength}{1ex}%
+\begin{picture}(1,1)(0,0)%
+\color{#1}%
+\moveto(0, 0)%
+\lineto(0, 1)%
+\lineto(1, 1)%
+\lineto(1, 0)%
+\closepath\fillpath%
+\end{picture}%
+}
+\ifthenelse{\equal{\FhG@opt@item}{fhg}}
+{
+\setbeamertemplate{itemize item}{\itemsquare}
+\setbeamertemplate{itemize subitem}{\itemsquare[FhGColorBlack50]}
+\setbeamertemplate{itemize subsubitem}{--}
+}{}
+\ifthenelse{\equal{\FhG@opt@item}{linedot}}
+{
+\setbeamertemplate{itemize item}{--}
+\setbeamertemplate{itemize subitem}{\ensuremath{\bullet}}
+\setbeamertemplate{itemize subsubitem}{\itemsquare[FhGColorBlack50]}
+}{}
+\ifthenelse{\equal{\FhG@opt@item}{lineline}}
+{
+\setbeamertemplate{itemize item}{--}
+\setbeamertemplate{itemize subitem}{\textcolor{FhGColorBlack60}{--}}
+\setbeamertemplate{itemize subsubitem}{-}
+}{}
+\ifthenelse{\equal{\FhG@opt@item}{linesquare}}
+{
+\setbeamertemplate{itemize item}{--}
+\setbeamertemplate{itemize subitem}{\itemsquare[FhGColorBlack60]}
+\setbeamertemplate{itemize subsubitem}{\textcolor{FhGColorBlack60}{\ensuremath{\bullet}}}
+}{}
+\setbeamertemplate{enumerate item}{\insertenumlabel}
+\setbeamertemplate{enumerate subitem}{\insertenumlabel.\insertsubenumlabel}
+\setbeamertemplate{enumerate subsubitem}{\insertenumlabel.\insertsubenumlabel.\insertsubsubenumlabel}
+\setbeamertemplate{description item}{\insertdescriptionitem\hfill}
+\ifthenelse{\isundefined\FhG@gls}
+{}
+{
+\RequirePackage[nopostdot, nonumberlist]{glossaries}
+\makeglossaries
+\setglossarystyle{altlist}
+\ifthenelse{\equal{\FhG@gls}{\@empty}}
+{}
+{\loadglsentries{\FhG@gls}}
+}
+\define@choicekey[FhG]{printinstitute}{format}{short,long,full}{\def\FhG@pinst@fmt{#1}}
+\define@choicekey[FhG]{printinstitute}{textformat}{normal,uppercase}{\def\FhG@pinst@txtfmt{#1}}
+\define@key[FhG]{printinstitute}{separator}{\def\FhG@pinst@sep{#1}}
+\presetkeys[FhG]{printinstitute}{format=short, textformat=normal, separator={~}}{}
+\def\FhG@pinst@out@short{%
+\ifthenelse{\isundefined\FhG@inst@short}%
+{Fraunhofer-Gesellschaft}%
+{%
+\ifthenelse{\equal{\FhG@inst@short}{\@empty}}%
+{Fraunhofer-Gesellschaft}%
+{Fraunhofer \FhG@inst@short}%
+}%
+}
+\newcommand{\printinstitute}[1][]{%
+\setkeys[FhG]{printinstitute}{#1}%
+\ifthenelse{\equal{\FhG@pinst@txtfmt}{normal}}%
+{\def\FhG@pinst@out@fmt{}}{}%
+\ifthenelse{\equal{\FhG@pinst@txtfmt}{uppercase}}%
+{\def\FhG@pinst@out@fmt{\MakeUppercase}}{}%
+\ifthenelse{\equal{\FhG@pinst@fmt}{short}}%
+{\FhG@pinst@out@fmt{\FhG@pinst@out@short}}{}%
+\ifthenelse{\equal{\FhG@pinst@fmt}{long}}%
+{%
+\ifthenelse{\isundefined\FhG@inst@long}%
+{\FhG@pinst@out@fmt{\FhG@pinst@out@short}}%
+{%
+\ifthenelse{\equal{\FhG@inst@long}{\@empty}}%
+{\FhG@pinst@out@fmt{\FhG@pinst@out@short}}%
+{\FhG@pinst@out@fmt{\FhG@inst@long}}%
+}%
+}{}%
+\ifthenelse{\equal{\FhG@pinst@fmt}{full}}%
+{%
+\ifthenelse{\isundefined\FhG@inst@long}%
+{\FhG@pinst@out@fmt{\FhG@pinst@out@short}}%
+{%
+\ifthenelse{\equal{\FhG@inst@long}{\@empty}}%
+{\FhG@pinst@out@fmt{\FhG@pinst@out@short}}%
+{%
+\FhG@pinst@out@fmt{\FhG@inst@long}%
+\ifthenelse{\isundefined\FhG@inst@short}%
+{}%
+{%
+\ifthenelse{\equal{\FhG@inst@short}{\@empty}}%
+{}%
+{\FhG@pinst@out@fmt{\FhG@pinst@sep\FhG@inst@short}}%
+}%
+}%
+}%
+}{}%
+}
+\usecolortheme{fhg-style}
+\usefonttheme{fhg-style}
+\renewcommand{\and}{, }
+\let\FhG@orig@maketitle=\maketitle
+\def\maketitle{
+\mode<article>{
+\FhG@orig@maketitle
+}
+\mode<presentation>{
+{
+\setbeamertemplate{background canvas}{
+\setlength{\unitlength}{\paperheight}%
+\begin{picture}(0,0)(0,0)%
+\put(0,-.65){\includegraphics[width=\paperwidth]{\inserttitlegraphic}}%
+\end{picture}%
+\setlength{\unitlength}{\paperwidth}%
+\begin{picture}(0,0)(0,0)%
+\put(.065,-.53){\fhglogoausgabe}%
+\end{picture}%
+\begin{picture}(0,0)(0,0)%
+\put(.85,-.552){\includegraphics[width=.1\paperwidth]{beamer-smart_cities}}%
+\end{picture}%
+}
+\begin{frame}[plain]
+\titlepage
+\end{frame}
+}
+}
+}
+\setbeamertemplate{title page}{
+\begin{minipage}[t][.8\textheight]{.9\paperwidth}
+\begin{beamercolorbox}[wd=.9\paperwidth, sep=1ex]{frametitle}
+\usebeamerfont{title}{\MakeUppercase{\inserttitle}}
+
+\usebeamerfont{subtitle}{\MakeUppercase{\insertsubtitle}}
+\end{beamercolorbox}
+\end{minipage}
+\begin{minipage}{.9\paperwidth}
+\ifx\beamer@shortauthor\@empty
+\ifx\insertdate\@empty\else
+{\insertdate}
+\fi
+\else
+{
+\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor
+\ifx\insertdate\@empty\else
+{, \insertdate}
+\fi
+}
+\fi
+\end{minipage}
+}
+\mode<presentation>
+\let\otp\titlepage
+\renewcommand{\titlepage}{\otp\addtocounter{framenumber}{-1}}
+\newcommand{\mreducelistspacing}{\vspace{-\topsep}}
+\mode<all>
+\setbeamertemplate{frametitle}{
+\vspace*{1em}
+\nointerlineskip
+\begin{beamercolorbox}[wd=.9\paperwidth,leftskip=.5em,rightskip=.5em,ht=2.5ex,dp=1ex]{frametitle}%
+\MakeUppercase{\insertframetitle}%
+\end{beamercolorbox}
+\begin{beamercolorbox}[wd=.9\paperwidth,leftskip=.5em,rightskip=.5em,ht=2.5ex]{framesubtitle}%
+\usebeamerfont{framesubtitle}%
+\insertframesubtitle%
+\end{beamercolorbox}
+}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{
+\nointerlineskip
+{
+\hfill
+\begin{beamercolorbox}[wd=.9\paperwidth,leftskip=0em,rightskip=0em,ht=6ex,dp=2ex]{footline}%
+\setlength{\unitlength}{1mm}%
+\begin{picture}(0,0)(0,0)%
+\put(0,0){\fhglogoausgabe}%
+\end{picture}%
+\hfill
+{
+\usebeamercolor[fg]{page number in head/foot}
+\usebeamerfont{page number in head/foot}
+\insertframenumber
+}
+\end{beamercolorbox}
+\hfill
+}
+\par
+\nointerlineskip
+{
+\hfill
+\begin{beamercolorbox}[wd=.9\paperwidth,leftskip=0em,rightskip=0em,ht=2ex,dp=1ex]{footline}
+\hfill
+{
+\copyright\ Fraunhofer FOKUS
+}
+\end{beamercolorbox}
+\hfill
+}
+\vspace*{2em}
+}
+%% 
+%% (c) 2002-2010 Fraunhofer ISST Berlin
+%% (c) seit 2012 Fraunhofer FOKUS Berlin
+%%
+%% End of file `beamerthemefhg-style.sty'.

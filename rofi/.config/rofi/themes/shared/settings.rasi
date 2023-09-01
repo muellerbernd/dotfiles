@@ -1,0 +1,9 @@
+@theme "colorschemes/dark-nord.rasi"
+
+@import "resolutions/1920x1080.rasi"
+@import "resolutions/3440x1440.rasi"
+
+#window {
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,14 @@
+<launch>
+<arg name="settings_file" default="$(find ros_pkg)/settings.yaml" />
+
+<node
+    pkg="ros_pkg"
+    type="ros_pkg_node"
+    name="node"
+    output="screen"
+    required="true"
+    >
+    <rosparam command="load" file="$(arg settings_file)" />
+</node>
+</launch>
+

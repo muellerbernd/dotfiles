@@ -1,0 +1,19 @@
+<launch>
+<arg name="settings_file" default="$(find kate_follow_line)/config/settings.yaml" />
+<arg name="speed" default="0.2" />
+<arg name="kate_status_topic" default="hg_08230/status" />
+<arg name="kate_follow_line_topic" default="hg_08230/follow_line" />
+<node
+    pkg="kate_follow_line"
+    type="main.py"
+    name="kate_follow_line_node"
+    output="screen"
+    required="true"
+    >
+    <!-- <rosparam command="load" file="$(arg settings_file)" /> -->
+    <param name="driving_speed" value="$(arg speed)"/>
+    <param name="kate_status_topic" value="$(arg kate_status_topic)"/>
+    <param name="kate_follow_line_topic" value="$(arg kate_follow_line_topic)"/>
+</node>
+</launch>
+

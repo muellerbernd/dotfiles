@@ -1,0 +1,4 @@
+-- vim.o.statusline = require("bemu.statusline.statusline").statusline()
+-- vim.o.winbar="%{%v:lua.status.get_winbar()%}"
+-- vim.o.statusline = "%{%v:lua.status.get_statusline()%}"
+-- vim.o.statusline = require("bemu.statusline.statusline")

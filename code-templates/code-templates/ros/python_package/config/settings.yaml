@@ -1,0 +1,3 @@
+driving_speed: 0.2
+kate_status_topic: "hg_08230/status"
+kate_follow_line_topic: "hg_08230/follow_line"

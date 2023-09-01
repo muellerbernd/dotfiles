@@ -1,0 +1,1248 @@
+%%
+%% This is file `fhg-style.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% fhg-style.dtx  (with options: `fhgstyle')
+%% 
+%% Der FhG-Stil steht unter dem Copyright des Fraunhofer FOKUS Berlin.
+%% (c) 2002-2010 Fraunhofer ISST Berlin
+%% (c) seit 2012 Fraunhofer FOKUS Berlin
+%% Informationen: Ekkart.Kleinod@fokus.fraunhofer.de
+%% 
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{fhg-style}
+[2022/01/04 v2.6.0 FhG-Stil]
+\typeout{*** FhG-Stil Version 2.6.0 ***}
+\RequirePackage{xkeyval}
+\RequirePackage{xifthen}
+\RequirePackage{iftex}
+\newboolean{FhG@opt@concept}
+\setboolean{FhG@opt@concept}{false}
+\DeclareOptionX{concept}{
+\setboolean{FhG@opt@concept}{true}
+\typeout{FhG-Stil-Option 'concept'}
+}
+\newcommand{\FhG@draft}{off}
+\DeclareOptionX{draft}{
+\renewcommand{\FhG@draft}{on}
+\PassOptionsToPackage{draft}{graphicx}
+\PassOptionsToPackage{draft}{hyperref}
+\typeout{FhG-Stil-Option 'draft'}
+}
+\DeclareOptionX{final}{
+\PassOptionsToPackage{final}{graphicx}
+\PassOptionsToPackage{final}{hyperref}
+\PassOptionsToPackage{final}{draftwatermark}
+\typeout{FhG-Stil-Option 'final'}
+}
+\DeclareOptionX{font}{
+\PassOptionsToPackage{font=#1}{frutiger}
+}
+\DeclareOptionX{glossary}{
+\newcommand{\FhG@gls}{#1}
+\typeout{FhG-Stil-Option 'glossary=\FhG@gls'}
+}
+\newcommand{\FhG@hypercolor}{black}
+\DeclareOptionX{hypercolor}{
+\ifthenelse{\isempty{#1}}
+{}
+{\renewcommand{\FhG@hypercolor}{#1}}
+\typeout{FhG-Stil-Option 'hypercolor=\FhG@hypercolor'}
+}
+\newcommand{\FhG@hyperdriver}{ps2pdf}
+\ifpdf
+\renewcommand{\FhG@hyperdriver}{pdftex}
+\fi
+\ifxetex
+\renewcommand{\FhG@hyperdriver}{xetex}
+\fi
+\DeclareOptionX{hyperdriver}{
+\ifthenelse{\isempty{#1}}
+{}
+{\renewcommand{\FhG@hyperdriver}{#1}}
+\typeout{FhG-Stil-Option 'hyperdriver=\FhG@hyperdriver'}
+}
+\newcommand{\FhG@opt@item}{fhg}
+\DeclareOptionX{item}{
+\ifthenelse{\equal{\@empty}{#1}}
+{}
+{
+\ifthenelse{
+\equal{#1}{fhg}\or
+\equal{#1}{linedot}\or
+\equal{#1}{lineline}\or
+\equal{#1}{linesquare}
+}
+{\renewcommand{\FhG@opt@item}{#1}}
+{\PackageWarning{fhg-style}{Aufzaehlung '#1' unbekannt, nutze '\FhG@opt@item'}}
+}
+\typeout{FhG-Stil-Option 'item=\FhG@opt@item'}
+}
+\newboolean{FhG@opt@lst}
+\setboolean{FhG@opt@lst}{false}
+\DeclareOptionX{listings}{
+\setboolean{FhG@opt@lst}{true}
+\typeout{FhG-Stil-Option 'listings'}
+}
+\newboolean{FhG@opt@noauthor}
+\setboolean{FhG@opt@noauthor}{false}
+\DeclareOptionX{noauthor}{
+\setboolean{FhG@opt@noauthor}{true}
+\typeout{FhG-Stil-Option 'noauthor'}
+}
+\newboolean{FhG@opt@nodate}
+\setboolean{FhG@opt@nodate}{false}
+\DeclareOptionX{nodate}{
+\setboolean{FhG@opt@nodate}{true}
+\typeout{FhG-Stil-Option 'nodate'}
+}
+\DeclareOptionX{nofrutiger}{
+\PassOptionsToPackage{nofrutiger}{frutiger}
+}
+\newboolean{FhG@opt@noinnertitle}
+\setboolean{FhG@opt@noinnertitle}{false}
+\DeclareOptionX{noinnertitle}{
+\setboolean{FhG@opt@noinnertitle}{true}
+\typeout{FhG-Stil-Option 'noinnertitle'}
+}
+\newboolean{FhG@opt@nomarvo}
+\setboolean{FhG@opt@nomarvo}{false}
+\DeclareOptionX{nomarvo}{
+\setboolean{FhG@opt@nomarvo}{true}
+\typeout{FhG-Stil-Option 'nomarvo'}
+}
+\newcommand{\FhG@titlepage}{on}
+\DeclareOptionX{notitlepage}{
+\renewcommand{\FhG@titlepage}{off}
+\typeout{FhG-Stil-Option 'notitlepage'}
+}
+\newboolean{FhG@opt@nowasy}
+\setboolean{FhG@opt@nowasy}{false}
+\DeclareOptionX{nowasy}{
+\setboolean{FhG@opt@nowasy}{true}
+\typeout{FhG-Stil-Option 'nowasy'}
+}
+\newboolean{FhG@opt@offer}
+\setboolean{FhG@opt@offer}{false}
+\DeclareOptionX{offer}{
+\setboolean{FhG@opt@offer}{true}
+\typeout{FhG-Stil-Option 'offer'}
+}
+\newcommand{\FhG@twoside}{on}
+\DeclareOptionX{oneside}{
+\renewcommand{\FhG@twoside}{off}
+\typeout{FhG-Stil-Option 'oneside'}
+}
+\newcommand{\FhG@opt@packages}{}
+\DeclareOptionX{packages}{
+\ifthenelse{\isempty{#1}}
+{}
+{\renewcommand{\FhG@opt@packages}{#1}}
+\typeout{FhG-Stil-Option 'packages=\FhG@opt@packages'}
+}
+\newboolean{FhG@opt@protocol}
+\setboolean{FhG@opt@protocol}{false}
+\DeclareOptionX{protocol}{
+\setboolean{FhG@opt@protocol}{true}
+\typeout{FhG-Stil-Option 'protocol'}
+}
+\newboolean{FhG@opt@reqs}
+\setboolean{FhG@opt@reqs}{false}
+\DeclareOptionX{requirements}{
+\setboolean{FhG@opt@reqs}{true}
+\typeout{FhG-Stil-Option 'requirements'}
+}
+\newcommand{\FhG@rtitle@left}{section}
+\DeclareOptionX{runningtitleleft}{
+\ifthenelse{\isempty{#1}}
+{}
+{\renewcommand{\FhG@rtitle@left}{#1}}
+\typeout{FhG-Stil-Option 'runningtitleleft=\FhG@rtitle@left'}
+}
+\newcommand{\FhG@rtitle@right}{subsection}
+\DeclareOptionX{runningtitleright}{
+\ifthenelse{\isempty{#1}}
+{}
+{\renewcommand{\FhG@rtitle@right}{#1}}
+\typeout{FhG-Stil-Option 'runningtitleright=\FhG@rtitle@right'}
+}
+\PassOptionsToPackage{xspace}{dhua}
+\ProcessOptionsX
+\KOMAoptions{
+captions=nooneline,
+cleardoublepage=empty,
+draft=\FhG@draft,
+fontsize=10pt,
+footnotes=multiple,
+footsepline=on,
+headings=big,
+headsepline=off,
+numbers=noendperiod,
+paper=a4,
+parskip=half,
+titlepage=\FhG@titlepage,
+toc=flat,
+twocolumn=off,
+twoside=\FhG@twoside
+}
+\ifthenelse{\equal{\KOMAClassName}{scrbook} OR \equal{\KOMAClassName}{scrreprt}}
+{
+\KOMAoptions{
+open=right
+}
+}
+{}
+\RequirePackage{graphicx}
+\RequirePackage[svgnames,table]{xcolor}
+\RequirePackage{pdfcolmk}
+\RequirePackage{pict2e}
+\RequirePackage{dashrule}
+\RequirePackage{calc}
+\RequirePackage{fp}
+\newlength{\FhG@len@col@width}
+\setlength{\FhG@len@col@width}{41.25mm}
+\newlength{\FhG@len@col@sep}
+\setlength{\FhG@len@col@sep}{4mm}
+\newlength{\FhGWidthOneCol}
+\setlength{\FhGWidthOneCol}{\FhG@len@col@width}
+\newlength{\FhGWidthTwoCol}
+\setlength{\FhGWidthTwoCol}{2\FhG@len@col@width + \FhG@len@col@sep}
+\newlength{\FhGWidthThreeCol}
+\setlength{\FhGWidthThreeCol}{3\FhG@len@col@width + 2\FhG@len@col@sep}
+\newlength{\FhGWidthFourCol}
+\setlength{\FhGWidthFourCol}{4\FhG@len@col@width + 3\FhG@len@col@sep}
+\newlength{\FhGWidthColSep}
+\setlength{\FhGWidthColSep}{\FhG@len@col@sep}
+\setlength{\textwidth}{3\FhG@len@col@width + 2\FhG@len@col@sep}
+\newlength{\FhG@len@foot@height}
+\setlength{\FhG@len@foot@height}{14mm}
+\setlength{\textheight}{241.3mm}
+\setlength{\marginparwidth}{\FhG@len@col@width}
+\setlength{\marginparsep}{\FhG@len@col@sep}
+\newlength{\FhG@len@rules@height}
+\setlength{\FhG@len@rules@height}{.5pt}
+\if@twoside
+\areaset[-5.5mm]{\textwidth}{\textheight}
+\else
+\areaset[-33.2mm]{\textwidth}{\textheight}
+\fi
+\addtolength{\topmargin}{8mm}
+\setlength{\footskip}{.6\FhG@len@foot@height}
+\RequirePackage[automark]{scrlayer-scrpage}
+\RequirePackage{lastpage}
+\RequirePackage[newcommands]{ragged2e}
+\automark[\FhG@rtitle@right]{\FhG@rtitle@left}
+\setheadwidth[0pt]{textwithmarginpar}
+\setfootwidth[0pt]{textwithmarginpar}
+\setfootsepline{\FhG@len@rules@height}
+\defpagestyle{FhGNormal}{
+{\FhG@head@content{0pt}}
+{\FhG@head@content{3\FhG@len@col@width + 3\FhG@len@col@sep}}
+{\FhG@head@content{3\FhG@len@col@width + 3\FhG@len@col@sep}}
+}{
+{\FhG@foot{even}}
+{\FhG@foot{odd}}
+{\FhG@foot{odd}}
+}
+\defpagestyle{FhGFoot}{
+{}
+{}
+{}
+}{
+{\FhG@foot{even}}
+{\FhG@foot{odd}}
+{\FhG@foot{odd}}
+}
+\pagestyle{FhGNormal}
+\setkomafont{pageheadfoot}{\normalfont\footnotesize}
+\newsavebox{\FhG@head@box}
+\newlength{\FhG@len@head}
+\newcommand{\FhG@head@content}[1]{%
+\def\FhG@head@temp{\headmark}%
+\ifthenelse{\equal{\FhG@head@temp}{}}%
+{\def\FhG@head@temp{\leftmark}}%
+{}%
+\savebox{\FhG@head@box}{%
+\parbox{\FhG@len@col@width}{\raggedright\FhG@head@temp}%
+}%
+\settoheight{\FhG@len@head}{\usebox{\FhG@head@box}}%
+\setlength{\unitlength}{\headsep + 1ex}%
+\begin{picture}(0,0)(0,1)%
+\put(0,0){%
+\setlength{\unitlength}{#1}%
+\begin{picture}(0,0)(-1,0)%
+\setlength{\unitlength}{.6ex}%
+\put(0,1){%
+\hdashrule{\FhG@len@col@width}{.7pt}{1.5pt 1pt}%
+}
+\setlength{\unitlength}{\FhG@len@head}%
+\put(0,-1){%
+\usebox{\FhG@head@box}%
+}%
+\setlength{\unitlength}{2\FhG@len@head - .2ex}%
+\put(0,-1){%
+\hdashrule{\FhG@len@col@width}{.7pt}{1.5pt 1pt}%
+}%
+\end{picture}%
+}%
+\end{picture}%
+}
+\newcommand{\FhG@foot}[1]{%
+\ifthenelse{\equal{#1}{even}}%
+{%
+\parbox[t]{\FhG@len@col@width}{\raggedright%
+\thepage\,|\,\pageref{LastPage}%
+}%
+\hspace*{\FhG@len@col@sep}%
+}{}%
+\parbox[t]{\FhG@len@col@width}{\RaggedRight%
+\ifthenelse{\isundefined\FhG@ext@name}%
+{\printinstitute[format=short]}%
+{\FhG@ext@name}%
+}%
+\hspace*{\FhG@len@col@sep}%
+\parbox[t]{\FhG@len@col@width}{\RaggedRight%
+\ifthenelse{\isundefined\FhG@titleshort}%
+{\FhG@title}%
+{\FhG@titleshort}%
+}%
+\hspace*{\FhG@len@col@sep}%
+\parbox[t]{\FhG@len@col@width}{\raggedright%
+\ifthenelse{\isundefined\FhG@partner@text}%
+{\hspace*{1em}}%
+{\FhG@partner@text}%
+}%
+\ifthenelse{\equal{#1}{odd}}%
+{%
+\hspace*{\FhG@len@col@sep}%
+\parbox[t]{\FhG@len@col@width}{\raggedright%
+\hfill%
+\thepage\,|\,\pageref{LastPage}%
+}%
+}{}%
+}
+\ifxetex
+\RequirePackage{microtype}
+\else
+\RequirePackage[tracking=true]{microtype}
+\SetTracking[no ligatures = f]{encoding = *, shape = sc}{120}
+\fi
+\IfFileExists{frutiger.sty}{
+\RequirePackage{frutiger}
+}{
+\PackageError{fhg-style}{frutiger.sty nicht vorhanden}
+}
+\IfFileExists{hologo.sty}{
+\RequirePackage{hologo}
+}{
+\PackageWarning{fhg-style}{hologo.sty nicht vorhanden}
+}
+\ifthenelse{\boolean{FhG@opt@nomarvo}}
+{}
+{
+\IfFileExists{marvosym.sty}{
+\RequirePackage{marvosym}
+\mathchardef\Rightarrow="3229
+}{
+\PackageWarning{fhg-style}{marvosym.sty nicht vorhanden}
+}
+}
+\ifthenelse{\boolean{FhG@opt@nowasy}}
+{}
+{
+\IfFileExists{wasysym.sty}{
+\RequirePackage[nointegrals]{wasysym}
+}{
+\PackageWarning{fhg-style}{wasysym.sty nicht vorhanden}
+}
+}
+\RequirePackage[KeepShorthandsActive]{babel}
+\RequirePackage[autostyle=true, german=guillemets]{csquotes}
+\defineshorthand{"`}{\openautoquote}
+\defineshorthand{"'}{\closeautoquote}
+\ifthenelse{\boolean{FhG@opt@protocol}}
+{
+\addto\captionsngerman{\def\protocolname{Protokoll}}
+\addto\captionsgerman{\def\protocolname{Protokoll}}
+\addto\captionsenglish{\def\protocolname{Protocol}}
+}{}
+\ifthenelse{\boolean{FhG@opt@offer}}
+{
+\addto\captionsngerman{\def\offername{Angebot}}
+\addto\captionsgerman{\def\offername{Angebot}}
+\addto\captionsenglish{\def\offername{Offer}}
+}{}
+\addto\captionsngerman{\def\indexname{Stichwörter}}
+\addto\captionsgerman{\def\indexname{Stichwörter}}
+\addto\captionsenglish{\def\indexname{Index}}
+\RequirePackage[
+\FhG@hyperdriver,
+allcolors=\FhG@hypercolor,
+bookmarks=true,
+bookmarksnumbered=true,
+bookmarksopen=true,
+breaklinks=true,
+colorlinks=true
+]{hyperref}
+\AtBeginDocument{
+\hypersetup{pdftitle=\FhG@title%
+\ifx\undefined\@subtitle\else%
+\ifx\empty\@subtitle\else%
+{ - \@subtitle}%
+\fi
+\fi%
+}
+\hypersetup{pdfauthor=\@author}
+\hypersetup{pdfsubject=\FhG@title}
+\hypersetup{pdfcreator=LaTeX}
+\hypersetup{pdfkeywords=\FhG@title}
+}
+\addto\extrasngerman{\def\equationautorefname{For\-mel}}
+\addto\extrasngerman{\def\footnoteautorefname{Fu\ss \-no\-te}}
+\addto\extrasngerman{\def\itemautorefname{Punkt}}
+\addto\extrasngerman{\def\figureautorefname{Ab\-bil\-dung}}
+\addto\extrasngerman{\def\subfigureautorefname{\figureautorefname}}
+\addto\extrasngerman{\def\tableautorefname{Ta\-bel\-le}}
+\addto\extrasngerman{\def\partautorefname{Teil}}
+\addto\extrasngerman{\def\appendixautorefname{An\-hang}}
+\addto\extrasngerman{\def\chapterautorefname{Ka\-pi\-tel}}
+\addto\extrasngerman{\def\sectionautorefname{\chapterautorefname}}
+\addto\extrasngerman{\def\subsectionautorefname{Ab\-schnitt}}
+\addto\extrasngerman{\def\subsubsectionautorefname{\subsectionautorefname}}
+\addto\extrasngerman{\def\paragraphautorefname{Ab\-satz}}
+\addto\extrasngerman{\def\subparagraphautorefname{Un\-ter\-ab\-satz}}
+\addto\extrasngerman{\def\FancyVerbLineautorefname{Zei\-le}}
+\addto\extrasngerman{\def\theoremautorefname{The\-o\-rem}}
+
+\addto\extrasgerman{\def\equationautorefname{For\-mel}}
+\addto\extrasgerman{\def\footnoteautorefname{Fu\ss \-no\-te}}
+\addto\extrasgerman{\def\itemautorefname{Punkt}}
+\addto\extrasgerman{\def\figureautorefname{Ab\-bil\-dung}}
+\addto\extrasgerman{\def\subfigureautorefname{\figureautorefname}}
+\addto\extrasgerman{\def\tableautorefname{Ta\-bel\-le}}
+\addto\extrasgerman{\def\partautorefname{Teil}}
+\addto\extrasgerman{\def\appendixautorefname{An\-hang}}
+\addto\extrasgerman{\def\chapterautorefname{Ka\-pi\-tel}}
+\addto\extrasgerman{\def\sectionautorefname{\chapterautorefname}}
+\addto\extrasgerman{\def\subsectionautorefname{Ab\-schnitt}}
+\addto\extrasgerman{\def\subsubsectionautorefname{\subsectionautorefname}}
+\addto\extrasgerman{\def\paragraphautorefname{Ab\-satz}}
+\addto\extrasgerman{\def\subparagraphautorefname{Un\-ter\-ab\-satz}}
+\addto\extrasgerman{\def\FancyVerbLineautorefname{Zei\-le}}
+\addto\extrasgerman{\def\theoremautorefname{The\-o\-rem}}
+
+\addto\extrasenglish{\def\equationautorefname{For\-mu\-la}}
+\addto\extrasenglish{\def\footnoteautorefname{Foot\-note}}
+\addto\extrasenglish{\def\itemautorefname{Item}}
+\addto\extrasenglish{\def\figureautorefname{Fig\-ure}}
+\addto\extrasenglish{\def\subfigureautorefname{\figureautorefname}}
+\addto\extrasenglish{\def\tableautorefname{Table}}
+\addto\extrasenglish{\def\partautorefname{Part}}
+\addto\extrasenglish{\def\appendixautorefname{Ap\-pen\-dix}}
+\addto\extrasenglish{\def\chapterautorefname{Chap\-ter}}
+\addto\extrasenglish{\def\sectionautorefname{Sec\-tion}}
+\addto\extrasenglish{\def\subsectionautorefname{\sectionautorefname}}
+\addto\extrasenglish{\def\subsubsectionautorefname{\sectionautorefname}}
+\addto\extrasenglish{\def\paragraphautorefname{Para\-graph}}
+\addto\extrasenglish{\def\subparagraphautorefname{Sub\-para\-graph}}
+\addto\extrasenglish{\def\FancyVerbLineautorefname{Line}}
+\addto\extrasenglish{\def\theoremautorefname{The\-orem}}
+\RequirePackage{bookmark}
+\definecolor{FhGColorFhGGreen}{rgb}{0.09,0.64,0.49}
+\definecolor{FhGGreen}{named}{FhGColorFhGGreen}
+\definecolor{FhGColorWhite}{named}{white}
+\definecolor{FhGColorBlack}{named}{black}
+\definecolor{FhGColorBlack50}{rgb}{0.5,0.5,0.5}
+\definecolor{FhGColorBlack60}{rgb}{0.4,0.4,0.4}
+\definecolor{FhGColorBlack25}{rgb}{0.75,0.75,0.75}
+\definecolor{FhGColorBlue5}{rgb}{0,0.2,0.42}
+\definecolor{FhGColor01}{rgb}{0.83,0.90,0.96} % 212/230/244
+\definecolor{FhGColor02}{rgb}{0.53,0.74,0.89} % 136/188/226
+\definecolor{FhGColor03}{rgb}{0.12,0.51,0.75} % 31/130/192
+\definecolor{FhGColor04}{rgb}{0.00,0.35,0.58} % 0/90/148
+\definecolor{FhGColor05}{rgb}{0.00,0.20,0.42} % 0/52/107
+\definecolor{FhGColor06}{rgb}{0.78,0.76,0.87} % 199/193/222
+\definecolor{FhGColor07}{rgb}{0.56,0.52,0.73} % 144/133/186
+\definecolor{FhGColor08}{rgb}{0.22,0.22,0.55} % 57/55/139
+\definecolor{FhGColor09}{rgb}{0.16,0.16,0.42} % 41/40/106
+\definecolor{FhGColor10}{rgb}{0.89,0.00,0.10} % 226/0/26
+\definecolor{FhGColor11}{rgb}{0.62,0.11,0.13} % 158/28/34
+\definecolor{FhGColor12}{rgb}{0.47,0.11,0.17} % 119/28/44
+\definecolor{FhGColor13}{rgb}{1.00,0.92,0.79} % 254/234/201
+\definecolor{FhGColor14}{rgb}{0.98,0.80,0.55} % 251/203/140
+\definecolor{FhGColor15}{rgb}{0.95,0.58,0.00} % 242/148/0
+\definecolor{FhGColor16}{rgb}{0.92,0.42,0.04} % 235/106/10
+\definecolor{FhGColor17}{rgb}{1.00,0.98,0.82} % 255/250/209
+\definecolor{FhGColor18}{rgb}{1.00,0.95,0.51} % 255/243/129
+\definecolor{FhGColor19}{rgb}{1.00,0.86,0.00} % 255/220/0
+\definecolor{FhGColor20}{rgb}{0.99,0.76,0.00} % 253/195/0
+\definecolor{FhGColor21}{rgb}{0.93,0.94,0.69} % 238/239/177
+\definecolor{FhGColor22}{rgb}{0.82,0.87,0.51} % 209/221/130
+\definecolor{FhGColor23}{rgb}{0.69,0.78,0.00} % 177/200/0
+\definecolor{FhGColor24}{rgb}{0.56,0.64,0.01} % 143/164/2
+\definecolor{FhGColor25}{rgb}{0.42,0.45,0.25} % 106/115/65
+\definecolor{FhGColor26}{rgb}{0.71,0.86,0.83} % 180/220/211
+\definecolor{FhGColor27}{rgb}{0.43,0.75,0.66} % 109/191/169
+\definecolor{FhGColor28}{rgb}{0.09,0.61,0.49} % 23/156/125
+\definecolor{FhGColor29}{rgb}{0.84,0.88,0.79} % 215/225/201
+\definecolor{FhGColor30}{rgb}{0.80,0.69,0.45} % 203/175/115
+\definecolor{FhGColor31}{rgb}{0.27,0.16,0.08} % 70/41/21
+\definecolor{FhGColor32}{rgb}{0.30,0.39,0.44} % 76/99/111
+\definecolor{FhGColor33}{rgb}{0.20,0.72,0.79} % 51/184/202
+\definecolor{FhGColor34}{rgb}{0.15,0.73,0.89} % 37/186/226
+\definecolor{FhGColor35}{rgb}{0.00,0.43,0.57} % 0/110/146
+\definecolor{FhGColor36}{rgb}{0.78,0.79,0.80} % 199/202/204
+\ifthenelse{\boolean{FhG@opt@protocol}}
+{
+\@titlepagefalse
+\def\@title{\protocolname}
+\def\FhG@title{\protocolname}
+}{}
+\newcommand{\FhG@fhglogo@createlogokaestchen}[2]{%
+\newsavebox{\FhG@fhglogo@logokaestchen}%
+\savebox{\FhG@fhglogo@logokaestchen}{%
+\setlength{\unitlength}{#2}%
+\begin{picture}(1,1)(0,0)%
+\color{#1}%
+\moveto(0.001, 0.001)%
+\lineto(0.001, 0.999)%
+\lineto(0.999, 0.999)%
+\lineto(0.999, 0.001)%
+\closepath\fillpath%
+\color{white}%
+\moveto(0, 0.667273)%
+\curveto(0.352583, 0.687357)(0.780572, 0.809663)(1, 0.914545)%
+\lineto(1, 0.94)%
+\curveto(0.846024, 0.870822)(0.503212, 0.747894)(0, 0.72)%
+\closepath\fillpath%
+ \moveto(0, 0.48)%
+ \curveto(0.351465, 0.548153)(0.780194, 0.709811)(1, 0.823636)%
+ \lineto(1, 0.863636)%
+ \curveto(0.838199, 0.786633)(0.475264, 0.630927)(0, 0.552727)%
+ \closepath\fillpath%
+\moveto(0, 0.145455)%
+\curveto(0.444250, 0.348872)(0.798080, 0.571642)(1, 0.7)%
+\lineto(1, 0.776364)%
+\curveto(0.795719, 0.654645)(0.480854, 0.479914)(0, 0.285455)%
+\closepath\fillpath%
+\moveto(0.096364, 0)%
+\curveto(0.400148, 0.169396)(0.813290, 0.438210)(1, 0.583636)%
+\lineto(1, 0.610909)%
+\curveto(0.842149, 0.498789)(0.485363, 0.263797)(0, 0)%
+\closepath\fillpath%
+\moveto(0.361818, 0)%
+\curveto(0.633584, 0.193963)(0.799786, 0.316267)(1, 0.487273)%
+\lineto(1, 0.527273)%
+\curveto(0.861942, 0.415237)(0.633711, 0.253203)(0.230909, 0)%
+\closepath\fillpath%
+\end{picture}%
+}%
+}
+\define@choicekey[FhG]{fhglogo}{color}[\val\nr]{normal,negativ,sw,grau}{%
+\ifcase\nr\relax
+\definecolor{FhG@fhglogo@boxcolor}{named}{FhGColorFhGGreen}
+\definecolor{FhG@fhglogo@textcolor}{named}{FhGColorBlack}
+\or
+\definecolor{FhG@fhglogo@boxcolor}{named}{FhGColorFhGGreen}
+\definecolor{FhG@fhglogo@textcolor}{named}{FhGColorWhite}
+\or
+\definecolor{FhG@fhglogo@boxcolor}{named}{FhGColorBlack}
+\definecolor{FhG@fhglogo@textcolor}{named}{FhGColorBlack}
+\or
+\definecolor{FhG@fhglogo@boxcolor}{named}{FhGColorBlack50}
+\definecolor{FhG@fhglogo@textcolor}{named}{FhGColorBlack50}
+\fi
+}
+\define@key[FhG]{fhglogo}{institute}{\def\FhG@fhglogo@institute{#1}}
+\define@choicekey[FhG]{fhglogo}{position}{right,left}{\def\FhG@fhglogo@position{#1}}
+\define@key[FhG]{fhglogo}{width}{\def\FhG@fhglogo@width{#1}}
+\presetkeys[FhG]{fhglogo}{color=normal, institute=\@empty, position=right, width=60mm}{}
+\newcommand{\fhglogo}[1][\@empty]{
+\setkeys[FhG]{fhglogo}{#1}
+\AtBeginDocument{
+\ifthenelse{\equal{\FhG@fhglogo@institute}{\@empty} \AND \NOT \isundefined\FhG@inst@short}%
+{\def\FhG@fhglogo@institute{\FhG@inst@short}}%
+{}%
+\def\FhG@fhglogo@fraunhofer{\textcolor{FhG@fhglogo@textcolor}{\Huge\textbf{Fraunhofer}}}
+\newlength{\FhG@fhglogo@ref}
+\setlength{\FhG@fhglogo@ref}{\heightof{\FhG@fhglogo@fraunhofer} * \real{0.5}}
+\newlength{\FhG@fhglogo@height}
+\setlength{\FhG@fhglogo@height}{3\FhG@fhglogo@ref}
+\FhG@fhglogo@createlogokaestchen{FhG@fhglogo@boxcolor}{\FhG@fhglogo@height}
+\newsavebox{\FhG@fhglogo@box}
+\savebox{\FhG@fhglogo@box}{%
+\newlength{\FhG@fhglogo@fraunhoferwidth}%
+\setlength{\FhG@fhglogo@fraunhoferwidth}{\widthof{\FhG@fhglogo@fraunhofer}}%
+\newlength{\FhG@fhglogo@totalwidth}%
+\setlength{\FhG@fhglogo@totalwidth}{\FhG@fhglogo@height + \FhG@fhglogo@ref + \FhG@fhglogo@fraunhoferwidth}%
+\parbox[t]{\FhG@fhglogo@totalwidth}{%
+\setlength{\parskip}{0mm}%
+\setlength{\baselineskip}{0mm}%
+\makebox{%
+\makebox[\FhG@fhglogo@height]{%
+\usebox{\FhG@fhglogo@logokaestchen}%
+}%
+\makebox[\FhG@fhglogo@ref]{}%
+\makebox[\FhG@fhglogo@fraunhoferwidth]{%
+\FhG@fhglogo@fraunhofer%
+}%
+}%
+\ifthenelse{\isempty{\FhG@fhglogo@institute}}%
+{}%
+{%
+\par%
+\vspace{\FhG@fhglogo@ref}%
+\ifthenelse{\equal{\FhG@fhglogo@position}{left}}%
+{%
+\hspace{\FhG@fhglogo@height}%
+\hspace{\FhG@fhglogo@ref}%
+\textcolor{FhGColorFhGGreen}{\huge\textbf{\FhG@fhglogo@institute}}%
+}%
+{%
+\hfill%
+\textcolor{FhG@fhglogo@textcolor}{\Large\textbf{\FhG@fhglogo@institute}}%
+}%
+}%
+}% parbox Gesamtlogo
+}% savebox
+}% AtBeginDocument
+\def\fhglogoausgabe{%
+\resizebox{\FhG@fhglogo@width}{!}{\usebox{\FhG@fhglogo@box}}%
+}
+} % end of \newcommand{\fhglogo}
+\def\FhG@title{}
+\renewcommand{\title}[2][]{
+\ifthenelse{\isempty{#1}}%
+{}%
+{\def\FhG@titleshort{#1}}
+\def\@title{#2}
+\def\FhG@title{#2}
+}
+\newcommand{\institute}[2]{
+\def\FhG@inst@long{#1}
+\def\FhG@inst@short{#2}
+}
+\newcommand{\organization}[1]{\def\FhG@organization{#1}}
+\define@key[FhG]{partner}{logo}{\def\FhG@partner@logofile{#1}}
+\define@key[FhG]{partner}{innerlogo}{\def\FhG@partner@innerlogofile{#1}}
+\presetkeys[FhG]{partner}{logo=\@empty}{}
+\presetkeys[FhG]{partner}{innerlogo=\@empty}{}
+\newcommand{\partner}[2][]{
+\setkeys[FhG]{partner}{#1}
+\def\FhG@partner@text{#2}
+}
+\addto\captionsngerman{\def\partnerheadingname{In Zusammenarbeit mit}}
+\addto\captionsgerman{\def\partnerheadingname{In Zusammenarbeit mit}}
+\addto\captionsenglish{\def\partnerheadingname{in cooperation with}}
+\newcommand{\email}[1]{\def\FhG@email{#1}}
+\newcommand{\version}[1]{\def\FhG@version{#1}}
+\renewcommand{\author}[2][]{
+\def\@author{#2}
+\def\FhG@author{#2}
+\def\FhG@innerauthor{#1}
+}
+\newcommand{\titlelogo}[2][]{
+\def\FhG@titlelogo@inner{#1}
+\def\FhG@titlelogo@front{#2}
+}
+\newcommand{\innertitletext}[1]{\def\FhG@innertitle@text{#1}}
+\newcommand{\externalname}[1]{\def\FhG@ext@name{#1}}
+\newcommand{\externallogo}[2][60mm]{
+\def\FhG@ext@logo@w{#1}
+\def\FhG@ext@logo{#2}
+}
+\renewcommand\maketitle{
+\if@titlepage
+\begin{titlepage}
+\ifthenelse{\boolean{FhG@opt@noinnertitle}}
+{
+\if@twoside
+\setcounter{page}{-1}
+\else
+\setcounter{page}{0}
+\fi
+}{
+\if@twoside
+\setcounter{page}{-3}
+\else
+\setcounter{page}{-1}
+\fi
+}
+\ifthenelse{\isundefined\fhglogoausgabe}%
+{}%
+{%
+\setlength{\unitlength}{1mm}%
+\begin{picture}(0,0)(-106.6,-3.1)%
+\put(0,0){\fhglogoausgabe}%
+\end{picture}%
+}%
+\ifthenelse{\isundefined\FhG@ext@logo}%
+{}%
+{%
+\newlength{\FhG@ext@logow}%
+\settowidth{\FhG@ext@logow}{\includegraphics[keepaspectratio, width=\FhG@ext@logo@w, height=15mm]{\FhG@ext@logo}}%
+\setlength{\unitlength}{\textwidth + \FhG@len@col@width + \FhG@len@col@sep - 10.5mm - \FhG@ext@logow}%
+\begin{picture}(0,0)(-1,0)%
+\put(0,0){%
+\includegraphics[keepaspectratio, width=\FhG@ext@logo@w, height=15mm]{\FhG@ext@logo}%
+}%
+\end{picture}%
+}%
+\newboolean{FhG@partner@haslogofile}%
+\setboolean{FhG@partner@haslogofile}{true}%
+\ifthenelse{\isundefined\FhG@partner@logofile}%
+{\setboolean{FhG@partner@haslogofile}{false}}%
+{%
+\ifthenelse{\equal{\FhG@partner@logofile}{\@empty}}%
+{\setboolean{FhG@partner@haslogofile}{false}}%
+{}%
+}%
+\ifthenelse{\boolean{FhG@partner@haslogofile}}%
+{%
+\setlength{\unitlength}{1mm}%
+\begin{picture}(0,0)(-119.5,230.4)%
+\put(-1,18.233){%
+\hdashrule{60mm}{.7pt}{3pt 2pt}%
+}%
+\put(0,14){%
+\textls{\textbf{\footnotesize\MakeUppercase{\partnerheadingname}}}%
+}%
+\put(0,0){%
+\includegraphics[keepaspectratio, width=30mm, height=14.9mm]{\FhG@partner@logofile}%
+}%
+\end{picture}%
+}%
+{}%
+\newboolean{FhG@title@hastitlelogo}%
+\setboolean{FhG@title@hastitlelogo}{true}%
+\ifthenelse{\isundefined\FhG@titlelogo@front}%
+{\setboolean{FhG@title@hastitlelogo}{false}}%
+{%
+\ifthenelse{\equal{\FhG@titlelogo@front}{\@empty}}%
+{\setboolean{FhG@title@hastitlelogo}{false}}%
+{}%
+}%
+\ifthenelse{\boolean{FhG@title@hastitlelogo}}%
+{%
+\setlength{\unitlength}{1mm}%
+\ifthenelse{\boolean{FhG@partner@haslogofile}}%
+{\def\FhG@titlelogo@vskip{201}}%
+{\def\FhG@titlelogo@vskip{230.4}}%
+\begin{picture}(0,0)(0,\FhG@titlelogo@vskip)%
+\includegraphics{\FhG@titlelogo@front}%
+\end{picture}%
+}%
+{}%
+\mbox{}\vskip 16.2mm
+\textls{\textbf{\footnotesize%
+\ifthenelse{\isundefined\FhG@ext@name}%
+{\printinstitute[format=full, textformat=uppercase]}%
+{{\MakeUppercase \FhG@ext@name}}%
+}}\par
+\vskip 39.2mm
+\ifthenelse{\equal{\@subject}{\@empty}}
+{\def\FhG@temp@out{\ }}
+{\def\FhG@temp@out{\@subject}}
+\ifthenelse{\boolean{FhG@opt@protocol}}
+{\def\FhG@temp@out{\protocolname\ \@subject}}
+{}
+\ifthenelse{\boolean{FhG@opt@offer}}
+{\def\FhG@temp@out{\offername\ \@subject}}
+{}
+\FhG@temp@out\par
+\ifthenelse{\isundefined\FhG@title}
+{\def\FhG@temp@out{---}}
+{\def\FhG@temp@out{\FhG@title}}
+{\Huge\textbf{\MakeUppercase{\FhG@temp@out}}\par}
+\vskip 3mm
+\ifthenelse{\equal{\@subtitle}{\@empty}}
+{}
+{{\huge\@subtitle\par}}
+\ifthenelse{\isundefined\FhG@version}
+{}
+{
+\vskip 3ex
+\FhG@version\par
+}
+\cleardoublepage
+\ifthenelse{\boolean{FhG@opt@noinnertitle}}
+{}
+{
+\thispagestyle{empty}
+\newboolean{FhG@partner@hasinnerlogofile}%
+\setboolean{FhG@partner@hasinnerlogofile}{true}%
+\ifthenelse{\isundefined\FhG@partner@innerlogofile}%
+{\setboolean{FhG@partner@hasinnerlogofile}{false}}%
+{%
+\ifthenelse{\equal{\FhG@partner@innerlogofile}{\@empty}}%
+{\setboolean{FhG@partner@hasinnerlogofile}{false}}%
+{}%
+}%
+\ifthenelse{\boolean{FhG@partner@hasinnerlogofile}}%
+{%
+\setlength{\unitlength}{1mm}%
+\begin{picture}(0,0)(-119.5,230.4)%
+\put(-1,18.233){%
+\hdashrule{60mm}{.7pt}{3pt 2pt}%
+}%
+\put(0,14){%
+\textls{\textbf{\footnotesize\MakeUppercase{\partnerheadingname}}}%
+}%
+\put(0,0){%
+\includegraphics[keepaspectratio, width=30mm, height=14.9mm]{\FhG@partner@innerlogofile}%
+}%
+\end{picture}%
+}%
+{}%
+\newboolean{FhG@innertitle@hastitlelogo}%
+\setboolean{FhG@innertitle@hastitlelogo}{true}%
+\ifthenelse{\isundefined\FhG@titlelogo@inner}%
+{\setboolean{FhG@innertitle@hastitlelogo}{false}}%
+{%
+\ifthenelse{\equal{\FhG@titlelogo@inner}{\@empty}}%
+{\setboolean{FhG@innertitle@hastitlelogo}{false}}%
+{}%
+}%
+\ifthenelse{\boolean{FhG@innertitle@hastitlelogo}}%
+{%
+\setlength{\unitlength}{1mm}%
+\ifthenelse{\boolean{FhG@partner@hasinnerlogofile}}%
+{\def\FhG@titlelogo@vskip{201}}%
+{\def\FhG@titlelogo@vskip{230.4}}%
+\begin{picture}(0,0)(0,\FhG@titlelogo@vskip)%
+\includegraphics{\FhG@titlelogo@inner}%
+\end{picture}%
+}%
+{}%
+\begin{picture}(0,0)(0,0)\end{picture}%
+\vskip 68.7mm
+\ifthenelse{\isundefined\FhG@title}
+{\def\FhG@temp@out{---}}
+{\def\FhG@temp@out{\FhG@title}}
+{\Huge\textcolor{FhGColorBlack60}{\textbf{\MakeUppercase{\FhG@temp@out}}}\par}
+\vskip 3mm
+\ifthenelse{\equal{\@subtitle}{\@empty}}
+{\vskip 12mm}
+{{\huge\textcolor{FhGColorBlack60}{\@subtitle}\par}}
+\newboolean{FhG@title@hasauthor}
+\setboolean{FhG@title@hasauthor}{true}
+\ifthenelse{\isundefined\FhG@author}
+{\setboolean{FhG@title@hasauthor}{false}}
+{
+\ifthenelse{\equal{\FhG@author}{\@empty}}
+{\setboolean{FhG@title@hasauthor}{false}}
+{}
+}
+\ifthenelse{\boolean{FhG@opt@noauthor}}
+{\setboolean{FhG@title@hasauthor}{false}}
+{}
+\newboolean{FhG@innertitle@hasauthor}
+\setboolean{FhG@innertitle@hasauthor}{true}
+\ifthenelse{\isundefined\FhG@innerauthor}
+{\setboolean{FhG@innertitle@hasauthor}{false}}
+{
+\ifthenelse{\equal{\FhG@innerauthor}{\@empty}}
+{\setboolean{FhG@innertitle@hasauthor}{false}}
+{}
+}
+\ifthenelse{\boolean{FhG@title@hasauthor}}
+{
+\vskip 8mm
+\textbf{\FhG@author}%
+\ifthenelse{\boolean{FhG@innertitle@hasauthor}}%
+{, \textbf{\FhG@innerauthor}}%
+{}%
+\par
+\ifthenelse{\isundefined\FhG@email}
+{\vskip 6mm}
+{\texttt{\href{mailto:\FhG@email}{\FhG@email}}\par}
+\vskip 5mm
+}
+{}
+\ifthenelse{\isundefined\FhG@organization}
+{}
+{\FhG@organization\par}
+\ifthenelse{\isundefined\FhG@innertitle@text}
+{}
+{\FhG@innertitle@text\par}
+\cleardoublepage
+} % end of inner title
+\end{titlepage}
+\else
+\thispagestyle{FhGFoot}
+\ifthenelse{\isundefined\fhglogoausgabe}
+{}%
+{%
+\setlength{\unitlength}{1mm}%
+\begin{picture}(0,0)(-106.6,-3.1)%
+\put(0,0){\fhglogoausgabe}%
+\end{picture}%
+}%
+\vskip 15mm
+\textcolor{FhGColorBlack60}{\textls{\textbf{\footnotesize%
+\ifthenelse{\isundefined\FhG@ext@name}%
+{\printinstitute[format=full, textformat=uppercase]}%
+{{\MakeUppercase \FhG@ext@name}}%
+}}}\par
+\vskip 5mm
+\ifthenelse{\equal{\@subject}{\@empty}}
+{\def\FhG@temp@out{\@empty}}
+{\def\FhG@temp@out{\@subject}}
+\ifthenelse{\boolean{FhG@opt@protocol}}
+{\def\FhG@temp@out{\protocolname\ \@subject}}
+{}
+\ifthenelse{\boolean{FhG@opt@offer}}
+{\def\FhG@temp@out{\offername\ \@subject}}
+{}
+\ifthenelse{\equal{\FhG@temp@out}{\@empty}}
+{\vskip 2mm}
+{\textcolor{FhGColorBlack60}{\FhG@temp@out}\par}
+\ifthenelse{\isundefined\FhG@title}
+{\def\FhG@temp@out{---}}
+{\def\FhG@temp@out{\FhG@title}}
+{\huge\textbf{\MakeUppercase{\FhG@temp@out}}\par}
+\ifthenelse{\equal{\@subtitle}{\@empty}}
+{}
+{{\Large\vskip 2mm\textcolor{FhGColorBlack60}{\@subtitle}\par}}
+\newboolean{FhG@title@hasauthor}
+\setboolean{FhG@title@hasauthor}{true}
+\ifthenelse{\isundefined\FhG@author}
+{\setboolean{FhG@title@hasauthor}{false}}
+{
+\ifthenelse{\equal{\FhG@author}{\@empty}}
+{\setboolean{FhG@title@hasauthor}{false}}
+{}
+}
+\ifthenelse{\boolean{FhG@opt@noauthor}}
+{\setboolean{FhG@title@hasauthor}{false}}
+{}
+\ifthenelse{\boolean{FhG@title@hasauthor}}
+{
+\vskip 2mm
+\ifthenelse{\isundefined\FhG@email}
+{\FhG@author}
+{\FhG@author\\\texttt{\href{mailto:\FhG@email}{\FhG@email}}}
+\par
+}
+{}
+\ifthenelse{\boolean{FhG@opt@nodate}}
+{}
+{
+\@date\par
+}
+\ifthenelse{\isundefined\FhG@version}
+{}
+{\FhG@version\par}
+\vspace*{5ex}
+\fi % end of \if@titlepage
+\let\thanks\relax
+\let\maketitle\relax
+\let\@maketitle\relax
+\global\let\@thanks\@empty
+\global\let\@author\@empty
+\global\let\@date\@empty
+\global\let\@title\@empty
+\global\let\@subtitle\@empty
+\global\let\@extratitle\@empty
+\global\let\@titlehead\@empty
+\global\let\@subject\@empty
+\global\let\@publishers\@empty
+\global\let\@uppertitleback\@empty
+\global\let\@lowertitleback\@empty
+\global\let\@dedication\@empty
+\global\let\author\relax
+\global\let\title\relax
+\global\let\extratitle\relax
+\global\let\titlehead\relax
+\global\let\subject\relax
+\global\let\publishers\relax
+\global\let\uppertitleback\relax
+\global\let\lowertitleback\relax
+\global\let\dedication\relax
+\global\let\date\relax
+\global\let\and\relax
+} % end of \renewcommand\maketitle
+\newcommand*{\FhG@newlineafter}[1]{#1\nopagebreak\\}
+\addtokomafont{disposition}{\let\@hangfrom\FhG@newlineafter}
+\ifthenelse{\boolean{FhG@opt@protocol}}
+{
+\renewcommand{\thesection}{TOP~\arabic{section}}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+}{}
+\addto\extrasngerman{\def\conceptname{Entwurf}}
+\addto\extrasgerman{\def\conceptname{Entwurf}}
+\addto\extrasenglish{\def\conceptname{Draft}}
+\ifthenelse{\boolean{FhG@opt@concept}}
+{
+\RequirePackage{draftwatermark}
+\SetWatermarkLightness{.9}
+\SetWatermarkText{\conceptname}
+}
+{}
+\input{fleqn.clo}
+\AtEndOfClass{\setlength{\mathindent}{0mm}}
+\RequirePackage{longtable}
+\RequirePackage{array}
+\RequirePackage{tabu}
+\RequirePackage{booktabs}
+\tabulinesep = ^.8mm_2mm
+\newtabulinestyle{FhGdashed=\FhG@len@rules@height on 3pt off 2pt}
+\newtabulinestyle{FhGsolid=\FhG@len@rules@height}
+\newcommand\fhgmidline{\tabucline[FhGdashed]-}
+\newcommand\fhgbottomline{\tabucline[FhGsolid]-}
+\define@key[FhG]{fhgtable}{firsthead}{\def\FhG@fhgtable@firsthead{#1}}
+\define@key[FhG]{fhgtable}{head}{\def\FhG@fhgtable@head{#1}}
+\define@key[FhG]{fhgtable}{foot}{\def\FhG@fhgtable@foot{#1}}
+\define@key[FhG]{fhgtable}{lastfoot}{\def\FhG@fhgtable@lastfoot{#1}}
+\define@key[FhG]{fhgtable}{autoline}{\def\FhG@fhgtable@autoline{#1}}
+\presetkeys[FhG]{fhgtable}{firsthead={}}{}
+\presetkeys[FhG]{fhgtable}{head={}}{}
+\presetkeys[FhG]{fhgtable}{foot={}}{}
+\presetkeys[FhG]{fhgtable}{lastfoot={}}{}
+\presetkeys[FhG]{fhgtable}{autoline={}}{}
+\newenvironment{fhgtable}[2][]{
+\setkeys[FhG]{fhgtable}{#1}
+\begin{longtabu}[l]{#2}
+\ifx\@empty\FhG@fhgtable@firsthead\else
+\FhG@fhgtable@firsthead
+\fhgmidline
+\endfirsthead
+\fi
+\ifx\@empty\FhG@fhgtable@head\else
+\FhG@fhgtable@head
+\fhgmidline
+\endhead
+\fi
+\ifx\@empty\FhG@fhgtable@foot\else
+\fhgbottomline
+\FhG@fhgtable@foot
+\endfoot
+\fi
+\ifx\@empty\FhG@fhgtable@lastfoot\else
+\fhgbottomline
+\FhG@fhgtable@lastfoot
+\endlastfoot
+\fi
+\ifx\@empty\FhG@fhgtable@autoline\else
+\everyrow{\fhgmidline}
+\fi
+}{
+\everyrow{}
+\end{longtabu}
+}
+\newenvironment{smalltable}[2][]{
+\begingroup
+\small
+\begin{fhgtable}[#1]{#2}
+}{
+\end{fhgtable}
+\endgroup
+}
+\RequirePackage{enumitem}
+\setlist{topsep=0mm plus .1pt, partopsep=0mm, leftmargin=\FhG@len@col@sep, noitemsep}
+\newcommand{\itemsquare}[1][FhGColorBlack]{
+\setlength{\unitlength}{1ex}%
+\begin{picture}(1,1)(0,0)%
+\color{#1}%
+\moveto(0, 0)%
+\lineto(0, 1)%
+\lineto(1, 1)%
+\lineto(1, 0)%
+\closepath\fillpath%
+\end{picture}%
+}
+\ifthenelse{\equal{\FhG@opt@item}{fhg}}
+{
+\setlist[itemize,1]{label=\itemsquare}
+\setlist[itemize,2]{label=\itemsquare[FhGColorBlack50]}
+\setlist[itemize,3]{label=--}
+\setlist[itemize,4]{label=\ensuremath{\cdot}}
+}{}
+\ifthenelse{\equal{\FhG@opt@item}{linedot}}
+{
+\setlist[itemize,1]{label=--}
+\setlist[itemize,2]{label=\ensuremath{\bullet}}
+\setlist[itemize,3]{label=\itemsquare[FhGColorBlack50]}
+\setlist[itemize,4]{label=\ensuremath{\cdot}}
+}{}
+\ifthenelse{\equal{\FhG@opt@item}{lineline}}
+{
+\setlist[itemize,1]{label=\textbf{--}}
+\setlist[itemize,2]{label=\textcolor{FhGColorBlack60}{--}}
+\setlist[itemize,3]{label=-}
+\setlist[itemize,4]{label=\textcolor{FhGColorBlack60}{-}}
+}{}
+\ifthenelse{\equal{\FhG@opt@item}{linesquare}}
+{
+\setlist[itemize,1]{label=--}
+\setlist[itemize,2]{label=\itemsquare[FhGColorBlack60]}
+\setlist[itemize,3]{label=\textcolor{FhGColorBlack60}{\ensuremath{\bullet}}}
+\setlist[itemize,4]{label=\textcolor{FhGColorBlack60}{--}}
+}{}
+\setlist[enumerate,1]{label=\arabic*, ref=\arabic*}
+\setlist[enumerate,2]{label=\alph*, ref=\theenumi.\alph*}
+\setlist[enumerate,3]{label=\roman*, ref=\theenumii.\roman*}
+\setlist[enumerate,4]{label=\Alph*, ref=\theenumiii.\Alph*}
+\setlist[description]{style=nextline, font=\normalfont}
+\deffootnote{\FhG@len@col@sep}{0mm}{\makebox[\FhG@len@col@sep][l]{\thefootnotemark}}
+\setfootnoterule[\FhG@len@rules@height]{\textwidth}
+\renewcommand*\footnoterule{%
+\normalsize\ftn@rule@test@values
+\kern-\dimexpr 2.6\p@+\ftn@rule@height\relax
+\ifx\@textbottom\relax\else\vskip \z@ \@plus.05fil\fi
+{\usekomafont{footnoterule}{%
+\hdashrule[1ex]{\ftn@rule@width}{\ftn@rule@height}{.5pt 1pt}}}%
+\kern 2.6\p@}
+\newcommand{\fhgmargin}[1]{%
+\marginpar{\normalfont\footnotesize\RaggedRight #1}%
+}
+\ifthenelse{\boolean{FhG@opt@protocol}}
+{
+\addto\captionsngerman{\def\contentsname{Tagesordnung}}
+\addto\captionsgerman{\def\contentsname{Tagesordnung}}
+\addto\captionsenglish{\def\contentsname{Agenda}}
+}
+{
+\addto\captionsngerman{\def\contentsname{Inhalt}}
+\addto\captionsgerman{\def\contentsname{Inhalt}}
+\addto\captionsenglish{\def\contentsname{Contents}}
+}
+\addto\captionsngerman{\def\listfigurename{Abbildungen}}
+\addto\captionsgerman{\def\listfigurename{Abbildungen}}
+\addto\captionsenglish{\def\listfigurename{Figures}}
+\addto\captionsngerman{\def\listtablename{Tabellen}}
+\addto\captionsgerman{\def\listtablename{Tabellen}}
+\addto\captionsenglish{\def\listtablename{Tables}}
+\ifthenelse{\isundefined\FhG@gls}
+{}
+{
+\RequirePackage[nopostdot, nonumberlist]{glossaries}
+\makeglossaries
+\setglossarystyle{altlist}
+\ifthenelse{\equal{\FhG@gls}{\@empty}}
+{}
+{\loadglsentries{\FhG@gls}}
+}
+\define@choicekey[FhG]{printinstitute}{format}{short,long,full}{\def\FhG@pinst@fmt{#1}}
+\define@choicekey[FhG]{printinstitute}{textformat}{normal,uppercase}{\def\FhG@pinst@txtfmt{#1}}
+\define@key[FhG]{printinstitute}{separator}{\def\FhG@pinst@sep{#1}}
+\presetkeys[FhG]{printinstitute}{format=short, textformat=normal, separator={~}}{}
+\def\FhG@pinst@out@short{%
+\ifthenelse{\isundefined\FhG@inst@short}%
+{Fraunhofer-Gesellschaft}%
+{%
+\ifthenelse{\equal{\FhG@inst@short}{\@empty}}%
+{Fraunhofer-Gesellschaft}%
+{Fraunhofer \FhG@inst@short}%
+}%
+}
+\newcommand{\printinstitute}[1][]{%
+\setkeys[FhG]{printinstitute}{#1}%
+\ifthenelse{\equal{\FhG@pinst@txtfmt}{normal}}%
+{\def\FhG@pinst@out@fmt{}}{}%
+\ifthenelse{\equal{\FhG@pinst@txtfmt}{uppercase}}%
+{\def\FhG@pinst@out@fmt{\MakeUppercase}}{}%
+\ifthenelse{\equal{\FhG@pinst@fmt}{short}}%
+{\FhG@pinst@out@fmt{\FhG@pinst@out@short}}{}%
+\ifthenelse{\equal{\FhG@pinst@fmt}{long}}%
+{%
+\ifthenelse{\isundefined\FhG@inst@long}%
+{\FhG@pinst@out@fmt{\FhG@pinst@out@short}}%
+{%
+\ifthenelse{\equal{\FhG@inst@long}{\@empty}}%
+{\FhG@pinst@out@fmt{\FhG@pinst@out@short}}%
+{\FhG@pinst@out@fmt{\FhG@inst@long}}%
+}%
+}{}%
+\ifthenelse{\equal{\FhG@pinst@fmt}{full}}%
+{%
+\ifthenelse{\isundefined\FhG@inst@long}%
+{\FhG@pinst@out@fmt{\FhG@pinst@out@short}}%
+{%
+\ifthenelse{\equal{\FhG@inst@long}{\@empty}}%
+{\FhG@pinst@out@fmt{\FhG@pinst@out@short}}%
+{%
+\FhG@pinst@out@fmt{\FhG@inst@long}%
+\ifthenelse{\isundefined\FhG@inst@short}%
+{}%
+{%
+\ifthenelse{\equal{\FhG@inst@short}{\@empty}}%
+{}%
+{\FhG@pinst@out@fmt{\FhG@pinst@sep\FhG@inst@short}}%
+}%
+}%
+}%
+}{}%
+}
+\RequirePackage{dhua}
+\newdhua{\bzw}{bzw}
+\newdhua{\ca}{ca}
+\newdhua{\etc}{etc}
+\newdhua{\evtl}{evtl}
+\newdhua{\mind}{mind}
+\newdhua{\usw}{usw}
+\ifx\undefined\meta
+\newcommand{\meta}[1]{\ensuremath\langle\textsl{#1}\ensuremath\rangle}
+\else
+ \renewcommand{\meta}[1]{\ensuremath\langle\textsl{#1}\ensuremath\rangle}
+\fi
+\ifthenelse{\boolean{FhG@opt@reqs}}
+{
+\RequirePackage[color=FhGColor16, bordercolor=white]{todonotes}
+\addto\captionsngerman{\def\listofrequirementsname{Liste der Anforderungen}}
+\addto\captionsgerman{\def\listofrequirementsname{Liste der Anforderungen}}
+\addto\captionsenglish{\def\listofrequirementsname{List of requirements}}
+\addto\captionsngerman{\def\fhgnolor{Anforderungsliste beim n\"achsten \LaTeX-Lauf verf\"ugbar.}}
+\addto\captionsgerman{\def\fhgnolor{Anforderungsliste beim n\"achsten \LaTeX-Lauf verf\"ugbar.}}
+\addto\captionsenglish{\def\fhgnolor{List of requirements is available after the next \LaTeX\ run.}}
+\newcommand{\listofrequirements}{
+\section{\listofrequirementsname}
+\IfFileExists{\jobname.lor}
+{}{
+\emph{\fhgnolor}
+\PackageWarning{fhg-style}{LaTeX rerun needed for list of requirements}
+}
+\@starttoc{lor}
+}
+\newcommand{\requirement}[1]{%
+\textbf{\textcolor{FhGColorBlue5}{#1}}%
+\addcontentsline{lor}{subsection}{#1}%
+}
+}
+{}
+\ifthenelse{\boolean{FhG@opt@lst}}
+{
+\RequirePackage{listings}
+\addto\captionsngerman{\def\lstlistlistingname{Programme}}
+\addto\captionsgerman{\def\lstlistlistingname{Programme}}
+\addto\captionsenglish{\def\lstlistlistingname{List of Programs}}
+\addto\captionsngerman{\def\lstlistingname{Programm}}
+\addto\captionsgerman{\def\lstlistingname{Programm}}
+\addto\captionsenglish{\def\lstlistingname{Program}}
+}
+{}
+\addto\captionsngerman{\def\formulaname{Formel}}
+\addto\captionsgerman{\def\formulaname{Formel}}
+\addto\captionsenglish{\def\formulaname{Formula}}
+\newlength{\FhG@len@equ}
+\setlength{\FhG@len@equ}{-\textwidth}
+\addtolength{\FhG@len@equ}{-\FhG@len@col@width}
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+\@addtoreset{equation}{section}
+\renewcommand{\@eqnnum}{%
+\hb@xt@.01\p@{}%
+\rlap{%
+\normalfont\normalcolor%
+{\footnotesize\formulaname\nobreakspace\theequation}%
+}%
+}
+\ifthenelse{\isempty{\FhG@opt@packages}}
+{}
+{\RequirePackage{\FhG@opt@packages}}
+%% 
+%% (c) 2002-2010 Fraunhofer ISST Berlin
+%% (c) seit 2012 Fraunhofer FOKUS Berlin
+%%
+%% End of file `fhg-style.sty'.

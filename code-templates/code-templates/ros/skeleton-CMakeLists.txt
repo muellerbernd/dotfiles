@@ -1,0 +1,42 @@
+cmake_minimum_required(VERSION 2.8.3)
+project(ros_pkg)
+
+find_package(catkin REQUIRED COMPONENTS
+  roscpp
+  rospy
+  laser_geometry
+  geometry_msgs
+  std_msgs
+  rosbag
+  tf2_geometry_msgs
+  tf2_ros
+  tf2
+  tf
+)
+
+#find_package(Boost REQUIRED COMPONENTS system)
+find_package(Eigen3 REQUIRED)
+
+catkin_package(
+  CATKIN_DEPENDS roscpp tf2_ros
+)
+
+include_directories(
+  include
+  ${catkin_INCLUDE_DIRS}
+  ${EIGEN3_INCLUDE_DIR}
+)
+
+add_executable(${PROJECT_NAME}_node src/testTransforms.cpp)
+
+target_link_libraries(tests_on_rosbag_data_node ${rosbag_LIBRARIES} ${catkin_LIBRARIES})
+
+find_package(PythonLibs 2.7)
+target_include_directories(tests_on_rosbag_data_node PRIVATE ${PYTHON_INCLUDE_DIRS})
+target_link_libraries(tests_on_rosbag_data_node ${PYTHON_LIBRARIES})
+
+catkin_install_python(PROGRAMS src/eval.py src/rewrite_bag.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
+set( CMAKE_EXPORT_COMPILE_COMMANDS ON )
+
