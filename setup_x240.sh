@@ -23,12 +23,13 @@ case "$1" in
         zathura \
         latexmk \
         starship \
+        fonts \
         xinit \
+        gtk-3.0 \
         locale \
         mime-apps \
         code-templates \
         scripts \
-        fonts \
         wallpapers
     ;;
 "down")
@@ -51,12 +52,13 @@ case "$1" in
         zathura \
         latexmk \
         starship \
+        fonts \
         xinit \
+        gtk-3.0 \
         locale \
         mime-apps \
         code-templates \
         scripts \
-        fonts \
         wallpapers
     ;;
 *)
