@@ -24,7 +24,6 @@ case "$1" in
         latexmk \
         starship \
         xinit \
-        gtk-3.0 \
         locale \
         mime-apps \
         code-templates \
@@ -53,7 +52,6 @@ case "$1" in
         latexmk \
         starship \
         xinit \
-        gtk-3.0 \
         locale \
         mime-apps \
         code-templates \
