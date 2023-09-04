@@ -211,6 +211,10 @@ require('lazy').setup({
     'rcarriga/nvim-notify',
     config = function()
       vim.notify = require 'notify'
+      vim.notify.setup {
+        -- background_colour = 'CursorColumn',
+        background_colour = '#000000',
+      }
     end,
   },
   -- {
