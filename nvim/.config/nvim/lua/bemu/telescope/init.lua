@@ -63,8 +63,16 @@ require('telescope').setup {
         ['<C-p>'] = actions.cycle_history_prev,
         ['<C-j>'] = actions.move_selection_next,
         ['<C-k>'] = actions.move_selection_previous,
+        ['<C-u>'] = actions.preview_scrolling_up,
+        ['<C-d>'] = actions.preview_scrolling_down,
+        ['<ScrollWheelUp>'] = actions.preview_scrolling_up,
+        ['<ScrollWheelDown>'] = actions.preview_scrolling_down,
       },
-      n = { q = actions.close },
+      n = {
+        q = actions.close,
+        ['<ScrollWheelUp>'] = actions.preview_scrolling_up,
+        ['<ScrollWheelDown>'] = actions.preview_scrolling_down,
+      },
     },
     -- Developer configurations: Not meant for general override
     -- buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,

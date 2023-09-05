@@ -157,7 +157,7 @@ nmap('<leader>co', "<cmd>lua require('dap').continue()<CR>", { desc = 'dap [co]n
 nmap('<leader>so', "<cmd>lua require('dap').step_over()<CR>", { desc = 'dap [s]tep [o]ver' })
 nmap('<leader>si', "<cmd>lua require('dap').step_into()<CR>", { desc = 'dap [s]tep [i]nto' })
 nmap('<leader>re', "<cmd>lua require('dap').repl.open()<CR>", { desc = 'dap [re]pl open' })
-nmap('<leader>dt', ':lua require("dapui").toggle()<CR>', { desc = '[d]apui [toggle]' })
+nmap('<leader>dt', ':lua require("dapui").toggle()<CR>', { desc = '[d]apui [t]oggle' })
 
 -- trouble
 -- Lua
@@ -173,6 +173,9 @@ nmap('<F4>', '<cmd>MarkdownPreviewToggle<cr>', { desc = 'toggle MarkdownPreview'
 
 -- latex-previewer
 nmap('<F5>', "<cmd>lua require('latex-previewer').preview()<cr>", { desc = 'open latex-previewer' })
+
+-- preview code with LSP code actions applied
+nmap('<leader>ap', ':lua require("actions-preview").code_actions()<CR>', { desc = '[a]ction [p]review for code actions' })
 
 -- toggle custom stuff
 vim.keymap.set('n', '<leader><leader>t', function()
