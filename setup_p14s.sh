@@ -30,6 +30,7 @@ case "$1" in
         code-templates \
         scripts \
         nix \
+        xmodmap \
         wallpapers
     ;;
 "down")
@@ -59,6 +60,7 @@ case "$1" in
         code-templates \
         scripts \
         nix \
+        xmodmap \
         wallpapers
     ;;
 *)
