@@ -58,4 +58,6 @@ exec --no-startup-id sleep 6 && nextcloud
 exec --no-startup-id xrandr --output eDP-1 --primary --mode 1920x1080 --auto --pos 0x0 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-2-1 --off --output DP-2-2 --off --output DP-2-3 --off --output HDMI-1 --off --output HDMI-2 --off --output VIRTUAL1 --off
 # Disable DPMS and prevent screen from blanking
 exec --no-startup-id xset s off -dpms
+exec --no-startup-id xset s off -dpms
 # exec --no-startup-id systemctl --user start spotifyd.service
+exec --no-startup-id xmodmap ~/.Xmodmap
