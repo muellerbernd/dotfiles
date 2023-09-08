@@ -24,8 +24,27 @@ require('lazy').setup({
   -- git in vim
   'tpope/vim-fugitive',
   -- autopairs
-  'windwp/nvim-autopairs', -- Autopairs, integrates with both cmp and treesitter
-  --
+  {
+    'windwp/nvim-autopairs', -- Autopairs, integrates with both cmp and treesitter
+    config = function()
+      require('nvim-autopairs').setup {
+        -- map_c_h = true, -- Map the <C-h> key to delete a pair
+        -- map_c_w = true, -- map <c-w> to delete a pair if possible
+      }
+    end,
+  },
+  -- nvim-surround
+  {
+    'kylechui/nvim-surround',
+    version = '*', -- Use for stability; omit to use `main` branch for the latest features
+    event = 'VeryLazy',
+    config = function()
+      require('nvim-surround').setup {
+        -- Configuration here, or leave empty to use defaults
+      }
+    end,
+  },
+
   -- A high-performance color highlighter
   {
     'norcalli/nvim-colorizer.lua',

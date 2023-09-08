@@ -31,6 +31,7 @@ case "$1" in
         scripts \
         nix \
         xmodmap \
+        joshuto \
         wallpapers
     ;;
 "down")
@@ -61,6 +62,7 @@ case "$1" in
         scripts \
         nix \
         xmodmap \
+        joshuto \
         wallpapers
     ;;
 *)

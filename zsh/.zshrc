@@ -92,27 +92,27 @@ export STARSHIP_LOG='error'
 # RPROMPT='[%D{%L:%M:%S}] '$RPROMPT
 # RPROMPT='[%D{%L:%M:%S %p}]'
 # taken from here: https://stackoverflow.com/questions/2187829/constantly-updated-clock-in-zsh-prompt
-RPROMPT='[%D{%H:%M:%S %p}]'
-schedprompt() {
-  emulate -L zsh
-  zmodload -i zsh/sched
-
-  # Remove existing event, so that multiple calls to
-  # "schedprompt" work OK.  (You could put one in precmd to push
-  # the timer 30 seconds into the future, for example.)
-  integer i=${"${(@)zsh_scheduled_events#*:*:}"[(I)schedprompt]}
-  (( i )) && sched -$i
-
-  # Test that zle is running before calling the widget (recommended
-  # to avoid error messages).
-  # Otherwise it updates on entry to zle, so there's no loss.
-  zle && zle reset-prompt
-
-  # This ensures we're not too far off the start of the minute
-  sched +30 schedprompt
-}
-
-schedprompt
+# RPROMPT='[%D{%H:%M:%S %p}]'
+# schedprompt() {
+#   emulate -L zsh
+#   zmodload -i zsh/sched
+#
+#   # Remove existing event, so that multiple calls to
+#   # "schedprompt" work OK.  (You could put one in precmd to push
+#   # the timer 30 seconds into the future, for example.)
+#   integer i=${"${(@)zsh_scheduled_events#*:*:}"[(I)schedprompt]}
+#   (( i )) && sched -$i
+#
+#   # Test that zle is running before calling the widget (recommended
+#   # to avoid error messages).
+#   # Otherwise it updates on entry to zle, so there's no loss.
+#   zle && zle reset-prompt
+#
+#   # This ensures we're not too far off the start of the minute
+#   sched +30 schedprompt
+# }
+#
+# schedprompt
 
 # load aliases
 if [ -f ~/.zsh_aliases ]; then
@@ -185,6 +185,15 @@ safedelete() {
 rr() {
     temp_file="$(mktemp -t "ranger_cd.XXXXXXXXXX")"
     ranger --choosedir="$temp_file" -- "${@:-$PWD}"
+    if chosen_dir="$(cat -- "$temp_file")" && [ -n "$chosen_dir" ] && [ "$chosen_dir" != "$PWD" ]; then
+        cd -- "$chosen_dir"
+    fi
+    rm -f -- "$temp_file"
+}
+
+jj() {
+    temp_file="$(mktemp -t "joshuto_cd.XXXXXXXXXX")"
+    joshuto --output-file "$temp_file" -- "${@:-$PWD}"
     if chosen_dir="$(cat -- "$temp_file")" && [ -n "$chosen_dir" ] && [ "$chosen_dir" != "$PWD" ]; then
         cd -- "$chosen_dir"
     fi
