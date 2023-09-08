@@ -24,7 +24,15 @@ require('lazy').setup({
   -- git in vim
   'tpope/vim-fugitive',
   -- autopairs
-  'windwp/nvim-autopairs', -- Autopairs, integrates with both cmp and treesitter
+  {
+    'windwp/nvim-autopairs', -- Autopairs, integrates with both cmp and treesitter
+    config = function()
+      require('nvim-autopairs').setup {
+        -- map_c_h = true, -- Map the <C-h> key to delete a pair
+        -- map_c_w = true, -- map <c-w> to delete a pair if possible
+      }
+    end,
+  },
   --
   -- A high-performance color highlighter
   {
