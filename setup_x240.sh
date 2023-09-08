@@ -31,6 +31,7 @@ case "$1" in
         code-templates \
         scripts \
         xmodmap \
+        joshuto \
         wallpapers
     ;;
 "down")
@@ -61,6 +62,7 @@ case "$1" in
         code-templates \
         scripts \
         xmodmap \
+        joshuto \
         wallpapers
     ;;
 *)

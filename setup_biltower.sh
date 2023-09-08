@@ -31,6 +31,7 @@ case "$1" in
         mime-apps \
         code-templates \
         scripts \
+        joshuto \
         wallpapers
     ;;
 "down")
@@ -61,6 +62,7 @@ case "$1" in
         mime-apps \
         code-templates \
         scripts \
+        joshuto \
         wallpapers
     ;;
 *)

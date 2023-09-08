@@ -191,6 +191,15 @@ rr() {
     rm -f -- "$temp_file"
 }
 
+jj() {
+    temp_file="$(mktemp -t "joshuto_cd.XXXXXXXXXX")"
+    joshuto --output-file "$temp_file" -- "${@:-$PWD}"
+    if chosen_dir="$(cat -- "$temp_file")" && [ -n "$chosen_dir" ] && [ "$chosen_dir" != "$PWD" ]; then
+        cd -- "$chosen_dir"
+    fi
+    rm -f -- "$temp_file"
+}
+
 # terminal settings
 export TERM='tmux-256color'
 # [[ -n $TMUX ]] && export TERM="tmux-256color"
