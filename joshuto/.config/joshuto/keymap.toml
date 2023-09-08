@@ -7,9 +7,9 @@ keymap = [
   { keys = ["T"], command = "new_tab --current" },
   { keys = ["W"], command = "close_tab" },
   { keys = ["ctrl+w"], command = "close_tab" },
-  { keys = ["q"], command = "close_tab" },
+  # { keys = ["q"], command = "close_tab" },
   { keys = ["ctrl+c"], command = "quit" },
-  { keys = ["Q"], command = "quit --output-current-directory" },
+  { keys = ["q"], command = "quit --output-current-directory" },
 
   { keys = ["R"], command = "reload_dirlist" },
   { keys = ["z", "h"], command = "toggle_hidden" },
@@ -131,6 +131,8 @@ keymap = [
   { keys = ["g", "e"], command = "cd /etc" },
   { keys = ["g", "h"], command = "cd ~/" },
   { keys = ["?"], command = "help" },
+  { keys = ["c", "f"], command = "subdir_fzf" },
+  { keys = ["c", "z"], command = "zi" },
 ]
 
 [task_view]
