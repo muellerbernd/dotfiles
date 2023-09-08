@@ -33,6 +33,7 @@ case "$1" in
         scripts \
         xmodmap \
         joshuto \
+        xbindkeys \
         wallpapers
     ;;
 "down")
@@ -65,6 +66,7 @@ case "$1" in
         scripts \
         xmodmap \
         joshuto \
+        xbindkeys \
         wallpapers
     ;;
 *)

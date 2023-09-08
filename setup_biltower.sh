@@ -32,6 +32,7 @@ case "$1" in
         code-templates \
         scripts \
         joshuto \
+        xbindkeys \
         wallpapers
     ;;
 "down")
@@ -63,6 +64,7 @@ case "$1" in
         code-templates \
         scripts \
         joshuto \
+        xbindkeys \
         wallpapers
     ;;
 *)
