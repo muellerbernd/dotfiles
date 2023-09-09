@@ -32,11 +32,11 @@ video_default = [
 ]
 
 text_default = [
-  { command = "micro" },
-  { command = "gedit", fork = true, silent = true },
-  { command = "bat", args = [
-    "--paging=always",
-  ] },
+  { command = "nvim" },
+  # { command = "micro" },
+  # { command = "bat", args = [
+  #   "--paging=always",
+  # ] },
 ]
 
 reader_default = [{ command = "zathura", fork = true, silent = true }]
@@ -138,6 +138,8 @@ vim.inherit = "text_default"
 xml.inherit = "text_default"
 yaml.inherit = "text_default"
 yml.inherit = "text_default"
+nix.inherit = "text_default"
+tex.inherit = "text_default"
 
 # archive formats
 7z.app_list = [
@@ -190,12 +192,12 @@ zip.app_list = [
 # misc formats
 aup.app_list = [{ command = "audacity", fork = true, silent = true }]
 
-m3u.app_list = [
-  { command = "micro" },
-  { command = "mpv" },
-  { command = "gedit", fork = true, silent = true },
-  { command = "bat", confirm_exit = true },
-]
+# m3u.app_list = [
+#   { command = "micro" },
+#   { command = "mpv" },
+#   { command = "nvim", fork = true, silent = true },
+#   { command = "bat", confirm_exit = true },
+# ]
 
 odt.inherit = "libreoffice_default"
 odf.inherit = "libreoffice_default"
@@ -214,12 +216,12 @@ pdf.inherit = "reader_default"
 kra.app_list = [{ command = "krita", fork = true, silent = true }]
 kdenlive.app_list = [{ command = "kdenlive", fork = true, silent = true }]
 
-tex.app_list = [
-  { command = "micro" },
-  { command = "gedit", fork = true, silent = true },
-  { command = "bat", confirm_exit = true },
-  { command = "pdflatex" },
-]
+# tex.app_list = [
+#   { command = "micro" },
+#   { command = "nvim", fork = true, silent = true },
+#   { command = "bat", confirm_exit = true },
+#   { command = "pdflatex" },
+# ]
 
 torrent.app_list = [{ command = "transmission-gtk" }]
 
