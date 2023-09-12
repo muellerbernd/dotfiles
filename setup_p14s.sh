@@ -11,6 +11,7 @@ case "$1" in
         rofi \
         picom \
         gitconf \
+        gitconf-work \
         clang-format \
         prettier-format \
         alacritty \
@@ -43,6 +44,7 @@ case "$1" in
         rofi \
         picom \
         gitconf \
+        gitconf-work \
         clang-format \
         prettier-format \
         alacritty \
