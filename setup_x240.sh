@@ -30,7 +30,6 @@ case "$1" in
         mime-apps \
         code-templates \
         scripts \
-        xmodmap \
         joshuto \
         xbindkeys \
         wallpapers
@@ -62,7 +61,6 @@ case "$1" in
         mime-apps \
         code-templates \
         scripts \
-        xmodmap \
         joshuto \
         xbindkeys \
         wallpapers

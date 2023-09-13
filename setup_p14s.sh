@@ -31,7 +31,6 @@ case "$1" in
         code-templates \
         scripts \
         nix \
-        xmodmap \
         joshuto \
         xbindkeys \
         wallpapers
@@ -64,7 +63,6 @@ case "$1" in
         code-templates \
         scripts \
         nix \
-        xmodmap \
         joshuto \
         xbindkeys \
         wallpapers
