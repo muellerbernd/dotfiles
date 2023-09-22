@@ -3,7 +3,7 @@
 rofi_command="rofi -theme themes/listmenu.rasi"
 
 keybindings=$(
-    egrep "^bindsym" $HOME/.config/i3/config | \
+    grep -E "^bindsym" $HOME/.config/i3/config $HOME/.config/i3/one_for_all.conf| \
     cut -d" " -f2- | \
     awk '$1 = "<b>"$1"</b>"'
 )

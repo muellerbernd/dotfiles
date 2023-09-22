@@ -4,4 +4,4 @@ configuration {
   show-icons:         true;
   icon-theme:         "OneDark";
 }
-@theme "/home/bernd/.config/rofi/themes/oneDark.rasi"
+@theme "~/.config/rofi/themes/oneDark.rasi"
