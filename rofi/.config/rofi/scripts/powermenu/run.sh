@@ -15,7 +15,7 @@ shutdown=" shutdown"
 reboot=" reboot"
 lock=" lock screen"
 suspend=" suspend"
-logout="\uf842"
+logout="\uf842 logout"
 yes='yes'
 no='no'
 
@@ -46,7 +46,7 @@ confirm_exit() {
 
 # Pass variables to rofi dmenu
 run_rofi() {
-    echo -e "$lock\n$suspend\n$logout\n$reboot\n$shutdown" | rofi_cmd
+    echo -e "$shutdown\n$reboot\n$lock\n$suspend\n$logout" | rofi_cmd
 }
 
 # Execute Command
