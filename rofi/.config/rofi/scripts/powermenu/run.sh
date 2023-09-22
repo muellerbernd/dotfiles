@@ -1,14 +1,16 @@
 #!/usr/bin/env bash
+# Script originally written by @adi1090x (Aditya Shakya) on GitHub.
 
-## Script originally written by @adi1090x (Aditya Shakya) on GitHub.
+set -e
+set -u
 
 # Current Theme
 dir="$HOME/.config/rofi/scripts/powermenu/"
 theme='style'
 
 # CMDs
-uptime="`uptime -p | sed -e 's/up //g'`"
-host=`hostname`
+uptime=$(uptime -p | sed -e 's/up //g')
+host=$(hostname)
 
 # Options
 shutdown=" shutdown"
@@ -54,10 +56,10 @@ run_cmd() {
     selected="$(confirm_exit)"
     if [[ "$selected" == "$yes" ]]; then
         if [[ $1 == '--shutdown' ]]; then
-            tmux kill-server
+            # tmux kill-server
             systemctl poweroff
         elif [[ $1 == '--reboot' ]]; then
-            tmux kill-server
+            # tmux kill-server
             systemctl reboot
         elif [[ $1 == '--suspend' ]]; then
             mpc -q pause
