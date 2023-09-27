@@ -97,6 +97,7 @@ case ${chosen} in
         run_cmd --reboot
         ;;
     $lock)
+        playerctl pause
         sh ~/scripts/lock.sh
         ;;
     $suspend)
