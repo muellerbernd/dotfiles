@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# Script originally written by @adi1090x (Aditya Shakya) on GitHub.
 
 set -e
 set -u
@@ -10,7 +9,6 @@ theme='style'
 
 # CMDs
 uptime=$(uptime -p | sed -e 's/up //g')
-# host=$(hostname)
 
 # Options
 shutdown=" shutdown"
@@ -25,9 +23,7 @@ no='no'
 # Rofi CMD
 rofi_cmd() {
     rofi -dmenu \
-        -p "Uptime: $uptime" \
-        # -mesg "Uptime: $uptime" \
-        # -theme ${dir}/${theme}.rasi
+        -p "Uptime: $uptime"
 }
 
 # Confirmation CMD
@@ -38,8 +34,7 @@ confirm_cmd() {
         -theme-str 'element-text {horizontal-align: 0.5;}' \
         -theme-str 'textbox {horizontal-align: 0.5;}' \
         -dmenu \
-        -p 'Confirmation' \
-        # -theme ${dir}/${theme}.rasi
+        -p 'Confirmation'
 }
 
 # Ask for confirmation
@@ -65,11 +60,15 @@ run_cmd() {
         elif [[ $1 == '--suspend' ]]; then
             # mpc -q pause
             # amixer set Master mute
+            # dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
             systemctl suspend
+            ~/scripts/lock.sh
         elif [[ $1 == '--hibernate' ]]; then
             # mpc -q pause
             # amixer set Master mute
+            # dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
             systemctl hibernate
+            ~/scripts/lock.sh
         elif [[ $1 == '--logout' ]]; then
             if [[ "$DESKTOP_SESSION" == 'openbox' ]]; then
                 openbox --exit
