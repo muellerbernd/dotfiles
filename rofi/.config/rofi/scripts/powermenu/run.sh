@@ -17,6 +17,7 @@ shutdown=" shutdown"
 reboot=" reboot"
 lock=" lock screen"
 suspend=" suspend"
+hibernate=" hibernate"
 logout="\uf842 logout"
 yes='yes'
 no='no'
@@ -48,7 +49,7 @@ confirm_exit() {
 
 # Pass variables to rofi dmenu
 run_rofi() {
-    echo -e "$shutdown\n$reboot\n$lock\n$suspend\n$logout" | rofi_cmd
+    echo -e "$shutdown\n$reboot\n$lock\n$suspend\n$hibernate\n$logout" | rofi_cmd
 }
 
 # Execute Command
@@ -62,9 +63,13 @@ run_cmd() {
             # tmux kill-server
             systemctl reboot
         elif [[ $1 == '--suspend' ]]; then
-            mpc -q pause
-            amixer set Master mute
+            # mpc -q pause
+            # amixer set Master mute
             systemctl suspend
+        elif [[ $1 == '--hibernate' ]]; then
+            # mpc -q pause
+            # amixer set Master mute
+            systemctl hibernate
         elif [[ $1 == '--logout' ]]; then
             if [[ "$DESKTOP_SESSION" == 'openbox' ]]; then
                 openbox --exit
@@ -100,6 +105,9 @@ case ${chosen} in
         ;;
     $suspend)
         run_cmd --suspend
+        ;;
+    $hibernate)
+        run_cmd --hibernate
         ;;
     $logout)
         run_cmd --logout
