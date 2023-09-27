@@ -61,12 +61,14 @@ run_cmd() {
             # mpc -q pause
             # amixer set Master mute
             # dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
+            playerctl pause
             systemctl suspend
             ~/scripts/lock.sh
         elif [[ $1 == '--hibernate' ]]; then
             # mpc -q pause
             # amixer set Master mute
             # dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
+            playerctl pause
             systemctl hibernate
             ~/scripts/lock.sh
         elif [[ $1 == '--logout' ]]; then
@@ -96,11 +98,6 @@ case ${chosen} in
         ;;
     $lock)
         sh ~/scripts/lock.sh
-        # if [[ -x '/usr/bin/betterlockscreen' ]]; then
-        #     betterlockscreen -l
-        # elif [[ -x '/usr/bin/i3lock' ]]; then
-        #     i3lock
-        # fi
         ;;
     $suspend)
         run_cmd --suspend
