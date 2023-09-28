@@ -15,7 +15,7 @@ shutdown=" shutdown"
 reboot=" reboot"
 lock=" lock screen"
 suspend=" suspend"
-hibernate=" hibernate"
+hibernate="󱇛 hibernate"
 logout="\uf842 logout"
 yes='yes'
 no='no'
@@ -61,14 +61,14 @@ run_cmd() {
             # mpc -q pause
             # amixer set Master mute
             # dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
-            playerctl pause
+            # playerctl pause
             systemctl suspend
             ~/scripts/lock.sh
         elif [[ $1 == '--hibernate' ]]; then
             # mpc -q pause
             # amixer set Master mute
             # dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
-            playerctl pause
+            # playerctl pause
             systemctl hibernate
             ~/scripts/lock.sh
         elif [[ $1 == '--logout' ]]; then
