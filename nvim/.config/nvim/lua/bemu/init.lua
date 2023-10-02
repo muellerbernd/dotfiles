@@ -32,7 +32,7 @@ require 'bemu.plugins.mk-preview'
 
 require 'bemu.plugins.alpha'
 require 'bemu.plugins.which-key'
-require 'bemu.plugins.indent-blankline'
+-- require 'bemu.plugins.indent-blankline'
 -- require("bemu.plugins.statusline")
 -- require("bemu.plugins.bufferline")
 -- use inbuild stuff
