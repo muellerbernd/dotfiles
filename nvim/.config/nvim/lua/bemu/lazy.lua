@@ -299,7 +299,7 @@ require('lazy').setup({
         },
       },
     },
-    main = 'ibl',
+    -- main = 'ibl',
   },
 
   -- Active indent guide and indent text objects. When you're browsing
