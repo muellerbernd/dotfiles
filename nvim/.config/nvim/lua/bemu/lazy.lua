@@ -212,12 +212,25 @@ require('lazy').setup({
   {
     'nvim-telescope/telescope.nvim',
     -- tag = "0.1.0",
-    -- or                            , branch = '0.1.x',
-    dependencies = { { 'nvim-lua/plenary.nvim' } },
+    -- or                            ,
+    branch = '0.1.x',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      -- Fuzzy Finder Algorithm which requires local dependencies to be built.
+      -- Only load if `make` is available. Make sure you have the system
+      -- requirements installed.
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        -- NOTE: If you are having trouble with this installation,
+        --       refer to the README for telescope-fzf-native for more instructions.
+        build = 'make',
+        cond = function()
+          return vim.fn.executable 'make' == 1
+        end,
+      },
+    },
   },
-  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   { 'nvim-telescope/telescope-media-files.nvim' },
-  'nvim-telescope/telescope-packer.nvim',
   'nvim-telescope/telescope-file-browser.nvim',
   'nvim-telescope/telescope-dap.nvim',
   -- It sets vim.ui.select to telescope. That means for example that neovim core stuff can fill the telescope picker. Example would be lua vim.lsp.buf.code_action()

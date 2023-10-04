@@ -166,12 +166,6 @@ function M.my_plugins()
   require('telescope.builtin').find_files { cwd = '~/plugins/' }
 end
 
-function M.installed_plugins()
-  require('telescope.builtin').find_files {
-    cwd = vim.fn.stdpath 'data' .. '/site/pack/packer/start/',
-  }
-end
-
 function M.project_search()
   require('telescope.builtin').find_files {
     previewer = false,

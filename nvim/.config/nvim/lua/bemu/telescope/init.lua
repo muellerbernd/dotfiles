@@ -122,7 +122,6 @@ pcall(require('telescope').load_extension, 'file_browser')
 -- pcall(require('telescope').load_extension, "gh")
 -- pcall(require("telescope").load_extension, "cheat")
 -- pcall(require("telescope").load_extension, "dap")
-pcall(require('telescope').load_extension, 'packer')
 -- To get ui-select loaded and working with telescope, you need to call
 -- load_extension, somewhere after setup function:
 pcall(require('telescope').load_extension, 'ui-select')
