@@ -131,7 +131,8 @@ nvim_treesitter.setup {
 vim.o.foldlevel = 5
 -- vim.o.foldmethod = "expr"
 vim.o.foldmethod = 'indent'
-vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
 
 require('treesitter-context').setup {
   enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
