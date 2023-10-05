@@ -156,34 +156,94 @@ end
 
 -- lua lsp
 -- lspconfig.sumneko_lua.setup(require("bemu.lsp.lua-lsp"))
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, 'lua/?.lua')
-table.insert(runtime_path, 'lua/?/init.lua')
+-- local runtime_path = vim.split(package.path, ';')
+-- table.insert(runtime_path, 'lua/?.lua')
+-- table.insert(runtime_path, 'lua/?/init.lua')
 --
 lspconfig.lua_ls.setup(config {
   settings = {
     Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-        -- Setup your lua path
-        path = runtime_path,
+      workspace = {
+        checkThirdParty = false,
+      },
+      completion = {
+        workspaceWord = true,
+        callSnippet = 'Both',
+      },
+      misc = {
+        parameters = {
+          -- "--log-level=trace",
+        },
+      },
+      hint = {
+        enable = true,
+        setType = false,
+        paramType = true,
+        paramName = 'Disable',
+        semicolon = 'Disable',
+        arrayIndex = 'Disable',
+      },
+      doc = {
+        privateName = { '^_' },
+      },
+      type = {
+        castNumberToInteger = true,
       },
       diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { 'vim' },
+        disable = { 'incomplete-signature-doc', 'trailing-space' },
+        -- enable = false,
+        groupSeverity = {
+          strong = 'Warning',
+          strict = 'Warning',
+        },
+        groupFileStatus = {
+          ['ambiguity'] = 'Opened',
+          ['await'] = 'Opened',
+          ['codestyle'] = 'None',
+          ['duplicate'] = 'Opened',
+          ['global'] = 'Opened',
+          ['luadoc'] = 'Opened',
+          ['redefined'] = 'Opened',
+          ['strict'] = 'Opened',
+          ['strong'] = 'Opened',
+          ['type-check'] = 'Opened',
+          ['unbalanced'] = 'Opened',
+          ['unused'] = 'Opened',
+        },
+        unusedLocalExclude = { '_*' },
       },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file('', true),
-        checkThirdParty = false,
-        maxPreload = 100000,
-        preloadFileSize = 10000,
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
+      format = {
         enable = false,
+        defaultConfig = {
+          indent_style = 'space',
+          indent_size = '2',
+          continuation_indent_size = '2',
+        },
       },
     },
   },
+  --   Lua = {
+  --     -- runtime = {
+  --     --   -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+  --     --   version = 'LuaJIT',
+  --     --   -- Setup your lua path
+  --     --   path = runtime_path,
+  --     -- },
+  --     -- diagnostics = {
+  --     --   -- Get the language server to recognize the `vim` global
+  --     --   globals = { 'vim' },
+  --     -- },
+  --     workspace = {
+  --       -- Make the server aware of Neovim runtime files
+  --       -- library = vim.api.nvim_get_runtime_file('', true),
+  --       checkThirdParty = false,
+  --       -- maxPreload = 100000,
+  --       -- preloadFileSize = 10000,
+  --     },
+  --     -- Do not send telemetry data containing a randomized but unique identifier
+  --     telemetry = {
+  --       enable = false,
+  --     },
+  --   },
+  -- },
 })
