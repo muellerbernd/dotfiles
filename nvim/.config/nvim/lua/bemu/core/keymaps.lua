@@ -19,9 +19,9 @@ vim.keymap.set('t', '<C-l>', '<C-\\><C-n><C-W>l')
 
 -- terminal
 vim.keymap.set('n', '<Leader>tn', function()
-  require('bemu.funcs').vert_term()
+  require('bemu.core.funcs').vert_term()
 end, { desc = 'New terminal in vert split' })
-vim.keymap.set('n', '<Leader>ts', ":lua require('bemu.funcs').horiz_term()<CR>", { desc = 'New terminal in horiz split' })
+vim.keymap.set('n', '<Leader>ts', ":lua require('bemu.core.funcs').horiz_term()<CR>", { desc = 'New terminal in horiz split' })
 
 -- ctrl+s to save
 vim.keymap.set('n', '<c-s>', '<cmd>update<CR>', { desc = 'write file' })
