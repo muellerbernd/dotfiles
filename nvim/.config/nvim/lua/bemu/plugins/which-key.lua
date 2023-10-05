@@ -1,23 +1,13 @@
--- https://github.com/folke/which-key.nvim
-local ok, which_key = pcall(require, 'which-key')
-if not ok then
-  print '"folke/which-key.nvim" not available'
-  return
-end
-
--- vimopt.timeoutlen is used to trigger which-key
-
-which_key.setup {
-  -- key_labels = {
-  --     ["<Space>"] = "Space",
-  --     ["<Cr>"] = "Enter",
-  --     ["<Tab>"] = "Tab",
-  -- },
-  -- window = {
-  --     border = "single",
-  -- },
-  -- layout = {
-  --     height = { min = 4, max = 10 },
-  -- },
-  -- ignore_missing = true,
+return {
+  "folke/which-key.nvim",
+  event = "VeryLazy",
+  init = function()
+    vim.o.timeout = true
+    vim.o.timeoutlen = 500
+  end,
+  opts = {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  },
 }

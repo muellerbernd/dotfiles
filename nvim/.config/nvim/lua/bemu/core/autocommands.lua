@@ -1,5 +1,5 @@
 local group = vim.api.nvim_create_augroup('BEMU', { clear = true })
-local funcs = require 'bemu.funcs'
+local funcs = require 'bemu.core.funcs'
 -- open help in right split
 -- vim.api.nvim_create_autocmd("BufEnter", {
 --     pattern = { "*.txt" },
