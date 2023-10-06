@@ -2,9 +2,14 @@
 vim.g.mapleader = ','
 vim.g.maplocalleader = ','
 
+-- Keymaps for better default experience
+-- See `:help vim.keymap.set()`
 -- Unbind some useless/annoying default key bindings.
-vim.keymap.set('n', 'Q', '<Nop>')
-vim.keymap.set('n', '<Space>', '<Nop>')
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+
+-- Remap for dealing with word wrap
+vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Make double-<Esc> clear search highlights
 vim.keymap.set('n', '<Esc><Esc>', '<Esc>:nohlsearch<CR><Esc>')

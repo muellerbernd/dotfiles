@@ -1,5 +1,6 @@
-require("bemu.core.keymaps")
-require("bemu.core.options")
-require("bemu.core.wiki")
-require("bemu.core.usercommands")
-require("bemu.core.globals")
+require 'bemu.core.keymaps'
+require 'bemu.core.options'
+require 'bemu.core.wiki'
+require 'bemu.core.usercommands'
+require 'bemu.core.globals'
+require 'bemu.core.autocommands'

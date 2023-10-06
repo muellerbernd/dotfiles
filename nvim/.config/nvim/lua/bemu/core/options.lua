@@ -6,7 +6,7 @@ set.encoding = 'UTF-8'
 set.showcmd = true
 set.termguicolors = true
 -- Redraw when needed
--- set.lazyredraw = true
+set.lazyredraw = true
 set.undodir = os.getenv 'HOME' .. '/.vim/undodir'
 set.undofile = true -- set undotree to save to file
 set.number = true
@@ -71,20 +71,3 @@ vim.opt.wildignore = { '*/cache/*', '*/tmp/*', '*.pyc', '*_build/*', '**/.git/*'
 
 -- spell check
 set.spell = true
--- setlocal spell
--- set spelllang=en
--- Using the colorscheme with spellchecking results in highlights with
--- pink text on red background, which is hard to read, so change the highlight color.
--- Color table:  https://github.com/guns/xterm-color-table.vim
--- Use white text on red background for misspelled words.
--- hi SpellBad ctermfg=015 ctermbg=009 cterm=bold guibg=#ff0000 guifg=#000000 gui=bold
-
--- vim.cmd [[
--- function! OpenZathura()
---     let position = line('.') . ":" . col('.') . ":" . expand('%:p') . " "
---     " call jobstart("zathura -x 'nvr --remote +%{line} %{input}' --synctex-forward " . position . " " . substitute(expand('%:p'),"tex$","pdf", ""))
---     call jobstart("zathura -x 'nvr --remote +%{line} %{input}' --synctex-forward " . position . " " . substitute("~/Desktop/GitProjects/MA-Thesis/thesis/NIKR_thesis.tex","tex$","pdf", ""))
--- endfunction
--- command! Synctex : call OpenZathura()
---
--- ]]

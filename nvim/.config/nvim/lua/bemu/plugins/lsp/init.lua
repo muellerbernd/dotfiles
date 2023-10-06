@@ -83,7 +83,7 @@ return {
         'html', -- needs vscode-langservers-extracted
         'marksman', -- needs marksman-bin
         'hls', -- needs haskell-language-server
-        -- 'rnix', -- needs rnix-lsp
+        'rnix', -- needs rnix-lsp
         -- 'nixd', -- needs nixd (from my arch packages)
         'tsserver', -- needs vscode-langservers-extracted
         'jsonls', -- needs vscode-langservers-extracted
