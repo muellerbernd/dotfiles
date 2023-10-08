@@ -94,7 +94,7 @@ vim.keymap.set('n', 'cN', '*``cgN')
 
 -- plugin mappings
 -- formatter
--- vim.keymap.set('n', '<F3>', '<cmd>Neoformat<CR>')
+vim.keymap.set('n', '<F3>', '<cmd>lua require("conform").format()<cr>')
 -- vim-header settings
 -- vim.keymap.set('n', '<leader>ah', '<cmd>AddHeader<CR>', { desc = '[a]dd [h]eader to file' })
 -- todo
