@@ -93,8 +93,6 @@ vim.keymap.set('n', 'cN', '*``cgN')
 -- vim.keymap.set('i',"<C-l>", "<c-g>u<Esc>[s1z=`]a<c-g>u", { desc = "correct spell" })
 
 -- plugin mappings
--- formatter
-vim.keymap.set('n', '<F3>', '<cmd>lua require("conform").format()<cr>')
 -- vim-header settings
 -- vim.keymap.set('n', '<leader>ah', '<cmd>AddHeader<CR>', { desc = '[a]dd [h]eader to file' })
 -- todo
