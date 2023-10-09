@@ -122,17 +122,24 @@ vim.keymap.set('n', '<leader>ft', "<cmd>lua require('telescope').extensions.asyn
 -- telescope wiki
 vim.keymap.set('n', '<leader>fw', "<cmd>lua require('bemu.plugins.telescope.funcs').list_mywikis()<cr>", { desc = '[f]ind configured [w]ikis' })
 
-vim.keymap.set('n', '<F8>', "<cmd>lua require('bemu.plugins.telescope.funcs').current_buffer_tags()<cr>", { desc = 'show current buffer tags' })
-vim.keymap.set('n', '<leader>fs', "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", { desc = '[f]ind via lsp [s]ymbols' })
+vim.keymap.set('n', '<F8>', function()
+  require('bemu.plugins.telescope.funcs').current_buffer_tags()
+end, { desc = 'show current buffer tags' })
+
+vim.keymap.set('n', '<leader>fs', function()
+  require('telescope.builtin').lsp_document_symbols()
+end, { desc = '[f]ind via lsp [s]ymbols' })
 
 -- Dap debugger
-vim.keymap.set('n', '<leader>br', "<cmd>lua require('dap').toggle_breakpoint()<CR>", { desc = 'dap set [br]eakpoint' })
-vim.keymap.set('n', '<leader>co', "<cmd>lua require('dap').continue()<CR>", { desc = 'dap [co]ntinue' })
-vim.keymap.set('n', '<leader>so', "<cmd>lua require('dap').step_over()<CR>", { desc = 'dap [s]tep [o]ver' })
-vim.keymap.set('n', '<leader>si', "<cmd>lua require('dap').step_into()<CR>", { desc = 'dap [s]tep [i]nto' })
-vim.keymap.set('n', '<leader>re', "<cmd>lua require('dap').repl.open()<CR>", { desc = 'dap [re]pl open' })
-vim.keymap.set('n', '<leader>dt', ':lua require("dapui").toggle()<CR>', { desc = '[d]apui [t]oggle' })
+-- vim.keymap.set('n', '<leader>br', "<cmd>lua require('dap').toggle_breakpoint()<CR>", { desc = 'dap set [br]eakpoint' })
+-- vim.keymap.set('n', '<leader>co', "<cmd>lua require('dap').continue()<CR>", { desc = 'dap [co]ntinue' })
+-- vim.keymap.set('n', '<leader>so', "<cmd>lua require('dap').step_over()<CR>", { desc = 'dap [s]tep [o]ver' })
+-- vim.keymap.set('n', '<leader>si', "<cmd>lua require('dap').step_into()<CR>", { desc = 'dap [s]tep [i]nto' })
+-- vim.keymap.set('n', '<leader>re', "<cmd>lua require('dap').repl.open()<CR>", { desc = 'dap [re]pl open' })
+-- vim.keymap.set('n', '<leader>dt', ':lua require("dapui").toggle()<CR>', { desc = '[d]apui [t]oggle' })
 
+-- markdown-previewer
+vim.keymap.set('n', '<F4>', '<cmd>MarkdownPreviewToggle<cr>', { desc = 'toggle markdown-previewer' })
 -- latex-previewer
 vim.keymap.set('n', '<F5>', "<cmd>lua require('latex-previewer').preview()<cr>", { desc = 'open latex-previewer' })
 
