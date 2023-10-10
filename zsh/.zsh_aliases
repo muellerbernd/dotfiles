@@ -9,6 +9,7 @@ alias -g nvidia_offload='__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME="
 alias unsetproxy='export http_proxy="";export ftp_proxy="";export https_proxy=""'
 alias tm="tmux a || tmux"
 alias lg='lazygit'
+alias ls='lsd'
 # ros setup
 alias rosexport='export ROS_HOSTNAME=localhost; export ROS_MASTER_URI=http://localhost:11311'
 # alias joshuto='joshuto --output-file /tmp/joshutodir; LASTDIR=`cat /tmp/joshutodir`; cd "$LASTDIR"'
