@@ -24,13 +24,13 @@ return {
               vim.api.nvim_buf_set_keymap(bufnr, ...)
             end
             local opts = { noremap = true, silent = true }
-            buf_set_keymap('n', 'gr', "<cmd>lua require('bemu.telescope.funcs').lsp_references()<cr>", { desc = '[g]oto [r]eferences' })
+            buf_set_keymap('n', 'gr', "<cmd>lua require('bemu.plugins.telescope.funcs').lsp_references()<cr>", { desc = '[g]oto [r]eferences' })
             -- See `:help vim.lsp.*` for documentation on any of the below functions
             buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', { desc = '[g]oto [D]eclaration' })
             buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', { desc = '[g]oto [d]efinition' })
             buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', { desc = 'show information' })
             -- buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-            buf_set_keymap('n', 'gI', "<cmd>lua require('bemu.telescope.funcs').lsp_implementations()<cr>", { desc = '[g]oto [I]mplementation' })
+            buf_set_keymap('n', 'gI', "<cmd>lua require('bemu.plugins.telescope.funcs').lsp_implementations()<cr>", { desc = '[g]oto [I]mplementation' })
             buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', { desc = 'signature_help' })
             buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', { desc = '[w]orkspace [a]dd' })
             buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', { desc = '[w]orkspace [r]emove' })
@@ -41,14 +41,14 @@ return {
             buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float() <CR>', { desc = 'list [e]rror diagnostics' })
             buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { desc = 'goto [prev [d]iagnostic' })
             buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', { desc = 'goto ]next [d]iagnostic' })
-            buf_set_keymap('n', '<space>q', "<cmd>lua require('bemu.telescope.funcs').lsp_set_loclist()<cr>", { desc = 'lsp_set_loclist' })
+            buf_set_keymap('n', '<space>q', "<cmd>lua require('bemu.plugins.telescope.funcs').lsp_set_loclist()<cr>", { desc = 'lsp_set_loclist' })
             buf_set_keymap(
               'n',
               '<space>wd',
-              "<cmd>lua require('bemu.telescope.funcs').lsp_document_symbols()<cr>",
+              "<cmd>lua require('bemu.plugins.telescope.funcs').lsp_document_symbols()<cr>",
               { desc = 'list [w]orkspace [d]ocument symbols' }
             )
-            buf_set_keymap('n', '<space>ww', "<cmd>lua require('bemu.telescope.funcs').lsp_workspace_symbols()<cr>", { desc = 'list workspace symbols' })
+            buf_set_keymap('n', '<space>ww', "<cmd>lua require('bemu.plugins.telescope.funcs').lsp_workspace_symbols()<cr>", { desc = 'list workspace symbols' })
             buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.format{ async=true }<CR>', { desc = '[f]ormat buffer' })
             -- lsp signature
             if has_lsp_sig then
