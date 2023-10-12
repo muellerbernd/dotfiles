@@ -60,6 +60,7 @@ return {
                 },
               }, bufnr)
             end
+            client.server_capabilities.semanticTokensProvider = nil
             --lsp_status.on_attach
           end,
           flags = {
