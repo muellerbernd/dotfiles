@@ -55,7 +55,7 @@ workspace 1 output DP2-1 DP2-2 DP2-3
 exec --no-startup-id redshift -P -O 0
 exec --no-startup-id indicator-keylock
 exec --no-startup-id sleep 6 && nextcloud
-exec --no-startup-id xrandr --output eDP1 --primary --mode 1920x1080 --auto --pos 0x0 --rotate normal --output DP1 --off --output DP2 --off --output DP2-1 --off --output DP2-2 --off --output DP2-3 --off --output HDMI1 --off --output HDMI2 --off --output VIRTUAL1 --off
+exec --no-startup-id xrandr --output eDP-1 --primary --mode 1920x1080 --auto --pos 0x0 --rotate normal --output DP1 --off --output DP2 --off --output DP2-1 --off --output DP2-2 --off --output DP2-3 --off --output HDMI1 --off --output HDMI2 --off --output VIRTUAL1 --off
 # Disable DPMS and prevent screen from blanking
 exec --no-startup-id xset s off -dpms
 # exec --no-startup-id systemctl --user start spotifyd.service

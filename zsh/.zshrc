@@ -26,6 +26,7 @@ elif [ -f ~/antigen.zsh ]; then
     source ~/antigen.zsh
 else
     curl -L git.io/antigen >~/antigen.zsh
+    source ~/antigen.zsh
     print "Installed Antigen from main repository with the latest stable version available!"
 fi
 
