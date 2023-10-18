@@ -11,6 +11,7 @@ general {
 /* order += "disk /home" */
 order += "wireless _first_"
 order += "ethernet _first_"
+order += "path_exists VPN"
 order += "battery 0"
 order += "battery 1"
 order += "cpu_temperature 0"
@@ -28,6 +29,11 @@ ethernet _first_ {
     #if you use %speed, i3status requires root privileges
     format_up = "%ip (%speed)"
     format_down = ""
+}
+
+path_exists VPN {
+        # path exists when a VPN tunnel launched by nmcli/nm-applet is active
+        path = "/proc/sys/net/ipv4/conf/tun0"
 }
 
 battery 0 {
@@ -74,8 +80,13 @@ cpu_usage {
 cpu_temperature 0 {
         format = " %degrees°C"
         /*path=/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input*/
-        path=/sys/devices/platform/coretemp.0/hwmon/hwmon8/temp1_input
+        path=/sys/class/thermal/thermal_zone2/temp
 }
+
+tztime holder__hey_man {
+       format = "holder__hey_man"
+}
+
 
 disk "/" {
         format = " %avail"
@@ -97,4 +108,8 @@ volume master {
         device = "pulse"
         mixer = "Master"
         mixer_idx = 0
+}
+
+read_file uptime {
+        path = "/proc/uptime"
 }
