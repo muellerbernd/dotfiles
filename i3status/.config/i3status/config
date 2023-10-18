@@ -80,7 +80,7 @@ cpu_usage {
 cpu_temperature 0 {
         format = " %degrees°C"
         /*path=/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input*/
-        path=/sys/class/thermal/thermal_zone2/temp
+        /*path=/sys/class/thermal/thermal_zone2/temp*/
 }
 
 tztime holder__hey_man {
