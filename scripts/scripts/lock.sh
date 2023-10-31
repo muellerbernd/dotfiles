@@ -5,7 +5,8 @@ lock="$HOME/wallpapers/lock.png"
 tmpbg='/tmp/screen.png'
 
 revert() {
-    xset dpms 0 0 0
+    # xset dpms 0 0 0
+    rm /tmp/screen.png
 }
 #
 # # trap revert HUP INT TERM
