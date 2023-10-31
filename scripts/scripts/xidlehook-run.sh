@@ -17,15 +17,11 @@
 
 # Run xidlehook
 xidlehook \
-  `# Don't lock when there's a fullscreen application` \
   --not-when-fullscreen \
-  `# Don't lock when there's audio playing` \
   --not-when-audio \
-  `# Undim & lock` \
   --timer 600 \
-    '~/scripts/lock.sh' \
+    '$HOME/scripts/lock.sh' \
     'xset dpms force on' \
-  `# Dim the screen after 120 seconds, undim if user becomes active` \
   --timer 120 \
     'xset dpms force off' \
     'xset dpms force on' \
