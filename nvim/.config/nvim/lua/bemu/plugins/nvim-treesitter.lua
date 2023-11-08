@@ -66,11 +66,12 @@ return {
           enable_autocmd = false,
         },
       }
-      vim.o.foldlevel = 5
-      -- vim.o.foldmethod = "expr"
-      vim.o.foldmethod = 'indent'
+      -- vim.o.foldlevel = 5
+      vim.o.foldmethod = "expr"
+      -- vim.o.foldmethod = 'indent'
       vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
       vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
+      vim.opt.foldenable = false
     end,
   },
 }
