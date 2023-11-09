@@ -13,6 +13,9 @@ image_default = [
   { command = "gimp", args = [
     "--",
   ], fork = true, silent = true },
+  { command = "ristretto", args = [
+    "--",
+  ], fork = true, silent = true },
 ]
 
 video_default = [
