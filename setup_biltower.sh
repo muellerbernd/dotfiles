@@ -23,7 +23,6 @@ case "$1" in
         zathura \
         latexmk \
         starship \
-        nix \
         fonts \
         xinit \
         gtk-3.0 \
@@ -55,7 +54,6 @@ case "$1" in
         zathura \
         latexmk \
         starship \
-        nix \
         fonts \
         xinit \
         gtk-3.0 \
