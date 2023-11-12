@@ -32,19 +32,19 @@ theme = "native"
 
 [[block]]
 block = "net"
-# device = "wlp3s0"
-# interval = 2
+device = "wl*"
+interval = 2
 format = " $icon $speed_down.eng(w:3,p:K)/s "
-format_alt = " $icon {$signal_strength|?} {$frequency.eng(w:3) |}{$ssid |}via $device "
-# inactive_format = " ^icon_no_wifi "
-# merge_with_next = true
+format_alt = " $icon {$signal_strength|?} {$frequency.eng(w:3) |}{$ssid |}$ip via $device "
+inactive_format = " ^icon_no_wifi "
+merge_with_next = true
 
 [[block]]
 block = "net"
 device = "en*"
 interval = 2
 format = " $icon $speed_down.eng(w:3,p:K)/s "
-format_alt = " $icon {$signal_strength|?} {$frequency.eng(w:3) |}{$ssid |}via $device "
+format_alt = " $icon $ip via $device "
 # inactive_format = " icon_down "
 merge_with_next = true
 # [[block]]
