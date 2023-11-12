@@ -2,7 +2,9 @@ include ~/.config/i3/one_for_all.conf
 
 bar {
     tray_output primary
-    status_command i3status --config ~/.config/i3status/config
+    # status_command i3status --config ~/.config/i3status/config
+    status_command i3status-rs ~/.config/i3status-rust/config.toml
+
 }
 
 # set variable because it can not be loaded from parent file

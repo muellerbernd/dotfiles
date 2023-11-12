@@ -11,7 +11,9 @@ include ~/.config/i3/one_for_all.conf
 bar {
     tray_output primary
     # output primary
-    status_command i3status --config ~/.config/i3status/config
+    # status_command i3status --config ~/.config/i3status/config
+    status_command i3status-rs ~/.config/i3status-rust/config.toml
+
     # i3bar_command i3bar
     # status_command i3blocks
     # colors {
