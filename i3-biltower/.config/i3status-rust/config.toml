@@ -30,7 +30,7 @@ theme = "native"
 
 [[block]]
 block = "net"
-device = "wlp3s0"
+device = "wlo1"
 interval = 2
 format = " $icon $speed_down.eng(w:3,p:K)/s "
 format_alt = " $icon {$signal_strength|?} {$frequency.eng(w:3) |}{$ssid |}via $device "
@@ -39,7 +39,7 @@ merge_with_next = true
 
 [[block]]
 block = "net"
-device = "enp0s31f6"
+device = "enp42s0"
 interval = 2
 format = " $icon $speed_down.eng(w:3,p:K)/s "
 format_alt = " $icon {$signal_strength|?} {$frequency.eng(w:3) |}{$ssid |}via $device "
