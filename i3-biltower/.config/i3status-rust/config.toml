@@ -66,6 +66,11 @@ format = " $icon $available.eng(w:5,p:1) "
 format_alt = " $icon $used.eng(w:5,p:1)/$total.eng(w:5,p:1) "
 
 [[block]]
+block = "nvidia_gpu"
+interval = 1
+format = " $icon RTX 3060 $utilization $temperature $clocks "
+
+[[block]]
 block = "cpu"
 interval = 5
 format = " $icon $utilization "
@@ -81,8 +86,8 @@ merge_with_next = true
 [[block]]
 block = "temperature"
 format = " $icon $average "
-# chip = "k10temp-pci-00c3"
-chip = "coretemp-isa-*"
+chip = "k10temp-pci-00c3"
+# chip = "coretemp-isa-*"
 good = 0
 info = 100
 warning = 100
