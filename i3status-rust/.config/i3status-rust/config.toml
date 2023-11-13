@@ -127,6 +127,7 @@ driver = "upower"
 full_threshold = 100
 format = " $icon $percentage {($time) |}"
 charging_format = " $icon $percentage "
+missing_format = ""
 
 [[block]]
 block = "battery"
@@ -135,6 +136,7 @@ driver = "upower"
 full_threshold = 100
 format = " $icon $percentage {($time) |}"
 charging_format = " $icon $percentage "
+missing_format = ""
 
 [[block]]
 block = "time"
