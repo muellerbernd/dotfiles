@@ -68,6 +68,11 @@ format = " $icon $available.eng(w:5,p:1) "
 format_alt = " $icon $used.eng(w:5,p:1)/$total.eng(w:5,p:1) "
 
 [[block]]
+block = "nvidia_gpu"
+interval = 1
+format = " $icon T550 $utilization $memory $clocks $temperature"
+
+[[block]]
 block = "cpu"
 interval = 5
 format = " $icon $utilization "
@@ -124,6 +129,7 @@ format = " $icon $percentage {($time) |}"
 charging_format = " $icon $percentage "
 not_charging_format = ""
 full_format = ""
+missing_format = ""
 
 [[block]]
 block = "battery"
@@ -134,6 +140,7 @@ format = " $icon $percentage {($time) |}"
 charging_format = " $icon $percentage "
 not_charging_format = ""
 full_format = ""
+missing_format = ""
 
 [[block]]
 block = "time"
