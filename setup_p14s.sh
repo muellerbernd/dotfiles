@@ -6,7 +6,6 @@ case "$1" in
     gpg --output ./gitconf-work/.gitconfig-job --decrypt ./gitconf-work/.gitconfig-job.gpg
     stow -v -t $HOME i3-common \
         i3-p14s \
-        i3status-rust \
         dunst \
         rofi \
         picom \
@@ -38,7 +37,6 @@ case "$1" in
 "down")
     stow -t $HOME -v -D i3-common \
         i3-p14s \
-        i3status-rust \
         dunst \
         rofi \
         picom \
