@@ -67,10 +67,10 @@ warning = 15.0
 format = " $icon $available.eng(w:5,p:1) "
 format_alt = " $icon $used.eng(w:5,p:1)/$total.eng(w:5,p:1) "
 
-[[block]]
-block = "nvidia_gpu"
-interval = 1
-format = " $icon T550 $utilization $memory $clocks $temperature"
+# [[block]]
+# block = "nvidia_gpu"
+# interval = 1
+# format = " $icon T550 $utilization $memory $clocks $temperature"
 
 [[block]]
 block = "cpu"
