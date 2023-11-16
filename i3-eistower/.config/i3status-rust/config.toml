@@ -68,7 +68,7 @@ format_alt = " $icon $used.eng(w:5,p:1)/$total.eng(w:5,p:1) "
 [[block]]
 block = "nvidia_gpu"
 interval = 1
-format = " $icon RTX 3060 $utilization $memory $clocks $temperature"
+format = " $icon RTX 2080 Ti $utilization $memory $clocks $temperature"
 
 [[block]]
 block = "cpu"
