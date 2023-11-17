@@ -22,7 +22,7 @@ tilde_in_titlebar = true
 # none, absolute, relative
 line_number_style = "none"
 
-# size, mtime, user, gourp, perm. can be combined with |. 
+# size, mtime, user, gourp, perm. can be combined with |.
 # `none` to disable, `all` to enable all
 # all and none can't be combined with other options
 linemode = "size"
@@ -35,8 +35,13 @@ directories_first = true
 reverse = false
 
 [preview]
-max_preview_size = 2097152                           # 2MB
-preview_script = "~/.config/joshuto/preview_file.sh" # make sure it's marked as executable
+# max_preview_size = 2097152                           # 2MB
+# preview_script = "~/.config/joshuto/preview_file.sh" # make sure it's marked as executable
+max_preview_size = 50000097152
+preview_script = "~/.config/joshuto/preview.sh"
+preview_shown_hook_script = "~/.config/joshuto/on_preview_shown_thumb"
+preview_removed_hook_script = "~/.config/joshuto/on_preview_removed"
+
 
 [search]
 # insensitive, sensitive, smart
