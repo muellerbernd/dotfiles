@@ -8,28 +8,13 @@ y="$3"          # y coordinate of upper left cell of preview area
 width="$4"      # Width of the preview pane (number of fitting characters)
 height="$5"     # Height of the preview pane (number of fitting characters)
 
-
 # Find out mimetype and extension
 mimetype=$(file --mime-type -Lb "$path")
 extension=$(/bin/echo "${path##*.}" | awk '{print tolower($0)}')
-
-
 case "$mimetype" in
-    image/png | image/jpeg | image/gif)
-        meta_file=$(get_preview_meta_file "$path")
-        y_offset=`cat "$meta_file" 2> /dev/null | grep "y-offset" | awk '{print $2}'`
-        if [ -z $y_offset ]; then
-            y_offset=0
-        fi
-        y=$(( $y + $y_offset))
-        thumbnail=`allmytoes -sx "$path" 2>/dev/null`
-        if [ $? -eq 0 ]; then
-            show_image "$thumbnail" $x $y $width $height
-        else
-            remove_image
-        fi
+    image/png | image/jpeg)
+        show_image "$path" $x $y $width $height
         ;;
     *)
         remove_image
-
 esac
