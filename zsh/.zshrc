@@ -194,7 +194,7 @@ rr() {
 
 jj() {
     temp_file="$(mktemp -t "joshuto_cd.XXXXXXXXXX")"
-    joshuto --output-file "$temp_file" -- "${@:-$PWD}"
+    ~/.config/joshuto/uberzug/joshuto.sh --output-file "$temp_file" -- "${@:-$PWD}"
     if chosen_dir="$(cat -- "$temp_file")" && [ -n "$chosen_dir" ] && [ "$chosen_dir" != "$PWD" ]; then
         cd -- "$chosen_dir"
     fi
