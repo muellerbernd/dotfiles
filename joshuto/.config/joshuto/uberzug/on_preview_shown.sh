@@ -10,7 +10,7 @@ height="$5"     # Height of the preview pane (number of fitting characters)
 
 # Find out mimetype and extension
 mimetype=$(file --mime-type -Lb "$path")
-extension=$(/bin/echo "${path##*.}" | awk '{print tolower($0)}')
+extension=$(echo "${path##*.}" | awk '{print tolower($0)}')
 case "$mimetype" in
     image/png | image/jpeg)
         show_image "$path" $x $y $width $height

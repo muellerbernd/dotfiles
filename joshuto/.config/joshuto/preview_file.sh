@@ -192,10 +192,10 @@ handle_mime() {
             exit 1 ;;
 
             ## Image
-            image/*)
+        image/*)
             ## Preview as text conversion
-            exiftool "${FILE_PATH}" && exit 0
-            exit 1 ;;
+            # exiftool "${FILE_PATH}" && exit 0
+            exit 0 ;;
 
             ## Video and audio
         video/* | audio/*)
@@ -205,10 +205,16 @@ handle_mime() {
     esac
 }
 
+handle_fallback() {
+    echo '----- File Type Classification -----' && file -bL -- "$FILE_PATH" && exit 0
+    exit 1
+}
+
 FILE_EXTENSION="${FILE_PATH##*.}"
 FILE_EXTENSION_LOWER="$(printf "%s" "${FILE_EXTENSION}" | tr '[:upper:]' '[:lower:]')"
 handle_extension
 MIMETYPE="$( file --dereference --brief --mime-type -- "${FILE_PATH}" )"
 handle_mime "${MIMETYPE}"
+handle_fallback
 
 exit 1
