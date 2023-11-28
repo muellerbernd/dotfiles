@@ -7,6 +7,7 @@ return {
       'nvim-treesitter/nvim-treesitter-textobjects',
       'windwp/nvim-ts-autotag',
       'lewis6991/spellsitter.nvim',
+      'JoosepAlviste/nvim-ts-context-commentstring',
     },
     config = function()
       -- import nvim-treesitter plugin
@@ -66,7 +67,6 @@ return {
         --   enable_autocmd = false,
         -- },
       }
-      require('ts_context_commentstring').setup {}
       vim.g.skip_ts_context_commentstring_module = true
       -- vim.o.foldlevel = 5
       vim.o.foldmethod = 'expr'
