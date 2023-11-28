@@ -61,13 +61,15 @@ return {
           },
         },
         -- enable nvim-ts-context-commentstring plugin for commenting tsx and jsx
-        context_commentstring = {
-          enable = true,
-          enable_autocmd = false,
-        },
+        -- context_commentstring = {
+        --   enable = true,
+        --   enable_autocmd = false,
+        -- },
       }
+      require('ts_context_commentstring').setup {}
+      vim.g.skip_ts_context_commentstring_module = true
       -- vim.o.foldlevel = 5
-      vim.o.foldmethod = "expr"
+      vim.o.foldmethod = 'expr'
       -- vim.o.foldmethod = 'indent'
       vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
       vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
