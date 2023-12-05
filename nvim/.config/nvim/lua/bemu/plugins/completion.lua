@@ -208,10 +208,10 @@ return {
       --     ghost_text = false
       -- }
       preselect = cmp.PreselectMode.None,
-      experimental = {
-        ghost_text = { hl_group = 'Comment' },
-        horizontal_search = true,
-      },
+      -- experimental = {
+      --   ghost_text = { hl_group = 'Comment' },
+      --   horizontal_search = true,
+      -- },
     }
 
     -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
