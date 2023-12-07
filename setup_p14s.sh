@@ -29,7 +29,6 @@ case "$1" in
         mime-apps \
         code-templates \
         scripts \
-        nix \
         joshuto \
         xbindkeys \
         wallpapers
@@ -60,7 +59,6 @@ case "$1" in
         mime-apps \
         code-templates \
         scripts \
-        nix \
         joshuto \
         xbindkeys \
         wallpapers

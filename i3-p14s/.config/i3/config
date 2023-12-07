@@ -14,9 +14,9 @@ mode "$mode_display" {
     bindsym h exec --no-startup-id xrandr --output HDMI-1 --auto --left-of eDP-1, mode "default"
     # bindsym p exec --no-startup-id xrandr --output HDMI-1 --auto --left-of eDP-1, mode "default"
     bindsym p exec --no-startup-id xrandr --output HDMI-1 --mode 1920x1080 --output eDP1 --primary --scale-from 1920x1080, mode "default"
-    bindsym d exec --no-startup-id xrandr --output eDP-1 --primary --mode 1920x1200 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-3-1 --off --output DP-3-2 --mode 1920x1200 --pos 3840x0 --rotate right --output DP-3-3 --mode 1920x1200 --pos 1920x0 --rotate normal, mode "default"
+    bindsym d exec --no-startup-id xrandr --output eDP-1 --primary --mode 1920x1200 --pos 0x360 --rotate normal --output HDMI-1 --off --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --mode 1920x1200 --pos 3840x0 --rotate right --output DP-3-1 --off --output DP-3-2 --mode 1920x1200 --pos 1920x360 --rotate normal --output DP-3-3 --off, mode "default"
     # xrandr --output eDP-1 --primary --output DP-3-3 --auto --right-of eDP-1 --output DP-3-2 --auto --rotate right --right-of DP-3-3, mode "default"
-    bindsym o exec --no-startup-id xrandr --output eDP-1 --primary --mode 1920x1200 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-3-1 --off --output DP-3-2 --off --output DP-3-3 --off, mode "default"
+    bindsym o exec --no-startup-id xrandr --output eDP-1 --primary --mode 1920x1200 --pos 0x360 --rotate normal --output HDMI-1 --off --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-3-1 --off --output DP-3-2 --off --output DP-3-3 --off, mode "default"
     # xrandr --output eDP-1 --primary --mode 1920x1200 --pos 0x0 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-3-1 --off --output DP-3-2 --off --output DP-3-3 --off --output DP-4 --off --output DP-4-1 --off --output DP-4-2 --off --output DP-4-3 --off --output HDMI-1 --off --output VIRTUAL1 --off, mode "default"
 
     # back to normal: Enter or Escape
@@ -24,8 +24,8 @@ mode "$mode_display" {
     bindsym Escape mode "default"
 }
 bindsym $mod+x mode "$mode_display"
-workspace 1 output DP-3-3
-workspace 2 output DP-3-2
+workspace 1 output DP-3-2
+workspace 2 output DP-4
 # workspace 4 output HDMI-1
 
 # exec --no-startup-id xfce4-power-manager
@@ -38,7 +38,7 @@ exec --no-startup-id redshift -P -O 0
 # exec --no-startup-id optimus-manager-qt
 exec --no-startup-id sleep 6 && nextcloud
 
-exec --no-startup-id xrandr --output eDP-1 --primary --mode 1920x1200 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-3-1 --off --output DP-3-2 --off --output DP-3-3 --off
+exec --no-startup-id xrandr --output eDP-1 --primary --mode 1920x1200 --pos 0x360 --rotate normal --output HDMI-1 --off --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-3-1 --off --output DP-3-2 --off --output DP-3-3 --off
 # xrandr --output eDP-1 --primary --mode 1920x1200 --pos 0x0 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-3-1 --off --output DP-3-2 --off --output DP-3-3 --off --output DP-4 --off --output DP-4-1 --off --output DP-4-2 --off --output DP-4-3 --off --output HDMI-1 --off --output VIRTUAL1 --off
 
 # vim:syntax=i3config
