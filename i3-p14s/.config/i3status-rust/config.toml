@@ -128,7 +128,7 @@ full_threshold = 100
 format = " $icon $percentage {($time) |}"
 charging_format = " $icon $percentage "
 not_charging_format = ""
-full_format = ""
+full_format = " $icon "
 missing_format = ""
 
 [[block]]
@@ -139,7 +139,7 @@ full_threshold = 100
 format = " $icon $percentage {($time) |}"
 charging_format = " $icon $percentage "
 not_charging_format = ""
-full_format = ""
+full_format = " $icon "
 missing_format = ""
 
 [[block]]
