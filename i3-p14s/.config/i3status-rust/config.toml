@@ -6,6 +6,8 @@ short = " $full_error_message.str(w:170, rot_interval:0.2) "
 
 [icons]
 icons = "material-nf"
+# [icons]
+# icons = "awesome4"
 [icons.overrides]
 no_wifi = "\U000f05aa" # nf-md-wifi_off
 bell-slash = "\U000f00a0" # nf-md-bell_sleep
@@ -20,6 +22,7 @@ degree = "\u00B0"
 
 [theme]
 theme = "native"
+# theme = "gruvbox-dark"
 # [theme.overrides]
 # separator = "/"
 
@@ -38,6 +41,9 @@ format = " $icon $speed_down.eng(w:3,p:K)/s "
 format_alt = " $icon {$signal_strength|?} {$frequency.eng(w:3) |}{$ssid |}$ip via $device "
 inactive_format = " ^icon_no_wifi "
 merge_with_next = true
+[[block.click]]
+button = "right"
+cmd = "nm-connection-editor"
 
 [[block]]
 block = "net"
@@ -45,8 +51,10 @@ device = "en*"
 interval = 2
 format = " $icon $speed_down.eng(w:3,p:K)/s "
 format_alt = " $icon $ip via $device "
-# inactive_format = " icon_down "
 merge_with_next = true
+[[block.click]]
+button = "right"
+cmd = "nm-connection-editor"
 # [[block]]
 # block = "bluetooth"
 # mac = "00:18:09:92:1B:BA"
@@ -125,23 +133,24 @@ block = "battery"
 device = "BAT0"
 driver = "upower"
 full_threshold = 100
-format = " $icon $percentage {($time) |}"
+format = " $icon $percentage {($time)| }"
 charging_format = " $icon $percentage "
 not_charging_format = ""
 full_format = " $icon "
 missing_format = ""
 
-[[block]]
-block = "battery"
-device = "BAT1"
-driver = "upower"
-full_threshold = 100
-format = " $icon $percentage {($time) |}"
-charging_format = " $icon $percentage "
-not_charging_format = ""
-full_format = " $icon "
-missing_format = ""
+# [[block]]
+# block = "battery"
+# device = "BAT1"
+# driver = "upower"
+# full_threshold = 100
+# format = " $icon $percentage {($time) |}"
+# charging_format = " $icon $percentage "
+# not_charging_format = ""
+# full_format = " $icon "
+# missing_format = ""
 
 [[block]]
 block = "time"
+interval = 1
 format = "$timestamp.datetime(f:'%V  %a %e.%B  %H:%M:%S') "

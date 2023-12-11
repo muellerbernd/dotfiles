@@ -140,4 +140,5 @@ missing_format = ""
 
 [[block]]
 block = "time"
+interval = 1
 format = "$timestamp.datetime(f:'%V  %a %e.%B  %H:%M:%S') "
