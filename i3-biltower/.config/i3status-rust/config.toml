@@ -72,7 +72,7 @@ format = " $icon RTX 3060 $utilization $memory $clocks $temperature"
 
 [[block]]
 block = "cpu"
-interval = 5
+interval = 1
 format = " $icon $utilization "
 format_alt = " $icon $utilization.eng(w:5) $max_frequency.eng(w:3,prefix:M) "
 merge_with_next = true
@@ -120,4 +120,5 @@ warning = 100
 
 [[block]]
 block = "time"
+interval = 1
 format = "$timestamp.datetime(f:'%V  %a %e.%B  %H:%M:%S') "
