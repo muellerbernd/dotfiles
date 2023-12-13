@@ -16,7 +16,8 @@ reboot=" reboot"
 lock=" lock screen"
 suspend=" suspend"
 hibernate="󱇛 hibernate"
-logout="\uf842 logout"
+# logout="\uf842 logout"
+logout="logout"
 yes='yes'
 no='no'
 
