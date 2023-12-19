@@ -56,7 +56,10 @@ $endif$
 %%% Source: https://latexcolor.com/
 % \definecolor{blanchedalmond}{rgb}{1.0, 0.92, 0.8}
 % \definecolor{blond}{rgb}{0.98, 0.94, 0.75}
-\definecolor{myorange}{HTML}{F1502F}
+% \definecolor{defaultspecial}{HTML}{F1502F}
+% \definecolor{defaultspecial}{HTML}{F1502F}
+\definecolor{defaultspecial}{HTML}{$if(specialcolor)$$specialcolor$$else$F1502F$endif$}
+\definecolor{defaultdark}{HTML}{$if(themecolor)$$themecolor$$else$3E2C00$endif$}
 %%% End of definition of colors
 %%
 
@@ -232,8 +235,8 @@ $if(keywords)$
 $endif$
 $if(colorlinks)$
   colorlinks=true,
-  linkcolor=$if(linkcolor)$$linkcolor$$else$myorange$endif$,
-  filecolor=$if(filecolor)$$filecolor$$else$myorange$endif$,
+  linkcolor=$if(linkcolor)$$linkcolor$$else$defaultspecial$endif$,
+  filecolor=$if(filecolor)$$filecolor$$else$defaultspecial$endif$,
   citecolor=$if(citecolor)$$citecolor$$else$Blue$endif$,
   urlcolor=$if(urlcolor)$$urlcolor$$else$Blue$endif$,
 $else$
