@@ -75,9 +75,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- })
 
 -- customize cmp_docs to be rendered as markdown
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = 'cmp_docs',
-    callback = function()
-        vim.treesitter.start(0, 'markdown')
-    end,
-})
+-- vim.api.nvim_create_autocmd('FileType', {
+--     pattern = 'cmp_docs',
+--     callback = function()
+--         vim.treesitter.start(0, 'markdown')
+--     end,
+-- })
