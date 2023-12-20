@@ -48,7 +48,12 @@ return {
               "<cmd>lua require('bemu.plugins.telescope.funcs').lsp_document_symbols()<cr>",
               { desc = 'list [w]orkspace [d]ocument symbols' }
             )
-            buf_set_keymap('n', '<space>ww', "<cmd>lua require('bemu.plugins.telescope.funcs').lsp_workspace_symbols()<cr>", { desc = 'list workspace symbols' })
+            buf_set_keymap(
+              'n',
+              '<space>ww',
+              "<cmd>lua require('bemu.plugins.telescope.funcs').lsp_workspace_symbols()<cr>",
+              { desc = 'list workspace symbols' }
+            )
             buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.format{ async=true }<CR>', { desc = '[f]ormat buffer' })
             -- lsp signature
             if has_lsp_sig then
@@ -66,6 +71,9 @@ return {
           flags = {
             debounce_text_changes = 150,
           },
+          -- File watching is disabled by default for neovim.
+          -- See: https://github.com/neovim/neovim/pull/22405
+          { workspace = { didChangeWatchedFiles = { dynamicRegistration = true } } },
         }, _config or {})
       end
 
@@ -84,12 +92,13 @@ return {
         'html', -- needs vscode-langservers-extracted
         'marksman', -- needs marksman-bin
         'hls', -- needs haskell-language-server
-        'rnix', -- needs rnix-lsp
         -- 'nixd', -- needs nixd (from my arch packages)
         'tsserver', -- needs vscode-langservers-extracted
         'jsonls', -- needs vscode-langservers-extracted
         'eslint', -- needs vscode-langservers-extracted
         'typst_lsp', -- needs typst-lsp
+        -- 'rnix', -- needs rnix-lsp
+        'nil_ls', -- needs nil
       }
       -- local servers = { "pylsp", "clangd", "gopls", "rust_analyzer" }
       for _, lsp in ipairs(servers) do
@@ -142,6 +151,17 @@ return {
                 },
                 procMacro = {
                   enable = true,
+                },
+              },
+            },
+          })
+        elseif lsp == 'nil_ls' then
+          lspconfig[lsp].setup(config {
+            settings = {
+              ['nil'] = {
+                testSetting = 42,
+                formatting = {
+                  command = { 'nixpkgs-fmt' },
                 },
               },
             },
