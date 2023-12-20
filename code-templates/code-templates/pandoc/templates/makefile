@@ -30,8 +30,7 @@ build.tex:
 	# --from="markdown+rebase_relative_paths"
 build.pdf:
 	# rg --passthru -w "\./" -r "$(ROOT_PATH)/" $(TEX_PATH) > tmp.tex
-	rg --passthru -e "\{\./" -r "{$(ROOT_PATH)/" $(TEX_PATH) > tmp.tex
-	mv tmp.tex $(TEX_PATH)
+	rg --passthru -e "\{\./" -r "{$(ROOT_PATH)/" $(TEX_PATH) > tmp.tex && mv tmp.tex $(TEX_PATH) || rm tmp.* && echo "relative paths not found, use original"
 	latexmk -xelatex -shell-escape $(TEX_PATH) -output-directory=/tmp/slides
 clean:
 	latexmk -c -output-directory=$(ROOT_PATH)
