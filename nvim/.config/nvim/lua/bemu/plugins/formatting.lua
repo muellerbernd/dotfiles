@@ -41,7 +41,7 @@ return {
         graphql = { 'prettier' },
         lua = { 'stylua' },
         python = { 'isort', 'black' },
-        nix = { 'nixfmt' },
+        nix = { 'nixpkgs-fmt' },
         bash = { 'beautysh' },
         sh = { 'beautysh' },
       },
