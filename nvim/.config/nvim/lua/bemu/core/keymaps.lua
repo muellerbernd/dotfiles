@@ -130,6 +130,9 @@ vim.keymap.set('n', '<leader>fs', function()
   require('telescope.builtin').lsp_document_symbols()
 end, { desc = '[f]ind via lsp [s]ymbols' })
 
+vim.keymap.set('n', '<leader>fo', function()
+  require('bemu.plugins.telescope.funcs').oldfiles()
+end, { desc = 'show oldfiles' })
 -- Dap debugger
 -- vim.keymap.set('n', '<leader>br', "<cmd>lua require('dap').toggle_breakpoint()<CR>", { desc = 'dap set [br]eakpoint' })
 -- vim.keymap.set('n', '<leader>co', "<cmd>lua require('dap').continue()<CR>", { desc = 'dap [co]ntinue' })

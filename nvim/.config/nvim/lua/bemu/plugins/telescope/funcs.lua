@@ -153,13 +153,18 @@ function M.grep_last_search(opts)
 end
 
 function M.oldfiles()
-  if true then
-    require('telescope').extensions.frecency.frecency()
-  end
-  if pcall(require('telescope').load_extension, 'frecency') then
-  else
-    require('telescope.builtin').oldfiles { layout_strategy = 'vertical' }
-  end
+  local listedBufs = vim.fn.getbufinfo { buflisted = 1 }
+  local bufPaths = vim.tbl_map(function(buf)
+    return buf.name
+  end, listedBufs)
+  vim.list_extend(vim.v.oldfiles, bufPaths)
+  -- if true then
+  --   require('telescope').extensions.frecency.frecency()
+  -- end
+  -- if pcall(require('telescope').load_extension, 'frecency') then
+  -- else
+  require('telescope.builtin').oldfiles { layout_strategy = 'vertical' }
+  -- end
 end
 
 function M.my_plugins()
