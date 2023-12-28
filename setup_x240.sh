@@ -25,7 +25,6 @@ case "$1" in
         starship \
         fonts \
         xinit \
-        gtk-3.0 \
         locale \
         mime-apps \
         code-templates \
@@ -56,7 +55,6 @@ case "$1" in
         starship \
         fonts \
         xinit \
-        gtk-3.0 \
         locale \
         mime-apps \
         code-templates \
