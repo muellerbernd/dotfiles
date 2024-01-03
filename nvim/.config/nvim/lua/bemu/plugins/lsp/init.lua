@@ -37,7 +37,7 @@ return {
             buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', { desc = 'list [w]orkspace [f]olders' })
             buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', { desc = 'show type [D]efinition' })
             buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', { desc = 'lsp [r]e[n]ame' })
-            buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', { desc = 'show [c]ode [a]ctions' })
+            -- buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', { desc = 'show [c]ode [a]ctions' })
             buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float() <CR>', { desc = 'list [e]rror diagnostics' })
             buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { desc = 'goto [prev [d]iagnostic' })
             buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', { desc = 'goto ]next [d]iagnostic' })
@@ -315,7 +315,7 @@ return {
         },
       }
       -- preview code with LSP code actions applied
-      vim.keymap.set('n', '<space>cap', ':lua require("actions-preview").code_actions()<CR>', { desc = '[a]ction [p]review for code actions' })
+      vim.keymap.set('n', '<space>ca', ':lua require("actions-preview").code_actions()<CR>', { desc = '[a]ction [p]review for code actions' })
     end,
   },
 }
