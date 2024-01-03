@@ -14,6 +14,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 -- Make double-<Esc> clear search highlights
 vim.keymap.set('n', '<Esc><Esc>', '<Esc>:nohlsearch<CR><Esc>')
 
+-- terminal mappings
 -- so that you can just hit Esc to enter normal mode
 vim.keymap.set('t', '<esc>', '<C-\\><C-N>')
 vim.keymap.set('t', 'jk', '<C-\\><C-n>')
@@ -23,14 +24,14 @@ vim.keymap.set('t', '<C-k>', '<C-\\><C-n><C-W>k')
 vim.keymap.set('t', '<C-l>', '<C-\\><C-n><C-W>l')
 
 -- terminal
-vim.keymap.set('n', '<Leader>tn', function()
+vim.keymap.set('n', '<leader>tn', function()
   require('bemu.core.funcs').vert_term()
 end, { desc = 'New terminal in vert split' })
-vim.keymap.set('n', '<Leader>ts', ":lua require('bemu.core.funcs').horiz_term()<CR>", { desc = 'New terminal in horiz split' })
+vim.keymap.set('n', '<leader>ts', ":lua require('bemu.core.funcs').horiz_term()<CR>", { desc = 'New terminal in horiz split' })
 
 -- ctrl+s to save
 vim.keymap.set('n', '<c-s>', '<cmd>update<CR>', { desc = 'write file' })
-vim.keymap.set('n', '<leader><leader>w', '<cmd>update<CR>', { desc = 'write file' })
+-- vim.keymap.set('n', '<leader><leader>w', '<cmd>update<CR>', { desc = 'write file' })
 
 -- Keeping it centered
 vim.keymap.set('n', 'n', 'nzzzv')
@@ -92,63 +93,6 @@ vim.keymap.set('n', 'cN', '*``cgN')
 -- correct spell with ctrl+l
 -- vim.keymap.set('i',"<C-l>", "<c-g>u<Esc>[s1z=`]a<c-g>u", { desc = "correct spell" })
 
--- plugin mappings
--- vim-header settings
--- vim.keymap.set('n', '<leader>ah', '<cmd>AddHeader<CR>', { desc = '[a]dd [h]eader to file' })
--- todo
-vim.keymap.set('n', '<leader>td', '<cmd>TodoTelescope<CR>', { desc = 'list current [t]o[d]os' })
-
--- telescope
-vim.keymap.set(
-  'n',
-  '<leader>ff',
-  "<cmd>lua require('telescope.builtin').find_files( { cwd = vim.fn.expand('%:p:h'), find_command={'rg','--ignore','--hidden','--files'}, prompt_prefix='🔍' }) <cr>",
-  { desc = '[f]ind [f]iles' }
-)
-vim.keymap.set('n', '<leader>fg', "<cmd>lua require('bemu.plugins.telescope.funcs').live_grep()<cr>", { desc = '[f]ind with [g]rep' })
-vim.keymap.set('n', '<leader>fb', "<cmd>lua require('telescope.builtin').buffers()<cr>", { desc = '[f]ind [b]uffers' })
-vim.keymap.set('n', '<leader>fS', "<cmd>lua require('telescope.builtin').spell_suggest()<cr>", { desc = '[f]ix [S]pell' })
-vim.keymap.set('n', '<leader>fG', "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", { desc = '[f]ind with [G]rep in current buffer' })
-vim.keymap.set('n', '<leader>fh', "<cmd>lua require('bemu.plugins.telescope.funcs').help_tags()<cr>", { desc = '[f]ind in [h]elp' })
-vim.keymap.set('n', '<leader>fl', "<cmd>lua require('telescope.builtin').resume()<cr>", { desc = '[f]ind in [l]ast picker' })
-vim.keymap.set('n', '<leader>fT', "<cmd>lua require('telescope.builtin').treesitter()<cr>", { desc = '[f]ind via [T]reesitter' })
-vim.keymap.set('n', '<leader>fR', "<cmd>lua require('telescope.builtin').registers()<CR>", { desc = '[f]ind in [r]egisters' })
-vim.keymap.set('n', '<leader>en', "<cmd>lua require('bemu.plugins.telescope.funcs').edit_neovim()<cr>", { desc = '[e]dit [n]eovim config' })
-vim.keymap.set('n', '<leader>el', "<cmd>lua require('bemu.plugins.telescope.funcs').local_plugins()<cr>", { desc = 'list [l]ocal [p]lugins' })
-vim.keymap.set('n', '<leader>qr', "<cmd>lua require('bemu.plugins.telescope.funcs').reload()<cr>", { desc = '[q]uick [r]eload plugins' })
-vim.keymap.set('n', '<leader>fr', "<cmd>lua require('bemu.plugins.telescope.funcs').file_browser()<cr>", { desc = '[f]ile b[r]owser' })
--- telescope tasks
-vim.keymap.set('n', '<leader>ft', "<cmd>lua require('telescope').extensions.asynctasks.all()<CR>", { desc = '[f]ind in configured async[t]asks' })
--- telescope wiki
-vim.keymap.set('n', '<leader>fw', "<cmd>lua require('bemu.plugins.telescope.funcs').list_mywikis()<cr>", { desc = '[f]ind configured [w]ikis' })
-
-vim.keymap.set('n', '<F8>', function()
-  require('bemu.plugins.telescope.funcs').current_buffer_tags()
-end, { desc = 'show current buffer tags' })
-
-vim.keymap.set('n', '<leader>fs', function()
-  require('telescope.builtin').lsp_document_symbols()
-end, { desc = '[f]ind via lsp [s]ymbols' })
-
-vim.keymap.set('n', '<leader>fo', function()
-  require('bemu.plugins.telescope.funcs').oldfiles()
-end, { desc = 'show oldfiles' })
--- Dap debugger
--- vim.keymap.set('n', '<leader>br', "<cmd>lua require('dap').toggle_breakpoint()<CR>", { desc = 'dap set [br]eakpoint' })
--- vim.keymap.set('n', '<leader>co', "<cmd>lua require('dap').continue()<CR>", { desc = 'dap [co]ntinue' })
--- vim.keymap.set('n', '<leader>so', "<cmd>lua require('dap').step_over()<CR>", { desc = 'dap [s]tep [o]ver' })
--- vim.keymap.set('n', '<leader>si', "<cmd>lua require('dap').step_into()<CR>", { desc = 'dap [s]tep [i]nto' })
--- vim.keymap.set('n', '<leader>re', "<cmd>lua require('dap').repl.open()<CR>", { desc = 'dap [re]pl open' })
--- vim.keymap.set('n', '<leader>dt', ':lua require("dapui").toggle()<CR>', { desc = '[d]apui [t]oggle' })
-
--- markdown-previewer
-vim.keymap.set('n', '<F4>', '<cmd>MarkdownPreviewToggle<cr>', { desc = 'toggle markdown-previewer' })
--- latex-previewer
-vim.keymap.set('n', '<F5>', "<cmd>lua require('latex-previewer').preview()<cr>", { desc = 'open latex-previewer' })
-
--- preview code with LSP code actions applied
-vim.keymap.set('n', '<leader>ap', ':lua require("actions-preview").code_actions()<CR>', { desc = '[a]ction [p]review for code actions' })
-
 -- toggle custom stuff
 vim.keymap.set('n', '<leader><leader>t', function()
   local word = vim.fn.expand '<cword>'
@@ -184,7 +128,7 @@ vim.keymap.set('n', '<leader>qf', function()
     vim.cmd 'cclose'
   end
 end, { desc = 'toggle [q]ick[f]ix list' })
-
+-- smart goto file
 vim.keymap.set('n', '<leader>gf', function()
   require('bemu.core.funcs').goto_file()
 end, { desc = '[g]oto [f]ile, create if not exist' })

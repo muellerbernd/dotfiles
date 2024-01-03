@@ -4,7 +4,6 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     build = ':TSUpdate',
     dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
       'windwp/nvim-ts-autotag',
       'lewis6991/spellsitter.nvim',
       'JoosepAlviste/nvim-ts-context-commentstring',

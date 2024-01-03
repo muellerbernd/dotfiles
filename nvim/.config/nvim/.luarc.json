@@ -79,5 +79,14 @@
         "/usr/share/vim/vimfiles",
         "${3rd}/luassert/library",
         "${3rd}/luv/library"
+    ],
+    "diagnostics.globals": [
+        "vim"
+    ],
+    "diagnostics.disable": [
+        "incomplete-signature-doc",
+        "trailing-space",
+        "undefined-global",
+        "no-unknown"
     ]
 }

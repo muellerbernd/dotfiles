@@ -23,7 +23,7 @@ return {
             local function buf_set_keymap(...)
               vim.api.nvim_buf_set_keymap(bufnr, ...)
             end
-            local opts = { noremap = true, silent = true }
+            -- local opts = { noremap = true, silent = true }
             buf_set_keymap('n', 'gr', "<cmd>lua require('bemu.plugins.telescope.funcs').lsp_references()<cr>", { desc = '[g]oto [r]eferences' })
             -- See `:help vim.lsp.*` for documentation on any of the below functions
             buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', { desc = '[g]oto [D]eclaration' })
@@ -314,6 +314,8 @@ return {
           },
         },
       }
+      -- preview code with LSP code actions applied
+      vim.keymap.set('n', '<space>cap', ':lua require("actions-preview").code_actions()<CR>', { desc = '[a]ction [p]review for code actions' })
     end,
   },
 }

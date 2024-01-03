@@ -14,8 +14,12 @@ return {
     init = function()
       vim.g.mkdp_filetypes = { 'markdown' }
     end,
+    config = function()
+      -- markdown-previewer
+      vim.keymap.set('n', '<F4>', '<cmd>MarkdownPreviewToggle<cr>', { desc = 'toggle markdown-previewer' })
+    end,
     ft = { 'markdown' },
-  }
+  },
   -- 'FelipeIzolan/markviewer.nvim',
   -- config = function()
   --   require('markviewer').setup()
