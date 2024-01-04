@@ -17,7 +17,7 @@ config.color_scheme = 'Gruvbox dark, medium (base16)'
 config.font = wezterm.font("Hack Nerd Font")
 config.font_size = 12.0
 config.enable_tab_bar = false
-config.window_close_confirmation = 'NeverPrompt'
+-- config.window_close_confirmation = 'NeverPrompt'
 -- disable default keybindings
 config.disable_default_key_bindings = false
 
