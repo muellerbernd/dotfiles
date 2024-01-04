@@ -23,12 +23,12 @@ config.disable_default_key_bindings = false
 
 config.keys = {
   { key = "Return", mods = "SHIFT|CTRL", action = wezterm.action.SpawnWindow },
-  { key = "PageUp", mods = "CTRL", action = wezterm.action.Nop },
-  { key = "PageUp", mods = "CTRL|SHIFT", action = wezterm.action.Nop },
-  { key = "PageDown", mods = "CTRL", action = wezterm.action.Nop },
-  { key = "PageDown", mods = "CTRL|SHIFT", action = wezterm.action.Nop },
-  { key = "LeftArrow", mods = "CTRL|SHIFT", action = wezterm.action.Nop },
-  { key = "RightArrow", mods = "CTRL|SHIFT", action = wezterm.action.Nop },
+  { key = "PageUp", mods = "CTRL", action = wezterm.action.DisableDefaultAssignment },
+  { key = "PageUp", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+  { key = "PageDown", mods = "CTRL", action = wezterm.action.DisableDefaultAssignment },
+  { key = "PageDown", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+  { key = "LeftArrow", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+  { key = "RightArrow", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
 }
 
 -- and finally, return the configuration to wezterm
