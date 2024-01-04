@@ -15,6 +15,7 @@ case "$1" in
         clang-format \
         prettier-format \
         alacritty \
+        wezterm \
         zsh \
         nvim \
         tmux \
@@ -45,6 +46,7 @@ case "$1" in
         clang-format \
         prettier-format \
         alacritty \
+        wezterm \
         zsh \
         nvim \
         tmux \
