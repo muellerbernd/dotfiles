@@ -192,9 +192,26 @@ handle_mime() {
             exit 1 ;;
 
             ## Image
+        image/png | image/jpeg)
+            chafa --size=${PREVIEW_WIDTH}x${PREVIEW_HEIGHT} "${FILE_PATH}" && exit 0
+            exit 1
+            ;;
+
+        image/png | image/jpeg | image/gif)
+            # ## Preview as "unicode art"
+            # chafa --size=${PREVIEW_WIDTH}x${PREVIEW_HEIGHT} "${FILE_PATH}" && exit 0
+            # echo "test"
+            # img2sixel --size=${PREVIEW_WIDTH}x${PREVIEW_HEIGHT} "${FILE_PATH}" && exit 0
+            # echo "test2"
+
+            # Don't work yet:
+            # chafa -f iterm "${FILE_PATH}" && exit 0
+            # imgcat "${FILE_PATH}" && exit 0
+            exit 1 ;;
+
         image/*)
             ## Preview as text conversion
-            # exiftool "${FILE_PATH}" && exit 0
+            exiftool "${FILE_PATH}" && exit 0
             exit 0 ;;
 
             ## Video and audio

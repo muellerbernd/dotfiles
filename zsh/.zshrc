@@ -202,7 +202,17 @@ rr() {
 
 jj() {
     temp_file="$(mktemp -t "joshuto_cd.XXXXXXXXXX")"
-    ~/.config/joshuto/uberzug/joshuto.sh --output-file "$temp_file" -- "${@:-$PWD}"
+    # ~/.config/joshuto/uberzug/joshuto.sh --output-file "$temp_file" -- "${@:-$PWD}"
+    joshuto --output-file "$temp_file" -- "${@:-$PWD}"
+    if chosen_dir="$(cat -- "$temp_file")" && [ -n "$chosen_dir" ] && [ "$chosen_dir" != "$PWD" ]; then
+        cd -- "$chosen_dir"
+    fi
+    rm -f -- "$temp_file"
+}
+
+ya() {
+    temp_file="$(mktemp -t "yazi_cd.XXXXXXXXXX")"
+    yazi --cwd-file "$temp_file" -- "${@:-$PWD}"
     if chosen_dir="$(cat -- "$temp_file")" && [ -n "$chosen_dir" ] && [ "$chosen_dir" != "$PWD" ]; then
         cd -- "$chosen_dir"
     fi
