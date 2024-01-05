@@ -83,15 +83,19 @@ delete-mue-p14s:
 
 install-t480:
 	stow --restow -v -t $$HOME i3-t480
+	stow --restow -v -t $$HOME i3status-rust
 
 delete-t480:
 	stow -v -t $$HOME --delete i3-t480
+	stow -v -t $$HOME --delete i3status-rust
 
 install-x240:
 	stow --restow -v -t $$HOME i3-x240
+	stow --restow -v -t $$HOME i3status-rust
 
 delete-x240:
 	stow -v -t $$HOME --delete i3-x240
+	stow -v -t $$HOME --delete i3status-rust
 
 install-biltower:
 	stow --restow -v -t $$HOME i3-biltower
