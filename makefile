@@ -99,8 +99,8 @@ install-biltower:
 delete-biltower:
 	stow -v -t $$HOME --delete i3-biltower
 
-install-eis-machine:
+install-EIS-machine:
 	stow --restow -v -t $$HOME i3-eistower
 
-delete-eis-machine:
+delete-EIS-machine:
 	stow -v -t $$HOME --delete i3-eistower
