@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+    <icon>Wezterm</icon>
+    <name>Open wezterm here</name>
+    <submenu></submenu>
+    <unique-id>1674028690989118-1</unique-id>
+    <command>wezterm</command>
+    <description>wezterm</description>
+    <range>*</range>
+    <patterns>*</patterns>
+    <directories/>
+</action>
+</actions>
