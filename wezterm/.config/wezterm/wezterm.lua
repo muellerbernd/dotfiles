@@ -13,7 +13,7 @@ end
 -- This is where you actually apply your config choices
 
 -- For example, changing the color scheme:
-config.color_scheme = 'Gruvbox dark, medium (base16)'
+config.color_scheme = "Gruvbox dark, medium (base16)"
 config.font = wezterm.font("Hack Nerd Font")
 config.font_size = 12.0
 config.enable_tab_bar = false
@@ -29,6 +29,8 @@ config.keys = {
   { key = "PageDown", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
   { key = "LeftArrow", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
   { key = "RightArrow", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+  -- { key = "C", mods = "CTRL|SHIFT", action = wezterm.action({ CopyTo = "Clipboard" }) },
+  -- { key = "V", mods = "CTRL|SHIFT", action = wezterm.action({ PasteFrom = "Clipboard" }) },
 }
 
 -- and finally, return the configuration to wezterm
