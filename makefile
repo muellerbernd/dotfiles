@@ -16,6 +16,7 @@ install-default:
 	gpg --output ./zsh/.zsh_aliases_work --decrypt ./zsh/.zsh_aliases_work.gpg
 	gpg --output ./gitconf-work/.gitconfig-job --decrypt ./gitconf-work/.gitconfig-job.gpg
 	stow --restow -v -t $$HOME i3-common \
+		sway-common \
 		dunst \
 		rofi \
 		gitconf \
@@ -47,6 +48,7 @@ install-default:
 delete-default:
 	# stow --verbose --target=$$HOME --delete */
 	stow -v -t $$HOME --delete i3-common \
+		sway-common \
 		dunst \
 		rofi \
 		gitconf \
@@ -82,11 +84,11 @@ delete-mue-p14s:
 	stow -v -t $$HOME --delete i3-p14s
 
 install-t480:
-	stow --restow -v -t $$HOME i3-t480
+	stow --restow -v -t $$HOME i3-t480 sway-t480
 	stow --restow -v -t $$HOME i3status-rust
 
 delete-t480:
-	stow -v -t $$HOME --delete i3-t480
+	stow -v -t $$HOME --delete i3-t480 sway-t480
 	stow -v -t $$HOME --delete i3status-rust
 
 install-x240:
