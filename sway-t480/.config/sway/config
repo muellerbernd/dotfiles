@@ -57,7 +57,9 @@ bindsym $mod+x mode "$mode_display"
 exec --no-startup-id redshift -P -O 0
 exec --no-startup-id indicator-keylock
 exec --no-startup-id sleep 6 && nextcloud
-exec --no-startup-id xrandr --output eDP-1 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output DP-1 --off --output HDMI-1 --off --output DP-2 --off --output HDMI-2 --off --output DP-2-1 --off --output DP-2-2 --off --output DP-2-3 --off
+# exec --no-startup-id xrandr --output eDP-1 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output DP-1 --off --output HDMI-1 --off --output DP-2 --off --output HDMI-2 --off --output DP-2-1 --off --output DP-2-2 --off --output DP-2-3 --off
+output eDP-1 resolution 1920x1080 position 0,0 scale 1
+
 # Disable DPMS and prevent screen from blanking
 exec --no-startup-id xset s off -dpms
 # exec --no-startup-id systemctl --user start spotifyd.service
