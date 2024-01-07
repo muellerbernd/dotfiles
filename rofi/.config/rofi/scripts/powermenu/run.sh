@@ -48,6 +48,16 @@ run_rofi() {
     echo -e "$shutdown\n$reboot\n$lock\n$suspend\n$hibernate\n$logout" | rofi_cmd
 }
 
+run_lock_cmd() {
+    if [[ "$XDG_SESSION_DESKTOP" == 'i3' ]]; then
+        ~/scripts/lock.sh
+    elif [[ "$XDG_SESSION_DESKTOP" == 'none+i3' ]]; then
+        ~/scripts/lock.sh
+    elif [[ "$XDG_SESSION_DESKTOP" == 'sway' ]]; then
+        ~/scripts/lock_sway.sh
+    fi
+}
+
 # Execute Command
 run_cmd() {
     selected="$(confirm_exit)"
@@ -64,25 +74,19 @@ run_cmd() {
             # dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
             # playerctl pause
             systemctl suspend
-            ~/scripts/lock.sh
+            run_lock_cmd
         elif [[ $1 == '--hibernate' ]]; then
             # mpc -q pause
             # amixer set Master mute
             # dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
             # playerctl pause
             systemctl hibernate
-            ~/scripts/lock.sh
+            run_lock_cmd
         elif [[ $1 == '--logout' ]]; then
-            if [[ "$DESKTOP_SESSION" == 'openbox' ]]; then
-                openbox --exit
-            elif [[ "$DESKTOP_SESSION" == 'bspwm' ]]; then
-                bspc quit
-            elif [[ "$DESKTOP_SESSION" == 'i3' ]]; then
+            if [[ "$XDG_SESSION_DESKTOP" == 'i3' ]]; then
                 i3-msg exit
-            elif [[ "$DESKTOP_SESSION" == 'none+i3' ]]; then
-                i3-msg exit
-            elif [[ "$DESKTOP_SESSION" == 'plasma' ]]; then
-                qdbus org.kde.ksmserver /KSMServer logout 0 0 0
+            elif [[ "$XDG_SESSION_DESKTOP" == 'sway' ]]; then
+                sway-msg exit
             fi
         fi
     else
@@ -100,8 +104,8 @@ case ${chosen} in
         run_cmd --reboot
         ;;
     $lock)
-        playerctl pause
-        sh ~/scripts/lock.sh
+        run_lock_cmd
+        # sh ~/scripts/lock.sh
         ;;
     $suspend)
         run_cmd --suspend
