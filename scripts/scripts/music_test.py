@@ -1,5 +1,7 @@
-import subprocess
+#!/usr/bin/env python3
+
 import os
+import subprocess
 
 # Checking for changes
 output = subprocess.getoutput("pacmd list-sinks").split("\n")
