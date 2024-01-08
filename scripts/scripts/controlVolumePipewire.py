@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 import argparse
 import json
@@ -14,16 +14,37 @@ def node_parsing(j: dict) -> (bool, str):
     return (is_sink, j["id"])
 
 
-# def notify_volume():
-#     os.popen(
-#         "wpctl get-volume @DEFAULT_SINK@ | awk '{print $2}' | awk '{split($0,a,'.'); print a[2]}'"
-#     )
+def get_sink_volume(sink_id: str) -> (int, bool):
+    outs = os.popen(f"wpctl get-volume {sink_id}").read().replace("\n", "").split(" ")
+    volume = float(outs[1]) * 100.0
+    is_muted = False
+    try:
+        is_muted = outs[2] == "[MUTED]"
+    except:
+        is_muted = False
+    print(f"id {sink_id} is_muted {is_muted} volume {volume}")
+    return (int(volume), is_muted)
+
+
+def notify_volume(volume: int):
+    msg_id = "991049"
+    os.popen(
+        f'dunstify -a "changeVolume" -u low -r "{msg_id}" "🔊  Volume: {volume}%"'
+    ).read()
+
+
+def notify_mute():
+    msg_id = "991049"
+    os.popen(
+        f'dunstify -a "changeVolume" -u low -r "{msg_id}" "  Volume muted"'
+    ).read()
 
 
 def main(args):
     print(args.vol_type)
     dump_output = json.loads(subprocess.getoutput("pw-dump"))
-    # print(dump_output)
+    sink_volumes = []
+    sink_muted = []
     for e in reversed(dump_output):
         is_sink, id = node_parsing(e)
         if is_sink:
@@ -36,6 +57,13 @@ def main(args):
                     os.popen(f"wpctl set-mute {id} toggle").read()
                 case _:
                     print("unknown")
+            volume, is_muted = get_sink_volume(id)
+            sink_volumes.append(volume)
+            sink_muted.append(is_muted)
+    if sum(sink_muted) == 5 or sum(sink_volumes) == 0:
+        notify_mute()
+    else:
+        notify_volume(max(sink_volumes))
 
 
 if __name__ == "__main__":
