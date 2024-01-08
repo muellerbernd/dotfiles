@@ -20,6 +20,7 @@ config.enable_tab_bar = false
 -- config.window_close_confirmation = 'NeverPrompt'
 -- disable default keybindings
 config.disable_default_key_bindings = false
+config.audible_bell = "Disabled"
 
 config.keys = {
   { key = "Return", mods = "SHIFT|CTRL", action = wezterm.action.SpawnWindow },
