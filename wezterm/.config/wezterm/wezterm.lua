@@ -21,6 +21,7 @@ config.enable_tab_bar = false
 -- disable default keybindings
 config.disable_default_key_bindings = false
 config.audible_bell = "Disabled"
+config.enable_wayland = false
 
 config.keys = {
   { key = "Return", mods = "SHIFT|CTRL", action = wezterm.action.SpawnWindow },
