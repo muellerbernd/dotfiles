@@ -100,10 +100,10 @@ delete-x240:
 	stow -v -t $$HOME --delete i3status-rust
 
 install-biltower:
-	stow --restow -v -t $$HOME i3-biltower
+	stow --restow -v -t $$HOME i3-biltower sway-biltower
 
 delete-biltower:
-	stow -v -t $$HOME --delete i3-biltower
+	stow -v -t $$HOME --delete i3-biltower sway-biltower
 
 install-EIS-machine:
 	stow --restow -v -t $$HOME i3-eistower

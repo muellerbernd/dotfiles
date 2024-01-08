@@ -1,0 +1,43 @@
+include ~/.config/sway/one_for_all.conf
+
+bar {
+    # output primary
+    # status_command i3status --config ~/.config/i3status/config
+    status_command i3status-rs ~/.config/i3status-rust/config.toml
+
+    # i3bar_command i3bar
+    # status_command i3blocks
+    # colors {
+    #     background #282A36
+    #     statusline #F8F8F2
+    #     separator  #44475A
+    #
+    #     focused_workspace  #44475A #44475A #F8F8F2
+    #     active_workspace   #282A36 #44475A #F8F8F2
+    #     inactive_workspace #282A36 #282A36 #BFBFBF
+    #     urgent_workspace   #FF5555 #FF5555 #F8F8F2
+    #     binding_mode       #FF5555 #FF5555 #F8F8F2
+    # }
+}
+
+# bar {
+#     tray_output none
+#     output nonprimary
+#     # status_command i3status --config ~/.config/i3status/config_nonprimary
+# }
+
+
+# set variable because it can not be loaded from parent file
+set $mod Mod4
+
+# workspace 2 output DP-2
+
+exec --no-startup-id redshift -P -O 0
+exec --no-startup-id indicator-keylock
+exec --no-startup-id nextcloud
+# exec --no-startup-id playerctld daemon
+# exec --no-startup-id nitrogen --restore
+# exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+# exec --no-startup-id /usr/lib/xfce-polkit/xfce-polkit
+# exec --no-startup-id /usr/lib/pam_kwallet_init
+exec --no-startup-id xrandr --output HDMI-0 --off --output DP-0 --primary --mode 1920x1080 --pos 0x420 --rotate normal --output DP-1 --off --output DP-2 --mode 1920x1080 --pos 1920x0 --rotate left --output DP-3 --off --output DP-4 --off --output DP-5 --off
