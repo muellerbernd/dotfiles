@@ -5,6 +5,22 @@ return {
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       { 'antosha417/nvim-lsp-file-operations', config = true },
+      {
+        'folke/neodev.nvim',
+        opts = {},
+        config = function()
+          -- You can override the default detection using the override function
+          -- EXAMPLE: If you want a certain directory to be configured differently, you can override its settings
+          require('neodev').setup {
+            override = function(root_dir, library)
+              if root_dir:find('/etc/nixos', 1, true) == 1 then
+                library.enabled = true
+                library.plugins = true
+              end
+            end,
+          }
+        end,
+      },
     },
     config = function()
       _ = require 'bemu.plugins.lsp.handlers'
@@ -196,6 +212,11 @@ return {
             workspace = {
               checkThirdParty = false,
             },
+            library = {
+              [vim.fn.expand '$VIMRUNTIME/lua'] = true,
+              [vim.fn.expand '$VIMRUNTIME/lua/vim/lsp'] = true,
+              [vim.fn.stdpath 'data' .. '/lazy/lazy.nvim/lua/lazy'] = true,
+            },
             completion = {
               workspaceWord = true,
               callSnippet = 'Both',
@@ -220,6 +241,7 @@ return {
               castNumberToInteger = true,
             },
             diagnostics = {
+              globals = { 'vim' },
               disable = { 'incomplete-signature-doc', 'trailing-space' },
               -- enable = false,
               groupSeverity = {
@@ -277,22 +299,6 @@ return {
         --   },
         -- },
       })
-    end,
-  },
-  {
-    'folke/neodev.nvim',
-    opts = {},
-    config = function()
-      -- You can override the default detection using the override function
-      -- EXAMPLE: If you want a certain directory to be configured differently, you can override its settings
-      require('neodev').setup {
-        override = function(root_dir, library)
-          if root_dir:find('/etc/nixos', 1, true) == 1 then
-            library.enabled = true
-            library.plugins = true
-          end
-        end,
-      }
     end,
   },
   -- A neovim plugin that preview code with LSP code actions applied.
