@@ -1,7 +1,7 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: Cartograph CF Nerd Font, monospace;
+    font-family: Hack Nerd Font, monospace;
     font-weight: bold;
     font-size: 14px;
     min-height: 0;
@@ -27,11 +27,11 @@ tooltip {
 }
 
 #workspaces button.active {
-    color: #a6adc8;
+    color: #cdd6f4;
 }
 
 #workspaces button.focused {
-    color: #a6adc8;
+    color: #cdd6f4;
     background: #eba0ac;
     border-radius: 10px;
 }
