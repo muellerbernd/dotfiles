@@ -80,10 +80,10 @@ delete-default:
 		wallpapers
 
 install-mue-p14s:
-	stow --restow -v -t $$HOME i3-p14s sway-p14s
+	stow --restow -v -t $$HOME i3-p14s sway-p14s hypr-p14s
 
 delete-mue-p14s:
-	stow -v -t $$HOME --delete i3-p14s sway-p14s
+	stow -v -t $$HOME --delete i3-p14s sway-p14s hypr-p14s
 
 install-t480:
 	stow --restow -v -t $$HOME i3-t480 sway-t480
