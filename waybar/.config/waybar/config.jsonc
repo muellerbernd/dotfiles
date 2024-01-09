@@ -18,9 +18,10 @@
     "modules-right": [
         "tray",
         "battery",
-        "backlight",
-        "pulseaudio",
-        "pulseaudio#microphone"
+        "battery#bat2"
+        // "backlight",
+        // "pulseaudio",
+        // "pulseaudio#microphone"
     ],
     "hyprland/window": {
         "format": "{}"
@@ -98,6 +99,32 @@
         "min-length": 6
     },
     "battery": {
+        "bat": "BAT0",
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 20
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{time} {icon}",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
+    },
+    "battery#bat2": {
+        "bat": "BAT1",
         "states": {
             "good": 95,
             "warning": 30,
