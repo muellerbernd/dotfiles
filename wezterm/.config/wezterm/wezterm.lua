@@ -22,7 +22,7 @@ config.enable_tab_bar = false
 config.disable_default_key_bindings = false
 config.audible_bell = "Disabled"
 config.enable_wayland = false
-config.front_end = "WebGpu"
+-- config.front_end = "WebGpu"
 -- config.front_end = "OpenGL"
 
 config.keys = {
