@@ -106,6 +106,7 @@
             "critical": 20
         },
         "format": "{icon} {capacity}%",
+        "format-time": "{H} h {m} min",
         "format-charging": " {capacity}%",
         "format-plugged": " {capacity}%",
         "format-alt": "{time} {icon}",
@@ -131,6 +132,7 @@
             "critical": 20
         },
         "format": "{icon} {capacity}%",
+        "format-time": "{H} h {m} min",
         "format-charging": " {capacity}%",
         "format-plugged": " {capacity}%",
         "format-alt": "{time} {icon}",
