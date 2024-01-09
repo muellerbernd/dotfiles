@@ -17,6 +17,7 @@ install-default:
 	gpg --output ./gitconf-work/.gitconfig-job --decrypt ./gitconf-work/.gitconfig-job.gpg
 	stow --restow -v -t $$HOME i3-common \
 		sway-common \
+		hypr-common \
 		dunst \
 		rofi \
 		gitconf \
@@ -49,6 +50,7 @@ delete-default:
 	# stow --verbose --target=$$HOME --delete */
 	stow -v -t $$HOME --delete i3-common \
 		sway-common \
+		hypr-common \
 		dunst \
 		rofi \
 		gitconf \
@@ -100,10 +102,10 @@ delete-x240:
 	stow -v -t $$HOME --delete i3status-rust
 
 install-biltower:
-	stow --restow -v -t $$HOME i3-biltower sway-biltower
+	stow --restow -v -t $$HOME i3-biltower sway-biltower hypr-biltower
 
 delete-biltower:
-	stow -v -t $$HOME --delete i3-biltower sway-biltower
+	stow -v -t $$HOME --delete i3-biltower sway-biltower hypr-biltower
 
 install-EIS-machine:
 	stow --restow -v -t $$HOME i3-eistower
