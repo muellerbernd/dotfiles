@@ -38,8 +38,8 @@ max_preview_size = 10485760 # 10MB
 preview_script = "~/.config/joshuto/preview_file.sh" # make sure it's marked as executable
 # max_preview_size = 50000097152
 # preview_script = "~/.config/joshuto/preview_file.sh"
-preview_shown_hook_script = "~/.config/joshuto/uberzug/on_preview_shown.sh"
-preview_removed_hook_script = "~/.config/joshuto/uberzug/on_preview_removed.sh"
+# preview_shown_hook_script = "~/.config/joshuto/uberzug/on_preview_shown.sh"
+# preview_removed_hook_script = "~/.config/joshuto/uberzug/on_preview_removed.sh"
 
 [tab]
 # inherit, home, root
