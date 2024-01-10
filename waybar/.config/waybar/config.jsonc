@@ -17,6 +17,7 @@
         "hyprland/window"
     ],
     "modules-right": [
+        // "keyboard-state",
         "tray",
         "battery",
         "battery#bat2"
@@ -188,5 +189,14 @@
     "cpu": {
         "format": "{usage}% <span color='#f5a97f'></span>",
         "tooltip": false
+    },
+    "keyboard-state": {
+        "numlock": true,
+        "capslock": true,
+        "format": "{name} {icon}",
+        "format-icons": {
+            "locked": "",
+            "unlocked": ""
+        }
     }
 }
