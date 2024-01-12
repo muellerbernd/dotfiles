@@ -57,6 +57,10 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufFilePre', 'BufRead' }, {
   command = 'set filetype=yaml',
 })
 
+vim.filetype.add({
+  pattern = { ["~/.config/hypr/.*%conf"] = "hypr" },
+})
+
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
