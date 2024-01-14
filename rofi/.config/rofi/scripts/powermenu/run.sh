@@ -75,15 +75,15 @@ run_cmd() {
             # amixer set Master mute
             # dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
             # playerctl pause
-            systemctl suspend
             run_lock_cmd
+            systemctl suspend
         elif [[ $1 == '--hibernate' ]]; then
             # mpc -q pause
             # amixer set Master mute
             # dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
             # playerctl pause
-            systemctl hibernate
             run_lock_cmd
+            systemctl hibernate
         elif [[ $1 == '--logout' ]]; then
             if [[ "$XDG_CURRENT_DESKTOP" == 'i3' ]]; then
                 i3-msg exit
