@@ -276,10 +276,9 @@ $if(listings)$
   % frame=single,
   breaklines,
   bgcolor=default-codebgcolor,
-  samepage,
+  samepage=false,
   % fontfamily=fdm,
   fontsize=\footnotesize,
-  % fontsize=\footnotesize,
 }
 
 % \BeforeBeginEnvironment{minted}{%
