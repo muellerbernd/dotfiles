@@ -5,5 +5,5 @@
 #}
 
 profile default {
-  output "eDP-1" enable
+  output "AU Optronics 0xD291" enable scale 1
 }
