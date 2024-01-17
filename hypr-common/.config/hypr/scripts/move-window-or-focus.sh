@@ -11,7 +11,17 @@ is_last() {
     hyprctl activewindow -j | jq -e ".address == .grouped[-1] or .grouped == []"
 }
 
+is_floating() {
+    hyprctl activewindow -j | jq -e ".floating"
+}
+
 case "$action $dir" in
+    "move u")
+        hyprctl dispatch movewindoworgroup u
+        ;;
+    "move d")
+        hyprctl dispatch movewindoworgroup d
+        ;;
     "move l")
         if ! is_first; then
             hyprctl dispatch movegroupwindow b
