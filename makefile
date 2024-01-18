@@ -18,7 +18,6 @@ install-default:
 	stow --restow -v -t $$HOME i3-common \
 		sway-common \
 		hypr-common \
-		kanshi \
 		waybar \
 		dunst \
 		rofi \
@@ -53,7 +52,6 @@ delete-default:
 	stow -v -t $$HOME --delete i3-common \
 		sway-common \
 		hypr-common \
-		kanshi \
 		waybar \
 		dunst \
 		rofi \
