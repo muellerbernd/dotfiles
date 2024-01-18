@@ -1,9 +1,0 @@
-#profile home_office {
-#  output "GIGA-BYTE TECHNOLOGY CO., LTD. Gigabyte M32U 21351B000087" mode 3840x2160@60Hz position 3840,0
-#  output "Dell Inc. DELL G3223Q 82X70P3" mode 3840x2160@60Hz position 0,0
-#  output "eDP-1" disable
-#}
-
-profile default {
-  output "AU Optronics 0xD291" enable scale 1
-}
