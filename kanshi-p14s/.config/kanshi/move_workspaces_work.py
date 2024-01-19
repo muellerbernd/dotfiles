@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# inspired by https://gist.github.com/Diaoul/4a33dfec9d80763a7f74ce8086bf5237
+
 import json
 import subprocess
 
@@ -20,15 +22,19 @@ def create_workspaces():
     print(workspaces_json)
     needed_workspaces = [1, 2, 3]
     for i in reversed(needed_workspaces):
-        workspace = list(filter(lambda x: x["id"] == i, workspaces_json))[0]
+        try:
+            workspace = list(filter(lambda x: x["id"] == i, workspaces_json))[0]
+        except:
+            workspace = None
         if workspace is None:
             print(f"workspace {i} does not exist")
+            _ = subprocess.getoutput(f"hyprctl keyword workspace {i}, persistent:true")
             _ = subprocess.getoutput(f"hyprctl dispatch workspace {i}")
-            _ = subprocess.getoutput(f"hyprctl dispatch workspaceopt persistent")
         else:
             print(f"workspace {i} exists")
+            print(workspace)
+            _ = subprocess.getoutput(f"hyprctl keyword workspace {i}, persistent:true")
             _ = subprocess.getoutput(f"hyprctl dispatch workspace {i}")
-            _ = subprocess.getoutput(f"hyprctl dispatch workspaceopt persistent")
 
 
 def assign_and_move(monitor_remap: dict):
