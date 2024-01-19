@@ -16,4 +16,5 @@ profile eis-office {
 
 profile eis-undock {
   output "eDP-1" enable mode 1920x1200@60 position 0,0 scale 1.000000
+  exec hyprctl dispatch workspace -- 1
 }
