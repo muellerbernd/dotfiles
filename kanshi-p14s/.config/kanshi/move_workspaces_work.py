@@ -42,7 +42,7 @@ def assign_and_move(monitor_remap: dict):
     for monitor, workspace in monitor_remap.items():
         print(f"Moving workspace {workspace} to {monitor}")
         _ = subprocess.getoutput(
-            f"hyprctl keyword workspace '{workspace}, monitor:${monitor}'"
+            f"hyprctl keyword workspace '{workspace}, monitor:${monitor}, persistent:true, default:true'"
         )
         _ = subprocess.getoutput(
             f"hyprctl dispatch moveworkspacetomonitor {workspace} {monitor}"

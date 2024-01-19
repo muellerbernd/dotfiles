@@ -11,7 +11,7 @@ profile eis-office {
   output "eDP-1" enable mode 1920x1200@60 position 0,0 scale 1.000000
   output "Dell Inc. DELL U2415 7MT018B3062L" enable position 1920,0 scale 1.000000
   output "Dell Inc. DELL U2415 7MT0196C30JU" enable position 3840,0 scale 1.000000 transform 270
-  exec ./move_workspaces_work.py
+  exec ~/.config/kanshi/move_workspaces_work.py
 }
 
 profile eis-undock {
