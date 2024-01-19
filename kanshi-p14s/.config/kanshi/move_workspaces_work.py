@@ -21,8 +21,8 @@ def create_workspaces():
     workspaces_json = json.loads(subprocess.getoutput("hyprctl workspaces -j"))
     print(workspaces_json)
     needed_workspaces = [1, 2, 3]
-    # for i in reversed(needed_workspaces):
-    for i in range(1,11):
+    for i in reversed(needed_workspaces):
+    # for i in range(1,11):
         try:
             workspace = list(filter(lambda x: x["id"] == i, workspaces_json))[0]
         except:
