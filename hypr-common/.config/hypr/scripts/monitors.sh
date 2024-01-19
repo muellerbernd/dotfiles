@@ -13,6 +13,14 @@ declare -i throttle_by=4
         # execute
         "$@"
     fi
+    monitors_json=$(hyprctl monitors -j)
+    workspaces_json=$(hyprctl workspaces -j)
+
+    monitors=($(echo $monitors_json | jq -r '. | sort_by(.x) | .[].name'))
+    workspace_count=$(echo $workspaces_json | jq -r '. | length')
+    active_workspaces=($(echo $monitors_json | jq -r '. | sort_by(.x) | .[].activeWorkspace.id'))
+
+    echo "Detected ${#monitors[@]} monitors with $workspace_count workspaces and $(IFS=,; echo ${active_workspaces[*]}) active"
     last_called=$(date +%s)
 }
 
@@ -73,16 +81,16 @@ function arrange_workspaces() {
             hyprctl keyword workspace "$i, monitor:${monitors[2]}" > /dev/null
             hyprctl dispatch moveworkspacetomonitor $i ${monitors[2]} > /dev/null
         done
-        for ((i = 7; i >= 4; i--)); do
-            echo "Moving workspace $i to ${monitors[1]}"
-            hyprctl keyword workspace "$i, monitor:${monitors[1]}" > /dev/null
-            hyprctl dispatch moveworkspacetomonitor $i ${monitors[1]} > /dev/null
-        done
-        for ((i = 3; i >= 1; i--)); do
-            echo "Moving workspace $i to ${monitors[0]}"
-            hyprctl keyword workspace "$i, monitor:${monitors[0]}" > /dev/null
-            hyprctl dispatch moveworkspacetomonitor $i ${monitors[0]} > /dev/null
-        done
+        # for ((i = 7; i >= 4; i--)); do
+        #     echo "Moving workspace $i to ${monitors[1]}"
+        #     hyprctl keyword workspace "$i, monitor:${monitors[1]}" > /dev/null
+        #     hyprctl dispatch moveworkspacetomonitor $i ${monitors[1]} > /dev/null
+        # done
+        # for ((i = 3; i >= 1; i--)); do
+        #     echo "Moving workspace $i to ${monitors[0]}"
+        #     hyprctl keyword workspace "$i, monitor:${monitors[0]}" > /dev/null
+        #     hyprctl dispatch moveworkspacetomonitor $i ${monitors[0]} > /dev/null
+        # done
     else  # more than 3 monitors...
         echo "Too many monitors"
     fi

@@ -11,10 +11,7 @@ profile eis-office {
   output "eDP-1" enable mode 1920x1200@60 position 0,0 scale 1.000000
   output "Dell Inc. DELL U2415 7MT018B3062L" enable position 1920,0 scale 1.000000
   output "Dell Inc. DELL U2415 7MT0196C30JU" enable position 3840,0 scale 1.000000 transform 270
-  # exec hyprctl dispatch workspace 1 > /dev/null
-  # exec hyprctl dispatch workspaceopt persistent > /dev/null
-  # exec hyprctl keyword workspace 1,monitor:desc:Dell Inc. DELL U2415 7MT018B3062L > /dev/null
-  # exec hyprctl dispatch moveworkspacetomonitor 1 monitor:desc:Dell Inc. DELL U2415 7MT018B3062L > /dev/null
+  exec ./move_workspaces.py
 }
 
 profile eis-undock {
