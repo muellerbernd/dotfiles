@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 
-import argparse
 import json
-import os
 import subprocess
 
 MONITOR_MAP = {
@@ -25,22 +23,22 @@ def create_workspaces():
         workspace = list(filter(lambda x: x["id"] == i, workspaces_json))[0]
         if workspace is None:
             print(f"workspace {i} does not exist")
-            ok = subprocess.getoutput(f"hyprctl dispatch workspace {i}")
-            ok = subprocess.getoutput(f"hyprctl dispatch workspaceopt persistent")
+            _ = subprocess.getoutput(f"hyprctl dispatch workspace {i}")
+            _ = subprocess.getoutput(f"hyprctl dispatch workspaceopt persistent")
         else:
             print(f"workspace {i} exists")
-            ok = subprocess.getoutput(f"hyprctl dispatch workspace {i}")
-            ok = subprocess.getoutput(f"hyprctl dispatch workspaceopt persistent")
-        ok = subprocess.getoutput(f"hyprctl dispatch workspace {i}")
+            _ = subprocess.getoutput(f"hyprctl dispatch workspace {i}")
+            _ = subprocess.getoutput(f"hyprctl dispatch workspaceopt persistent")
+        _ = subprocess.getoutput(f"hyprctl dispatch workspace {i}")
 
 
 def assign_and_move(monitor_remap: dict):
     for monitor, workspace in monitor_remap.items():
         print(f"Moving workspace {workspace} to {monitor}")
-        ok = subprocess.getoutput(
+        _ = subprocess.getoutput(
             f"hyprctl keyword workspace '{workspace}, monitor:${monitor}'"
         )
-        ok = subprocess.getoutput(
+        _ = subprocess.getoutput(
             f"hyprctl dispatch moveworkspacetomonitor {workspace} {monitor}"
         )
 
