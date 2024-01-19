@@ -29,7 +29,6 @@ def create_workspaces():
             print(f"workspace {i} exists")
             _ = subprocess.getoutput(f"hyprctl dispatch workspace {i}")
             _ = subprocess.getoutput(f"hyprctl dispatch workspaceopt persistent")
-        _ = subprocess.getoutput(f"hyprctl dispatch workspace {i}")
 
 
 def assign_and_move(monitor_remap: dict):
@@ -54,6 +53,10 @@ def main():
     print(monitor_remap)
     create_workspaces()
     assign_and_move(monitor_remap)
+    # activate workspaces 1,2,3
+    needed_workspaces = [1, 2, 3]
+    for i in reversed(needed_workspaces):
+        _ = subprocess.getoutput(f"hyprctl dispatch workspace {i}")
 
 
 if __name__ == "__main__":
