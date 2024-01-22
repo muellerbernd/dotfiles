@@ -1,0 +1,23 @@
+# #profile home_office {
+# #  output "GIGA-BYTE TECHNOLOGY CO., LTD. Gigabyte M32U 21351B000087" mode 3840x2160@60Hz position 3840,0
+# #  output "Dell Inc. DELL G3223Q 82X70P3" mode 3840x2160@60Hz position 0,0
+# #  output "eDP-1" disable
+# #}
+#
+# profile default {
+#   output "AU Optronics 0xD291" enable scale 1
+# }
+profile ilmtv {
+  output "eDP-1" enable mode 1920x1080@60 position 0,0 scale 1.000000
+  output "CTV TV 0x01010101"
+  # exec "hyprctl keyword monitor desc:CTV TV 0x01010101,1920x1080@60,0x0,1,mirror,eDP-1"
+  exec hyprctl keyword monitor desc:CTV TV 0x01010101,preferred,auto,1,mirror,eDP-1 && hyprctl keyword monitor ,preferred,auto,1
+
+  # output "Dell Inc. DELL U2415 7MT0196C30JU" enable position 3840,0 scale 1.000000 transform 270
+  # exec ~/.config/kanshi/move_workspaces_work.py
+}
+
+profile undock {
+  output "eDP-1" enable mode 1920x1080@60 position 0,0 scale 1.000000
+  exec hyprctl dispatch workspace -- 1
+}

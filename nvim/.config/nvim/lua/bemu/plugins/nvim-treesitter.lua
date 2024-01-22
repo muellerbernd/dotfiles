@@ -104,5 +104,5 @@ return {
       vim.opt.foldenable = false
     end,
   },
-  { 'luckasRanarison/tree-sitter-hypr', ft = 'hypr' },
+  -- { 'luckasRanarison/tree-sitter-hypr', ft = 'hypr' },
 }
