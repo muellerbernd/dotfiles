@@ -63,7 +63,7 @@ tooltip {
 #tray,
 #submap,
 #keyboard-state,
-#custom-audio-idle-inhibitor,
+#privacy,
 #backlight {
   background: #1e1e2e;
   padding: 0px 10px;
@@ -159,7 +159,11 @@ tooltip {
   margin-left: 0px;
 }
 
-#custom-audio-idle-inhibitor {
+#privacy,
+#privacy-item,
+#privacy-item.screenshare,
+#privacy-item.audio-in,
+#privacy-item.audio-out {
   color: #cba6f7;
   border-radius: 10px 10px 10px 10px;
   margin-right: 5px;

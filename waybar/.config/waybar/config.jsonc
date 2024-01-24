@@ -18,7 +18,7 @@
     ],
     "modules-right": [
         // "keyboard-state",
-        "custom/audio-idle-inhibitor",
+        "privacy",
         "tray",
         "battery",
         "battery#bat2"
@@ -182,16 +182,26 @@
             "unlocked": ""
         }
     },
-    "custom/audio-idle-inhibitor": {
-        "format": "{icon}",
-        "exec": "sway-audio-idle-inhibit --dry-print-both-waybar",
-        "exec-if": "which sway-audio-idle-inhibit",
-        "return-type": "json",
-        "format-icons": {
-            "output": "",
-            "input": "",
-            "output-input": "  ",
-            "none": ""
-        }
+    "privacy": {
+        "icon-spacing": 4,
+        "icon-size": 18,
+        "transition-duration": 250,
+        "modules": [
+            {
+                "type": "screenshare",
+                "tooltip": true,
+                "tooltip-icon-size": 24
+            },
+            {
+                "type": "audio-out",
+                "tooltip": true,
+                "tooltip-icon-size": 24
+            },
+            {
+                "type": "audio-in",
+                "tooltip": true,
+                "tooltip-icon-size": 24
+            }
+        ]
     }
 }
