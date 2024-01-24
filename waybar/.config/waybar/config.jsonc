@@ -18,6 +18,7 @@
     ],
     "modules-right": [
         // "keyboard-state",
+        "custom/audio-idle-inhibitor",
         "tray",
         "battery",
         "battery#bat2"
@@ -36,7 +37,7 @@
         "all-outputs": true,
         "on-click": "activate",
         "format": "{icon}",
-        "persistent_workspaces": {
+        "persistent-workspaces": {
             "1": [],
             "2": [],
             "3": [],
@@ -179,6 +180,18 @@
         "format-icons": {
             "locked": "",
             "unlocked": ""
+        }
+    },
+    "custom/audio-idle-inhibitor": {
+        "format": "{icon}",
+        "exec": "sway-audio-idle-inhibit --dry-print-both-waybar",
+        "exec-if": "which sway-audio-idle-inhibit",
+        "return-type": "json",
+        "format-icons": {
+            "output": "",
+            "input": "",
+            "output-input": "  ",
+            "none": ""
         }
     }
 }
