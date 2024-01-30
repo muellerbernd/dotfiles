@@ -6,7 +6,7 @@ set.encoding = 'UTF-8'
 set.showcmd = true
 set.termguicolors = true
 -- Redraw when needed
-set.lazyredraw = true
+-- set.lazyredraw = true
 set.undodir = os.getenv 'HOME' .. '/.vim/undodir'
 set.undofile = true -- set undotree to save to file
 set.number = true
