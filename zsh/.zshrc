@@ -58,6 +58,7 @@ eval "$(starship init zsh)"
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$PATH:$HOME/.cargo/bin:$PATH
 export PATH=$PATH:$HOME/.nix-profile/bin:$PATH
+export PATH=$HOME/.distrobox/bin:$PATH
 
 # You can use fd to generate input for the command-line fuzzy finder fzf:
 # export FZF_DEFAULT_COMMAND="fd --type file --color=always --strip-cwd-prefix --hidden --follow --exclude .git"
@@ -250,23 +251,4 @@ eval "$(direnv hook zsh)"
 eval "$(atuin init zsh --disable-up-arrow)"
 
 export PATH=$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/bernd/.conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/bernd/.conda/etc/profile.d/conda.sh" ]; then
-        . "/home/bernd/.conda/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/bernd/.conda/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-
-if [ -f "/home/bernd/.conda/etc/profile.d/mamba.sh" ]; then
-    . "/home/bernd/.conda/etc/profile.d/mamba.sh"
-fi
-# <<< conda initialize <<<
 
