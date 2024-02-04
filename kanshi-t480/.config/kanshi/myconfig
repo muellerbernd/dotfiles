@@ -17,6 +17,11 @@ profile ilmtv {
   # exec ~/.config/kanshi/move_workspaces_work.py
 }
 
+profile ammeraoffice {
+  output "eDP-1" enable mode 1920x1080@60 position 0,0 scale 1.000000
+  output "BNQ BenQ GW2780 ETFAL03748SL0" position -1920,0 scale 1.000000
+}
+
 profile undock {
   output "eDP-1" enable mode 1920x1080@60 position 0,0 scale 1.000000
   exec hyprctl dispatch workspace -- 1
