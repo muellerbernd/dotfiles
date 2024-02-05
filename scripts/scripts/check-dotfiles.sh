@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 function get_local_changes {
-  DIR="$(cd "$(dirname "$0")" && pwd)"
-  # echo "Script location: ${DIR}"
+  DIR="$(cd "$(readlink -m "$0"| xargs dirname)" && pwd -P)"
   cd $DIR
   if (git status | grep -q "nothing to commit"); then
     git pull
