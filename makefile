@@ -15,7 +15,7 @@ delete:
 install-default:
 	gpg --output ./zsh/.zsh_aliases_work --decrypt ./zsh/.zsh_aliases_work.gpg
 	gpg --output ./gitconf-work/.gitconfig-job --decrypt ./gitconf-work/.gitconfig-job.gpg
-	stow --restow -v -t $$HOME i3-common \
+	stow --no-folding --restow -v -t $$HOME i3-common \
 		sway-common \
 		hypr-common \
 		waybar \
@@ -38,7 +38,6 @@ install-default:
 		fonts \
 		xinit \
 		locale \
-		mime-apps \
 		code-templates \
 		scripts \
 		joshuto \
@@ -49,7 +48,7 @@ install-default:
 
 delete-default:
 	# stow --verbose --target=$$HOME --delete */
-	stow -v -t $$HOME --delete i3-common \
+	stow --no-folding -v -t $$HOME --delete i3-common \
 		sway-common \
 		hypr-common \
 		waybar \
@@ -72,7 +71,6 @@ delete-default:
 		fonts \
 		xinit \
 		locale \
-		mime-apps \
 		code-templates \
 		scripts \
 		joshuto \
@@ -82,35 +80,35 @@ delete-default:
 		wallpapers
 
 install-mue-p14s:
-	stow --restow -v -t $$HOME i3-p14s sway-p14s hypr-p14s kanshi-p14s
+	stow --no-folding --restow -v -t $$HOME i3-p14s sway-p14s hypr-p14s kanshi-p14s
 
 delete-mue-p14s:
-	stow -v -t $$HOME --delete i3-p14s sway-p14s hypr-p14s kanshi-p14s
+	stow --no-folding -v -t $$HOME --delete i3-p14s sway-p14s hypr-p14s kanshi-p14s
 
 install-t480:
-	stow --restow -v -t $$HOME i3-t480 sway-t480 hypr-t480 kanshi-t480
-	stow --restow -v -t $$HOME i3status-rust
+	stow --no-folding --restow -v -t $$HOME i3-t480 sway-t480 hypr-t480 kanshi-t480
+	stow --no-folding --restow -v -t $$HOME i3status-rust
 
 delete-t480:
-	stow -v -t $$HOME --delete i3-t480 sway-t480 hypr-t480 kanshi-t480
-	stow -v -t $$HOME --delete i3status-rust
+	stow --no-folding -v -t $$HOME --delete i3-t480 sway-t480 hypr-t480 kanshi-t480
+	stow --no-folding -v -t $$HOME --delete i3status-rust
 
 install-x240:
-	stow --restow -v -t $$HOME i3-x240
-	stow --restow -v -t $$HOME i3status-rust
+	stow --no-folding --restow -v -t $$HOME i3-x240
+	stow --no-folding --restow -v -t $$HOME i3status-rust
 
 delete-x240:
-	stow -v -t $$HOME --delete i3-x240
-	stow -v -t $$HOME --delete i3status-rust
+	stow --no-folding -v -t $$HOME --delete i3-x240
+	stow --no-folding -v -t $$HOME --delete i3status-rust
 
 install-biltower:
-	stow --restow -v -t $$HOME i3-biltower sway-biltower hypr-biltower
+	stow --no-folding --restow -v -t $$HOME i3-biltower sway-biltower hypr-biltower
 
 delete-biltower:
-	stow -v -t $$HOME --delete i3-biltower sway-biltower hypr-biltower
+	stow --no-folding -v -t $$HOME --delete i3-biltower sway-biltower hypr-biltower
 
 install-EIS-machine:
-	stow --restow -v -t $$HOME i3-eistower
+	stow --no-folding --restow -v -t $$HOME i3-eistower
 
 delete-EIS-machine:
-	stow -v -t $$HOME --delete i3-eistower
+	stow --no-folding -v -t $$HOME --delete i3-eistower
