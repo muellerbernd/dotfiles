@@ -44,6 +44,7 @@ install-default:
 		yazi \
 		xbindkeys \
 		thunar \
+		mime-apps \
 		wallpapers
 
 delete-default:
@@ -77,6 +78,7 @@ delete-default:
 		yazi \
 		xbindkeys \
 		thunar \
+		mime-apps \
 		wallpapers
 
 install-mue-p14s:
