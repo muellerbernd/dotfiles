@@ -1,4 +1,4 @@
-HOSTNAME = $(shell hostname)
+HOSTNAME = $(shell ./get_host.sh)
 
 ifndef HOSTNAME
 	$(error Hostname unknown)
