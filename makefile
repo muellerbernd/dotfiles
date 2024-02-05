@@ -96,8 +96,8 @@ delete-t480:
 	stow --no-folding -v -t $$HOME --delete i3status-rust
 
 install-x240:
-	stow --no-folding --restow -v -t $$HOME i3-x240
-	stow --no-folding --restow -v -t $$HOME i3status-rust
+	stow --no-folding --restow -v -t $$HOME i3-x240 hypr-t480
+	stow --no-folding --restow -v -t $$HOME i3status-rust hypr-t480
 
 delete-x240:
 	stow --no-folding -v -t $$HOME --delete i3-x240
