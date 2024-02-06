@@ -55,10 +55,9 @@ eval "$(starship init zsh)"
 
 # export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
 # export PATH=$HOME/bin:/usr/local/bin:/sbin:/usr/sbin:$PATH
-export PATH=$HOME/.local/bin:$PATH
-export PATH=$PATH:$HOME/.cargo/bin:$PATH
-export PATH=$PATH:$HOME/.nix-profile/bin:$PATH
-export PATH=$HOME/.distrobox/bin:$PATH
+# export PATH=$HOME/.local/bin:$PATH
+# export PATH=$PATH:$HOME/.cargo/bin:$PATH
+# export PATH=$PATH:$HOME/.nix-profile/bin:$PATH
 
 # You can use fd to generate input for the command-line fuzzy finder fzf:
 # export FZF_DEFAULT_COMMAND="fd --type file --color=always --strip-cwd-prefix --hidden --follow --exclude .git"
