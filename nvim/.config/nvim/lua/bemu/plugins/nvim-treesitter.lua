@@ -105,4 +105,5 @@ return {
     end,
   },
   -- { 'luckasRanarison/tree-sitter-hypr', ft = 'hypr' },
+  { 'nvim-treesitter/nvim-treesitter-context' },
 }
