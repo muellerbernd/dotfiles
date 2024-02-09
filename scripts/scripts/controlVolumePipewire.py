@@ -60,10 +60,15 @@ def main(args):
             volume, is_muted = get_sink_volume(id)
             sink_volumes.append(volume)
             sink_muted.append(is_muted)
-    if sum(sink_muted) == 5 or sum(sink_volumes) == 0:
+    # if sum(sink_muted) == 5 or sum(sink_volumes) == 0:
+    #     notify_mute()
+    # else:
+    #     notify_volume(max(sink_volumes))
+    volume, is_muted = get_sink_volume("@DEFAULT_AUDIO_SINK@")
+    if is_muted:
         notify_mute()
     else:
-        notify_volume(max(sink_volumes))
+        notify_volume(volume)
 
 
 if __name__ == "__main__":
