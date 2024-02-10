@@ -65,6 +65,7 @@ return {
         'sql',
         'nix',
         -- 'hypr',
+        'hyprlang'
       },
       incremental_selection = {
         enable = true,
