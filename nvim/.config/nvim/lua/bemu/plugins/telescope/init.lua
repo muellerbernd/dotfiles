@@ -87,6 +87,7 @@ return {
             '--strip-cwd-prefix',
             '-E',
             '*cache*',
+            '--follow',
           },
           cwd = vim.fn.expand '%:p:h',
         },
@@ -107,6 +108,8 @@ return {
           select_buffer = true,
           respect_gitignore = false,
           hidden = false,
+          follow_symlinks = true,
+          show_symlink = true,
         },
         -- ['ui-select'] = {
         --   require('telescope.themes').get_dropdown {
