@@ -248,6 +248,3 @@ eval "$(direnv hook zsh)"
 
 # atuin
 eval "$(atuin init zsh --disable-up-arrow)"
-
-export PATH=$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
-
