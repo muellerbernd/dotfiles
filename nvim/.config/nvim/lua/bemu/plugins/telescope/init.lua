@@ -27,6 +27,7 @@ return {
           '--smart-case',
           '--hidden',
           '--no-ignore',
+          '--follow',
         },
         prompt_prefix = '> ',
         selection_caret = '> ',
