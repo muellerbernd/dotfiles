@@ -50,3 +50,4 @@ application/x-wine-extension-ini=nvim.desktop
 x-scheme-handler/etcher=balena-etcher-electron.desktop
 x-scheme-handler/about=firefox.desktop
 x-scheme-handler/unknown=firefox.desktop
+x-scheme-handler/msteams=teams-for-linux.desktop
