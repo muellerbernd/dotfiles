@@ -8,7 +8,7 @@ return {
         null_ls.builtins.formatting.prettier,
         null_ls.builtins.formatting.black,
         null_ls.builtins.formatting.isort,
-        null_ls.builtins.formatting.beautysh,
+        null_ls.builtins.formatting.shfmt,
         null_ls.builtins.formatting.prettier.with {
           filetypes = { 'html', 'json', 'markdown' },
         },
@@ -16,9 +16,9 @@ return {
           filetypes = { 'yaml' },
           extra_filetypes = { 'toml' },
         },
-        null_ls.builtins.formatting.xmllint.with {
-          filetypes = { 'xml' },
-        },
+        -- null_ls.builtins.formatting.xmllint.with {
+        --   filetypes = { 'xml' },
+        -- },
 
         -- null_ls.builtins.diagnostics.write_good,
         -- null_ls.builtins.code_actions.gitsigns,

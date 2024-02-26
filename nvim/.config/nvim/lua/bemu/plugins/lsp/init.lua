@@ -115,6 +115,7 @@ return {
         'typst_lsp', -- needs typst-lsp
         -- 'rnix', -- needs rnix-lsp
         'nil_ls', -- needs nil
+        'lemminx'
       }
       -- local servers = { "pylsp", "clangd", "gopls", "rust_analyzer" }
       for _, lsp in ipairs(servers) do
