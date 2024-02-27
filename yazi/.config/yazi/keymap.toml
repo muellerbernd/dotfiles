@@ -94,7 +94,7 @@ keymap = [
 
     # Find
     { on = [ "/" ], exec = "find --smart",            desc = "Find next file" },
-    { on = [ "?" ], exec = "find --previous --smart", desc = "Find previous file" },
+    { on = [ "~" ], exec = "find --previous --smart", desc = "Find previous file" },
     { on = [ "n" ], exec = "find_arrow",              desc = "Go to next found file" },
     { on = [ "N" ], exec = "find_arrow --previous",   desc = "Go to previous found file" },
 
@@ -142,7 +142,7 @@ keymap = [
     { on = [ "g", "<Space>" ], exec = "cd --interactive", desc = "Go to a directory interactively" },
 
     # Help
-    { on = [ "~" ], exec = "help", desc = "Open help" },
+    { on = [ "?" ], exec = "help", desc = "Open help" },
 ]
 
 [tasks]
