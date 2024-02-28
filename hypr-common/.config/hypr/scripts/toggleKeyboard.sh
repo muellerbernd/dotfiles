@@ -12,6 +12,8 @@ fi
 # Check if device is currently enabled (1 = enabled, 0 = disabled)
 DEVICE="$(hyprctl getoption $HYPRLAND_VARIABLE | grep 'int: 1')"
 
+echo "$DEVICE"
+
 if [ -z "$DEVICE" ]; then
     # if the device is disabled, then enable
     notify-send -u normal "Enabling Keyboard"
