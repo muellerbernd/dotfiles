@@ -1,25 +1,29 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
-# Set device to be toggled
-# HYPRLAND_DEVICE="pxic2642:00-04ca:00b1-touchpad"
-HYPRLAND_DEVICE="at-translated-set-2-keyboard"
-HYPRLAND_VARIABLE="device:$HYPRLAND_DEVICE:enabled"
+export STATUS_FILE="$XDG_RUNTIME_DIR/keyboard.status"
 
 if [ -z "$XDG_RUNTIME_DIR" ]; then
-  export XDG_RUNTIME_DIR=/run/user/$(id -u)
+    export XDG_RUNTIME_DIR=/run/user/$(id -u)
 fi
 
-# Check if device is currently enabled (1 = enabled, 0 = disabled)
-DEVICE="$(hyprctl getoption $HYPRLAND_VARIABLE | grep 'int: 1')"
-
-echo "$DEVICE"
-
-if [ -z "$DEVICE" ]; then
-    # if the device is disabled, then enable
+enable_keyboard() {
+    printf "true" >"$STATUS_FILE"
     notify-send -u normal "Enabling Keyboard"
-    hyprctl keyword $HYPRLAND_VARIABLE true
-else
-    # if the device is enabled, then disable
+    hyprctl keyword '$LAPTOP_KB_ENABLED' "true" -r
+}
+
+disable_keyboard() {
+    printf "false" >"$STATUS_FILE"
     notify-send -u normal "Disabling Keyboard"
-    hyprctl keyword $HYPRLAND_VARIABLE false
+    hyprctl keyword '$LAPTOP_KB_ENABLED' "false" -r
+}
+
+if ! [ -f "$STATUS_FILE" ]; then
+  enable_keyboard
+else
+  if [ $(cat "$STATUS_FILE") = "true" ]; then
+    disable_keyboard
+  elif [ $(cat "$STATUS_FILE") = "false" ]; then
+    enable_keyboard
+  fi
 fi
