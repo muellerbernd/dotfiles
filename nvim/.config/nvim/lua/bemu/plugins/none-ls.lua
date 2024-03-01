@@ -16,9 +16,6 @@ return {
           filetypes = { 'yaml' },
           extra_filetypes = { 'toml' },
         },
-        -- null_ls.builtins.formatting.xmllint.with {
-        --   filetypes = { 'xml' },
-        -- },
 
         -- null_ls.builtins.diagnostics.write_good,
         -- null_ls.builtins.code_actions.gitsigns,

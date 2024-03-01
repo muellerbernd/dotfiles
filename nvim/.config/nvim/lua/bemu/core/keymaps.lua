@@ -42,7 +42,7 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 -- vim.keymap.set('n',"p", "]p")
 
 -- fix indentation
--- vim.keymap.set('n',"<leader>i", "gg=G<C-o><C-o>")
+vim.keymap.set('n',"<leader>i", "gg=G<C-o><C-o>", { desc = 'fix [i]ndentation in buffer' })
 
 -- navigate quickfix
 vim.keymap.set('n', '<leader><leader>j', '<cmd>cn<CR>', { desc = '[j] next qf item' })
