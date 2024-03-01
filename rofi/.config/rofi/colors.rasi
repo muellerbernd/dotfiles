@@ -2,7 +2,7 @@
 
 * {
   empty:    #00000000;
-  base:     #282C34FF;
+  base:     #343434FF;
   text:     #ABB2BFFF;
   text-alt: #818896FF;
   text-alt-2: #5C6370FF;
