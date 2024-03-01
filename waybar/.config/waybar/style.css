@@ -10,21 +10,22 @@
 }
 
 window#waybar {
-  background: rgba(21, 18, 27, 0);
+  background-color: rgba(21, 18, 27, 0.1);
+  /* background-color: rgba(59, 59, 59, 0.3); */
   color: #cdd6f4;
 }
 
 tooltip {
-  background: #1e1e2e;
+  background: #343434;
   border-radius: 10px;
   border-width: 2px;
   border-style: solid;
-  border-color: #11111b;
+  border-color: #111111;
 }
 
 #workspaces button {
   padding: 5px;
-  color: #313244;
+  color: #111111;
   margin-right: 5px;
 }
 
@@ -39,21 +40,17 @@ tooltip {
 }
 
 #workspaces button.urgent {
-  color: #11111b;
+  color: #111111;
   background: #a6e3a1;
   border-radius: 10px;
 }
 
 #workspaces button:hover {
-  background: #11111b;
+  background: #111111;
   color: #cdd6f4;
   border-radius: 10px;
 }
 
-#custom-language,
-#custom-updates,
-#custom-caffeine,
-#custom-weather,
 #window,
 #clock,
 #battery,
@@ -65,11 +62,11 @@ tooltip {
 #keyboard-state,
 #privacy,
 #backlight {
-  background: #1e1e2e;
+  background: #343434;
   padding: 0px 10px;
   margin: 3px 0px;
   margin-top: 10px;
-  border: 1px solid #181825;
+  /* border: 1px solid #181825; */
 }
 
 #tray {
@@ -78,32 +75,10 @@ tooltip {
 }
 
 #workspaces {
-  background: #1e1e2e;
   border-radius: 10px;
   margin-left: 10px;
   padding-right: 0px;
   padding-left: 5px;
-}
-
-#custom-caffeine {
-  color: #89dceb;
-  border-radius: 10px 0px 0px 10px;
-  border-right: 0px;
-  margin-left: 10px;
-}
-
-#custom-language {
-  color: #f38ba8;
-  border-radius: 10px 10px 10px 10px;
-  margin-right: 10px;
-  border-left: 0px;
-}
-
-#custom-updates {
-  color: #f5c2e7;
-  border-radius: 10px 0px 0px 10px;
-  border-left: 0px;
-  border-right: 0px;
 }
 
 #window {
@@ -117,26 +92,6 @@ tooltip {
   border-radius: 10px 10px 10px 10px;
   margin-left: 5px;
   border-right: 0px;
-}
-
-#network {
-  color: #f9e2af;
-  border-left: 0px;
-  border-right: 0px;
-}
-
-#pulseaudio {
-  color: #89b4fa;
-  border-left: 0px;
-  border-right: 0px;
-}
-
-#pulseaudio.microphone {
-  color: #cba6f7;
-  border-radius: 0px 10px 10px 0px;
-  border-left: 0px;
-  border-right: 0px;
-  margin-right: 5px;
 }
 
 #battery {
@@ -153,12 +108,6 @@ tooltip {
   border-left: 0px;
 }
 
-#custom-weather {
-  border-radius: 0px 10px 10px 0px;
-  border-right: 0px;
-  margin-left: 0px;
-}
-
 #privacy,
 #privacy-item,
 #privacy-item.screenshare,
@@ -166,5 +115,7 @@ tooltip {
 #privacy-item.audio-out {
   color: #cba6f7;
   border-radius: 10px 10px 10px 10px;
-  margin-right: 5px;
+  margin-right: 10px;
 }
+
+/* vim: ts=2 sw=2: */
