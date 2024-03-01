@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-export STATUS_FILE="$XDG_RUNTIME_DIR/keyboard.status"
-
 if [ -z "$XDG_RUNTIME_DIR" ]; then
     export XDG_RUNTIME_DIR=/run/user/$(id -u)
 fi
+
+export STATUS_FILE="$XDG_RUNTIME_DIR/keyboard.status"
 
 enable_keyboard() {
     printf "true" >"$STATUS_FILE"
