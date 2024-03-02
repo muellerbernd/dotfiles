@@ -43,10 +43,10 @@
     progress_bar_frame_width = 2
 
     # Set the minimum width for the progress bar
-    progress_bar_min_width = 120
+    progress_bar_min_width = 100
 
     # Set the maximum width for the progress bar
-    progress_bar_max_width = 120
+    progress_bar_max_width = 100
 
     # Show how many messages are currently hidden (because of geometry).
     indicate_hidden = yes
@@ -58,7 +58,7 @@
     # The transparency of the window.  Range: [0; 100].
     # This option will only work if a compositing window manager is
     # present (e.g. xcompmgr, compiz, etc.).
-    transparency = 15
+    transparency = 50
 
     # Draw a line of "separator_height" pixel height between two
     # notifications.
@@ -66,17 +66,17 @@
     separator_height = 2
 
     # Padding between text and separator.
-    padding = 8
+    padding = 5
 
     # Horizontal padding.
-    horizontal_padding = 8
+    horizontal_padding = 5
 
     # Defines width in pixels of frame around the notification window.
     # Set to 0 to disable.
-    frame_width = 0
+    frame_width = 2
 
     # Defines color of the frame around the notification window.
-    frame_color = background
+    frame_color = #cdd6f4
 
     # Define a color for the separator.
     # possible values are:
@@ -221,7 +221,7 @@
     # corners.
     # The radius will be automatically lowered if it exceeds half of the
     # notification height to avoid clipping text and/or icons.
-    corner_radius = 8
+    corner_radius = 3
 
     # Ignore the dbus closeNotification message.
     # Useful to enforce the timeout set by dunst configuration. Without this
@@ -272,7 +272,7 @@
     highlight = "#eceff4"
     background = "#343434"
     foreground = "#eceff4"
-    frame_color = "#111111"
+    frame_color = "#cdd6f4"
     timeout = 10
     # Icon for notifications with low urgency, uncomment to enable
     #icon = /path/to/icon
@@ -281,8 +281,8 @@
     highlight = "#eceff4"
     background = "#343434"
     foreground = "#eceff4"
-    frame_color = "#111111"
-    timeout = 20
+    frame_color = "#cdd6f4"
+    timeout = 10
 
     # Icon for notifications with normal urgency, uncomment to enable
     #icon = /path/to/icon
@@ -291,7 +291,7 @@
     highlight = "#88c0d0"
     background = "#343434"
     foreground = "#eceff4"
-    frame_color = "#111111"
+    frame_color = "cdd6f4"
     timeout = 0
     # Icon for notifications with critical urgency, uncomment to enable
     #icon = /path/to/icon

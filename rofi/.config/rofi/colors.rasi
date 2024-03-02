@@ -7,7 +7,8 @@
   text-alt: #818896FF;
   text-alt-2: #5C6370FF;
   cyan:     #56B6C2FF;
-  white:     #FFFFFFFF;
+  high:     #5f5f4fFF;
+  white:    #FFFFFFFF;
   blue:     #61AFEEFF;
   magenta:  #C678DDFF;
   green:    #98C379FF;
