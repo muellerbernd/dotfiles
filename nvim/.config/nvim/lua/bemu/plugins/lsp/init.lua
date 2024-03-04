@@ -114,8 +114,8 @@ return {
         'eslint', -- needs vscode-langservers-extracted
         'typst_lsp', -- needs typst-lsp
         -- 'rnix', -- needs rnix-lsp
-        -- 'nil_ls', -- needs nil
-        'nixd',
+        'nil_ls', -- needs nil
+        -- 'nixd',
         'lemminx',
       }
       -- local servers = { "pylsp", "clangd", "gopls", "rust_analyzer" }
@@ -179,7 +179,7 @@ return {
               ['nil'] = {
                 testSetting = 42,
                 formatting = {
-                  command = { 'nixpkgs-fmt' },
+                  command = { 'alejandra' },
                 },
               },
             },
