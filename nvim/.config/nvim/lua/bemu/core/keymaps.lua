@@ -81,7 +81,7 @@ vim.keymap.set('n', '<M-x>', '<cmd>bp <BAR> bd! #<CR>')
 -- This replaces :tabnew which I used to bind to this mapping
 -- vim.keymap.set('n',"<leader>T", "<cmd>enew<cr>", { desc = "open new empty buffer" })
 
-vim.keymap.set('n', '<leader>ca', '<cmd>w <bar> %bd <bar> e# <bar> bd#<cr>', { desc = '[c]lose [a]ll buffers except this one' })
+vim.keymap.set('n', '<leader><leader>ca', '<cmd>w <bar> %bd <bar> e# <bar> bd#<cr>', { desc = '[c]lose [a]ll buffers except this one' })
 
 -- Go on top of a word you want to change
 -- Press cn or cN

@@ -5,22 +5,6 @@ return {
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       { 'antosha417/nvim-lsp-file-operations', config = true },
-      {
-        'folke/neodev.nvim',
-        opts = {},
-        config = function()
-          -- You can override the default detection using the override function
-          -- EXAMPLE: If you want a certain directory to be configured differently, you can override its settings
-          require('neodev').setup {
-            override = function(root_dir, library)
-              if root_dir:find('/etc/nixos', 1, true) == 1 then
-                library.enabled = true
-                library.plugins = true
-              end
-            end,
-          }
-        end,
-      },
     },
     config = function()
       _ = require 'bemu.plugins.lsp.handlers'
@@ -29,70 +13,90 @@ return {
         return
       end
 
-      -- after the language server attaches to the current buffer
-      local function config(_config)
-        return vim.tbl_deep_extend('force', {
-          capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
-          -- Set default client capabilities plus window/workDoneProgress
-          -- capabilities = vim.tbl_extend("keep", capabilities or {}, lsp_status.capabilities),
-          on_attach = function(client, bufnr)
-            local function buf_set_keymap(...)
-              vim.api.nvim_buf_set_keymap(bufnr, ...)
-            end
-            -- local opts = { noremap = true, silent = true }
-            buf_set_keymap('n', 'gr', "<cmd>lua require('bemu.plugins.telescope.funcs').lsp_references()<cr>", { desc = '[g]oto [r]eferences' })
-            -- See `:help vim.lsp.*` for documentation on any of the below functions
-            buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', { desc = '[g]oto [D]eclaration' })
-            buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', { desc = '[g]oto [d]efinition' })
-            buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', { desc = 'show information' })
-            -- buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-            buf_set_keymap('n', 'gI', "<cmd>lua require('bemu.plugins.telescope.funcs').lsp_implementations()<cr>", { desc = '[g]oto [I]mplementation' })
-            buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', { desc = 'signature_help' })
-            buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', { desc = '[w]orkspace [a]dd' })
-            buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', { desc = '[w]orkspace [r]emove' })
-            buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', { desc = 'list [w]orkspace [f]olders' })
-            buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', { desc = 'show type [D]efinition' })
-            buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', { desc = 'lsp [r]e[n]ame' })
-            -- buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', { desc = 'show [c]ode [a]ctions' })
-            buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float() <CR>', { desc = 'list [e]rror diagnostics' })
-            buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { desc = 'goto [prev [d]iagnostic' })
-            buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', { desc = 'goto ]next [d]iagnostic' })
-            buf_set_keymap('n', '<space>q', "<cmd>lua require('bemu.plugins.telescope.funcs').lsp_set_loclist()<cr>", { desc = 'lsp_set_loclist' })
-            buf_set_keymap(
-              'n',
-              '<space>wd',
-              "<cmd>lua require('bemu.plugins.telescope.funcs').lsp_document_symbols()<cr>",
-              { desc = 'list [w]orkspace [d]ocument symbols' }
-            )
-            buf_set_keymap(
-              'n',
-              '<space>ww',
-              "<cmd>lua require('bemu.plugins.telescope.funcs').lsp_workspace_symbols()<cr>",
-              { desc = 'list workspace symbols' }
-            )
-            buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.format{ async=true }<CR>', { desc = '[f]ormat buffer' })
-            -- lsp signature
-            if has_lsp_sig then
-              -- lspsig.on_attach()
-              lspsig.on_attach({
-                bind = true, -- This is mandatory, otherwise border config won't get registered.
-                handler_opts = {
-                  border = 'rounded',
-                },
-              }, bufnr)
-            end
-            client.server_capabilities.semanticTokensProvider = nil
-            --lsp_status.on_attach
-          end,
-          flags = {
-            debounce_text_changes = 150,
-          },
-          -- File watching is disabled by default for neovim.
-          -- See: https://github.com/neovim/neovim/pull/22405
-          { workspace = { didChangeWatchedFiles = { dynamicRegistration = true } } },
-        }, _config or {})
-      end
+      -- LSP servers and clients are able to communicate to each other what features they support.
+      --  By default, Neovim doesn't support everything that is in the LSP Specification.
+      --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
+      --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
+      --  This function gets run when an LSP attaches to a particular buffer.
+      --    That is to say, every time a new file is opened that is associated with
+      --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
+      --    function will be executed to configure the current buffer
+      vim.api.nvim_create_autocmd('LspAttach', {
+        group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
+        callback = function(event)
+          -- NOTE: Remember that lua is a real programming language, and as such it is possible
+          -- to define small helper and utility functions so you don't have to repeat yourself
+          -- many times.
+          --
+          -- In this case, we create a function that lets us more easily define mappings specific
+          -- for LSP related items. It sets the mode, buffer and description for us each time.
+          local map = function(keys, func, desc)
+            vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+          end
+
+          -- Jump to the definition of the word under your cursor.
+          --  This is where a variable was first declared, or where a function is defined, etc.
+          --  To jump back, press <C-T>.
+          map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+
+          -- Find references for the word under your cursor.
+          map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+
+          -- Jump to the implementation of the word under your cursor.
+          --  Useful when your language has ways of declaring types without an actual implementation.
+          map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+
+          -- Jump to the type of the word under your cursor.
+          --  Useful when you're not sure what type a variable is and you want to see
+          --  the definition of its *type*, not where it was *defined*.
+          map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+
+          -- Fuzzy find all the symbols in your current document.
+          --  Symbols are things like variables, functions, types, etc.
+          map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+
+          -- Fuzzy find all the symbols in your current workspace
+          --  Similar to document symbols, except searches over your whole project.
+          map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+
+          -- Rename the variable under your cursor
+          --  Most Language Servers support renaming across files, etc.
+          map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+
+          -- Execute a code action, usually your cursor needs to be on top of an error
+          -- or a suggestion from your LSP for this to activate.
+          map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+
+          -- Opens a popup that displays documentation about the word under your cursor
+          --  See `:help K` for why this keymap
+          map('K', vim.lsp.buf.hover, 'Hover Documentation')
+
+          -- WARN: This is not Goto Definition, this is Goto Declaration.
+          --  For example, in C this would take you to the header
+          map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+
+          -- The following two autocommands are used to highlight references of the
+          -- word under your cursor when your cursor rests there for a little while.
+          --    See `:help CursorHold` for information about when this is executed
+          --
+          -- When you move your cursor, the highlights will be cleared (the second autocommand).
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+          if client and client.server_capabilities.documentHighlightProvider then
+            vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+              buffer = event.buf,
+              callback = vim.lsp.buf.document_highlight,
+            })
+
+            vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+              buffer = event.buf,
+              callback = vim.lsp.buf.clear_references,
+            })
+          end
+        end,
+      })
       -- Use a loop to conveniently call 'setup' on multiple servers and
       -- map buffer local keybindings when the language server attaches
       local servers = {
@@ -127,7 +131,8 @@ return {
         --         cmd = { "clangd", "--j=1", "--background-index" },
         --     })
         if lsp == 'clangd' then
-          lspconfig[lsp].setup(config {
+          lspconfig[lsp].setup {
+            capabilities = capabilities,
             cmd = {
               'clangd',
               '--background-index',
@@ -135,18 +140,20 @@ return {
               '--clang-tidy',
               '--header-insertion=iwyu',
             },
-          })
+          }
         elseif lsp == 'ccls' then
-          lspconfig[lsp].setup(config {
+          lspconfig[lsp].setup {
+            capabilities = capabilities,
             init_options = {
               compilationDatabaseDirectory = 'build',
               index = { threads = 1, comments = 0, trackDependency = 1 },
               clang = { excludeArgs = { '-frounding-math' } },
               cache = { retainInMemory = 0, directory = '/tmp/ccls-cache' },
             },
-          })
+          }
         elseif lsp == 'rust_analyzer' then
-          lspconfig[lsp].setup(config {
+          lspconfig[lsp].setup {
+            capabilities = capabilities,
             settings = {
               ['rust-analyzer'] = {
                 assist = {
@@ -172,9 +179,10 @@ return {
                 },
               },
             },
-          })
+          }
         elseif lsp == 'nil_ls' then
-          lspconfig[lsp].setup(config {
+          lspconfig[lsp].setup {
+            capabilities = capabilities,
             settings = {
               ['nil'] = {
                 testSetting = 42,
@@ -183,124 +191,37 @@ return {
                 },
               },
             },
-          })
+          }
         else
-          lspconfig[lsp].setup(config())
+          lspconfig[lsp].setup {
+            capabilities = capabilities,
+          }
         end
       end
-
-      -- local rt = require("rust-tools")
-      --
-      -- rt.setup({
-      --   server = {
-      --     on_attach = function(_, bufnr)
-      --       -- Hover actions
-      --       vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-      --       -- Code action groups
-      --       vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
-      --     end,
-      --   },
-      -- })
-
-      -- lua lsp
-      -- lspconfig.sumneko_lua.setup(require("bemu.lsp.lua-lsp"))
-      -- local runtime_path = vim.split(package.path, ';')
-      -- table.insert(runtime_path, 'lua/?.lua')
-      -- table.insert(runtime_path, 'lua/?/init.lua')
-      --
-      lspconfig.lua_ls.setup(config {
+      lspconfig.lua_ls.setup {
+        capabilities = capabilities,
         settings = {
           Lua = {
+            runtime = { version = 'LuaJIT' },
             workspace = {
               checkThirdParty = false,
-            },
-            library = {
-              [vim.fn.expand '$VIMRUNTIME/lua'] = true,
-              [vim.fn.expand '$VIMRUNTIME/lua/vim/lsp'] = true,
-              [vim.fn.stdpath 'data' .. '/lazy/lazy.nvim/lua/lazy'] = true,
+              -- Tells lua_ls where to find all the Lua files that you have loaded
+              -- for your neovim configuration.
+              library = {
+                '${3rd}/luv/library',
+                unpack(vim.api.nvim_get_runtime_file('', true)),
+              },
+              -- If lua_ls is really slow on your computer, you can try this instead:
+              -- library = { vim.env.VIMRUNTIME },
             },
             completion = {
-              workspaceWord = true,
-              callSnippet = 'Both',
+              callSnippet = 'Replace',
             },
-            misc = {
-              parameters = {
-                -- "--log-level=trace",
-              },
-            },
-            hint = {
-              enable = true,
-              setType = false,
-              paramType = true,
-              paramName = 'Disable',
-              semicolon = 'Disable',
-              arrayIndex = 'Disable',
-            },
-            doc = {
-              privateName = { '^_' },
-            },
-            type = {
-              castNumberToInteger = true,
-            },
-            diagnostics = {
-              globals = { 'vim' },
-              disable = { 'incomplete-signature-doc', 'trailing-space' },
-              -- enable = false,
-              groupSeverity = {
-                strong = 'Warning',
-                strict = 'Warning',
-              },
-              groupFileStatus = {
-                ['ambiguity'] = 'Opened',
-                ['await'] = 'Opened',
-                ['codestyle'] = 'None',
-                ['duplicate'] = 'Opened',
-                ['global'] = 'Opened',
-                ['luadoc'] = 'Opened',
-                ['redefined'] = 'Opened',
-                ['strict'] = 'Opened',
-                ['strong'] = 'Opened',
-                ['type-check'] = 'Opened',
-                ['unbalanced'] = 'Opened',
-                ['unused'] = 'Opened',
-              },
-              unusedLocalExclude = { '_*' },
-            },
-            format = {
-              enable = false,
-              defaultConfig = {
-                indent_style = 'space',
-                indent_size = '2',
-                continuation_indent_size = '2',
-              },
-            },
+            -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+            -- diagnostics = { disable = { 'missing-fields' } },
           },
         },
-        --   Lua = {
-        --     -- runtime = {
-        --     --   -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        --     --   version = 'LuaJIT',
-        --     --   -- Setup your lua path
-        --     --   path = runtime_path,
-        --     -- },
-        --     -- diagnostics = {
-        --     --   -- Get the language server to recognize the `vim` global
-        --     --   globals = { 'vim' },
-        --     -- },
-        --     workspace = {
-        --       -- Make the server aware of Neovim runtime files
-        --       -- library = vim.api.nvim_get_runtime_file('', true),
-        --       checkThirdParty = false,
-        --       -- maxPreload = 100000,
-        --       -- preloadFileSize = 10000,
-        --     },
-        --     -- Do not send telemetry data containing a randomized but unique identifier
-        --     telemetry = {
-        --       enable = false,
-        --     },
-        --   },
-        -- },
-      })
+      }
     end,
   },
   -- A neovim plugin that preview code with LSP code actions applied.
@@ -327,3 +248,6 @@ return {
     end,
   },
 }
+
+-- The line beneath this is called `modeline`. See `:help modeline`
+-- vim: ts=2 sts=2 sw=2 et

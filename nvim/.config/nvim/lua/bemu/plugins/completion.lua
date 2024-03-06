@@ -1,6 +1,6 @@
 return {
   'hrsh7th/nvim-cmp',
-  event = 'InsertEnter',
+  -- event = 'InsertEnter',
   dependencies = {
     'hrsh7th/cmp-buffer', -- source for text in buffer
     'hrsh7th/cmp-path', -- source for file system paths
@@ -31,18 +31,6 @@ return {
   config = function()
     -- Set completeopt to have a better completion experience
     vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
-    local source_mapping = {
-      nvim_lsp = '[LSP]',
-      buffer = '[Buffer]',
-      nvim_lua = '[Lua]',
-      cmp_tabnine = '[TN]',
-      path = '[Path]',
-      calc = '[Calc]',
-      treesitter = '[TS]',
-      fuzzy_buffer = '[FZ]',
-      fuzzy_path = '[FZ]',
-      rg = '[RG]',
-    }
 
     local has_words_before = function()
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -129,26 +117,6 @@ return {
           behavior = cmp.ConfirmBehavior.Replace,
           -- select = true,
         },
-        -- ["<Tab>"] = cmp.mapping(function(fallback)
-        --     if cmp.visible() then
-        --         cmp.select_next_item()
-        --     elseif luasnip.expand_or_jumpable() then
-        --         luasnip.expand_or_jump()
-        --     elseif has_words_before() then
-        --         cmp.complete()
-        --     else
-        --         fallback()
-        --     end
-        -- end, { "i", "s" }),
-        -- ["<S-Tab>"] = cmp.mapping(function(fallback)
-        --     if cmp.visible() then
-        --         cmp.select_prev_item()
-        --     elseif luasnip.jumpable(-1) then
-        --         luasnip.jump(-1)
-        --     else
-        --         fallback()
-        --     end
-        -- end, { "i", "s" }),
       },
       sources = cmp.config.sources {
         -- { name = "nvim_lua" },
