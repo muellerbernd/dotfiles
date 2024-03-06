@@ -68,7 +68,7 @@ return {
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
-          map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+          -- map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap
@@ -101,24 +101,24 @@ return {
       -- map buffer local keybindings when the language server attaches
       local servers = {
         -- "pylsp", -- needs python-lsp-server
-        'pyright', -- needs pyright
+        'pyright',       -- needs pyright
         -- "ccls", -- needs ccls
-        'clangd', -- needs clangd
-        'cmake', -- needs cmake-language-server
-        'gopls', -- needs go
+        'clangd',        -- needs clangd
+        'cmake',         -- needs cmake-language-server
+        'gopls',         -- needs go
         'rust_analyzer', -- needs rust-analyzer
-        'bashls', -- needs bash-language-server
-        'texlab', -- needs texlab
-        'html', -- needs vscode-langservers-extracted
-        'marksman', -- needs marksman-bin
-        'hls', -- needs haskell-language-server
+        'bashls',        -- needs bash-language-server
+        'texlab',        -- needs texlab
+        'html',          -- needs vscode-langservers-extracted
+        'marksman',      -- needs marksman-bin
+        'hls',           -- needs haskell-language-server
         -- 'nixd', -- needs nixd (from my arch packages)
-        'tsserver', -- needs vscode-langservers-extracted
-        'jsonls', -- needs vscode-langservers-extracted
-        'eslint', -- needs vscode-langservers-extracted
-        'typst_lsp', -- needs typst-lsp
+        'tsserver',      -- needs vscode-langservers-extracted
+        'jsonls',        -- needs vscode-langservers-extracted
+        'eslint',        -- needs vscode-langservers-extracted
+        'typst_lsp',     -- needs typst-lsp
         -- 'rnix', -- needs rnix-lsp
-        'nil_ls', -- needs nil
+        'nil_ls',        -- needs nil
         -- 'nixd',
         'lemminx',
       }
@@ -244,7 +244,9 @@ return {
         },
       }
       -- preview code with LSP code actions applied
-      vim.keymap.set('n', '<space>ca', ':lua require("actions-preview").code_actions()<CR>', { desc = '[a]ction [p]review for code actions' })
+      vim.keymap.set('n', '<leader>ca', function()
+        require('actions-preview').code_actions()
+      end, { desc = 'LSP: [c]ode [a]ction preview' })
     end,
   },
 }
