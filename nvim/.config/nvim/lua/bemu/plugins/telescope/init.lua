@@ -143,44 +143,43 @@ return {
     -- load_extension, somewhere after setup function:
     require('telescope').load_extension 'ui-select'
 
-    vim.keymap.set(
-      'n',
-      '<leader>ff',
-      "<cmd>lua require('telescope.builtin').find_files( { cwd = vim.fn.expand('%:p:h'), find_command={'rg','--ignore','--hidden','--files'}, prompt_prefix='🔍' }) <cr>",
-      { desc = '[f]ind [f]iles' }
-    )
-    vim.keymap.set('n', '<leader>fg', "<cmd>lua require('bemu.plugins.telescope.funcs').live_grep()<cr>", { desc = '[f]ind with [g]rep' })
-    vim.keymap.set('n', '<leader>fb', "<cmd>lua require('telescope.builtin').buffers()<cr>", { desc = '[f]ind [b]uffers' })
-    vim.keymap.set('n', '<leader>fS', "<cmd>lua require('telescope.builtin').spell_suggest()<cr>", { desc = '[f]ix [S]pell' })
-    vim.keymap.set(
-      'n',
-      '<leader>fG',
-      "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>",
-      { desc = '[f]ind with [G]rep in current buffer' }
-    )
-    vim.keymap.set('n', '<leader>fh', "<cmd>lua require('bemu.plugins.telescope.funcs').help_tags()<cr>", { desc = '[f]ind in [h]elp' })
-    vim.keymap.set('n', '<leader>fl', "<cmd>lua require('telescope.builtin').resume()<cr>", { desc = '[f]ind in [l]ast picker' })
-    vim.keymap.set('n', '<leader>fT', "<cmd>lua require('telescope.builtin').treesitter()<cr>", { desc = '[f]ind via [T]reesitter' })
-    vim.keymap.set('n', '<leader>fR', "<cmd>lua require('telescope.builtin').registers()<CR>", { desc = '[f]ind in [r]egisters' })
-    vim.keymap.set('n', '<leader>en', "<cmd>lua require('bemu.plugins.telescope.funcs').edit_neovim()<cr>", { desc = '[e]dit [n]eovim config' })
-    vim.keymap.set('n', '<leader>el', "<cmd>lua require('bemu.plugins.telescope.funcs').local_plugins()<cr>", { desc = 'list [l]ocal [p]lugins' })
-    vim.keymap.set('n', '<leader>qr', "<cmd>lua require('bemu.plugins.telescope.funcs').reload()<cr>", { desc = '[q]uick [r]eload plugins' })
-    vim.keymap.set('n', '<leader>fr', "<cmd>lua require('bemu.plugins.telescope.funcs').file_browser()<cr>", { desc = '[f]ile b[r]owser' })
+    local builtin = require 'telescope.builtin'
+    local custom = require 'bemu.plugins.telescope.funcs'
+
+    vim.keymap.set('n', '<leader>sh', custom.help_tags, { desc = '[s]earch in [h]elp' })
+    vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[s]earch [k]eymaps' })
+    vim.keymap.set('n', '<leader>sf', function()
+      builtin.find_files { cwd = vim.fn.expand '%:p:h', find_command = { 'rg', '--ignore', '--hidden', '--files' }, prompt_prefix = '🔍' }
+    end, { desc = '[s]earch [f]iles' })
+    vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[s]earch [s]elect Telescope' })
+    vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[s]earch current [w]ord' })
+    vim.keymap.set('n', '<leader>sg', custom.live_grep, { desc = '[s]earch by [g]rep' })
+    vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
+    vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, { desc = '[s]earch with [G]rep in current buffer' })
+    vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[s]earch [d]iagnostics' })
+    vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[s]earch [r]esume' })
+    vim.keymap.set('n', '<leader>s.', custom.oldfiles, { desc = '[s]earch Recent Files ("." for repeat)' })
+    vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+    -- Also possible to pass additional configuration options.
+    --  See `:help telescope.builtin.live_grep()` for information about particular keys
+    vim.keymap.set('n', '<leader>s/', function()
+      builtin.live_grep {
+        grep_open_files = true,
+        prompt_title = 'Live Grep in Open Files',
+      }
+    end, { desc = '[s]earch [/] in Open Files' })
+    vim.keymap.set('n', '<F8>', custom.current_buffer_tags, { desc = 'show current buffer tags' })
     -- telescope tasks
-    vim.keymap.set('n', '<leader>ft', "<cmd>lua require('telescope').extensions.asynctasks.all()<CR>", { desc = '[f]ind in configured async[t]asks' })
+    vim.keymap.set('n', '<leader>st', function()
+      require('telescope').extensions.asynctasks.all()
+    end, { desc = '[s]earch in configured async[t]asks' })
     -- telescope wiki
-    vim.keymap.set('n', '<leader>fw', "<cmd>lua require('bemu.plugins.telescope.funcs').list_mywikis()<cr>", { desc = '[f]ind configured [w]ikis' })
-
-    vim.keymap.set('n', '<F8>', function()
-      require('bemu.plugins.telescope.funcs').current_buffer_tags()
-    end, { desc = 'show current buffer tags' })
-
-    vim.keymap.set('n', '<leader>fs', function()
-      require('telescope.builtin').lsp_document_symbols()
-    end, { desc = '[f]ind via lsp [s]ymbols' })
-
-    vim.keymap.set('n', '<leader>fo', function()
-      require('bemu.plugins.telescope.funcs').oldfiles()
-    end, { desc = 'show oldfiles' })
+    vim.keymap.set('n', '<leader>fw', custom.list_mywikis, { desc = '[f]ind configured [w]ikis' })
+    -- fix spell
+    vim.keymap.set('n', '<leader>fS', builtin.spell_suggest, { desc = '[f]ix [S]pell' })
+    -- search in neovim config
+    vim.keymap.set('n', '<leader>sn', custom.edit_neovim, { desc = '[s]earch [n]eovim config' })
+    -- file_browser
+    vim.keymap.set('n', '<leader>fr', custom.file_browser, { desc = '[f]ile b[r]owser' })
   end,
 }
