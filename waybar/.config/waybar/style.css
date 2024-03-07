@@ -60,8 +60,8 @@ tooltip {
 #pulseaudio,
 #network,
 #workspaces,
-#tray,
 #submap,
+#tray,
 #keyboard-state,
 #privacy,
 #backlight {
@@ -70,6 +70,12 @@ tooltip {
   margin: 3px 0px;
   /* margin-top: 10px; */
   /* border: 1px solid #181825; */
+}
+
+#submap {
+  color: #FF0000;
+  border-radius: 10px 10px 10px 10px;
+  margin-left: 10px;
 }
 
 #tray {
