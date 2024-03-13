@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 
-# hyprctl dispatch focuswindow address:$(hyprctl -j clients | jq -r '.[] | select(.class=="firefox") | .address')
-
 import argparse
 import json
+import os
 import subprocess
 
 
@@ -11,29 +10,45 @@ def get_windows() -> dict:
     windows = json.loads(subprocess.getoutput("hyprctl clients -j"))
     return windows
 
-# Ask for confirmation
-# def confirm():
-#     subprocess.getoutput('echo -e "$yes\n$no" | rofi -theme-str 'window {location: center; anchor: center; fullscreen: false; width: 350px;}' \
-#         -theme-str 'mainbox {children: [ "message", "listview" ];}' \
-#         -theme-str 'listview {columns: 2; lines: 1;}' \
-#         -theme-str 'element-text {horizontal-align: 0.5;}' \
-#         -theme-str 'textbox {horizontal-align: 0.5;}' \
-#         -dmenu \
-#         -p 'Confirmation'')
 
 def main():
     # Instantiate the parser
-    parser = argparse.ArgumentParser(description='Optional app description')
+    parser = argparse.ArgumentParser(description="Optional app description")
     # Required positional argument
-    parser.add_argument('drun', type=str,
-                    help='A required integer positional argument')
+    parser.add_argument("drun", type=str, help="A required integer positional argument")
     args = parser.parse_args()
-    print(args.drun)
+    # print(args.drun)
 
     windows = get_windows()
-    # print(windows)
-    # out = subprocess.getoutput("rofi -show drun -run-command 'echo {cmd}'")
-    # print(out)
+    # config
+    rofiOption = ""
+
+    window_list: dict = {}
+    for window in windows:
+        address = window["address"]
+        # c = window["class"]
+        # title = window["title"]
+        # workspace = window["workspace"]
+        window_list[address] = str(window)
+    # config
+    rofiOption = ""
+    # preparing menu
+    # print(window_list.values())
+    menu = '"' + "\n".join(window_list.values()) + '"'
+
+    # displaying menu
+    choice: str = os.popen(
+        "echo " + menu + ' | rofi -dmenu -i -p "Select Windows" ' + rofiOption
+    ).read()[:-1]
+    addr: list = list(window_list.keys())[list(window_list.values()).index(choice)]
+    workspace: str = eval(choice)["workspace"]["name"]
+    if "special" in workspace:
+        special_ws = workspace.split(":")[1]
+        os.system(
+            f"hyprctl dispatch focuswindow address:{addr} && hyprctl dispatch togglespecialworkspace {special_ws}"
+        )
+    else:
+        os.system(f"hyprctl dispatch focuswindow address:{addr}")
 
 
 if __name__ == "__main__":
