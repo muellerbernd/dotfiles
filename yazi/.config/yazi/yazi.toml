@@ -18,27 +18,27 @@ ueberzug_offset = [ 0, 0, 0, 0 ]
 
 [opener]
 edit = [
-    { exec = '$EDITOR "$@"', block = true,  for = "unix" },
-    { exec = 'code "%*"',    orphan = true, for = "windows" },
+    { run = '$EDITOR "$@"', block = true,  for = "unix" },
+    { run = 'code "%*"',    orphan = true, for = "windows" },
 ]
 open = [
-    { exec = 'xdg-open "$@"',             desc = "Open", for = "linux" },
-    { exec = 'open "$@"',                 desc = "Open", for = "macos" },
-    { exec = 'start "%1"', orphan = true, desc = "Open", for = "windows" }
+    { run = 'xdg-open "$@"',             desc = "Open", for = "linux" },
+    { run = 'open "$@"',                 desc = "Open", for = "macos" },
+    { run = 'start "%1"', orphan = true, desc = "Open", for = "windows" }
 ]
 reveal = [
-    { exec = 'open -R "$1"',                       desc = "Reveal", for = "macos" },
-    { exec = 'explorer /select,%1', orphan = true, desc = "Reveal", for = "windows" },
-    { exec = '''exiftool "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show EXIF", for = "unix" },
+    { run = 'open -R "$1"',                       desc = "Reveal", for = "macos" },
+    { run = 'explorer /select,%1', orphan = true, desc = "Reveal", for = "windows" },
+    { run = '''exiftool "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show EXIF", for = "unix" },
 ]
 extract = [
-    { exec = 'unar "$1"', desc = "Extract here", for = "unix" },
-    { exec = 'unar "%1"', desc = "Extract here", for = "windows" },
+    { run = 'unar "$1"', desc = "Extract here", for = "unix" },
+    { run = 'unar "%1"', desc = "Extract here", for = "windows" },
 ]
 play = [
-    { exec = 'mpv "$@"', orphan = true, for = "unix" },
-    { exec = 'mpv "%1"', orphan = true, for = "windows" },
-    { exec = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info", for = "unix" },
+    { run = 'mpv "$@"', orphan = true, for = "unix" },
+    { run = 'mpv "%1"', orphan = true, for = "windows" },
+    { run = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info", for = "unix" },
 ]
 
 [open]
@@ -77,40 +77,40 @@ suppress_preload = false
 # [plugin]
 #
 # preloaders = [
-#     { name = "*", cond = "!mime", exec = "mime.lua", multi = true, prio = "high" },
+#     { name = "*", cond = "!mime", run = "mime.lua", multi = true, prio = "high" },
 #     # Image
-#     { mime = "image/vnd.djvu", exec = "noop.lua" },
-#     { mime = "image/*",        exec = "image.lua" },
+#     { mime = "image/vnd.djvu", run = "noop.lua" },
+#     { mime = "image/*",        run = "image.lua" },
 #     # Video
-#     { mime = "video/*", exec = "video.lua" },
+#     { mime = "video/*", run = "video.lua" },
 #     # PDF
-#     { mime = "application/pdf", exec = "pdf.lua" },
+#     { mime = "application/pdf", run = "pdf.lua" },
 # ]
 # previewers = [
-#     { name = "*/", exec = "folder.lua", sync = true },
+#     { name = "*/", run = "folder.lua", sync = true },
 #     # Code
-#     { mime = "text/*",                 exec = "code.lua" },
-#     { mime = "*/xml",                  exec = "code.lua" },
-#     { mime = "*/javascript",           exec = "code.lua" },
-#     { mime = "*/x-wine-extension-ini", exec = "code.lua" },
+#     { mime = "text/*",                 run = "code.lua" },
+#     { mime = "*/xml",                  run = "code.lua" },
+#     { mime = "*/javascript",           run = "code.lua" },
+#     { mime = "*/x-wine-extension-ini", run = "code.lua" },
 #     # JSON
-#     { mime = "application/json", exec = "json.lua" },
+#     { mime = "application/json", run = "json.lua" },
 #     # Image
-#     { mime = "image/vnd.djvu", exec = "noop.lua" },
-#     { mime = "image/*",        exec = "image.lua" },
+#     { mime = "image/vnd.djvu", run = "noop.lua" },
+#     { mime = "image/*",        run = "image.lua" },
 #     # Video
-#     { mime = "video/*", exec = "video.lua" },
+#     { mime = "video/*", run = "video.lua" },
 #     # PDF
-#     { mime = "application/pdf", exec = "pdf.lua" },
+#     { mime = "application/pdf", run = "pdf.lua" },
 #     # Archive
-#     { mime = "application/zip",             exec = "archive.lua" },
-#     { mime = "application/gzip",            exec = "archive.lua" },
-#     { mime = "application/x-tar",           exec = "archive.lua" },
-#     { mime = "application/x-bzip",          exec = "archive.lua" },
-#     { mime = "application/x-bzip2",         exec = "archive.lua" },
-#     { mime = "application/x-7z-compressed", exec = "archive.lua" },
-#     { mime = "application/x-rar",           exec = "archive.lua" },
-#     { mime = "application/xz",              exec = "archive.lua" },
+#     { mime = "application/zip",             run = "archive.lua" },
+#     { mime = "application/gzip",            run = "archive.lua" },
+#     { mime = "application/x-tar",           run = "archive.lua" },
+#     { mime = "application/x-bzip",          run = "archive.lua" },
+#     { mime = "application/x-bzip2",         run = "archive.lua" },
+#     { mime = "application/x-7z-compressed", run = "archive.lua" },
+#     { mime = "application/x-rar",           run = "archive.lua" },
+#     { mime = "application/xz",              run = "archive.lua" },
 # ]
 
 [input]
