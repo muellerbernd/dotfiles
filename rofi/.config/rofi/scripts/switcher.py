@@ -29,7 +29,9 @@ def main():
         # c = window["class"]
         # title = window["title"]
         # workspace = window["workspace"]
-        window_list[address] = str(window)
+        wanted_keys = ["class", "title", "workspace"]  # The keys you want
+        window_subset = dict((k, window[k]) for k in wanted_keys if k in window)
+        window_list[address] = str(window_subset)
     # config
     rofiOption = ""
     # preparing menu
@@ -37,18 +39,21 @@ def main():
     menu = '"' + "\n".join(window_list.values()) + '"'
 
     # displaying menu
-    choice: str = os.popen(
-        "echo " + menu + ' | rofi -dmenu -i -p "Select Windows" ' + rofiOption
-    ).read()[:-1]
-    addr: list = list(window_list.keys())[list(window_list.values()).index(choice)]
-    workspace: str = eval(choice)["workspace"]["name"]
-    if "special" in workspace:
-        special_ws = workspace.split(":")[1]
-        os.system(
-            f"hyprctl dispatch focuswindow address:{addr} && hyprctl dispatch togglespecialworkspace {special_ws}"
-        )
-    else:
-        os.system(f"hyprctl dispatch focuswindow address:{addr}")
+    try:
+        choice: str = os.popen(
+            "echo " + menu + ' | rofi -dmenu -i -p "Select Windows" ' + rofiOption
+        ).read()[:-1]
+        addr: list = list(window_list.keys())[list(window_list.values()).index(choice)]
+        workspace: str = eval(choice)["workspace"]["name"]
+        if "special" in workspace:
+            special_ws = workspace.split(":")[1]
+            os.system(
+                f"hyprctl dispatch focuswindow address:{addr} && hyprctl dispatch togglespecialworkspace {special_ws}"
+            )
+        else:
+            os.system(f"hyprctl dispatch focuswindow address:{addr}")
+    except Exception as e:
+        print(e)
 
 
 if __name__ == "__main__":
