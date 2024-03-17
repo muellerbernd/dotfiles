@@ -1,0 +1,9 @@
+{
+    "date": {
+        "prefix": "my-date",
+        "body": [
+            "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}"
+        ],
+        "description": "Put the date in (Y-m-D) format !!!!!!!!"
+    }
+}

@@ -18,6 +18,7 @@ return {
       config = function()
         require('luasnip.loaders.from_vscode').lazy_load()
         require('luasnip.loaders.from_snipmate').lazy_load()
+        require("luasnip.loaders.from_vscode").load({ paths = { "~/.config/nvim/lua/bemu/snips" } }) -- Load snippets from my-snippets folder
       end,
     },
     'saadparwaiz1/cmp_luasnip', -- for autocompletion
