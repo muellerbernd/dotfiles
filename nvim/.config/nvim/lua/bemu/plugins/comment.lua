@@ -15,5 +15,8 @@ return {
       -- for commenting tsx and jsx files
       pre_hook = ts_context_commentstring.create_pre_hook(),
     }
+    -- define custom comment stuff
+    local ft = require 'Comment.ft'
+    ft.hyprlang = '#%s'
   end,
 }

@@ -57,9 +57,18 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufFilePre', 'BufRead' }, {
   command = 'set filetype=yaml',
 })
 
-vim.filetype.add({
-  pattern = { ["~/.config/hypr/.*%conf"] = "hypr" },
-})
+-- vim.filetype.add({
+--   pattern = { ["~/.config/hypr/.*%conf"] = "hypr" },
+-- })
+
+vim.filetype.add {
+  extension = { rasi = 'rasi' },
+  pattern = {
+    ['.*/waybar/config*'] = 'jsonc',
+    ['.*/mako/config'] = 'dosini',
+    ['.*/hypr/.*%.conf'] = 'hyprlang',
+  },
+}
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
