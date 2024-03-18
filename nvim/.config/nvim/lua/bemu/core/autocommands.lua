@@ -39,11 +39,11 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 })
 
 -- set filetypes for specific files
--- vim.api.nvim_create_autocmd({ "BufNewFile", "BufFilePre", "BufRead" }, {
---     group = group,
---     pattern = { "*.md" },
---     command = "set filetype=markdown",
--- })
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufFilePre", "BufRead" }, {
+    group = group,
+    pattern = { "*.md" },
+    command = "set filetype=markdown",
+})
 
 vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufFilePre', 'BufRead' }, {
   group = group,

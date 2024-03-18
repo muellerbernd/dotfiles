@@ -16,6 +16,12 @@
                     "nix"
                 ],
                 "path": "./snippets/nix.json"
+            },
+            {
+                "language": [
+                    "markdown"
+                ],
+                "path": "./snippets/markdown.json"
             }
         ]
     }

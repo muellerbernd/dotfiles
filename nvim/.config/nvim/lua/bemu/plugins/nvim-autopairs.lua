@@ -1,6 +1,6 @@
 return {
   'windwp/nvim-autopairs',
-  event = { 'InsertEnter' },
+  -- event = { 'InsertEnter' },
   dependencies = {
     'hrsh7th/nvim-cmp',
   },
@@ -20,9 +20,10 @@ return {
     }
 
     -- remove add ` char on filetype markdown
-    autopairs.get_rules("`")[1].not_filetypes = { 'markdown' }
+    local getRule = require('nvim-autopairs').get_rules
+    getRule('`')[1].not_filetypes = { 'markdown' }
 
-    local ts_conds = require 'nvim-autopairs.ts-conds'
+    -- local ts_conds = require 'nvim-autopairs.ts-conds'
 
     -- import nvim-autopairs completion functionality
     local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
