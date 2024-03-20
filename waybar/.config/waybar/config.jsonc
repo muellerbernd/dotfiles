@@ -18,7 +18,7 @@
     ],
     "modules-right": [
         // "keyboard-state",
-        "privacy",
+        // "privacy",
         "tray",
         "battery",
         "battery#bat2"
@@ -69,11 +69,6 @@
         "icon-size": 13,
         "spacing": 10
     },
-    // "clock": {
-    //     "format": "{: %R   %d/%m/%y}",
-    //     // %a %e.%B  %H:%M:%S
-    //     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
-    // },
     "clock": {
         "format": " {:%H:%M}",
         "format-alt": "{:%A, %B %d, %Y (%R)}  ",
