@@ -45,6 +45,7 @@ install-default:
 		xbindkeys \
 		thunar \
 		mime-apps \
+		foot \
 		wallpapers
 
 delete-default:
@@ -79,6 +80,7 @@ delete-default:
 		xbindkeys \
 		thunar \
 		mime-apps \
+		foot \
 		wallpapers
 
 install-mue-p14s:
