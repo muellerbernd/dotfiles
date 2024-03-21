@@ -42,7 +42,7 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 -- vim.keymap.set('n',"p", "]p")
 
 -- fix indentation
-vim.keymap.set('n',"<leader>i", "gg=G<C-o><C-o>", { desc = 'fix [i]ndentation in buffer' })
+-- vim.keymap.set('n',"<leader>i", "gg=G<C-o><C-o>", { desc = 'fix [i]ndentation in buffer' })
 
 -- navigate quickfix
 vim.keymap.set('n', '<leader><leader>j', '<cmd>cn<CR>', { desc = '[j] next qf item' })
@@ -50,14 +50,14 @@ vim.keymap.set('n', '<leader><leader>k', '<cmd>cp<CR>', { desc = '[k] previous q
 
 -- Line moving
 ---- Normal mode
-vim.keymap.set('n', '<leader>j', '<cmd>m .+1<CR>==', { desc = 'move line up' })
-vim.keymap.set('n', '<leader>k', '<cmd>m .-2<CR>==', { desc = 'move line down' })
+-- vim.keymap.set('n', '<leader>j', '<cmd>m .+1<CR>==', { desc = 'move line up' })
+-- vim.keymap.set('n', '<leader>k', '<cmd>m .-2<CR>==', { desc = 'move line down' })
 ---- Insert mode
 -- vim.keymap.set('i', '<C-j>', '<ESC>:m .+1<CR>==gi', { desc = 'move line up' })
 -- vim.keymap.set('i', '<C-k>', '<ESC>:m .-2<CR>==gi', { desc = 'move line down' })
 ---- Visual mode
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv==kgvo<esc>=kgvo", { desc = 'move highlighted text down' })
-vim.keymap.set('v', 'K', ":m '<-2<CR>gv==jgvo<esc>=jgvo", { desc = 'move highlighted text up' })
+-- vim.keymap.set('v', 'J', ":m '>+1<CR>gv==kgvo<esc>=kgvo", { desc = 'move highlighted text down' })
+-- vim.keymap.set('v', 'K', ":m '<-2<CR>gv==jgvo<esc>=jgvo", { desc = 'move highlighted text up' })
 
 vim.keymap.set('n', '<leader>y', '"+yy', { desc = 'copy to clipboard' })
 vim.keymap.set('n', '<leader>p', '"+p', { desc = 'paste after from clipboard' })
