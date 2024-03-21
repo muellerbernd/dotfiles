@@ -53,8 +53,8 @@ vim.keymap.set('n', '<leader><leader>k', '<cmd>cp<CR>', { desc = '[k] previous q
 vim.keymap.set('n', '<leader>j', '<cmd>m .+1<CR>==', { desc = 'move line up' })
 vim.keymap.set('n', '<leader>k', '<cmd>m .-2<CR>==', { desc = 'move line down' })
 ---- Insert mode
-vim.keymap.set('i', '<C-j>', '<ESC>:m .+1<CR>==gi', { desc = 'move line up' })
-vim.keymap.set('i', '<C-k>', '<ESC>:m .-2<CR>==gi', { desc = 'move line down' })
+-- vim.keymap.set('i', '<C-j>', '<ESC>:m .+1<CR>==gi', { desc = 'move line up' })
+-- vim.keymap.set('i', '<C-k>', '<ESC>:m .-2<CR>==gi', { desc = 'move line down' })
 ---- Visual mode
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv==kgvo<esc>=kgvo", { desc = 'move highlighted text down' })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv==jgvo<esc>=jgvo", { desc = 'move highlighted text up' })

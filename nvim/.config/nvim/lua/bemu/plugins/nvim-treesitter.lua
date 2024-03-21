@@ -143,7 +143,6 @@ return {
       vim.opt.foldenable = false
     end,
   },
-  -- { 'luckasRanarison/tree-sitter-hypr', ft = 'hypr' },
   {
     'nvim-treesitter/nvim-treesitter-context',
     enabled = true,

@@ -36,6 +36,9 @@ return {
           local map = function(keys, func, desc)
             vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
+          local imap = function(keys, func, desc)
+            vim.keymap.set('i', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+          end
 
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
@@ -73,6 +76,8 @@ return {
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
+
+          imap('<C-k>', vim.lsp.buf.signature_help, 'Show signature help')
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header
