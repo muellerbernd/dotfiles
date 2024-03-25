@@ -36,7 +36,8 @@ extract = [
     { run = 'unar "%1"', desc = "Extract here", for = "windows" },
 ]
 play = [
-    { run = 'xdg-open "$@"',             desc = "Open", for = "linux" },
+    { run = 'vlc "$1"',             desc = "Open with vlc", for = "linux" },
+    { run = 'xdg-open "$@"',             desc = "Open with xdg", for = "linux" },
     { run = 'mpv "%1"', orphan = true, for = "windows" },
     { run = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info", for = "unix" },
 ]
