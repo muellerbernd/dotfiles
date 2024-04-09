@@ -9,7 +9,7 @@ return {
     config = function()
       local neogen = require 'neogen'
       neogen.setup {}
-      vim.keymap.set('n', '<Leader>nf', function()
+      vim.keymap.set('n', '<Leader>ng', function()
         neogen.generate {}
       end, { desc = '[n]eogen generate' })
     end,
