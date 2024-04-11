@@ -18,5 +18,6 @@ return {
     -- define custom comment stuff
     local ft = require 'Comment.ft'
     ft.hyprlang = '#%s'
+    ft.dosini = '#%s'
   end,
 }
