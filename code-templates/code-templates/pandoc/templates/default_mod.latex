@@ -59,7 +59,25 @@ $endif$
 % \definecolor{defaultspecial}{HTML}{F1502F}
 % \definecolor{defaultspecial}{HTML}{F1502F}
 \definecolor{defaultspecial}{HTML}{$if(specialcolor)$$specialcolor$$else$F1502F$endif$}
-\definecolor{defaultdark}{HTML}{$if(themecolor)$$themecolor$$else$3E2C00$endif$}
+\definecolor{colorlinks-linkcolor}{HTML}{$if(linkcolor)$$linkcolor$$else$F1502F$endif$}
+\definecolor{colorlinks-filecolor}{HTML}{$if(filecolor)$$filecolor$$else$F1502F$endif$}
+\definecolor{colorlinks-citecolor}{HTML}{$if(citecolor)$$citecolor$$else$0000FF$endif$}
+\definecolor{colorlinks-urlcolor}{HTML}{$if(urlcolor)$$urlcolor$$else$0000FF$endif$}
+\definecolor{themebg}{HTML}{$if(themebg)$$themebg$$else$3E2C00$endif$}
+\definecolor{primarycolor}{HTML}{$if(primarycolor)$$primarycolor$$else$000000$endif$}
+\definecolor{secundarycolor}{HTML}{$if(secundarycolor)$$secundarycolor$$else$000000$endif$}
+\definecolor{tertiarycolor}{HTML}{$if(tertiarycolor)$$tertiarycolor$$else$000000$endif$}
+\definecolor{quaternarycolor}{HTML}{$if(quaternarycolor)$$quaternarycolor$$else$000000$endif$}
+\definecolor{numbercolor}{HTML}{$if(footernrcolor)$$footernrcolor$$else$FFFFFF$endif$}
+\definecolor{structurecolor}{HTML}{$if(structurecolor)$$structurecolor$$else$000000$endif$}
+\definecolor{framecolor}{HTML}{$if(framecolor)$$framecolor$$else$FFFFFF$endif$}
+\definecolor{textcolor}{HTML}{$if(textcolor)$$textcolor$$else$000000$endif$}
+
+\setbeamercolor{background canvas}{bg=framecolor}
+
+\setbeamercolor{normal text}{fg=textcolor}
+% \setbeamercolor{frametitle}{fg=textcolor}
+\usebeamercolor[fg]{normal text}
 %%% End of definition of colors
 %%
 
@@ -235,10 +253,10 @@ $if(keywords)$
 $endif$
 $if(colorlinks)$
   colorlinks=true,
-  linkcolor=$if(linkcolor)$$linkcolor$$else$defaultspecial$endif$,
-  filecolor=$if(filecolor)$$filecolor$$else$defaultspecial$endif$,
-  citecolor=$if(citecolor)$$citecolor$$else$Blue$endif$,
-  urlcolor=$if(urlcolor)$$urlcolor$$else$Blue$endif$,
+  linkcolor=colorlinks-linkcolor,
+  filecolor=colorlinks-filecolor,
+  citecolor=colorlinks-citecolor,
+  urlcolor=colorlinks-urlcolor,
 $else$
   hidelinks,
 $endif$

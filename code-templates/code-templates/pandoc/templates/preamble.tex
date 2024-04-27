@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%color
 \usepackage{xcolor}
-% \definecolor{defaultdark}{HTML}{3E2C00} % UBC Blue (primary)
+% \definecolor{themebg}{HTML}{3E2C00} % UBC Blue (primary)
 \definecolor{UBCgrey}{rgb}{0.3686, 0.5255, 0.6235} % UBC Grey (secondary)
 
 \definecolor{default-linkcolor}{HTML}{A50000}
@@ -9,23 +9,23 @@
 \definecolor{default-urlcolor}{HTML}{4077C0}
 \definecolor{default-codebgcolor}{HTML}{F0F0F0}
 
-\setbeamercolor{palette primary}{bg=defaultdark,fg=white}
-\setbeamercolor{palette secondary}{bg=defaultdark,fg=white}
-\setbeamercolor{palette tertiary}{bg=defaultdark,fg=white}
-\setbeamercolor{palette quaternary}{bg=defaultdark,fg=white}
-\setbeamercolor{structure}{fg=defaultdark} % itemize, enumerate, etc
-\setbeamercolor{section in toc}{fg=defaultdark} % TOC sections
-\setbeamercolor{section title}{fg=defaultdark}
+\setbeamercolor{palette primary}{bg=themebg,fg=white}
+\setbeamercolor{palette secondary}{bg=themebg,fg=white}
+\setbeamercolor{palette tertiary}{bg=themebg,fg=white}
+\setbeamercolor{palette quaternary}{bg=themebg,fg=white}
+\setbeamercolor{structure}{fg=structurecolor} % itemize, enumerate, etc
+\setbeamercolor{section in toc}{fg=themebg} % TOC sections
+\setbeamercolor{section title}{fg=themebg}
 
 %% change circle miniframes color
-% \setbeamercolor{mini frame}{fg=defaultspecial, bg=defaultdark}
+% \setbeamercolor{mini frame}{fg=defaultspecial, bg=themebg}
 
 %% Change subsection in footer color (author and institute color)
 % \setbeamercolor{subsection in head/foot}{bg=UBCgrey,fg=white}
-% \setbeamercolor{section in head/foot}{bg=UBCgrey,fg=white}
+% \setbeamercolor{section in head/foot}{bg=themebg,fg=white}
 
 %change section dot color
-% \setbeamercolor{section in head/foot}{bg=defaultdark}
+% \setbeamercolor{section in head/foot}{bg=themebg}
 
 %% Change the circle in miniframes to a box
 %\setbeamertemplate{mini frame}[box]
@@ -69,7 +69,7 @@
             leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
         {\usebeamerfont{title in head/foot}\insertshorttitle}%
         \hfill%
-        {\usebeamerfont{frame number}\usebeamercolor[fg]{frame number}\insertframenumber~\frameofframes~\inserttotalframenumber}
+        {\usebeamerfont{frame number}\usebeamercolor[numbercolor]{frame number}\insertframenumber~\frameofframes~\inserttotalframenumber}
     \end{beamercolorbox}%
     \begin{beamercolorbox}[colsep=1.5pt]{lower separation line foot}
     \end{beamercolorbox}
