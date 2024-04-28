@@ -3,11 +3,11 @@
 % \definecolor{themebg}{HTML}{3E2C00} % UBC Blue (primary)
 \definecolor{UBCgrey}{rgb}{0.3686, 0.5255, 0.6235} % UBC Grey (secondary)
 
-\definecolor{default-linkcolor}{HTML}{A50000}
-\definecolor{default-filecolor}{HTML}{A50000}
-\definecolor{default-citecolor}{HTML}{4077C0}
-\definecolor{default-urlcolor}{HTML}{4077C0}
-\definecolor{default-codebgcolor}{HTML}{F0F0F0}
+% \definecolor{default-linkcolor}{HTML}{A50000}
+% \definecolor{default-filecolor}{HTML}{A50000}
+% \definecolor{default-citecolor}{HTML}{4077C0}
+% \definecolor{default-urlcolor}{HTML}{4077C0}
+% \definecolor{default-codebgcolor}{HTML}{F0F0F0}
 
 \setbeamercolor{palette primary}{bg=themebg,fg=white}
 \setbeamercolor{palette secondary}{bg=themebg,fg=white}
@@ -18,18 +18,18 @@
 \setbeamercolor{section title}{fg=themebg}
 
 %% change circle miniframes color
-% \setbeamercolor{mini frame}{fg=defaultspecial, bg=themebg}
+\setbeamercolor{mini frame}{fg=defaultspecial, bg=themebg}
 
 %% Change subsection in footer color (author and institute color)
-% \setbeamercolor{subsection in head/foot}{bg=UBCgrey,fg=white}
-% \setbeamercolor{section in head/foot}{bg=themebg,fg=white}
+\setbeamercolor{subsection in head/foot}{bg=themebg,fg=defaultspecial}
+\setbeamercolor{section in head/foot}{bg=themebg,fg=defaultspecial}
 
 %change section dot color
-% \setbeamercolor{section in head/foot}{bg=themebg}
+\setbeamercolor{section in head/foot}{bg=themebg}
 
 %% Change the circle in miniframes to a box
-%\setbeamertemplate{mini frame}[box]
-%\setbeamertemplate{mini frame in current subsection}[box]
+\setbeamertemplate{mini frame}[box]
+\setbeamertemplate{mini frame in current subsection}[box]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Create framenumber in footer
