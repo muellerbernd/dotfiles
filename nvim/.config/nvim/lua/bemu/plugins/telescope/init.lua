@@ -1,6 +1,7 @@
 return {
   'nvim-telescope/telescope.nvim',
-  branch = '0.1.x',
+  -- branch = '0.1.x',
+  tag = '0.1.6',
   dependencies = {
     'nvim-lua/plenary.nvim',
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
@@ -11,9 +12,9 @@ return {
   },
   config = function()
     local actions = require 'telescope.actions'
-    local sorters = require 'telescope.sorters'
-    local themes = require 'telescope.themes'
-    local previewers = require 'telescope.previewers'
+    -- local sorters = require 'telescope.sorters'
+    -- local themes = require 'telescope.themes'
+    -- local previewers = require 'telescope.previewers'
     -- local trouble = require("trouble.providers.telescope")
     require('telescope').setup {
       defaults = {
@@ -141,7 +142,7 @@ return {
     pcall(require('telescope').load_extension, 'file_browser')
     -- To get ui-select loaded and working with telescope, you need to call
     -- load_extension, somewhere after setup function:
-    require('telescope').load_extension 'ui-select'
+    -- require('telescope').load_extension 'ui-select'
 
     local builtin = require 'telescope.builtin'
     local custom = require 'bemu.plugins.telescope.funcs'
