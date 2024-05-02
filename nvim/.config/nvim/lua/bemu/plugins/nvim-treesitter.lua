@@ -21,7 +21,7 @@ return {
     dependencies = {
       'windwp/nvim-ts-autotag',
       'lewis6991/spellsitter.nvim',
-      'JoosepAlviste/nvim-ts-context-commentstring',
+      -- 'JoosepAlviste/nvim-ts-context-commentstring',
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
     -- configure treesitter
