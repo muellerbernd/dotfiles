@@ -8,8 +8,8 @@ vim.g.maplocalleader = ' '
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+-- vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+-- vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Make double-<Esc> clear search highlights
 vim.keymap.set('n', '<Esc><Esc>', '<Esc>:nohlsearch<CR><Esc>')
@@ -27,7 +27,8 @@ vim.keymap.set('t', '<C-l>', '<C-\\><C-n><C-W>l')
 vim.keymap.set('n', '<leader>tn', function()
   require('bemu.core.funcs').vert_term()
 end, { desc = 'New terminal in vert split' })
-vim.keymap.set('n', '<leader>ts', ":lua require('bemu.core.funcs').horiz_term()<CR>", { desc = 'New terminal in horiz split' })
+vim.keymap.set('n', '<leader>ts', ":lua require('bemu.core.funcs').horiz_term()<CR>",
+  { desc = 'New terminal in horiz split' })
 
 -- ctrl+s to save
 vim.keymap.set('n', '<c-s>', '<cmd>update<CR>', { desc = 'write file' })
@@ -48,6 +49,20 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 vim.keymap.set('n', '<leader><leader>j', '<cmd>cn<CR>', { desc = '[j] next qf item' })
 vim.keymap.set('n', '<leader><leader>k', '<cmd>cp<CR>', { desc = '[k] previous qf item' })
 
+vim.keymap.set('n', '<leader>x', '<cmd>.lua<CR>', { desc = 'Execute the current line' })
+vim.keymap.set('n', '<leader><leader>x', '<cmd>source %<CR>', { desc = 'Execute the current file' })
+
+-- Toggle hlsearch if it's on, otherwise just do "enter"
+vim.keymap.set('n', '<CR>', function()
+  ---@diagnostic disable-next-line: undefined-field
+  if vim.opt.hlsearch:get() then
+    vim.cmd.nohl()
+    return ''
+  else
+    return '<CR>'
+  end
+end, { expr = true })
+
 -- Line moving
 ---- Normal mode
 -- vim.keymap.set('n', '<leader>j', '<cmd>m .+1<CR>==', { desc = 'move line up' })
@@ -58,6 +73,21 @@ vim.keymap.set('n', '<leader><leader>k', '<cmd>cp<CR>', { desc = '[k] previous q
 ---- Visual mode
 -- vim.keymap.set('v', 'J', ":m '>+1<CR>gv==kgvo<esc>=kgvo", { desc = 'move highlighted text down' })
 -- vim.keymap.set('v', 'K', ":m '<-2<CR>gv==jgvo<esc>=jgvo", { desc = 'move highlighted text up' })
+vim.keymap.set('n', '<M-j>', function()
+  if vim.opt.diff:get() then
+    vim.cmd [[normal! ]c]]
+  else
+    vim.cmd [[m .+1<CR>==]]
+  end
+end)
+
+vim.keymap.set('n', '<M-k>', function()
+  if vim.opt.diff:get() then
+    vim.cmd [[normal! [c]]
+  else
+    vim.cmd [[m .-2<CR>==]]
+  end
+end)
 
 vim.keymap.set('n', '<leader>y', '"+yy', { desc = 'copy to clipboard' })
 vim.keymap.set('n', '<leader>p', '"+p', { desc = 'paste after from clipboard' })
@@ -70,7 +100,8 @@ vim.keymap.set('v', '<', '<gv^')
 -- buffer management
 -- Previous/next buffer
 vim.keymap.set('n', '<C-PageDown>', '<cmd>if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>')
-vim.keymap.set('n', '<C-PageUp>', '<cmd>if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>')
+vim.keymap.set('n', '<C-PageUp>',
+  '<cmd>if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>')
 
 -- Close the current buffer and move to the previous one
 -- This replicates the idea of closing a tab
@@ -81,7 +112,8 @@ vim.keymap.set('n', '<M-x>', '<cmd>bp <BAR> bd! #<CR>')
 -- This replaces :tabnew which I used to bind to this mapping
 -- vim.keymap.set('n',"<leader>T", "<cmd>enew<cr>", { desc = "open new empty buffer" })
 
-vim.keymap.set('n', '<leader><leader>ca', '<cmd>w <bar> %bd <bar> e# <bar> bd#<cr>', { desc = '[c]lose [a]ll buffers except this one' })
+vim.keymap.set('n', '<leader><leader>ca', '<cmd>w <bar> %bd <bar> e# <bar> bd#<cr>',
+  { desc = '[c]lose [a]ll buffers except this one' })
 
 -- Go on top of a word you want to change
 -- Press cn or cN
@@ -89,6 +121,12 @@ vim.keymap.set('n', '<leader><leader>ca', '<cmd>w <bar> %bd <bar> e# <bar> bd#<c
 -- Smash that dot '.' multiple times to change all the other occurrences of the word
 vim.keymap.set('n', 'cn', '*``cgn')
 vim.keymap.set('n', 'cN', '*``cgN')
+
+-- These mappings control the size of splits (height/width)
+vim.keymap.set('n', '<M-left>', '<c-w>5<')
+vim.keymap.set('n', '<M-right>', '<c-w>5>')
+vim.keymap.set('n', '<M-up>', '<C-W>+')
+vim.keymap.set('n', '<M-down>', '<C-W>-')
 
 -- correct spell with ctrl+l
 -- vim.keymap.set('i',"<C-l>", "<c-g>u<Esc>[s1z=`]a<c-g>u", { desc = "correct spell" })
@@ -106,6 +144,7 @@ vim.keymap.set('n', '<leader><leader>t', function()
   }
 
   word_mapping = vim.tbl_add_reverse_lookup(word_mapping)
+  -- word_mapping = vim.tbl_inv(word_mapping)
 
   local new_word = word_mapping[word]
 
@@ -137,4 +176,6 @@ end, { desc = '[g]oto [f]ile, create if not exist' })
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
-vim.keymap.set('n', '<leader>dd', function() require('telescope.builtin').diagnostics() end, { desc = 'Open [d]iagnostic list' })
+vim.keymap.set('n', '<leader>dd', function()
+  require('telescope.builtin').diagnostics()
+end, { desc = 'Open [d]iagnostic list' })
