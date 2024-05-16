@@ -97,11 +97,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- commentstring
 -- https://github.com/neovim/neovim/pull/28176
-vim.api.nvim_create_autocmd('FileType', {
-  group = group,
-  pattern = { 'hyprlang', 'dosini' },
-  callback = function(event)
-    local cs = '#%s'
-    vim.bo[event.buf].commentstring = cs:gsub('(%S)%%s', '%1 %%s'):gsub('%%s(%S)', '%%s %1')
-  end,
-})
+-- vim.api.nvim_create_autocmd('FileType', {
+--   group = group,
+--   pattern = { 'hyprlang', 'dosini' },
+--   callback = function(event)
+--     local cs = '#%s'
+--     vim.bo[event.buf].commentstring = cs:gsub('(%S)%%s', '%1 %%s'):gsub('%%s(%S)', '%%s %1')
+--   end,
+-- })
