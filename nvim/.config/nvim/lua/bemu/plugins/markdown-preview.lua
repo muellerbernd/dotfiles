@@ -16,7 +16,7 @@ return {
     end,
     config = function()
       -- markdown-previewer
-      vim.keymap.set('n', '<F4>', '<cmd>MarkdownPreviewToggle<cr>', { desc = 'toggle markdown-previewer' })
+      vim.keymap.set('n', '<leader>mp', '<cmd>MarkdownPreviewToggle<cr>', { desc = 'toggle [m]arkdown-[p]reviewer' })
     end,
     ft = { 'markdown' },
   },
