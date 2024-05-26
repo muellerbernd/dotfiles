@@ -1,7 +1,6 @@
 [alias]
     sla = "!git --no-pager log --oneline --decorate --all --graph -35"
     pfwl = "push --force-with-lease"
-    pr = "!hub pull-request --browse"
       # list branches ordered by change time
     br = "!git for-each-ref --format='%(committerdate:short),%(authorname),%(refname:short)' --sort=committerdate refs/heads/ | column -t -s ','"
     bra = branch -a
@@ -17,7 +16,7 @@
     l = log --oneline --graph --decorate
     lg = log -p
     ls = ls-files
-    pom = push origin master
+    pom = push origin main
     # push current branch
     po = "!git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\""
     st = status
@@ -47,9 +46,9 @@
 ;     insteadOf = https://aur.archlinux.org/
 
 [filter "lfs"]
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
 [http]
-	postBuffer = 157286400
+    postBuffer = 157286400
