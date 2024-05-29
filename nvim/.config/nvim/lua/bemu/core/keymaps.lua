@@ -143,8 +143,10 @@ vim.keymap.set('n', '<leader><leader>t', function()
     ['ON'] = 'OFF',
   }
 
-  word_mapping = vim.tbl_add_reverse_lookup(word_mapping)
-  -- word_mapping = vim.tbl_inv(word_mapping)
+  -- add reversed key value pairs to table
+  for k, v in pairs(word_mapping) do
+    word_mapping[v] = k
+  end
 
   local new_word = word_mapping[word]
 

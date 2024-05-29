@@ -25,11 +25,11 @@ custom_funcs.ToggleTrimWhitespace = function()
   print('TrimWhitespace ' .. tostring(trimWhitespace))
 end
 
-custom_funcs.VimReload = function()
-  -- vim.api.nvim_exec("luafile %", false)
-  vim.api.nvim_exec('so ~/.config/nvim/init.lua', false)
-  vim.notify 'Reloaded nvim config'
-end
+-- custom_funcs.VimReload = function()
+--   -- vim.api.nvim_exec("luafile %", false)
+--   vim.api.nvim_exec('so ~/.config/nvim/init.lua', false)
+--   vim.notify 'Reloaded nvim config'
+-- end
 
 custom_funcs.reload_nvim_conf = function()
   for name, _ in pairs(package.loaded) do
@@ -45,7 +45,7 @@ end
 custom_funcs.TrimWhitespace = function()
   if trimWhitespace then
     local save = vim.fn.winsaveview()
-    vim.api.nvim_exec('keepjumps keeppatterns silent! %s/\\s\\+$//e', false)
+    vim.api.nvim_exec2('keepjumps keeppatterns silent! %s/\\s\\+$//e', {})
     vim.fn.winrestview(save)
   end
 end
@@ -53,7 +53,7 @@ end
 custom_funcs.retab = function()
   if trimWhitespace then
     local save = vim.fn.winsaveview()
-    vim.api.nvim_exec('retab', false)
+    vim.api.nvim_exec2('retab', {})
     vim.fn.winrestview(save)
   end
 end
@@ -89,20 +89,20 @@ custom_funcs.goto_file = function()
     vim.cmd 'normal gf'
   else
     print 'file does not exist'
-    vim.api.nvim_exec('edit' .. newfilepath, false)
+    vim.api.nvim_exec2('edit' .. newfilepath, {})
   end
 end
 
 custom_funcs.vert_term = function()
   local win_width = vim.fn.winwidth(0)
   local term_width = win_width / 3
-  vim.api.nvim_exec(term_width .. 'vs | term', false)
+  vim.api.nvim_exec2(term_width .. 'vs | term', {})
 end
 
 custom_funcs.horiz_term = function()
   local win_height = vim.fn.winheight(0)
   local term_height = win_height / 4
-  vim.api.nvim_exec('bel' .. term_height .. 'sp | term', false)
+  vim.api.nvim_exec2('bel' .. term_height .. 'sp | term', {})
 end
 
 return custom_funcs
