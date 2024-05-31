@@ -136,11 +136,11 @@ return {
 
       vim.g.skip_ts_context_commentstring_module = true
       -- vim.o.foldlevel = 5
-      vim.o.foldmethod = 'expr'
-      -- vim.o.foldmethod = 'indent'
-      vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-      vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
-      vim.opt.foldenable = false
+      -- vim.o.foldmethod = 'expr'
+      -- -- vim.o.foldmethod = 'indent'
+      -- vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+      -- vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
+      -- vim.opt.foldenable = false
     end,
   },
   {
