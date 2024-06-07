@@ -9,12 +9,13 @@ profile eis-office {
 
 profile ammera-office {
   output "eDP-1" enable mode 1920x1200@60 position 0,0 scale 1.000000
-  output "BNQ BenQ GW2780 ETFAL03748SL0" position -1920,0 scale 1.000000
+  output "BNQ BenQ GW2780 ETFAL03748SL0" enable position -1920,0 scale 1.000000
+  exec ~/.config/kanshi/move_workspaces_ammera_office.py
   exec killall -SIGUSR2 waybar
   #exec sleep 0.5 && hyprctl dispatch workspace -- 1
 }
 
-profile eis-undock {
+profile undock {
   output "eDP-1" enable mode 1920x1200@60 position 0,0 scale 1.000000
   # exec killall waybar
   # exec waybar &
