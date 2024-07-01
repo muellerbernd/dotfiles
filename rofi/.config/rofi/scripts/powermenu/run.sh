@@ -56,7 +56,8 @@ run_lock_cmd() {
     elif [[ "$XDG_CURRENT_DESKTOP" == 'sway' ]]; then
         ~/scripts/lock_sway.sh
     elif [[ "$XDG_CURRENT_DESKTOP" == 'Hyprland' ]]; then
-        ~/.config/hypr/scripts/lock.sh
+        # ~/.config/hypr/scripts/lock.sh
+        hyprlock
     fi
 }
 
@@ -75,14 +76,14 @@ run_cmd() {
             # amixer set Master mute
             # dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
             # playerctl pause
-            run_lock_cmd
+            # run_lock_cmd
             systemctl suspend
         elif [[ $1 == '--hibernate' ]]; then
             # mpc -q pause
             # amixer set Master mute
             # dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
             # playerctl pause
-            run_lock_cmd
+            # run_lock_cmd
             systemctl hibernate
         elif [[ $1 == '--logout' ]]; then
             if [[ "$XDG_CURRENT_DESKTOP" == 'i3' ]]; then
@@ -108,7 +109,7 @@ case ${chosen} in
         run_cmd --reboot
         ;;
     $lock)
-        run_lock_cmd
+        loginctl lock-session
         # sh ~/scripts/lock.sh
         ;;
     $suspend)
