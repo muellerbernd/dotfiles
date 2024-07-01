@@ -1,3 +1,5 @@
+alias grep="${aliases[grep]:-grep} --color=auto"
+alias ls="${aliases[ls]:-ls} --group-directories-first --color=auto"
 alias grep='grep $1 --color'
 alias grepl='grep -srnIi $1 --color'
 alias restartmouse='xinput disable 12 ; xinput enable 12'
@@ -8,7 +10,6 @@ alias restartmouse='xinput disable 12 ; xinput enable 12'
 alias -g nvidia_offload='__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME="nvidia" __VK_LAYER_NV_optimus="NVIDIA_only"'
 alias unsetproxy='export http_proxy="";export ftp_proxy="";export https_proxy=""'
 alias tm="tmux a || tmux"
-alias lg='lazygit'
 # ros setup
 alias rosexport='export ROS_HOSTNAME=localhost; export ROS_MASTER_URI=http://localhost:11311'
 # alias joshuto='joshuto --output-file /tmp/joshutodir; LASTDIR=`cat /tmp/joshutodir`; cd "$LASTDIR"'

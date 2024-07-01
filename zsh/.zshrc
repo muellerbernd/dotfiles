@@ -139,7 +139,7 @@ if [ -f /usr/share/vcstool-completion/vcs.zsh ]; then
     source /usr/share/vcstool-completion/vcs.zsh
 fi
 
-ros2_on() {
+function ros2_on() {
     # export ROS_DOMAIN_ID=42
     # export ROS_VERSION=2
     # export ROS_PYTHON_VERSION=3
@@ -151,15 +151,15 @@ ros2_on() {
     eval "$(register-python-argcomplete colcon)"
 }
 
-ros1_on() {
+function ros1_on() {
     rosexport
     source /opt/ros/noetic/setup.zsh
 }
 
 # custom funcs
-gitaur() {echo $1 | awk '{print "git clone https://aur.archlinux.org/"$1".git"}' | xargs -I % sh -c %}
+function gitaur() {echo $1 | awk '{print "git clone https://aur.archlinux.org/"$1".git"}' | xargs -I % sh -c %}
 
-safedelete() {
+function safedelete() {
     if command -v gio >/dev/null; then
         for f in "$@"; do
             gio trash -f "$f"
@@ -191,7 +191,7 @@ safedelete() {
 #     exec "$@"
 # }
 
-rr() {
+function rr() {
     temp_file="$(mktemp -t "ranger_cd.XXXXXXXXXX")"
     ranger --choosedir="$temp_file" -- "${@:-$PWD}"
     if chosen_dir="$(cat -- "$temp_file")" && [ -n "$chosen_dir" ] && [ "$chosen_dir" != "$PWD" ]; then
@@ -200,7 +200,7 @@ rr() {
     rm -f -- "$temp_file"
 }
 
-jj() {
+function jj() {
     temp_file="$(mktemp -t "joshuto_cd.XXXXXXXXXX")"
     # ~/.config/joshuto/uberzug/joshuto.sh --output-file "$temp_file" -- "${@:-$PWD}"
     joshuto --output-file "$temp_file" -- "${@:-$PWD}"
@@ -210,13 +210,22 @@ jj() {
     rm -f -- "$temp_file"
 }
 
-ya() {
+function ya() {
     temp_file="$(mktemp -t "yazi_cd.XXXXXXXXXX")"
     yazi --cwd-file "$temp_file" -- "${@:-$PWD}"
     if chosen_dir="$(cat -- "$temp_file")" && [ -n "$chosen_dir" ] && [ "$chosen_dir" != "$PWD" ]; then
         cd -- "$chosen_dir"
     fi
     rm -f -- "$temp_file"
+}
+
+function man() {
+    local cols=$(tput cols || echo ${COLUMNS:-80})
+    if [[ cols -gt 100 ]]; then
+        MANWIDTH=100 command man "$@"
+    else
+        MANWIDTH="${cols}" command man "$@"
+    fi
 }
 
 # terminal settings
