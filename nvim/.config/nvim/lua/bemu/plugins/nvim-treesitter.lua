@@ -22,7 +22,7 @@ return {
       'windwp/nvim-ts-autotag',
       'lewis6991/spellsitter.nvim',
       -- 'JoosepAlviste/nvim-ts-context-commentstring',
-      'nvim-treesitter/nvim-treesitter-textobjects',
+      -- 'nvim-treesitter/nvim-treesitter-textobjects',
     },
     -- configure treesitter
     opts = { -- enable syntax highlighting

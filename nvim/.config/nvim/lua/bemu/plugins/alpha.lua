@@ -18,7 +18,7 @@ return {
       dashboard.button(
         'f',
         '  Find file',
-        "<cmd>lua require('telescope.builtin').find_files( { cwd = vim.fn.expand('%:p:h'), find_command={'rg','--ignore','--hidden','--files'}, prompt_prefix='🔍' }) <cr>"
+        "<cmd>lua require('bemu.plugins.telescope.funcs').search_all_files() <cr>"
       ),
       dashboard.button('e', '  New file', ':ene <BAR> startinsert <CR>'),
       -- dashboard.button("p", "  Vimwikis", "<cmd>lua require('bemu.telescope').list_vimwikis() <CR>"),
