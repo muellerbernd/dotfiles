@@ -138,6 +138,7 @@ return {
       local servers = {
         -- "pylsp", -- needs python-lsp-server
         'pyright',       -- needs pyright
+        -- "jedi-language-server",
         -- "ccls", -- needs ccls
         'clangd',        -- needs clangd
         'cmake',         -- needs cmake-language-server
@@ -148,14 +149,12 @@ return {
         'html',          -- needs vscode-langservers-extracted
         'marksman',      -- needs marksman-bin
         'hls',           -- needs haskell-language-server
-        'nixd',          -- needs nixd (from my arch packages)
         'tsserver',      -- needs vscode-langservers-extracted
         'jsonls',        -- needs vscode-langservers-extracted
         'eslint',        -- needs vscode-langservers-extracted
         'typst_lsp',     -- needs typst-lsp
-        -- 'rnix', -- needs rnix-lsp
         -- 'nil_ls',        -- needs nil
-        -- 'nixd',
+        'nixd',
         'lemminx',
       }
       -- local servers = { "pylsp", "clangd", "gopls", "rust_analyzer" }
@@ -222,6 +221,17 @@ return {
             settings = {
               ['nil'] = {
                 testSetting = 42,
+                formatting = {
+                  command = { 'alejandra' },
+                },
+              },
+            },
+          }
+        elseif lsp == 'nixd' then
+          lspconfig[lsp].setup {
+            capabilities = capabilities,
+            settings = {
+              ['nixd'] = {
                 formatting = {
                   command = { 'alejandra' },
                 },

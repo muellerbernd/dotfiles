@@ -1,6 +1,6 @@
 return {
   'hrsh7th/nvim-cmp',
-  event = { 'InsertEnter', 'CmdlineEnter' },
+  event = 'VimEnter',
   dependencies = {
     'hrsh7th/cmp-buffer', -- source for text in buffer
     'hrsh7th/cmp-path',   -- source for file system paths
@@ -33,6 +33,7 @@ return {
   },
   config = function()
     -- Set completeopt to have a better completion experience
+    vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
     local has_words_before = function()
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -43,11 +44,7 @@ return {
     local cmp = require 'cmp'
     local lspkind = require 'lspkind'
 
-    vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
-    vim.opt.shortmess:append 'c'
-
     cmp.setup {
-      completion = { completeopt = 'menu,menuone,noinsert' },
       window = {
         completion = {
           border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
@@ -62,7 +59,6 @@ return {
         expand = function(args)
           -- For `luasnip` user.
           luasnip.lsp_expand(args.body)
-          vim.snippet.expand(args.body)
         end,
       },
       -- completion = {keyword_length = 2},
@@ -75,63 +71,54 @@ return {
         },
       },
       mapping = {
-        ['<C-n>'] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select },
-        ['<C-p>'] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select },
-        -- ['<C-n>'] = cmp.mapping(function(fallback)
-        --   if cmp.visible() then
-        --     cmp.select_next_item()
-        --   elseif luasnip.expand_or_jumpable() then
-        --     luasnip.expand_or_jump()
-        --   elseif has_words_before() then
-        --     cmp.complete()
-        --   else
-        --     fallback()
-        --   end
-        -- end, { 'i', 's' }),
-        -- ['<C-p>'] = cmp.mapping(function(fallback)
-        --   if cmp.visible() then
-        --     cmp.select_prev_item()
-        --   elseif luasnip.jumpable(-1) then
-        --     luasnip.jump(-1)
-        --   else
-        --     fallback()
-        --   end
-        -- end, { 'i', 's' }),
-        -- ['<C-Down>'] = cmp.mapping(function(fallback)
-        --   if cmp.visible() then
-        --     cmp.select_next_item()
-        --   elseif luasnip.expand_or_jumpable() then
-        --     luasnip.expand_or_jump()
-        --   elseif has_words_before() then
-        --     cmp.complete()
-        --   else
-        --     fallback()
-        --   end
-        -- end, { 'i', 's' }),
-        -- ['<C-Up>'] = cmp.mapping(function(fallback)
-        --   if cmp.visible() then
-        --     cmp.select_prev_item()
-        --   elseif luasnip.jumpable(-1) then
-        --     luasnip.jump(-1)
-        --   else
-        --     fallback()
-        --   end
-        -- end, { 'i', 's' }),
+        ['<C-n>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          elseif has_words_before() then
+            cmp.complete()
+          else
+            fallback()
+          end
+        end, { 'i', 's' }),
+        ['<C-p>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end, { 'i', 's' }),
+        ['<C-Down>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          elseif has_words_before() then
+            cmp.complete()
+          else
+            fallback()
+          end
+        end, { 'i', 's' }),
+        ['<C-Up>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end, { 'i', 's' }),
 
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
+        -- ["<C-Space>"] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.close(),
-        ['<C-y>'] = cmp.mapping(
-          cmp.mapping.confirm {
-            behavior = cmp.ConfirmBehavior.Insert,
-            select = true,
-          },
-          { 'i', 'c' }
-        ),
         ['<CR>'] = cmp.mapping.confirm {
           behavior = cmp.ConfirmBehavior.Replace,
-          select = true,
+          -- select = true,
         },
       },
       sources = cmp.config.sources {
@@ -172,16 +159,16 @@ return {
         { name = 'nvim_lsp_signature_help' },
       },
       -- sorting = {
-      --   comparators = {
-      --     cmp.config.compare.offset,
-      --     cmp.config.compare.exact,
-      --     cmp.config.compare.score,
-      --     require('cmp-under-comparator').under,
-      --     cmp.config.compare.kind,
-      --     cmp.config.compare.sort_text,
-      --     cmp.config.compare.length,
-      --     cmp.config.compare.order,
-      --   },
+      --     comparators = {
+      --         cmp.config.compare.offset,
+      --         cmp.config.compare.exact,
+      --         cmp.config.compare.score,
+      --         require("cmp-under-comparator").under,
+      --         cmp.config.compare.kind,
+      --         cmp.config.compare.sort_text,
+      --         cmp.config.compare.length,
+      --         cmp.config.compare.order,
+      --     },
       -- },
       -- matching = {
       --     disallow_fuzzy_matching = true,
