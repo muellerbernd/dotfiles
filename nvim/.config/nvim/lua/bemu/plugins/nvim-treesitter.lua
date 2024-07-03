@@ -67,6 +67,7 @@ return {
         'nix',
         -- 'hypr',
         'hyprlang',
+        'typst',
       },
       incremental_selection = {
         enable = true,
