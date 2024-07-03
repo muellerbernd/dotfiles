@@ -65,6 +65,8 @@ export FZF_DEFAULT_COMMAND="fd --color=always --strip-cwd-prefix --hidden --foll
 export FZF_DEFAULT_OPTS="--ansi"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
+source <(fzf --zsh)
+
 # enable control-s and control-q
 stty start undef
 stty stop undef
