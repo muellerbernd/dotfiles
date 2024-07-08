@@ -20,11 +20,8 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   -- buffer = bufnr,
   pattern = 'main*',
   callback = function()
+    local bufnr = vim.api.nvim_get_current_buf()
     if enable_typst_autocmd then
-      -- local bufnr = vim.api.nvim_get_current_buf()
-      -- local abs_path = vim.api.nvim_buf_get_name(bufnr)
-      -- vim.notify(string.format('typst compile %s!', abs_path), vim.log.levels.INFO)
-
       local abs_path = vim.api.nvim_buf_get_name(bufnr)
       local pdf_path = replace_extension(abs_path, 'pdf')
       local typstmake = Job:new {
