@@ -15,8 +15,9 @@ local replace_extension = function(path, ext)
   return path:sub(1, offset) .. ext
 end
 
+vim.api.nvim_create_augroup('Typst', { clear = true })
+
 vim.api.nvim_create_autocmd('BufWritePost', {
-  group = vim.api.nvim_create_augroup('Typst', { clear = true }),
   -- buffer = bufnr,
   pattern = 'main*',
   callback = function()
