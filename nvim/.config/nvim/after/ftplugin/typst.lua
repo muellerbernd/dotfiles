@@ -2,7 +2,7 @@ local Job = require 'plenary.job'
 -- local Path = require "plenary.path"
 
 local zathura = {}
-local enable_autocmd = false
+local enable_typst_autocmd = false
 
 local replace_extension = function(path, ext)
   local offset
@@ -15,14 +15,16 @@ local replace_extension = function(path, ext)
   return path:sub(1, offset) .. ext
 end
 
-vim.api.nvim_create_augroup('Typst', { clear = true })
-
-local bufnr = vim.api.nvim_get_current_buf()
 vim.api.nvim_create_autocmd('BufWritePost', {
-  group = 'Typst',
-  buffer = bufnr,
+  group = vim.api.nvim_create_augroup('Typst', { clear = true }),
+  -- buffer = bufnr,
+  pattern = 'main*',
   callback = function()
-    if enable_autocmd then
+    if enable_typst_autocmd then
+      -- local bufnr = vim.api.nvim_get_current_buf()
+      -- local abs_path = vim.api.nvim_buf_get_name(bufnr)
+      -- vim.notify(string.format('typst compile %s!', abs_path), vim.log.levels.INFO)
+
       local abs_path = vim.api.nvim_buf_get_name(bufnr)
       local pdf_path = replace_extension(abs_path, 'pdf')
       local typstmake = Job:new {
@@ -30,10 +32,10 @@ vim.api.nvim_create_autocmd('BufWritePost', {
         args = {
           'compile',
           abs_path,
-          -- pdf_path,
         },
         on_stdout = function(j, return_val)
-          print(return_val)
+          vim.notify(string.format('retval %s!', return_val), vim.log.levels.INFO)
+          vim.notify(string.format('j %s!', j), vim.log.levels.INFO)
         end,
       }
       typstmake:after_success(function()
@@ -48,8 +50,8 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 })
 
 vim.keymap.set('n', '<leader>ll', function()
-  enable_autocmd = not enable_autocmd
-  local status = enable_autocmd and 'enabled' or 'disabled'
+  enable_typst_autocmd = not enable_typst_autocmd
+  local status = enable_typst_autocmd and 'enabled' or 'disabled'
   vim.notify(string.format('Typst %s!', status), vim.log.levels.INFO)
 end, { desc = 'toggle typst pdf building' })
 

@@ -137,7 +137,7 @@ return {
       -- map buffer local keybindings when the language server attaches
       local servers = {
         -- "pylsp", -- needs python-lsp-server
-        'pyright',       -- needs pyright
+        'pyright', -- needs pyright
         -- "jedi-language-server",
         -- "ccls", -- needs ccls
         'clangd',        -- needs clangd
@@ -235,6 +235,17 @@ return {
                 formatting = {
                   command = { 'alejandra' },
                 },
+              },
+            },
+          }
+        elseif lsp == 'typst_lsp' then
+          lspconfig[lsp].setup {
+            capabilities = capabilities,
+            settings = {
+              exportPdf = 'never', -- Choose onType, onSave or never.
+              -- serverPath = "" -- Normally, there is no need to uncomment it.
+              formatting = {
+                command = { 'typstyle' },
               },
             },
           }
