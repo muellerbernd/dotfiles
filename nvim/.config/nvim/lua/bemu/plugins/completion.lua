@@ -33,7 +33,8 @@ return {
   },
   config = function()
     -- Set completeopt to have a better completion experience
-    vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+    -- vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+    -- vim.opt.completeopt = { 'menu,menuone,noinsert' }
 
     local has_words_before = function()
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -46,6 +47,7 @@ return {
 
     cmp.setup {
       window = {
+        preselect = cmp.PreselectMode.None,
         completion = {
           border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
           -- winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None",
@@ -61,6 +63,7 @@ return {
           luasnip.lsp_expand(args.body)
         end,
       },
+      completion = { completeopt = 'menu,menuone,noinsert' },
       -- completion = {keyword_length = 2},
       confirmation = { default_behavior = cmp.ConfirmBehavior.Replace },
       -- configure lspkind for vs-code like pictograms in completion menu
@@ -91,56 +94,37 @@ return {
             fallback()
           end
         end, { 'i', 's' }),
-        ['<C-Down>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          elseif has_words_before() then
-            cmp.complete()
-          else
-            fallback()
-          end
-        end, { 'i', 's' }),
-        ['<C-Up>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            fallback()
-          end
-        end, { 'i', 's' }),
-
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        -- ["<C-Space>"] = cmp.mapping.complete(),
+        -- ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.close(),
-        ['<CR>'] = cmp.mapping.confirm {
-          behavior = cmp.ConfirmBehavior.Replace,
-          -- behavior = cmp.ConfirmBehavior.Insert,
-          -- select = true,
-        },
+        ['<CR>'] = cmp.mapping(
+          cmp.mapping.confirm {
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = true,
+          },
+          { 'i', 'c' }
+        ),
       },
       sources = cmp.config.sources {
         -- { name = "nvim_lua" },
-        -- { name = "nvim_lsp" },
-        -- { name = "luasnip" },
-        -- { name = "buffer" },
-        -- { name = "path" },
-        { name = 'nvim_lsp', priority_weight = 1000 },
-        { name = 'luasnip',  priority_weight = 750 },
-        {
-          name = 'buffer',
-          -- max_item_count = 8,
-          priority_weight = 500,
-          -- option = {
-          --     get_bufnrs = function()
-          --         return vim.api.nvim_list_bufs()
-          --     end,
-          -- },
-        },
-        { name = 'path',                   priority_weight = 250 },
+        { name = 'nvim_lsp' },
+        { name = 'luasnip' },
+        { name = 'buffer' },
+        { name = 'path' },
+        -- { name = 'nvim_lsp',               priority_weight = 1000 },
+        -- { name = 'luasnip',                priority_weight = 750 },
+        -- {
+        --   name = 'buffer',
+        --   -- max_item_count = 8,
+        --   priority_weight = 500,
+        --   -- option = {
+        --   --     get_bufnrs = function()
+        --   --         return vim.api.nvim_list_bufs()
+        --   --     end,
+        --   -- },
+        -- },
+        -- { name = 'path',                   priority_weight = 250 },
         -- {
         --     name = "rg",
         --     keyword_length = 3,
@@ -148,15 +132,6 @@ return {
         --     priority_weight = 60,
         --     option = { additional_arguments = "--smart-case --hidden" },
         -- },
-        -- {name = "luasnip", options = {use_show_condition = false}},
-        -- { name = 'ultisnips' }, -- For ultisnips users.
-        -- { name = 'snippy' }, -- For snippy users.
-        -- {name = "ultisnips"},
-        -- {name = "cmp_tabnine"},
-        -- {name = "buffer"},
-        -- {name = "path"},
-        -- {name = "treesitter"},
-        -- {name = "rg"}
         { name = 'nvim_lsp_signature_help' },
       },
       -- sorting = {
