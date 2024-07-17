@@ -46,8 +46,8 @@ return {
     local lspkind = require 'lspkind'
 
     cmp.setup {
+      preselect = cmp.PreselectMode.None,
       window = {
-        preselect = cmp.PreselectMode.None,
         completion = {
           border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
           -- winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None",
@@ -63,7 +63,7 @@ return {
           luasnip.lsp_expand(args.body)
         end,
       },
-      completion = { completeopt = 'menu,menuone,noinsert' },
+      completion = { completeopt = 'menu,menuone,noinsert,noselect' },
       -- completion = {keyword_length = 2},
       confirmation = { default_behavior = cmp.ConfirmBehavior.Replace },
       -- configure lspkind for vs-code like pictograms in completion menu
@@ -76,7 +76,7 @@ return {
       mapping = {
         ['<C-n>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            cmp.select_next_item()
+            cmp.select_next_item { behavior = cmp.SelectBehavior.Insert }
           elseif luasnip.expand_or_jumpable() then
             luasnip.expand_or_jump()
           elseif has_words_before() then
@@ -87,7 +87,7 @@ return {
         end, { 'i', 's' }),
         ['<C-p>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            cmp.select_prev_item()
+            cmp.select_prev_item { behavior = cmp.SelectBehavior.Insert }
           elseif luasnip.jumpable(-1) then
             luasnip.jump(-1)
           else
@@ -101,7 +101,7 @@ return {
         ['<CR>'] = cmp.mapping(
           cmp.mapping.confirm {
             behavior = cmp.ConfirmBehavior.Insert,
-            select = true,
+            select = false,
           },
           { 'i', 'c' }
         ),
@@ -160,29 +160,28 @@ return {
       --     -- Let's play with this for a day or two
       --     ghost_text = false
       -- }
-      preselect = cmp.PreselectMode.None,
       -- experimental = {
       --   ghost_text = { hl_group = 'Comment' },
       --   horizontal_search = true,
       -- },
     }
 
-    -- -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-    -- cmp.setup.cmdline({ '/', '?' }, {
-    --   mapping = cmp.mapping.preset.cmdline(),
-    --   sources = {
-    --     { name = 'buffer' },
-    --   },
-    -- })
-    --
-    -- -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-    -- cmp.setup.cmdline(':', {
-    --   mapping = cmp.mapping.preset.cmdline(),
-    --   sources = cmp.config.sources({
-    --     { name = 'path' },
-    --   }, {
-    --     { name = 'cmdline' },
-    --   }),
-    -- })
+    -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+    cmp.setup.cmdline({ '/', '?' }, {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = {
+        { name = 'buffer' },
+      },
+    })
+
+    -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+    cmp.setup.cmdline(':', {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = cmp.config.sources({
+        { name = 'path' },
+      }, {
+        { name = 'cmdline' },
+      }),
+    })
   end,
 }
