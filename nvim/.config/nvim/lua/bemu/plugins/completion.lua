@@ -65,7 +65,7 @@ return {
       },
       completion = { completeopt = 'menu,menuone,noinsert,noselect' },
       -- completion = {keyword_length = 2},
-      confirmation = { default_behavior = cmp.ConfirmBehavior.Replace },
+      -- confirmation = { default_behavior = cmp.ConfirmBehavior.Replace },
       -- configure lspkind for vs-code like pictograms in completion menu
       formatting = {
         format = lspkind.cmp_format {
@@ -98,7 +98,7 @@ return {
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         -- ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.close(),
-        ['<CR>'] = cmp.mapping(
+        ['<C-y>'] = cmp.mapping(
           cmp.mapping.confirm {
             behavior = cmp.ConfirmBehavior.Insert,
             select = false,
