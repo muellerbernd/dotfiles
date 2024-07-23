@@ -45,6 +45,8 @@ return {
     local cmp = require 'cmp'
     local lspkind = require 'lspkind'
 
+    local cmp_select = { behavior = cmp.SelectBehavior.Insert }
+
     cmp.setup {
       preselect = cmp.PreselectMode.None,
       window = {
@@ -63,9 +65,12 @@ return {
           luasnip.lsp_expand(args.body)
         end,
       },
-      completion = { completeopt = 'menu,menuone,noinsert,noselect' },
-      -- completion = {keyword_length = 2},
-      -- confirmation = { default_behavior = cmp.ConfirmBehavior.Replace },
+      completion = {
+        completeopt = 'menu,menuone,noinsert,noselect',
+        -- keyword_length = 1,
+        -- keyword_pattern = '.*',
+      },
+      confirmation = { default_behavior = cmp.ConfirmBehavior.Replace },
       -- configure lspkind for vs-code like pictograms in completion menu
       formatting = {
         format = lspkind.cmp_format {
@@ -73,38 +78,44 @@ return {
           ellipsis_char = '...',
         },
       },
-      mapping = {
-        ['<C-n>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item { behavior = cmp.SelectBehavior.Insert }
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          elseif has_words_before() then
-            cmp.complete()
-          else
-            fallback()
-          end
-        end, { 'i', 's' }),
-        ['<C-p>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item { behavior = cmp.SelectBehavior.Insert }
-          elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            fallback()
-          end
-        end, { 'i', 's' }),
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+      mapping = cmp.mapping.preset.insert {
+        -- Select the [n]ext item
+        ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+        -- Select the [p]revious item
+        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+        -- Accept ([y]es) the completion.
+        --  This will auto-import if your LSP supports it.
+        --  This will expand snippets if the LSP sent a snippet.
+        ['<C-y>'] = cmp.mapping.confirm {
+          behavior = cmp.ConfirmBehavior.Replace,
+          select = false,
+        },
+        -- Manually trigger a completion from nvim-cmp.
+        --  Generally you don't need this, because nvim-cmp will display
+        --  completions whenever it has completion options available.
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.abort(),
+        -- Scroll the documentation window [b]ack / [f]orward
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        -- ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.close(),
-        ['<C-y>'] = cmp.mapping(
-          cmp.mapping.confirm {
-            behavior = cmp.ConfirmBehavior.Insert,
-            select = false,
-          },
-          { 'i', 'c' }
-        ),
+        -- Think of <c-l> as moving to the right of your snippet expansion.
+        --  So if you have a snippet that's like:
+        --  function $name($args)
+        --    $body
+        --  end
+        --
+        -- <c-l> will move you to the right of each of the expansion locations.
+        -- <c-h> is similar, except moving you backwards.
+        ['<C-l>'] = cmp.mapping(function()
+          if luasnip.expand_or_locally_jumpable() then
+            luasnip.expand_or_jump()
+          end
+        end, { 'i', 's' }),
+        ['<C-h>'] = cmp.mapping(function()
+          if luasnip.locally_jumpable(-1) then
+            luasnip.jump(-1)
+          end
+        end, { 'i', 's' }),
       },
       sources = cmp.config.sources {
         -- { name = "nvim_lua" },
