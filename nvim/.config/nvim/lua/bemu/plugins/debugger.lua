@@ -12,7 +12,7 @@ return {
       local ui = require "dapui"
 
       require("dapui").setup()
-      require("dap-go").setup()
+      -- require("dap-go").setup()
 
       require("nvim-dap-virtual-text").setup {
         -- This just tries to mitigate the chance that I leak tokens here. Probably won't stop it from happening...

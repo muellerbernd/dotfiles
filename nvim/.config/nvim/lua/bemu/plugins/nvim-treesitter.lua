@@ -69,15 +69,15 @@ return {
         'hyprlang',
         'typst',
       },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = '<C-space>',
-          node_incremental = '<C-space>',
-          scope_incremental = false,
-          node_decremental = '<bs>',
-        },
-      },
+      -- incremental_selection = {
+      --   enable = true,
+      --   keymaps = {
+      --     init_selection = '<cr>',
+      --     node_incremental = '<leader>n',
+      --     scope_incremental = false,
+      --     node_decremental = '<leader>tsp',
+      --   },
+      -- },
       -- enable nvim-ts-context-commentstring plugin for commenting tsx and jsx
       -- context_commentstring = {
       --   enable = true,

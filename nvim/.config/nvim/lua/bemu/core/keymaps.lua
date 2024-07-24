@@ -24,11 +24,11 @@ vim.keymap.set('t', '<C-k>', '<C-\\><C-n><C-W>k')
 vim.keymap.set('t', '<C-l>', '<C-\\><C-n><C-W>l')
 
 -- terminal
-vim.keymap.set('n', '<leader>tn', function()
-  require('bemu.core.funcs').vert_term()
-end, { desc = 'New terminal in vert split' })
-vim.keymap.set('n', '<leader>ts', ":lua require('bemu.core.funcs').horiz_term()<CR>",
-  { desc = 'New terminal in horiz split' })
+-- vim.keymap.set('n', '<leader>tn', function()
+--   require('bemu.core.funcs').vert_term()
+-- end, { desc = 'New terminal in vert split' })
+-- vim.keymap.set('n', '<leader>ts', ":lua require('bemu.core.funcs').horiz_term()<CR>",
+--   { desc = 'New terminal in horiz split' })
 
 -- ctrl+s to save
 vim.keymap.set('n', '<c-s>', '<cmd>update<CR>', { desc = 'write file' })
@@ -89,9 +89,9 @@ vim.keymap.set('n', '<M-k>', function()
   end
 end)
 
-vim.keymap.set('n', '<leader>y', '"+yy', { desc = 'copy to clipboard' })
-vim.keymap.set('n', '<leader>p', '"+p', { desc = 'paste after from clipboard' })
-vim.keymap.set('n', '<leader>P', '"+P', { desc = 'paste before from clipboard' })
+-- vim.keymap.set('n', '<leader>y', '"+yy', { desc = 'copy to clipboard' })
+-- vim.keymap.set('n', '<leader>p', '"+p', { desc = 'paste after from clipboard' })
+-- vim.keymap.set('n', '<leader>P', '"+P', { desc = 'paste before from clipboard' })
 
 -- Don't leave visual mode after indenting
 vim.keymap.set('v', '>', '>gv^')

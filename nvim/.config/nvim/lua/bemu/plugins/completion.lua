@@ -44,6 +44,7 @@ return {
     local luasnip = require 'luasnip'
     local cmp = require 'cmp'
     local lspkind = require 'lspkind'
+    local compare = require 'cmp.config.compare'
 
     local cmp_select = { behavior = cmp.SelectBehavior.Insert }
 
@@ -70,14 +71,14 @@ return {
         -- keyword_length = 1,
         -- keyword_pattern = '.*',
       },
-      confirmation = { default_behavior = cmp.ConfirmBehavior.Replace },
+      -- confirmation = { default_behavior = cmp.ConfirmBehavior.Replace },
       -- configure lspkind for vs-code like pictograms in completion menu
-      formatting = {
-        format = lspkind.cmp_format {
-          maxwidth = 50,
-          ellipsis_char = '...',
-        },
-      },
+      -- formatting = {
+      --   format = lspkind.cmp_format {
+      --     maxwidth = 50,
+      --     ellipsis_char = '...',
+      --   },
+      -- },
       mapping = cmp.mapping.preset.insert {
         -- Select the [n]ext item
         ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
@@ -86,7 +87,7 @@ return {
         -- Accept ([y]es) the completion.
         --  This will auto-import if your LSP supports it.
         --  This will expand snippets if the LSP sent a snippet.
-        ['<C-y>'] = cmp.mapping.confirm {
+        ['<cr>'] = cmp.mapping.confirm {
           behavior = cmp.ConfirmBehavior.Replace,
           select = false,
         },
@@ -145,6 +146,23 @@ return {
         -- },
         { name = 'nvim_lsp_signature_help' },
       },
+      sorting = {
+        priority_weight = 2,
+        comparators = {
+          -- Default: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua
+          -- With sort_text added
+          compare.exact,
+          compare.score,
+          compare.sort_text,
+          compare.offset,
+          compare.recently_used,
+          compare.locality,
+          compare.kind,
+          compare.length,
+          compare.order,
+        },
+      },
+
       -- sorting = {
       --     comparators = {
       --         cmp.config.compare.offset,
