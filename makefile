@@ -17,6 +17,7 @@ install-default:
 	gpg --output ./gitconf-work/.gitconfig-job --decrypt ./gitconf-work/.gitconfig-job.gpg
 	stow --no-folding --restow -v -t $$HOME i3-common \
 		sway-common \
+		niri \
 		hypr-common \
 		waybar \
 		dunst \
