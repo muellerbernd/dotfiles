@@ -2,7 +2,36 @@
 // "/-" comments out the following node.
 // Check the wiki for a full description of the configuration:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Overview
+spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
 spawn-at-startup "waybar"
+spawn-at-startup "gnome-keyring-daemon" "--start" "--components=ssh,secrets,pkcs11"
+spawn-at-startup "lxpolkit"
+spawn-at-startup "nm-applet" "--indicator"
+spawn-at-startup "nextcloud"
+spawn-at-startup "blueman-applet"
+spawn-at-startup "dunst"
+spawn-at-startup "xbindkeys"
+spawn-at-startup "~/scripts/check-dotfiles.sh"
+spawn-at-startup "hyprpaper"
+spawn-at-startup "kanshi"
+spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store" // Stores only text data
+spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store" // Stores only image data
+spawn-at-startup "hypridle"
+
+// This flag will make niri ask the applications to omit their client-side decorations.
+// If an application will specifically ask for CSD, the request will be honored. Additionally, clients will be informed that they are tiled, removing some rounded corners.
+// With prefer-no-csd set, applications that negotiate server-side decorations through the xdg-decoration protocol will have focus ring and border drawn around them without a solid colored background.
+prefer-no-csd
+
+environment {
+    QT_QPA_PLATFORM "wayland"
+    XDG_CURRENT_DESKTOP "niri"
+    DISPLAY null
+}
+
+hotkey-overlay {
+    skip-at-startup
+}
 
 // Input device configuration.
 // Find the full list of options on the wiki:
@@ -268,7 +297,7 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return { spawn "foot"; }
     Mod+D { spawn "rofi-script"; }
-    Super+Alt+L { spawn "swaylock"; }
+    Mod+Escape { spawn "loginctl" "lock-session"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.
@@ -280,6 +309,9 @@ binds {
     XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
     XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+
+    XF86MonBrightnessDown { spawn "light" "-T" "0.9"; }
+    XF86MonBrightnessUp   { spawn "light" "-T" "1.1"; }
 
     Mod+Shift+Q { close-window; }
 
