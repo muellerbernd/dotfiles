@@ -7,7 +7,7 @@ spawn-at-startup "waybar"
 spawn-at-startup "gnome-keyring-daemon" "--start" "--components=ssh,secrets,pkcs11"
 spawn-at-startup "lxpolkit"
 spawn-at-startup "nm-applet" "--indicator"
-spawn-at-startup "nextcloud"
+spawn-at-startup "cage" "--" "nextcloud"
 spawn-at-startup "blueman-applet"
 spawn-at-startup "dunst"
 spawn-at-startup "xbindkeys"
@@ -27,6 +27,8 @@ environment {
     QT_QPA_PLATFORM "wayland"
     XDG_CURRENT_DESKTOP "niri"
     // DISPLAY null
+    DISPLAY ":0"
+    // WAYLAND_DISPLAY "wayland-0"
 }
 
 hotkey-overlay {
@@ -115,6 +117,14 @@ output "eDP-1" {
     // automatically.
     // position x=1280 y=0
 }
+
+// workspace "xwayland" {
+// }
+// // Open xwayland on the "xwayland" workspace at niri startup.
+// window-rule {
+//     match at-startup=true app-id=r#"^wlroots$"#
+//     open-on-workspace "xwayland"
+// }
 
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
