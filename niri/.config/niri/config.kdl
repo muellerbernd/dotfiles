@@ -26,7 +26,7 @@ prefer-no-csd
 environment {
     QT_QPA_PLATFORM "wayland"
     XDG_CURRENT_DESKTOP "niri"
-    DISPLAY null
+    // DISPLAY null
 }
 
 hotkey-overlay {
