@@ -9,6 +9,7 @@ return {
     'nvim-telescope/telescope-file-browser.nvim',
     -- It sets vim.ui.select to telescope. That means for example that neovim core stuff can fill the telescope picker. Example would be lua vim.lsp.buf.code_action()
     'nvim-telescope/telescope-ui-select.nvim',
+    'debugloop/telescope-undo.nvim',
   },
   config = function()
     local actions = require 'telescope.actions'
@@ -16,7 +17,8 @@ return {
     -- local themes = require 'telescope.themes'
     -- local previewers = require 'telescope.previewers'
     -- local trouble = require("trouble.providers.telescope")
-    require('telescope').setup {
+    local telescope = require 'telescope'
+    telescope.setup {
       defaults = {
         vimgrep_arguments = {
           'rg',
@@ -96,10 +98,10 @@ return {
       },
       extensions = {
         fzf = {
-          fuzzy = true, -- false will only do exact matching
+          fuzzy = true,                   -- false will only do exact matching
           override_generic_sorter = true, -- override the generic sorter
-          override_file_sorter = true, -- override the file sorter
-          case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
+          override_file_sorter = true,    -- override the file sorter
+          case_mode = 'smart_case',       -- or "ignore_case" or "respect_case"
           -- the default case_mode is "smart_case"
         },
         file_browser = {
@@ -137,12 +139,13 @@ return {
     -- To get fzf loaded and working with telescope, you need to call
     -- load_extension, somewhere after setup function:
     -- Load the fzy native extension at the start.
-    pcall(require('telescope').load_extension, 'fzy_native')
+    telescope.load_extension 'fzy_native'
     -- To get telescope-file-browser loaded
-    pcall(require('telescope').load_extension, 'file_browser')
+    telescope.load_extension 'file_browser'
     -- To get ui-select loaded and working with telescope, you need to call
     -- load_extension, somewhere after setup function:
     -- require('telescope').load_extension 'ui-select'
+    telescope.load_extension 'undo'
 
     local builtin = require 'telescope.builtin'
     local custom = require 'bemu.plugins.telescope.funcs'
@@ -156,7 +159,8 @@ return {
     vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[s]earch current [w]ord' })
     vim.keymap.set('n', '<leader>sg', custom.live_grep, { desc = '[s]earch by [g]rep' })
     vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
-    vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, { desc = '[s]earch with [G]rep in current buffer' })
+    vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find,
+      { desc = '[s]earch with [G]rep in current buffer' })
     vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[s]earch [d]iagnostics' })
     vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[s]earch [r]esume' })
     vim.keymap.set('n', '<leader>s.', custom.oldfiles, { desc = '[s]earch Recent Files ("." for repeat)' })
