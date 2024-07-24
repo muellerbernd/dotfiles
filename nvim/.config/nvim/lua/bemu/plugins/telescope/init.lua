@@ -139,7 +139,7 @@ return {
     -- To get fzf loaded and working with telescope, you need to call
     -- load_extension, somewhere after setup function:
     -- Load the fzy native extension at the start.
-    telescope.load_extension 'fzy_native'
+    telescope.load_extension 'fzf'
     -- To get telescope-file-browser loaded
     telescope.load_extension 'file_browser'
     -- To get ui-select loaded and working with telescope, you need to call
