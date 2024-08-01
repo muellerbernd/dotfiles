@@ -47,6 +47,7 @@ install-default:
 		thunar \
 		mime-apps \
 		foot \
+		contour \
 		wallpapers
 
 delete-default:
@@ -82,6 +83,7 @@ delete-default:
 		thunar \
 		mime-apps \
 		foot \
+		contour \
 		wallpapers
 
 install-mue-p14s:

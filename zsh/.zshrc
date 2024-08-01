@@ -117,6 +117,9 @@ export STARSHIP_LOG='error'
 #
 # schedprompt
 
+
+ZSH_HIGHLIGHT_STYLES[comment]=fg=245
+
 # load aliases
 if [ -f ~/.zsh_aliases ]; then
     source ~/.zsh_aliases
