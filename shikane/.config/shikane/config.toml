@@ -1,0 +1,30 @@
+[[profile]]
+name = "ast-work"
+exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec ~/.config/kanshi/move_workspaces_work.py","exec killall -SIGUSR2 waybar"]
+
+[[profile.output]]
+enable = true
+search = ["m=0xD291", "s=", "v=AU Optronics"]
+mode = "1920x1200@60.026Hz"
+position = "0,0"
+scale = 1.0
+transform = "normal"
+adaptive_sync = false
+
+[[profile.output]]
+enable = true
+search = ["m=DELL U2415", "s=7MT0196C30JU", "v=Dell Inc."]
+mode = "1920x1200@59.95Hz"
+position = "3840,0"
+scale = 1.0
+transform = "270"
+adaptive_sync = false
+
+[[profile.output]]
+enable = true
+search = ["m=DELL U2415", "s=7MT018B3062L", "v=Dell Inc."]
+mode = "1920x1200@59.95Hz"
+position = "1920,0"
+scale = 1.0
+transform = "normal"
+adaptive_sync = false
