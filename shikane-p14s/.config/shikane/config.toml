@@ -4,7 +4,7 @@ exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\""
 
 [[profile.output]]
 enable = true
-search = ["n/eDP-1"]
+search = ["m=0xD291", "s=", "v=AU Optronics"]
 mode = "1920x1200@60.026Hz"
 position = "0,0"
 scale = 1.0
@@ -27,12 +27,33 @@ scale = 1.0
 transform = "normal"
 
 [[profile]]
+name = "ilmbase"
+exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec killall -SIGUSR2 waybar","hyprctl dispatch workspace -- 1"]
+
+[[profile.output]]
+enable = true
+search = ["m=0xD291", "s=", "v=AU Optronics"]
+mode = "1920x1200@60.026Hz"
+position = "1920,0"
+scale = 1.0
+transform = "normal"
+
+[[profile.output]]
+enable = true
+search = ["m=DELL P2317H", "s=HH77Y7B4AM6L", "v=Dell Inc."]
+mode = "1920x1080@60Hz"
+position = "0,0"
+scale = 1.0
+transform = "normal"
+adaptive_sync = false
+
+[[profile]]
 name = "undock"
 exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec killall -SIGUSR2 waybar","hyprctl dispatch workspace -- 1"]
 
 [[profile.output]]
 enable = true
-search = ["n/eDP-1"]
+search = ["m=0xD291", "s=", "v=AU Optronics"]
 mode = "1920x1200@60.026Hz"
 position = "0,0"
 scale = 1.0
