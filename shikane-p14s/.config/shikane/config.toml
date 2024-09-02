@@ -1,6 +1,6 @@
 [[profile]]
 name = "ast-work"
-exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec ~/.config/kanshi/move_workspaces_work.py","exec killall -SIGUSR2 waybar"]
+exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec ~/.config/kanshi/move_workspaces_work.py","exec killall -SIGUSR2 waybar","hyprctl dispatch workspace -- 1"]
 
 [[profile.output]]
 enable = true
@@ -28,7 +28,7 @@ transform = "normal"
 
 [[profile]]
 name = "undock"
-exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec killall -SIGUSR2 waybar"]
+exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec killall -SIGUSR2 waybar","hyprctl dispatch workspace -- 1"]
 
 [[profile.output]]
 enable = true
