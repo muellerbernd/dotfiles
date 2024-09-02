@@ -1,0 +1,39 @@
+[[profile]]
+name = "ast-work"
+exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec ~/.config/kanshi/move_workspaces_work.py","exec killall -SIGUSR2 waybar"]
+
+[[profile.output]]
+enable = true
+search = ["n/eDP-1"]
+mode = "1920x1200@60.026Hz"
+position = "0,0"
+scale = 1.0
+transform = "normal"
+
+[[profile.output]]
+enable = true
+search = ["m=DELL U2415", "s=7MT0196C30JU", "v=Dell Inc."]
+mode = "1920x1200@59.95Hz"
+position = "3840,0"
+scale = 1.0
+transform = "270"
+
+[[profile.output]]
+enable = true
+search = ["m=DELL U2415", "s=7MT018B3062L", "v=Dell Inc."]
+mode = "1920x1200@59.95Hz"
+position = "1920,0"
+scale = 1.0
+transform = "normal"
+
+[[profile]]
+name = "undock"
+exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec killall -SIGUSR2 waybar"]
+
+[[profile.output]]
+enable = true
+search = ["n/eDP-1"]
+mode = "1920x1200@60.026Hz"
+position = "0,0"
+scale = 1.0
+transform = "normal"
