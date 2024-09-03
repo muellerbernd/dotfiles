@@ -13,7 +13,8 @@ spawn-at-startup "dunst"
 spawn-at-startup "xbindkeys"
 spawn-at-startup "~/scripts/check-dotfiles.sh"
 spawn-at-startup "hyprpaper"
-spawn-at-startup "kanshi"
+// spawn-at-startup "kanshi"
+spawn-at-startup "shikane"
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store" // Stores only text data
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store" // Stores only image data
 spawn-at-startup "hypridle"
@@ -78,7 +79,7 @@ input {
 
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-    // focus-follows-mouse
+    focus-follows-mouse
 }
 
 // You can configure outputs by their name, which you can find
@@ -211,9 +212,9 @@ layout {
         // If you enable the border, you probably want to disable the focus ring.
         off
 
-        width 4
-        active-color "#ffc87f"
-        inactive-color "#505050"
+        //width 4
+        //active-color "#ffc87f"
+        //inactive-color "#505050"
 
         // active-gradient from="#ffbb66" to="#ffc880" angle=45 relative-to="workspace-view"
         // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
@@ -272,8 +273,8 @@ window-rule {
     // This regular expression is intentionally made as specific as possible,
     // since this is the default config, and we want no false positives.
     // You can get away with just app-id="wezterm" if you want.
-    match app-id=r#"^org\.wezfurlong\.wezterm$"#
-    default-column-width {}
+    //match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    //default-column-width {}
 }
 
 // Example: block out two password managers from screen capture.
