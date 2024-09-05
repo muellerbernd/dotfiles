@@ -34,8 +34,8 @@
     path = ~/.gitconfig-job
 [includeIf "gitdir:~/work/"] # job needs, like workspace/* so all included projects
     path = ~/.gitconfig-job
-[credential]
-    helper = store
+; [credential]
+;     helper = store
 [pull]
     rebase = false
 [init]
