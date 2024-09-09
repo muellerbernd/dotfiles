@@ -74,7 +74,7 @@ return {
 
           -- Rename the variable under your cursor
           --  Most Language Servers support renaming across files, etc.
-          -- map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+          map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
@@ -308,7 +308,7 @@ return {
         },
       }
       -- preview code with LSP code actions applied
-      vim.keymap.set('n', 'gra', function()
+      vim.keymap.set('n', '<space>ca', function()
         require('actions-preview').code_actions()
       end, { desc = 'LSP: [c]ode [a]ction preview' })
     end,
