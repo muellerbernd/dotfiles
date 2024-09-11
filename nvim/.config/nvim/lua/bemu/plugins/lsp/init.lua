@@ -145,7 +145,7 @@ return {
         'html',          -- needs vscode-langservers-extracted
         'marksman',      -- needs marksman-bin
         'hls',           -- needs haskell-language-server
-        'ts_ls',      -- needs vscode-langservers-extracted
+        -- 'ts_ls',      -- needs vscode-langservers-extracted
         'jsonls',        -- needs vscode-langservers-extracted
         'eslint',        -- needs vscode-langservers-extracted
         'typst_lsp',     -- needs typst-lsp
