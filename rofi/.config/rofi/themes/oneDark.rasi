@@ -27,7 +27,7 @@ window {
     border-color:                   @white;
     border-radius:                  5;
     padding:                        10;
-    width:                          40%;
+    width:                          30%;
 }
 
 prompt {
@@ -62,7 +62,7 @@ inputbar {
 
 mainbox {
     border:                         0;
-    border-color:                   @cyan;
+    border-color:                   @darkorange;
     padding:                        6;
 }
 
@@ -71,7 +71,7 @@ listview {
     columns:                        1;
     fixed-height:                   0;
     border:                         0;
-    border-color:                   @cyan;
+    border-color:                   @darkorange;
     spacing:                        4px;
     scrollbar:                      true;
     padding:                        20px 5px;
@@ -101,7 +101,7 @@ element normal.active {
     text-color:                     @base;
 }
 element selected.normal {
-    background-color:               @cyan;
+    background-color:               @darkorange;
     text-color:                     @base;
 }
 element selected.urgent {
@@ -125,12 +125,12 @@ element alternate.urgent {
 
 element alternate.active {
     background-color:               @green;
-    text-color:                     @text;
+    text-color:                     @base;
 }
 
 sidebar {
     border:                         0;
-    border-color:                   @cyan;
+    border-color:                   @darkorange;
     border-radius:                  0;
 }
 
@@ -140,14 +140,14 @@ button {
     background-color:               @base;
     margin:                         5px;
     padding:                        3px;
-    text-color:                     @cyan;
+    text-color:                     @darkorange;
     border:                         2px;
     border-radius:                  100%;
     border-color:                   @text;
 }
 
 button selected {
-    background-color:               @cyan;
+    background-color:               @darkorange;
     text-color:                     @base;
     border:                         0;
     border-radius:                  100%;
@@ -157,14 +157,14 @@ button selected {
 scrollbar {
     width:                          4px;
     border:                         5px;
-    handle-color:                   @cyan;
+    handle-color:                   @darkorange;
     handle-width:                   8px;
     padding:                        0;
 }
 
 message {
     border:                         0;
-    border-color:                   @cyan;
+    border-color:                   @darkorange;
     padding:                        1px;
 }
 
