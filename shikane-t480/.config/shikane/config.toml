@@ -20,7 +20,7 @@ exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\""
 
 [[profile]]
 name = "ammera"
-exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec killall -SIGUSR2 waybar","hyprctl dispatch workspace -- 1"]
+exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec ~/.config/shikane/move_workspaces_ammera.py","exec killall -SIGUSR2 waybar","hyprctl dispatch workspace -- 1"]
     [[profile.output]]
     enable = true
     search = ["n/eDP-1"]
@@ -31,12 +31,13 @@ exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\""
 
     [[profile.output]]
     enable = true
-    search = ["m=BNQ BenQ GW2780", "s=ETFAL03748SL0", "v=BNQ"]
+    search = ["m=BenQ GW2780", "s=ETFAL03748SL0"]
     mode = "1920x1080@60Hz"
     position = "0,0"
     scale = 1.0
     transform = "normal"
     adaptive_sync = false
+
 
 [[profile]]
 name = "undock"
