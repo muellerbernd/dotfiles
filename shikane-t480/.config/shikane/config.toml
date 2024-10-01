@@ -3,20 +3,29 @@ name = "ilmbase"
 exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec killall -SIGUSR2 waybar","hyprctl dispatch workspace -- 1"]
     [[profile.output]]
     enable = true
-    search = ["n/eDP-1"]
-    mode = "1920x1080@60.026Hz"
-    position = "1920,0"
-    scale = 1.0
-    transform = "normal"
-
-    [[profile.output]]
-    enable = true
     search = ["m=DELL P2317H", "s=HH77Y7B4AM6L", "v=Dell Inc."]
     mode = "1920x1080@60Hz"
     position = "0,0"
     scale = 1.0
-    transform = "normal"
     adaptive_sync = false
+    transform = "normal"
+
+    [[profile.output]]
+    enable = true
+    search = ["m=DELL P2317H", "s=HH77Y75BAEDB", "v=Dell Inc."]
+    mode = "1920x1080@60Hz"
+    position = "1920,0"
+    scale = 1.0
+    adaptive_sync = false
+    transform = "90"
+
+    [[profile.output]]
+    enable = true
+    search = ["n/eDP-1"]
+    mode = "1920x1080@60.026Hz"
+    position = "3000,0"
+    scale = 1.0
+    transform = "normal"
 
 [[profile]]
 name = "ammera"
