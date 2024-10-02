@@ -1,5 +1,5 @@
 [Added Associations]
-application/octet-stream=nvim.desktop;CloudCompare.desktop;mousepad.desktop;
+application/octet-stream=nvim.desktop;
 text/x-chdr=nvim.desktop;;
 video/x-matroska=vlc.desktop;
 application/pdf=okularApplication_pdf.desktop;org.pwmt.zathura.desktop;
@@ -12,7 +12,7 @@ text/html=firefox.desktop;
 model/stl=PrusaSlicer.desktop;meshlab.desktop;blender.desktop;
 application/xml=nvim.desktop;
 text/x-csrc=nvim.desktop;
-text/plain=CloudCompare.desktop;nvim.desktop;
+text/plain=nvim.desktop;
 text/x-c++src=nvim.desktop;
 application/x-shellscript=nvim.desktop;
 text/x-tex=nvim.desktop;
@@ -51,3 +51,4 @@ x-scheme-handler/etcher=balena-etcher-electron.desktop
 x-scheme-handler/about=firefox.desktop
 x-scheme-handler/unknown=firefox.desktop
 x-scheme-handler/msteams=teams-for-linux.desktop
+image/x-photo-cd=CloudCompare.desktop

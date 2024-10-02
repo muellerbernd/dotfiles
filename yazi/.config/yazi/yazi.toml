@@ -45,6 +45,7 @@ play = [
 [open]
 rules = [
     { name = "*/", use = [ "edit", "open", "reveal" ] },
+    { name = "*.pcd", use = [ "open", "reveal" ] },
 
     { mime = "text/*",  use = [ "edit", "reveal" ] },
     { mime = "image/*", use = [ "open", "reveal" ] },
