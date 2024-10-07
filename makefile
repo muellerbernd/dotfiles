@@ -19,6 +19,7 @@ install-default:
 		sway-common \
 		niri \
 		hypr-common \
+		jay \
 		waybar \
 		dunst \
 		rofi \
@@ -55,6 +56,7 @@ delete-default:
 	stow --no-folding -v -t $$HOME --delete i3-common \
 		sway-common \
 		hypr-common \
+		jay \
 		waybar \
 		dunst \
 		rofi \
