@@ -1,15 +1,20 @@
-# keymap = """
-#     xkb_keymap {
-#         xkb_keycodes { include "evdev+aliases(qwerty)" };
-#         xkb_types    { include "complete"              };
-#         xkb_compat   { include "complete"              };
-#         xkb_symbols  { include "pc+de(basic)"     };
-#     };
-#     """
+keymap = """
+    xkb_keymap {
+        xkb_keycodes { include "evdev+aliases(qwerty)" };
+        xkb_types    { include "complete"              };
+        xkb_compat   { include "complete"              };
+        xkb_symbols  { include "pc+de(basic)"     };
+    };
+    """
 
 on-graphics-initialized = { type = "exec", exec = "dunst" }
-on-graphics-initialized = { type = "exec", exec = "waybar" }
 on-graphics-initialized = { type = "exec", exec = "~/scripts/check-dotfiles.sh" }
+on-graphics-initialized = { type = "exec", exec = "lxpolkit" }
+on-graphics-initialized = { type = "exec", exec ="gnome-keypring-daemon --start --components=ssh,secrets,pkcs11" }
+on-graphics-initialized = { type = "exec", exec ="nm-applet --indicator" }
+on-graphics-initialized = { type = "exec", exec ="blueman-applet" }
+on-graphics-initialized = { type = "exec", exec ="wl-paste --type text --watch cliphist store" }
+on-graphics-initialized = { type = "exec", exec ="wl-paste --type image --watch cliphist store" }
 
 [shortcuts]
 mod4-Left = "focus-left"
@@ -34,8 +39,9 @@ mod4-shift-q = "close"
 mod4-space = "toggle-floating"
 mod4-Return = { type = "exec", exec = "foot" }
 mod4-d = { type = "exec", exec = "fuzzel" }
-mod4-shift-e = "quit"
-mod4-shift-r = "reload-config-toml"
+# mod4-shift-e = "quit"
+mod4-shift-e = { type = "exec", exec = "~/.config/fuzzel/scripts/powermenu.sh" }
+mod4-shift-c = "reload-config-toml"
 
 ctrl-alt-F1 = { type = "switch-to-vt", num = 1 }
 ctrl-alt-F2 = { type = "switch-to-vt", num = 2 }
@@ -75,3 +81,16 @@ mod4-shift-0 = { type = "move-to-workspace", name = "10" }
 [status]
 format = "i3bar"
 exec = "i3status"
+
+[[outputs]]
+name = "left"
+match.serial-number = "HH77Y7B4AM6L"
+x = 0
+y = 0
+
+[[outputs]]
+name = "right"
+match.serial-number = "HH77Y75BAEDB"
+x = 1920
+y = 0
+transform = "rotate-90"
