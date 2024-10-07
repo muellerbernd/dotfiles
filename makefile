@@ -23,6 +23,7 @@ install-default:
 		waybar \
 		dunst \
 		rofi \
+		fuzzel \
 		gitconf \
 		gitconf-work \
 		clang-format \
@@ -60,6 +61,7 @@ delete-default:
 		waybar \
 		dunst \
 		rofi \
+		fuzzel \
 		gitconf \
 		gitconf-work \
 		clang-format \

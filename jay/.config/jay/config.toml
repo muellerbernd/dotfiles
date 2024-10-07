@@ -33,6 +33,7 @@ mod4-a = "focus-parent"
 mod4-shift-q = "close"
 mod4-space = "toggle-floating"
 mod4-Return = { type = "exec", exec = "foot" }
+mod4-d = { type = "exec", exec = "fuzzel" }
 mod4-shift-e = "quit"
 mod4-shift-r = "reload-config-toml"
 
