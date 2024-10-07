@@ -8,7 +8,7 @@ keymap = """
     """
 
 on-graphics-initialized = { type = "exec", exec = "dunst" }
-on-graphics-initialized = { type = "exec", exec = "~/scripts/check-dotfiles.sh" }
+on-graphics-initialized = { type = "exec", exec = "/home/bernd/scripts/check-dotfiles.sh" }
 on-graphics-initialized = { type = "exec", exec = "lxpolkit" }
 on-graphics-initialized = { type = "exec", exec ="gnome-keypring-daemon --start --components=ssh,secrets,pkcs11" }
 on-graphics-initialized = { type = "exec", exec ="nm-applet --indicator" }
@@ -40,7 +40,7 @@ mod4-space = "toggle-floating"
 mod4-Return = { type = "exec", exec = "foot" }
 mod4-d = { type = "exec", exec = "fuzzel" }
 # mod4-shift-e = "quit"
-mod4-shift-e = { type = "exec", exec = "~/.config/fuzzel/scripts/powermenu.sh" }
+mod4-shift-e = { type = "exec", exec = "/home/bernd/.config/fuzzel/scripts/powermenu.sh" }
 mod4-shift-c = "reload-config-toml"
 
 ctrl-alt-F1 = { type = "switch-to-vt", num = 1 }
