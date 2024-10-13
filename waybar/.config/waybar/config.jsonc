@@ -8,13 +8,13 @@
     "height": 0,
     "modules-left": [
         "clock",
-        // "custom/weather",
-        // "wlr/workspaces",
         "hyprland/workspaces",
-        "hyprland/submap"
+        "hyprland/submap",
+        "river/layout"
     ],
     "modules-center": [
-        "hyprland/window"
+        "hyprland/window",
+        "river/window"
     ],
     "modules-right": [
         // "keyboard-state",

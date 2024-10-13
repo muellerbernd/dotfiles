@@ -20,6 +20,7 @@ install-default:
 		niri \
 		hypr-common \
 		jay \
+		river \
 		waybar \
 		dunst \
 		rofi \
@@ -58,6 +59,7 @@ delete-default:
 		sway-common \
 		hypr-common \
 		jay \
+		river \
 		waybar \
 		dunst \
 		rofi \
