@@ -9,13 +9,13 @@
     "modules-left": [
         "clock",
         "hyprland/workspaces",
-        "hyprland/submap",
-        "river/tags",
-        "river/mode"
+        "hyprland/submap"
+        //"river/tags",
+        //"river/mode"
     ],
     "modules-center": [
-        "hyprland/window",
-        "river/window"
+        "hyprland/window"
+        //"river/window"
     ],
     "modules-right": [
         // "keyboard-state",
