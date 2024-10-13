@@ -10,7 +10,8 @@
         "clock",
         "hyprland/workspaces",
         "hyprland/submap",
-        "river/layout"
+        "river/tags",
+        "river/mode"
     ],
     "modules-center": [
         "hyprland/window",

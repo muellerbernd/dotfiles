@@ -23,16 +23,20 @@ riverctl map normal Super+Shift R spawn ~/.config/river/init
 riverctl map normal Super+Shift Q close
 
 # Super+Shift+E to exit river
-riverctl map normal Super+Shift E exit
+riverctl map normal Super+Shift E spawn "$HOME/.config/fuzzel/scripts/powermenu.sh"
 
 # Super+Right and Super+Left to focus the next/previous view in the layout stack
-riverctl map normal Super Right focus-view next
-riverctl map normal Super Left focus-view previous
+riverctl map normal Super Right focus-view right
+riverctl map normal Super Left focus-view left
+riverctl map normal Super Up focus-view up
+riverctl map normal Super Down focus-view down
 
 # Super+Shift+J and Super+Shift+K to swap the focused view with the next/previous
 # view in the layout stack
-riverctl map normal Super+Shift Right swap next
-riverctl map normal Super+Shift Left swap previous
+riverctl map normal Super+Shift Right swap right
+riverctl map normal Super+Shift Left swap left
+riverctl map normal Super+Shift Up swap up
+riverctl map normal Super+Shift Down swap down
 
 # Super+Period and Super+Comma to focus the next/previous output
 riverctl map normal Super Period focus-output next
@@ -43,7 +47,7 @@ riverctl map normal Super+Shift Period send-to-output next
 riverctl map normal Super+Shift Comma send-to-output previous
 
 # Super+Return to bump the focused view to the top of the layout stack
-# riverctl map normal Super Return zoom
+riverctl map normal Super+Alt Return zoom
 
 # Super+H and Super+L to decrease/increase the main ratio of rivertile(1)
 # riverctl map normal Super H send-layout-cmd rivertile "main-ratio -0.05"
@@ -53,23 +57,30 @@ riverctl map normal Super+Shift Comma send-to-output previous
 # riverctl map normal Super+Shift H send-layout-cmd rivertile "main-count +1"
 # riverctl map normal Super+Shift L send-layout-cmd rivertile "main-count -1"
 
-# Super+Alt+{H,J,K,L} to move views
-riverctl map normal Super+Alt Left move left 100
-riverctl map normal Super+Alt Down move down 100
-riverctl map normal Super+Alt Up move up 100
-riverctl map normal Super+Alt Right move right 100
+riverctl declare-mode float
+riverctl map normal Super R enter-mode float # Super+R to enter float mode
 
-# Super+Alt+Control+{H,J,K,L} to snap views to screen edges
-riverctl map normal Super+Alt+Control Left snap left
-riverctl map normal Super+Alt+Control Down snap down
-riverctl map normal Super+Alt+Control Up snap up
-riverctl map normal Super+Alt+Control Right snap right
+### Floating window mappings but note that these also apply to tiled windows.
+#
+# Super {Arrows} to move views
+riverctl map float Super Left move left 100
+riverctl map float Super Down move down 100
+riverctl map float Super Up move up 100
+riverctl map float Super Right move right 100
 
-# Super+Alt+Shift+{H,J,K,L} to resize views
-# riverctl map normal Super+Alt+Shift H resize horizontal -100
-# riverctl map normal Super+Alt+Shift J resize vertical 100
-# riverctl map normal Super+Alt+Shift K resize vertical -100
-# riverctl map normal Super+Alt+Shift L resize horizontal 100
+# Alt+{arrows} to snap views to screen edges
+riverctl map float Alt Left snap left
+riverctl map float Alt Down snap down
+riverctl map float Alt Up snap up
+riverctl map float Alt Right snap right
+
+# Shift+{arrows} to resize views
+riverctl map float Shift Left resize horizontal -100
+riverctl map float Shift Down resize vertical 100
+riverctl map float Shift Up resize vertical -100
+riverctl map float Shift Right resize horizontal 100
+
+riverctl map float None Escape enter-mode normal # Escape to exit float mode and return to normal mode
 
 # Super + Left Mouse Button to move views
 riverctl map-pointer normal Super BTN_LEFT move-view
@@ -102,6 +113,16 @@ all_tags=$(((1 << 32) - 1))
 riverctl map normal Super 0 set-focused-tags $all_tags
 riverctl map normal Super+Shift 0 set-view-tags $all_tags
 
+# scratchpad https://wiki.archlinux.org/title/River
+scratch_tag=$((1 << 20))
+
+riverctl map normal Super Minus toggle-focused-tags ${scratch_tag} # toggle the scratchpad
+riverctl map normal Super+Shift Minus set-view-tags ${scratch_tag} # send windows to the scratchpad
+
+# Set spawn tagmask to ensure new windows do not have the scratchpad tag unless explicitly set.
+all_but_scratch_tag=$((((1 << 32) - 1) ^ $scratch_tag))
+riverctl spawn-tagmask ${all_but_scratch_tag}
+
 # Super+Space to toggle float
 riverctl map normal Super Space toggle-float
 
@@ -131,19 +152,25 @@ for mode in normal locked; do
     riverctl map $mode None XF86Eject spawn 'eject -T'
 
     # Control pulse audio volume with pamixer (https://github.com/cdemoulins/pamixer)
-    riverctl map $mode None XF86AudioRaiseVolume spawn 'pamixer -i 5'
-    riverctl map $mode None XF86AudioLowerVolume spawn 'pamixer -d 5'
-    riverctl map $mode None XF86AudioMute spawn 'pamixer --toggle-mute'
+    riverctl map $mode None XF86AudioRaiseVolume spawn "$HOME/scripts/controlVolumePipewire.py up"
+    riverctl map $mode None XF86AudioLowerVolume spawn "$HOME/scripts/controlVolumePipewire.py down"
+    riverctl map $mode None XF86AudioMute spawn "$HOME/scripts/controlVolumePipewire.py mute"
 
     # Control MPRIS aware media players with playerctl (https://github.com/altdesktop/playerctl)
-    riverctl map $mode None XF86AudioMedia spawn 'playerctl play-pause'
-    riverctl map $mode None XF86AudioPlay spawn 'playerctl play-pause'
-    riverctl map $mode None XF86AudioPrev spawn 'playerctl previous'
-    riverctl map $mode None XF86AudioNext spawn 'playerctl next'
+    riverctl map $mode None XF86AudioMedia spawn "$HOME/scripts/playPauseToggle.py"
+    riverctl map $mode None XF86AudioPlay spawn "$HOME/scripts/playPauseToggle.py"
+    riverctl map $mode None XF86AudioPrev spawn "$HOME/scripts/playNextOrPrevious.sh prev"
+    riverctl map $mode None XF86AudioNext spawn "$HOME/scripts/playNextOrPrevious.sh next"
+    riverctl map $mode None XF86AudioMicMute spawn "wpctl set-mute @DEFAULT_SOURCE@ toggle"
 
     # Control screen backlight brightness with brightnessctl (https://github.com/Hummer12007/brightnessctl)
-    riverctl map $mode None XF86MonBrightnessUp spawn 'brightnessctl set +5%'
-    riverctl map $mode None XF86MonBrightnessDown spawn 'brightnessctl set 5%-'
+    riverctl map $mode None XF86MonBrightnessUp spawn 'light -A 1 && sh ~/scripts/notifyBrightness.sh'
+    riverctl map $mode None XF86MonBrightnessDown spawn 'light -U 1 && sh ~/scripts/notifyBrightness.sh'
+
+    # disable laptop keyboard
+    riverctl map $mode None XF86PowerOff spawn "$HOME/scripts/toggleLaptopKeyboard.sh"
+    # not working
+    # riverctl map $mode -release None Caps_Lock spawn "$HOME/scripts/notifyCaps.sh"
 done
 
 # Set background and border color
@@ -158,35 +185,49 @@ riverctl set-repeat 50 300
 riverctl rule-add -app-id 'float*' -title 'foo' float
 
 # Make all views with app-id "bar" and any title use client-side decorations
-riverctl rule-add -app-id "bar" csd
+# riverctl rule-add -app-id "bar" csd
 
 # Set the default layout generator to be rivertile and start it.
 # River will send the process group of the init executable SIGTERM on exit.
 riverctl default-layout rivertile
-rivertile -view-padding 1 -outer-padding 0 -main-location left -main-ratio 0.5 &
+rivertile -view-padding 1 -outer-padding 0 -main-location right -main-ratio 0.5 &
 
 riverctl keyboard-layout de
+# Set touchpad by grabbing the event
+for pad in $(riverctl list-inputs | grep -i touchpad ); do
+  riverctl input $pad events enabled
+  riverctl input $pad tap enabled
+  riverctl input $pad natural-scroll enabled
+done
+
+# riverctl input pointer-2-7-SynPS/2_Synaptics_TouchPad tap enabled
+# riverctl input pointer-2-7-SynPS/2_Synaptics_TouchPad natural-scroll enabled
 riverctl focus-follows-cursor always
 
+# Set app-ids and titles of views which should use client side decorations
+riverctl csd-filter-add app-id "firefox"
+
 # autostart commands
-# riverctl spawn 'pkill waybar && waybar'
-pkill waybar && waybar &
-dunst &
-nm-applet &
-blueman &
-nextcloud &
-dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
+riverctl spawn 'pkill waybar; waybar'
+# riverctl spawn 'waybar'
+riverctl spawn 'dunst'
+riverctl spawn 'nm-applet'
+riverctl spawn 'blueman'
+riverctl spawn 'nextcloud'
+riverctl spawn 'hypridle'
+riverctl spawn 'hyprpaper'
+riverctl spawn "dbus-update-activation-environment XDG_CURRENT_DESKTOP=river"
 # keyring stuff
-lxpolkit &
-gnome-keyring-daemon --start --components=ssh,secrets,pkcs11 &
+riverctl spawn 'lxpolkit'
+riverctl spawn 'gnome-keyring-daemon --start --components=ssh,secrets,pkcs11'
 
 # smarter paste
-wl-paste --type text --watch cliphist store &
-wl-paste --type image --watch cliphist store &
+riverctl spawn 'wl-paste --type text --watch cliphist store'
+riverctl spawn 'wl-paste --type image --watch cliphist store'
 
 # dynamic display management
-shikane &
+riverctl spawn 'shikane'
 
-~/scripts/check-dotfiles.sh &
+riverctl spawn "$HOME/scripts/check-dotfiles.sh"
 
 # vim: filetype=sh

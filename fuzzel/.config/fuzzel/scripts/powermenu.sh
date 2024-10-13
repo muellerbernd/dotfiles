@@ -48,6 +48,9 @@ run_lock_cmd() {
     elif [[ "$XDG_CURRENT_DESKTOP" == 'Hyprland' ]]; then
         # ~/.config/hypr/scripts/lock.sh
         hyprlock
+    elif [[ "$XDG_CURRENT_DESKTOP" == 'River' ]]; then
+        # ~/.config/hypr/scripts/lock.sh
+        hyprlock
     fi
 }
 
@@ -84,6 +87,8 @@ run_cmd() {
                 hyprctl dispatch exit
             elif [[ "$XDG_CURRENT_DESKTOP" == 'niri' ]]; then
                 niri msg action quit
+            elif [[ "$XDG_CURRENT_DESKTOP" == 'river' ]]; then
+                riverctl exit
             fi
         fi
     else

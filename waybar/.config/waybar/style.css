@@ -23,31 +23,36 @@ tooltip {
   border-color: #cdd6f4;
 }
 
-#workspaces button {
+#workspaces,
+#tags button {
   /* padding: 5px; */
   color: #cdd6f4;
   /* margin-right: 5px; */
 }
 
-#workspaces button.active {
+#workspaces,
+#tags button.active {
   background: #5f5f4f;
   color: #cdd6f4;
   border-radius: 10px;
 }
 
-#workspaces button.focused {
+#workspaces,
+#tags button.focused {
   color: #cdd6f4;
   background: #eba0ac;
   border-radius: 10px;
 }
 
-#workspaces button.urgent {
+#workspaces,
+#tags button.urgent {
   color: #111111;
   background: #a6e3a1;
   border-radius: 10px;
 }
 
-#workspaces button:hover {
+#workspaces,
+#tags button:hover {
   /* background: #111111; */
   background: #5f5f4f;
   color: #cdd6f4;
@@ -60,7 +65,9 @@ tooltip {
 #pulseaudio,
 #network,
 #workspaces,
+#tags,
 #submap,
+#mode,
 #tray,
 #keyboard-state,
 #privacy,
@@ -72,8 +79,9 @@ tooltip {
   /* border: 1px solid #181825; */
 }
 
-#submap {
-  color: #FF0000;
+#submap,
+#mode {
+  color: #ff0000;
   border-radius: 10px 10px 10px 10px;
   margin-left: 10px;
 }
@@ -83,7 +91,8 @@ tooltip {
   margin-right: 10px;
 }
 
-#workspaces {
+#workspaces,
+#tags {
   border-radius: 10px;
   margin-left: 10px;
   padding-right: 0px;
