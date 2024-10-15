@@ -142,6 +142,8 @@ return {
       -- vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
       -- vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
       -- vim.opt.foldenable = false
+      vim.o.foldmethod = 'expr'
+      vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
     end,
   },
   {
