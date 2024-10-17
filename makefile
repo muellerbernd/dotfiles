@@ -22,6 +22,7 @@ install-default:
 		jay \
 		river \
 		waybar \
+		yambar \
 		dunst \
 		rofi \
 		fuzzel \
@@ -61,6 +62,7 @@ delete-default:
 		jay \
 		river \
 		waybar \
+		yambar \
 		dunst \
 		rofi \
 		fuzzel \
