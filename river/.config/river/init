@@ -207,27 +207,9 @@ riverctl focus-follows-cursor always
 # Set app-ids and titles of views which should use client side decorations
 riverctl csd-filter-add app-id "firefox"
 
-# autostart commands
-riverctl spawn 'pkill waybar; waybar'
-# riverctl spawn 'waybar'
-riverctl spawn 'dunst'
-riverctl spawn 'nm-applet'
-riverctl spawn 'blueman'
-riverctl spawn 'nextcloud'
-riverctl spawn 'hypridle'
-riverctl spawn 'hyprpaper'
-riverctl spawn "dbus-update-activation-environment XDG_CURRENT_DESKTOP=river"
-# keyring stuff
-riverctl spawn 'lxpolkit'
-riverctl spawn 'gnome-keyring-daemon --start --components=ssh,secrets,pkcs11'
-
-# smarter paste
-riverctl spawn 'wl-paste --type text --watch cliphist store'
-riverctl spawn 'wl-paste --type image --watch cliphist store'
-
-# dynamic display management
-riverctl spawn 'shikane'
-
-riverctl spawn "$HOME/scripts/check-dotfiles.sh"
+# --------------------------------------------------------
+# AUTOSTART
+# --------------------------------------------------------
+riverctl spawn "$HOME/.config/river/autostart"
 
 # vim: filetype=sh

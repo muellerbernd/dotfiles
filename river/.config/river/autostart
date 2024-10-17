@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+
+# wallpaper="$(fd . ~/Pictures/wallpapers -t f | shuf -n 1)"
+
+cleaner=("lxpolkit" "dunst" "wl-paste" "nm-applet" "waybar" "blueman" "nextcloud" "hyprpaper" "hypridle" "gnome-keyring-daemon" "shikane" "eww" "yambar")
+
+for str in "${cleaner[@]}"
+do
+    kill -SIGTERM `pgrep -f "$str"`
+done
+
+dunst &
+lxpolkit &
+foot --server &
+wl-paste --type text --watch cliphist store &
+wl-paste --type image --watch cliphist store &
+wl-paste --primary --watch cliphist store &
+nm-applet &
+blueman &
+nextcloud &
+hypridle &
+hyprpaper &
+xhost + local: &
+gnome-keyring-daemon --start --components=ssh,secrets,pkcs11 &
+waybar --config ~/.config/waybar/config-river.jsonc &
+shikane &
+# eww open bar &
+# yambar &
+"$HOME"/scripts/check-dotfiles.sh &
+
+export XDG_CURRENT_DESKTOP=river
+export XDG_SESSION_TYPE=wayland
+export XDG_SESSION_DESKTOP=Hyprland
+
