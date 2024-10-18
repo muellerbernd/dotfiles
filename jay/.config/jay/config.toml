@@ -94,3 +94,8 @@ match.serial-number = "HH77Y75BAEDB"
 x = 1920
 y = 0
 transform = "rotate-90"
+
+[[inputs]]
+match.is-pointer = true
+tap-enabled = true
+natural-scrolling = true

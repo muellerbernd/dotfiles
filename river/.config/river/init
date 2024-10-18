@@ -194,10 +194,10 @@ rivertile -view-padding 1 -outer-padding 0 -main-location right -main-ratio 0.5 
 
 riverctl keyboard-layout de
 # Set touchpad by grabbing the event
-for pad in $(riverctl list-inputs | grep -i touchpad ); do
-  riverctl input $pad events enabled
-  riverctl input $pad tap enabled
-  riverctl input $pad natural-scroll enabled
+for pad in $(riverctl list-inputs | grep -i touchpad); do
+    riverctl input $pad events enabled
+    riverctl input $pad tap enabled
+    riverctl input $pad natural-scroll enabled
 done
 
 # riverctl input pointer-2-7-SynPS/2_Synaptics_TouchPad tap enabled
@@ -211,5 +211,13 @@ riverctl csd-filter-add app-id "firefox"
 # AUTOSTART
 # --------------------------------------------------------
 riverctl spawn "$HOME/.config/river/autostart"
+
+# The user dinit instance is shared across all login sessions and all ttys
+# Therefore, only tell it about the first wayland session
+if [ "$WAYLAND_DISPLAY" = "wayland-1" ]; then
+    dinitctl setenv WAYLAND_DISPLAY
+    dinitctl setenv DISPLAY
+    dinitctl restart dbus --force
+fi
 
 # vim: filetype=sh

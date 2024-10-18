@@ -67,8 +67,8 @@ tooltip {
 }
 
 #tags button.focused {
+  background: #5f5f4f;
   color: #cdd6f4;
-  background: #eba0ac;
   border-radius: 10px;
 }
 
