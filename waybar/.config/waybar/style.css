@@ -23,62 +23,31 @@ tooltip {
   border-color: #cdd6f4;
 }
 
-/*#workspaces button {*/
-/*  /* padding: 5px; */*/
-/*  color: #cdd6f4;*/
-/*  /* margin-right: 5px; */*/
-/*}*/
-/**/
-/*#workspaces button.active {*/
-/*  background: #5f5f4f;*/
-/*  color: #cdd6f4;*/
-/*  border-radius: 10px;*/
-/*}*/
-/**/
-/*#workspaces button.focused {*/
-/*  color: #cdd6f4;*/
-/*  background: #eba0ac;*/
-/*  border-radius: 10px;*/
-/*}*/
-/**/
-/*#workspaces button.urgent {*/
-/*  color: #111111;*/
-/*  background: #a6e3a1;*/
-/*  border-radius: 10px;*/
-/*}*/
-/**/
-/*#workspaces button:hover {*/
-/*  /* background: #111111; */*/
-/*  background: #5f5f4f;*/
-/*  color: #cdd6f4;*/
-/*  border-radius: 10px;*/
-/*}*/
-
-#tags button {
+#workspaces button {
   /* padding: 5px; */
   color: #cdd6f4;
   /* margin-right: 5px; */
 }
 
-#tags button.active {
+#workspaces button.active {
   background: #5f5f4f;
   color: #cdd6f4;
   border-radius: 10px;
 }
 
-#tags button.focused {
-  background: #5f5f4f;
+#workspaces button.focused {
   color: #cdd6f4;
+  background: #eba0ac;
   border-radius: 10px;
 }
 
-#tags button.urgent {
+#workspaces button.urgent {
   color: #111111;
   background: #a6e3a1;
   border-radius: 10px;
 }
 
-#tags button:hover {
+#workspaces button:hover {
   /* background: #111111; */
   background: #5f5f4f;
   color: #cdd6f4;
@@ -91,7 +60,6 @@ tooltip {
 #pulseaudio,
 #network,
 #workspaces,
-#tags,
 #submap,
 #mode,
 #layout,
@@ -106,8 +74,7 @@ tooltip {
   /* border: 1px solid #181825; */
 }
 
-#submap,
-#mode {
+#submap {
   color: #ff0000;
   border-radius: 10px 10px 10px 10px;
   margin-left: 10px;
@@ -123,14 +90,7 @@ tooltip {
   margin-right: 10px;
 }
 
-/*#workspaces {*/
-/*  border-radius: 10px;*/
-/*  margin-left: 10px;*/
-/*  padding-right: 0px;*/
-/*  padding-left: 0px;*/
-/*}*/
-
-#tags {
+#workspaces {
   border-radius: 10px;
   margin-left: 10px;
   padding-right: 0px;
