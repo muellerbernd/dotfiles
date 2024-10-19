@@ -13,7 +13,7 @@ done
 # dunst &
 mako &
 lxpolkit &
-# foot --server &
+foot --server &
 wl-paste --type text --watch cliphist store &
 wl-paste --type image --watch cliphist store &
 wl-paste --primary --watch cliphist store &

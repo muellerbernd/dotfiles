@@ -125,10 +125,10 @@ delete-x240:
 	stow --no-folding -v -t $$HOME --delete i3status-rust
 
 install-biltower:
-	stow --no-folding --restow -v -t $$HOME i3-biltower sway-biltower hypr-biltower
+	stow --no-folding --restow -v -t $$HOME i3-biltower hypr-biltower shikane-biltower
 
 delete-biltower:
-	stow --no-folding -v -t $$HOME --delete i3-biltower sway-biltower hypr-biltower
+	stow --no-folding -v -t $$HOME --delete i3-biltower hypr-biltower shikane-biltower
 
 install-EIS-machine:
 	stow --no-folding --restow -v -t $$HOME i3-eistower

@@ -39,13 +39,15 @@ riverctl map normal Super+Shift Left swap left
 riverctl map normal Super+Shift Up swap up
 riverctl map normal Super+Shift Down swap down
 
-# Super+Period and Super+Comma to focus the next/previous output
 riverctl map normal Super Period spawn "makoctl dismiss --all"
-# riverctl map normal Super Comma focus-output previous
-#
-# # Super+Shift+{Period,Comma} to send the focused view to the next/previous output
-# riverctl map normal Super+Shift Period send-to-output next
-# riverctl map normal Super+Shift Comma send-to-output previous
+
+# Super+Period and Super+Comma to focus the next/previous output
+riverctl map normal Control Period focus-output right
+riverctl map normal Control Comma focus-output left
+
+# Super+Shift+{Period,Comma} to send the focused view to the next/previous output
+riverctl map normal Control+Shift Period send-to-output right
+riverctl map normal Control+Shift Comma send-to-output left
 
 # Super+Return to bump the focused view to the top of the layout stack
 riverctl map normal Super P zoom
