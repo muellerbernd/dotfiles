@@ -24,6 +24,7 @@ install-default:
 		waybar \
 		yambar \
 		dunst \
+		mako \
 		rofi \
 		fuzzel \
 		gitconf \
@@ -64,6 +65,7 @@ delete-default:
 		waybar \
 		yambar \
 		dunst \
+		mako \
 		rofi \
 		fuzzel \
 		gitconf \

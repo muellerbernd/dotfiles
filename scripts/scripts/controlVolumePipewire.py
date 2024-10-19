@@ -27,16 +27,14 @@ def get_sink_volume(sink_id: str) -> (int, bool):
 
 
 def notify_volume(volume: int):
-    msg_id = "991049"
     os.popen(
-        f'dunstify -a "changeVolume" -u low -r "{msg_id}" "🔊  Volume: {volume}%"'
+        f'notify-send "🔊  Volume: {volume}%" --hint=string:x-dunst-stack-tag:volume'
     ).read()
 
 
 def notify_mute():
-    msg_id = "991049"
     os.popen(
-        f'dunstify -a "changeVolume" -u low -r "{msg_id}" "  Volume muted"'
+        f'notify-send "  Volume muted" --hint=string:x-dunst-stack-tag:volume'
     ).read()
 
 

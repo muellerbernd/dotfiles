@@ -10,14 +10,12 @@ function is_mute {
 }
 
 # send_notification
-msgId="991049"
 volume=$(get_volume)
 retval=$(is_mute)
 if [ "$retval" != "" ]
 then
-    dunstify -a "changeVolume" -u low -r "$msgId" "  Volume muted"
+    notify-send "  Volume muted" --hint=string:x-dunst-stack-tag:volume
 else
-    dunstify -a "changeVolume" -u low -r "$msgId" \
-        "🔊  Volume: ${volume}%"
+    notify-send "🔊  Volume: ${volume}%" --hint=string:x-dunst-stack-tag:volume
 fi
 

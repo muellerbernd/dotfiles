@@ -1,0 +1,27 @@
+# configuration file for mako
+
+font=Hack Nerd Font 14
+
+# base03
+background-color=#343434
+# base0
+text-color=#eceff4
+border-color=#cdd6f4
+
+border-size=2
+
+ignore-timeout=1
+default-timeout=5000
+margin=8
+
+[hidden]
+format=(and %h more)
+#base01
+text-color=#eceff4
+border-color=#cdd6f4
+
+[urgency=high]
+# base03
+# background-color=#002b36
+# red
+border-color=#dc322f

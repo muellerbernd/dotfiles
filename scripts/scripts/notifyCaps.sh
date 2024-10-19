@@ -4,7 +4,7 @@ msgId="981141"
 caps_lock_status=$(cat /sys/class/leds/input0::capslock/brightness)
 
 if [ $caps_lock_status == "1" ]; then
-  dunstify -u low -r "$msgId" "caps lock on"
+  notify-send "CAPS" --hint=string:x-dunst-stack-tag:caps
 else
-  dunstify -u low -r "$msgId" "caps lock off"
+  notify-send "CAPS OFF" --hint=string:x-dunst-stack-tag:caps
 fi
