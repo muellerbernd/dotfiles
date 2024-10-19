@@ -33,32 +33,27 @@ riverctl map normal Super Down focus-view down
 
 # Super+Shift+J and Super+Shift+K to swap the focused view with the next/previous
 # view in the layout stack
+# riverctl map normal Super+Shift Right swap right
 riverctl map normal Super+Shift Right swap right
 riverctl map normal Super+Shift Left swap left
 riverctl map normal Super+Shift Up swap up
 riverctl map normal Super+Shift Down swap down
 
 # Super+Period and Super+Comma to focus the next/previous output
-riverctl map normal Super Period focus-output next
-riverctl map normal Super Comma focus-output previous
-
-# Super+Shift+{Period,Comma} to send the focused view to the next/previous output
-riverctl map normal Super+Shift Period send-to-output next
-riverctl map normal Super+Shift Comma send-to-output previous
+riverctl map normal Super Period spawn "makoctl dismiss --all"
+# riverctl map normal Super Comma focus-output previous
+#
+# # Super+Shift+{Period,Comma} to send the focused view to the next/previous output
+# riverctl map normal Super+Shift Period send-to-output next
+# riverctl map normal Super+Shift Comma send-to-output previous
 
 # Super+Return to bump the focused view to the top of the layout stack
-riverctl map normal Super+Alt Return zoom
-
-# Super+H and Super+L to decrease/increase the main ratio of rivertile(1)
-# riverctl map normal Super H send-layout-cmd rivertile "main-ratio -0.05"
-# riverctl map normal Super L send-layout-cmd rivertile "main-ratio +0.05"
-
-# Super+Shift+H and Super+Shift+L to increment/decrement the main count of rivertile(1)
-# riverctl map normal Super+Shift H send-layout-cmd rivertile "main-count +1"
-# riverctl map normal Super+Shift L send-layout-cmd rivertile "main-count -1"
+riverctl map normal Super P zoom
 
 riverctl declare-mode float
-riverctl map normal Super R enter-mode float # Super+R to enter float mode
+riverctl declare-mode resize
+riverctl map normal Super F enter-mode float # Super+F to enter float mode
+riverctl map normal Super R enter-mode resize # Super+R to enter resize mode
 
 ### Floating window mappings but note that these also apply to tiled windows.
 #
@@ -80,7 +75,21 @@ riverctl map float Shift Down resize vertical 100
 riverctl map float Shift Up resize vertical -100
 riverctl map float Shift Right resize horizontal 100
 
+riverctl map resize Left send-layout-cmd rivertile '-main-ratio -0.05'
+riverctl map resize Right send-layout-cmd rivertile '-main-ratio +0.05'
+riverctl map resize Up send-layout-cmd rivertile '-main-count +1'
+riverctl map resize Down period send-layout-cmd rivertile '-main-count -1'
+
+# Super+H and Super+L to decrease/increase the main ratio of rivertile(1)
+riverctl map resize Super Right send-layout-cmd rivertile "main-ratio -0.05"
+riverctl map resize Super Left send-layout-cmd rivertile "main-ratio +0.05"
+
+# Super+Shift+H and Super+Shift+L to increment/decrement the main count of rivertile(1)
+riverctl map resize Super Down send-layout-cmd rivertile "main-count +1"
+riverctl map resize Super Up send-layout-cmd rivertile "main-count -1"
+
 riverctl map float None Escape enter-mode normal # Escape to exit float mode and return to normal mode
+riverctl map resize None Escape enter-mode normal # Escape to exit float mode and return to normal mode
 
 # Super + Left Mouse Button to move views
 riverctl map-pointer normal Super BTN_LEFT move-view
@@ -130,10 +139,10 @@ riverctl map normal Super Space toggle-float
 riverctl map normal Super F toggle-fullscreen
 
 # Super+{Up,Right,Down,Left} to change layout orientation
-# riverctl map normal Super Up send-layout-cmd rivertile "main-location top"
-# riverctl map normal Super Right send-layout-cmd rivertile "main-location right"
-# riverctl map normal Super Down send-layout-cmd rivertile "main-location bottom"
-# riverctl map normal Super Left send-layout-cmd rivertile "main-location left"
+riverctl map normal Alt Up send-layout-cmd rivertile "main-location top"
+riverctl map normal Alt Right send-layout-cmd rivertile "main-location right"
+riverctl map normal Alt Down send-layout-cmd rivertile "main-location bottom"
+riverctl map normal Alt Left send-layout-cmd rivertile "main-location left"
 
 # Declare a passthrough mode. This mode has only a single mapping to return to
 # normal mode. This makes it useful for testing a nested wayland compositor
@@ -182,7 +191,8 @@ riverctl border-color-unfocused 0x586e75
 riverctl set-repeat 50 300
 
 # Make all views with an app-id that starts with "float" and title "foo" start floating.
-riverctl rule-add -app-id 'float*' -title 'foo' float
+# riverctl rule-add -app-id 'float*' -title 'foo' float
+riverctl rule-add -app-id firefox ssd
 
 # Make all views with app-id "bar" and any title use client-side decorations
 # riverctl rule-add -app-id "bar" csd
@@ -214,10 +224,10 @@ riverctl spawn "$HOME/.config/river/autostart"
 
 # The user dinit instance is shared across all login sessions and all ttys
 # Therefore, only tell it about the first wayland session
-if [ "$WAYLAND_DISPLAY" = "wayland-1" ]; then
-    dinitctl setenv WAYLAND_DISPLAY
-    dinitctl setenv DISPLAY
-    dinitctl restart dbus --force
-fi
+# if [ "$WAYLAND_DISPLAY" = "wayland-1" ]; then
+#     dinitctl setenv WAYLAND_DISPLAY
+#     dinitctl setenv DISPLAY
+#     dinitctl restart dbus --force
+# fi
 
 # vim: filetype=sh

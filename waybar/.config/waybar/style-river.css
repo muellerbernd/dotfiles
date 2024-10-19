@@ -23,36 +23,6 @@ tooltip {
   border-color: #cdd6f4;
 }
 
-/*#workspaces button {*/
-/*  /* padding: 5px; */*/
-/*  color: #cdd6f4;*/
-/*  /* margin-right: 5px; */*/
-/*}*/
-/**/
-/*#workspaces button.active {*/
-/*  background: #5f5f4f;*/
-/*  color: #cdd6f4;*/
-/*  border-radius: 10px;*/
-/*}*/
-/**/
-/*#workspaces button.focused {*/
-/*  color: #cdd6f4;*/
-/*  background: #eba0ac;*/
-/*  border-radius: 10px;*/
-/*}*/
-/**/
-/*#workspaces button.urgent {*/
-/*  color: #111111;*/
-/*  background: #a6e3a1;*/
-/*  border-radius: 10px;*/
-/*}*/
-/**/
-/*#workspaces button:hover {*/
-/*  /* background: #111111; */*/
-/*  background: #5f5f4f;*/
-/*  color: #cdd6f4;*/
-/*  border-radius: 10px;*/
-/*}*/
 
 #tags button {
   /* padding: 5px; */
@@ -90,9 +60,7 @@ tooltip {
 #battery,
 #pulseaudio,
 #network,
-#workspaces,
 #tags,
-#submap,
 #mode,
 #layout,
 #tray,
@@ -106,15 +74,14 @@ tooltip {
   /* border: 1px solid #181825; */
 }
 
-#submap,
 #mode {
-  color: #ff0000;
-  border-radius: 10px 10px 10px 10px;
+  color: #ff55ff;
+  border-radius: 10px 0px 0px 10px;
   margin-left: 10px;
 }
 
-#mode {
-  border-radius: 10px;
+#layout {
+  border-radius: 0px 10px 10px 0px;
   margin-right: 10px;
 }
 
@@ -122,13 +89,6 @@ tooltip {
   border-radius: 10px;
   margin-right: 10px;
 }
-
-/*#workspaces {*/
-/*  border-radius: 10px;*/
-/*  margin-left: 10px;*/
-/*  padding-right: 0px;*/
-/*  padding-left: 0px;*/
-/*}*/
 
 #tags {
   border-radius: 10px;

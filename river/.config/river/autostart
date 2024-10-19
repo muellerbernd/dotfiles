@@ -3,14 +3,15 @@
 
 # wallpaper="$(fd . ~/Pictures/wallpapers -t f | shuf -n 1)"
 
-cleaner=("lxpolkit" "dunst" "wl-paste" "nm-applet" "waybar" "blueman" "nextcloud" "hyprpaper" "hypridle" "shikane" "eww" "yambar")
+cleaner=("lxpolkit" "dunst" "wl-paste" "nm-applet" "waybar" "blueman" "nextcloud" "hyprpaper" "hypridle" "shikane" "eww" "yambar" "mako" "nextcloud")
 
 for str in "${cleaner[@]}"
 do
-    kill -SIGTERM `pgrep -f "$str"`
+    kill -SIGTERM $(pgrep -f "$str")
 done
 
-dunst &
+# dunst &
+mako &
 lxpolkit &
 # foot --server &
 wl-paste --type text --watch cliphist store &
@@ -22,8 +23,8 @@ nextcloud &
 hypridle &
 hyprpaper &
 xhost + local: &
-# gnome-keyring-daemon --start --components=ssh,secrets,pkcs11 &
-waybar --config ~/.config/waybar/config-river.jsonc &
+gnome-keyring-daemon --start --components=ssh,secrets,pkcs11 &
+waybar --config ~/.config/waybar/config-river.jsonc --style ~/.config/waybar/style-river.css &
 shikane &
 # eww open bar &
 # yambar &

@@ -7,14 +7,16 @@
     "gtk-layer-shell": true,
     "height": 0,
     "modules-left": [
-        "clock",
-        "river/tags",
-        "river/mode"
+        "river/tags"
     ],
     "modules-center": [
-        "river/window"
+        "clock"
+        //"river/window"
+        //"custom/title"
     ],
     "modules-right": [
+        "river/mode",
+        "river/layout",
         "tray",
         "battery",
         "battery#bat2"
@@ -24,8 +26,8 @@
         "spacing": 10
     },
     "clock": {
-        "format": " {:%H:%M}",
-        "format-alt": "{:%A, %B %d, %Y (%R)}  ",
+        "format": "{:%A, %B %d, %Y (%R)}  ",
+        "format-alt": " {:%H:%M}",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "calendar": {
             "mode": "year",
@@ -126,5 +128,12 @@
                 "tooltip-icon-size": 24
             }
         ]
+    },
+    "river/window": {
+        "format": "{}",
+        "max-lenght": 1
+    },
+    "custom/title": {
+        "exec": "./scripts/river-title.sh"
     }
 }
