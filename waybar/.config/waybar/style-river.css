@@ -49,11 +49,11 @@ tooltip {
   /* margin-right: 5px; */
 }
 
-#tags button.occupied {
-  background: #5f5f4f;
-  color: #cdd6f4;
-  border-radius: 10px;
-}
+/*#tags button.occupied {*/
+/*  background: #5f5f4f;*/
+/*  color: #cdd6f4;*/
+/*  border-radius: 10px;*/
+/*}*/
 
 #tags button.focused {
   background: #5f5f4f;
