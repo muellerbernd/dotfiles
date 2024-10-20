@@ -18,7 +18,7 @@ wl-paste --type text --watch cliphist store &
 wl-paste --type image --watch cliphist store &
 wl-paste --primary --watch cliphist store &
 nm-applet &
-blueman &
+blueman-applet &
 nextcloud &
 hypridle &
 hyprpaper &

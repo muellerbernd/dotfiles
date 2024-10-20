@@ -131,7 +131,11 @@
     },
     "river/window": {
         "format": "{}",
-        "max-lenght": 1
+        "max-length": 1
+    },
+    "river/tags": {
+        "format": "{}",
+        "num-tags": 9
     },
     "custom/title": {
         "exec": "./scripts/river-title.sh"

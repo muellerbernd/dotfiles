@@ -14,7 +14,8 @@
 riverctl map normal Super Return spawn foot
 
 # App launcher
-riverctl map normal Super D spawn fuzzel
+# riverctl map normal Super D spawn fuzzel
+riverctl map normal Super D spawn rofi-script
 
 # reload river config
 riverctl map normal Super+Shift R spawn ~/.config/river/init
@@ -23,7 +24,7 @@ riverctl map normal Super+Shift R spawn ~/.config/river/init
 riverctl map normal Super+Shift Q close
 
 # Super+Shift+E to exit river
-riverctl map normal Super+Shift E spawn "$HOME/.config/fuzzel/scripts/powermenu.sh"
+riverctl map normal Super+Shift E spawn "$HOME/.config/rofi/scripts/powermenu/run.sh"
 
 # Super+Right and Super+Left to focus the next/previous view in the layout stack
 riverctl map normal Super Right focus-view right
@@ -39,18 +40,18 @@ riverctl map normal Super+Shift Left swap left
 riverctl map normal Super+Shift Up swap up
 riverctl map normal Super+Shift Down swap down
 
-riverctl map normal Super Period spawn "makoctl dismiss --all"
+riverctl map normal Super Q spawn "makoctl dismiss --all"
 
 # Super+Period and Super+Comma to focus the next/previous output
-riverctl map normal Control Period focus-output right
-riverctl map normal Control Comma focus-output left
+riverctl map normal Super Period focus-output right
+riverctl map normal Super Comma focus-output left
 
 # Super+Shift+{Period,Comma} to send the focused view to the next/previous output
-riverctl map normal Control+Shift Period send-to-output right
-riverctl map normal Control+Shift Comma send-to-output left
+riverctl map normal Super+Shift Period send-to-output right
+riverctl map normal Super+Shift Comma send-to-output left
 
 # Super+Return to bump the focused view to the top of the layout stack
-riverctl map normal Super P zoom
+riverctl map normal Super Z zoom
 
 riverctl declare-mode float
 riverctl declare-mode resize
@@ -168,10 +169,10 @@ for mode in normal locked; do
     riverctl map $mode None XF86AudioMute spawn "$HOME/scripts/controlVolumePipewire.py mute"
 
     # Control MPRIS aware media players with playerctl (https://github.com/altdesktop/playerctl)
-    riverctl map $mode None XF86AudioMedia spawn "$HOME/scripts/playPauseToggle.py"
-    riverctl map $mode None XF86AudioPlay spawn "$HOME/scripts/playPauseToggle.py"
-    riverctl map $mode None XF86AudioPrev spawn "$HOME/scripts/playNextOrPrevious.sh prev"
-    riverctl map $mode None XF86AudioNext spawn "$HOME/scripts/playNextOrPrevious.sh next"
+    riverctl map $mode None XF86AudioMedia spawn "playerctl play-pause"
+    riverctl map $mode None XF86AudioPlay spawn "playerctl play-pause"
+    riverctl map $mode None XF86AudioPrev spawn "playerctl previous"
+    riverctl map $mode None XF86AudioNext spawn "playerctl next"
     riverctl map $mode None XF86AudioMicMute spawn "wpctl set-mute @DEFAULT_SOURCE@ toggle"
 
     # Control screen backlight brightness with brightnessctl (https://github.com/Hummer12007/brightnessctl)
@@ -183,6 +184,9 @@ for mode in normal locked; do
     # not working
     # riverctl map $mode -release None Caps_Lock spawn "$HOME/scripts/notifyCaps.sh"
 done
+
+riverctl map normal Super V spawn "cliphist list | rofi -dmenu | cliphist decode | wl-copy"
+riverctl map normal Super Escape spawn "loginctl lock-session"
 
 # Set background and border color
 riverctl background-color 0x002b36

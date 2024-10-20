@@ -5,7 +5,7 @@
     Hack Nerd Font,
     monospace;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 12px;
   min-height: 0;
 }
 
@@ -24,13 +24,32 @@ tooltip {
 }
 
 
+#window,
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#tags,
+#mode,
+#layout,
+#tray,
+#keyboard-state,
+#privacy,
+#backlight {
+  background: #343434;
+  padding: 0px 10px;
+  margin: 3px 0px;
+  /* margin-top: 10px; */
+  /* border: 1px solid #181825; */
+}
+
 #tags button {
-  /* padding: 5px; */
+  padding: 5px;
   color: #cdd6f4;
   /* margin-right: 5px; */
 }
 
-#tags button.active {
+#tags button.occupied {
   background: #5f5f4f;
   color: #cdd6f4;
   border-radius: 10px;
@@ -55,23 +74,11 @@ tooltip {
   border-radius: 10px;
 }
 
-#window,
-#clock,
-#battery,
-#pulseaudio,
-#network,
-#tags,
-#mode,
-#layout,
-#tray,
-#keyboard-state,
-#privacy,
-#backlight {
-  background: #343434;
-  padding: 0px 10px;
-  margin: 3px 0px;
-  /* margin-top: 10px; */
-  /* border: 1px solid #181825; */
+#tags {
+  border-radius: 10px;
+  margin-left: 10px;
+  padding-right: 0px;
+  padding-left: 0px;
 }
 
 #mode {
@@ -88,13 +95,6 @@ tooltip {
 #tray {
   border-radius: 10px;
   margin-right: 10px;
-}
-
-#tags {
-  border-radius: 10px;
-  margin-left: 10px;
-  padding-right: 0px;
-  padding-left: 0px;
 }
 
 #window {
