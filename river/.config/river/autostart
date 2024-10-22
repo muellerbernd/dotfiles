@@ -26,6 +26,7 @@ xhost + local: &
 gnome-keyring-daemon --start --components=ssh,secrets,pkcs11 &
 waybar --config ~/.config/waybar/config-river.jsonc --style ~/.config/waybar/style-river.css &
 shikane &
+dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
 # eww open bar &
 # yambar &
 "$HOME"/scripts/check-dotfiles.sh &
