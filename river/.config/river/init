@@ -203,6 +203,7 @@ riverctl set-repeat 50 300
 # riverctl rule-add -app-id 'float*' -title 'foo' float
 riverctl rule-add -app-id firefox ssd
 riverctl rule-add -app-id .blueman-manager-wrapped ssd
+riverctl rule-add -app-id org.pwmt.zathura ssd
 
 # Make all views with app-id "bar" and any title use client-side decorations
 # riverctl rule-add -app-id "bar" csd
@@ -225,7 +226,7 @@ done
 riverctl focus-follows-cursor always
 
 # Set app-ids and titles of views which should use client side decorations
-riverctl csd-filter-add app-id "firefox"
+# riverctl csd-filter-add app-id "firefox"
 
 # --------------------------------------------------------
 # AUTOSTART
