@@ -1,8 +1,8 @@
 vim.g.mywiki_list = {
   {
-    path = '/home/bernd/Desktop/Nextcloud/mywiki/index.md',
+    path = '/home/bernd/Sync/PrivateWiki/index.md',
   },
   {
-    path = '/home/bernd/SyncWork/wiki',
+    path = '/home/bernd/SyncWork/WorkWiki/index.md',
   },
 }
