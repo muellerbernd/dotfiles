@@ -10,7 +10,6 @@ do
     kill -SIGTERM $(pgrep -f "$str")
 done
 
-# dunst &
 mako &
 lxpolkit &
 foot --server &
@@ -20,13 +19,15 @@ wl-paste --primary --watch cliphist store &
 nm-applet &
 blueman-applet &
 nextcloud &
-hypridle &
-hyprpaper &
 xhost + local: &
 gnome-keyring-daemon --start --components=ssh,secrets,pkcs11 &
 waybar --config ~/.config/waybar/config-river.jsonc --style ~/.config/waybar/style-river.css &
 shikane &
 dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
-# eww open bar &
-# yambar &
+
+foot --server &
+
+hypridle &
+hyprpaper &
+
 "$HOME"/scripts/check-dotfiles.sh &
