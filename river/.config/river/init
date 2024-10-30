@@ -189,7 +189,8 @@ for mode in normal locked; do
 done
 
 riverctl map normal Super V spawn "cliphist list | rofi -dmenu | cliphist decode | wl-copy"
-riverctl map normal Super Escape spawn "loginctl lock-session"
+# riverctl map normal Super Escape spawn "loginctl lock-session"
+riverctl map normal Super Escape spawn "$HOME/scripts/lock_sway.sh"
 
 # Set background and border color
 riverctl background-color 0x002b36
