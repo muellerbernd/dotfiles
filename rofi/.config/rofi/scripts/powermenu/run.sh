@@ -55,6 +55,8 @@ run_lock_cmd() {
         ~/scripts/lock.sh
     elif [[ "$XDG_CURRENT_DESKTOP" == 'sway' ]]; then
         ~/scripts/lock_sway.sh
+    elif [[ "$XDG_CURRENT_DESKTOP" == 'river' ]]; then
+        ~/scripts/lock_sway.sh
     elif [[ "$XDG_CURRENT_DESKTOP" == 'Hyprland' ]]; then
         # ~/.config/hypr/scripts/lock.sh
         hyprlock
@@ -113,8 +115,9 @@ case ${chosen} in
         run_cmd --reboot
         ;;
     $lock)
-        loginctl lock-session
+        # loginctl lock-session
         # sh ~/scripts/lock.sh
+        run_lock_cmd
         ;;
     $suspend)
         run_cmd --suspend
