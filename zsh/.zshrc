@@ -263,6 +263,8 @@ eval "$(direnv hook zsh)"
 # atuin
 eval "$(atuin init zsh --disable-up-arrow)"
 
+eval "$(just --completions zsh)"
+
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
