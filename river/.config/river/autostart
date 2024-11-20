@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 
-# wallpaper="$(fd . ~/Pictures/wallpapers -t f | shuf -n 1)"
 
 cleaner=("lxpolkit" "dunst" "wl-paste" "nm-applet" "waybar" "blueman" "nextcloud" "hyprpaper" "hypridle" "shikane" "eww" "yambar" "mako" "nextcloud" "swayidle" "swaybg" "sway-audio-idle-inhibit")
 
@@ -19,7 +18,7 @@ wl-paste --primary --watch cliphist store &
 nm-applet &
 blueman-applet &
 nextcloud &
-xhost + local: &
+# xhost + local: &
 gnome-keyring-daemon --start --components=ssh,secrets,pkcs11 &
 waybar --config ~/.config/waybar/config-river.jsonc --style ~/.config/waybar/style-river.css &
 shikane &
@@ -27,20 +26,21 @@ dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 
 # hypridle &
 # hyprpaper &
+# wallpaper="$(fd . ~/Pictures/wallpapers -t f | shuf -n 1)"
 swaybg --image "$HOME/wallpapers/black-hole.png" --mode fill &
 
 sway-audio-idle-inhibit &
 swayidle -w \
-    timeout 900 'notify-send -u critical -t 9000 "Locking Screen in 10 seconds"' \
-    timeout 910 "$HOME/scripts/lock_sway.sh" idlehint 310 \
-    timeout 1200 "wlopm --off '*'" resume "wlopm --on '*'" &
+    timeout 1200 'notify-send -u critical -t 9000 "Locking Screen in 10 seconds"' \
+    timeout 1210 "$HOME/scripts/lock_sway.sh" idlehint 1210 \
+    timeout 1500 "wlopm --off '*'" resume "wlopm --on '*'" &
 
 "$HOME"/scripts/check-dotfiles.sh &
 
-# The user dinit instance is shared across all login sessions and all ttys
-# Therefore, only tell it about the first wayland session
-if [ "$WAYLAND_DISPLAY" = "wayland-1" ]; then
-    dinitctl setenv WAYLAND_DISPLAY
-    dinitctl setenv DISPLAY
-    dinitctl restart dbus --force
-fi
+# # The user dinit instance is shared across all login sessions and all ttys
+# # Therefore, only tell it about the first wayland session
+# if [ "$WAYLAND_DISPLAY" = "wayland-1" ]; then
+#     dinitctl setenv WAYLAND_DISPLAY
+#     dinitctl setenv DISPLAY
+#     dinitctl restart dbus --force
+# fi
