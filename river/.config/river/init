@@ -11,7 +11,7 @@
 # Note: the "Super" modifier is also known as Logo, GUI, Windows, Mod4, etc.
 
 # Super+Shift+Return to start an instance of foot (https://codeberg.org/dnkl/foot)
-riverctl map normal Super Return spawn foot
+riverctl map normal Super Return spawn "footclient"
 
 # App launcher
 # riverctl map normal Super D spawn fuzzel
@@ -188,6 +188,9 @@ for mode in normal locked; do
     # riverctl map $mode -release None Caps_Lock spawn "$HOME/scripts/notifyCaps.sh"
 done
 
+# nightmode
+riverctl map normal Super+Shift N spawn "$HOME/scripts/nightmode.sh"
+
 riverctl map normal Super V spawn "cliphist list | rofi -dmenu | cliphist decode | wl-copy"
 # riverctl map normal Super Escape spawn "loginctl lock-session"
 riverctl map normal Super Escape spawn "$HOME/scripts/lock_sway.sh"
@@ -196,6 +199,7 @@ riverctl map normal Super Escape spawn "$HOME/scripts/lock_sway.sh"
 riverctl background-color 0x002b36
 riverctl border-color-focused 0xcdd6f4
 riverctl border-color-unfocused 0x586e75
+riverctl border-width 2
 
 # Set keyboard repeat rate
 riverctl set-repeat 50 300
