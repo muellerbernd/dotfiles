@@ -15,7 +15,8 @@ exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\""
     mode = "1920x1200@59.95Hz"
     position = "3840,0"
     scale = 1.0
-    transform = "270"
+    # transform = "270"
+    transform = "90"
 
     [[profile.output]]
     enable = true
