@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
 
-
-
 cleaner=("lxpolkit" "dunst" "wl-paste" "nm-applet" "waybar" "blueman" "nextcloud" "hyprpaper" "hypridle" "shikane" "eww" "yambar" "mako" "nextcloud" "swayidle" "swaybg" "sway-audio-idle-inhibit")
 
-for str in "${cleaner[@]}"
-do
+for str in "${cleaner[@]}"; do
     kill -SIGTERM $(pgrep -f "$str")
 done
 
@@ -17,7 +14,7 @@ wl-paste --type image --watch cliphist store &
 wl-paste --primary --watch cliphist store &
 nm-applet &
 blueman-applet &
-nextcloud &
+# nextcloud &
 # xhost + local: &
 gnome-keyring-daemon --start --components=ssh,secrets,pkcs11 &
 waybar --config ~/.config/waybar/config-river.jsonc --style ~/.config/waybar/style-river.css &
