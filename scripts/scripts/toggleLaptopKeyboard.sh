@@ -1,7 +1,18 @@
 #!/usr/bin/env bash
 
 pipe=/tmp/laptopKeyboardState
-target=/sys/devices/platform/i8042/serio0/input/input0/inhibited
+# target=/sys/devices/platform/i8042/serio0/input/input0/inhibited
+
+host=$(hostname)
+case $host in
+"fw13")
+    target=/sys/devices/platform/i8042/serio0/input/input1/inhibited
+    ;;
+*)
+    target=/sys/devices/platform/i8042/serio0/input/input0/inhibited
+    ;;
+esac
+echo $target
 
 toggle_keyboard() {
     if [ "$1" = "0" ]; then
