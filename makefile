@@ -116,6 +116,14 @@ delete-t480:
 	stow --no-folding -v -t $$HOME --delete i3-t480 sway-t480 hypr-t480 kanshi-t480 shikane-t480
 	stow --no-folding -v -t $$HOME --delete i3status-rust
 
+install-fw13:
+	stow --no-folding --restow -v -t $$HOME i3-t480 sway-t480 hypr-t480 kanshi-t480 shikane-t480
+	stow --no-folding --restow -v -t $$HOME i3status-rust
+
+delete-fw13:
+	stow --no-folding -v -t $$HOME --delete i3-t480 sway-t480 hypr-t480 kanshi-t480 shikane-t480
+	stow --no-folding -v -t $$HOME --delete i3status-rust
+
 install-x240:
 	stow --no-folding --restow -v -t $$HOME i3-x240 hypr-t480
 	stow --no-folding --restow -v -t $$HOME i3status-rust hypr-t480
