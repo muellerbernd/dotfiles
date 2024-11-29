@@ -97,10 +97,10 @@ delete-default:
 		wallpapers
 
 install-mue-p14s:
-	stow --no-folding --restow -v -t $$HOME i3-p14s sway-p14s hypr-p14s kanshi-p14s shikane-p14s
+	stow --no-folding --restow -v -t $$HOME i3-p14s hypr-p14s shikane-p14s
 
 delete-mue-p14s:
-	stow --no-folding -v -t $$HOME --delete i3-p14s sway-p14s hypr-p14s kanshi-p14s shikane-p14s
+	stow --no-folding -v -t $$HOME --delete i3-p14s hypr-p14s shikane-p14s
 
 install-ammerapad:
 	make install-t480
@@ -109,19 +109,19 @@ install-ilmpad:
 	make install-t480
 
 install-t480:
-	stow --no-folding --restow -v -t $$HOME i3-t480 sway-t480 hypr-t480 kanshi-t480 shikane-t480
+	stow --no-folding --restow -v -t $$HOME i3-t480 hypr-t480 shikane-t480
 	stow --no-folding --restow -v -t $$HOME i3status-rust
 
 delete-t480:
-	stow --no-folding -v -t $$HOME --delete i3-t480 sway-t480 hypr-t480 kanshi-t480 shikane-t480
+	stow --no-folding -v -t $$HOME --delete i3-t480 hypr-t480 shikane-t480
 	stow --no-folding -v -t $$HOME --delete i3status-rust
 
 install-fw13:
-	stow --no-folding --restow -v -t $$HOME i3-t480 sway-t480 hypr-t480 kanshi-t480 shikane-t480
+	stow --no-folding --restow -v -t $$HOME i3-t480 hypr-t480 shikane-t480
 	stow --no-folding --restow -v -t $$HOME i3status-rust
 
 delete-fw13:
-	stow --no-folding -v -t $$HOME --delete i3-t480 sway-t480 hypr-t480 kanshi-t480 shikane-t480
+	stow --no-folding -v -t $$HOME --delete i3-t480 hypr-t480 shikane-fw
 	stow --no-folding -v -t $$HOME --delete i3status-rust
 
 install-x240:
