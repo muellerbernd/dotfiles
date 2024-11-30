@@ -115,9 +115,9 @@ case ${chosen} in
         run_cmd --reboot
         ;;
     $lock)
-        # loginctl lock-session
+        loginctl lock-session
         # sh ~/scripts/lock.sh
-        run_lock_cmd
+        # run_lock_cmd
         ;;
     $suspend)
         run_cmd --suspend
