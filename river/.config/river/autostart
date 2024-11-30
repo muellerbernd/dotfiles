@@ -24,7 +24,17 @@ dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 hypridle &
 # hyprpaper &
 # wallpaper="$(fd . ~/Pictures/wallpapers -t f | shuf -n 1)"
-swaybg --image "$HOME/wallpapers/black-hole.png" --mode fill &
+host=$(hostname)
+case $host in
+"fw13")
+    wallpaper=$HOME/wallpapers/framework-minimal.png
+    ;;
+*)
+    wallpaper=$HOME/wallpapers/black-hole.png
+    ;;
+esac
+
+swaybg --image "$wallpaper" --mode fill &
 
 # sway-audio-idle-inhibit &
 # swayidle -w \
