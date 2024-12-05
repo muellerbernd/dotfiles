@@ -16,10 +16,11 @@ nm-applet &
 blueman-applet &
 # nextcloud &
 # xhost + local: &
-gnome-keyring-daemon --start --components=ssh,secrets,pkcs11 &
+dbus-update-activation-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
+# gnome-keyring-daemon --start --components=ssh,secrets,pkcs11 &
+gnome-keyring-daemon --start --components=ssh,secrets &
 waybar --config ~/.config/waybar/config-river.jsonc --style ~/.config/waybar/style-river.css &
 shikane &
-dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
 
 hypridle &
 # hyprpaper &

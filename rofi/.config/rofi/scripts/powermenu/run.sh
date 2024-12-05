@@ -96,7 +96,7 @@ run_cmd() {
                 hyprctl dispatch exit
             elif [[ "$XDG_CURRENT_DESKTOP" == 'niri' ]]; then
                 niri msg action quit
-            elif [[ "$XDG_CURRENT_DESKTOP" == 'river' ]]; then
+            elif [[ "$XDG_CURRENT_DESKTOP" == 'river' || "$XDG_SESSION_DESKTOP" == 'river' ]]; then
                 riverctl exit
             fi
         fi
