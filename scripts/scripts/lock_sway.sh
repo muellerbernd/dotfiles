@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 pic="$HOME/wallpapers/rick-and-morty.png"
-lock="$HOME/wallpapers/lock.png"
 tmpbg='/tmp/screen.png'
 
 revert() {
@@ -26,7 +25,7 @@ gm convert $tmpbg -scale 10% -scale 1000% $tmpbg
 # gm convert +shade 1x1 $tmpbg $mask
 gm composite -tile "$pic" $tmpbg $tmpbg
 
-swaylock -i $tmpbg -e -f -n
+swaylock -i $tmpbg -F -f -n -l
 
 revert
 
