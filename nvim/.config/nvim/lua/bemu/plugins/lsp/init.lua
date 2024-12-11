@@ -148,7 +148,7 @@ return {
         -- 'ts_ls',      -- needs vscode-langservers-extracted
         'jsonls',        -- needs vscode-langservers-extracted
         'eslint',        -- needs vscode-langservers-extracted
-        'typst_lsp',     -- needs typst-lsp
+        'tinymist',      -- needs tinymist
         -- 'nil_ls',        -- needs nil
         'nixd',
         'lemminx',
