@@ -76,7 +76,7 @@ exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\""
     adaptive_sync = false
 
 [[profile]]
-name = "firemobil"
+name = "denkraum"
 exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec killall -SIGUSR2 waybar","hyprctl dispatch workspace -- 1"]
     [[profile.output]]
     enable = true
@@ -88,7 +88,7 @@ exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\""
 
     [[profile.output]]
     enable = true
-    search = ["m=AndroidTV"]
+    search = ["m=SyncMaster"]
     mode = "1920x1080@60.00Hz"
     position = "0,0"
     scale = 1.0
