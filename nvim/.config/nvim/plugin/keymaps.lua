@@ -1,6 +1,3 @@
--- leader to ,
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
 
 vim.keymap.set('n', '<leader><leader>e', '<cmd>.lua<CR>', { desc = 'Execute the current line' })
 vim.keymap.set('n', '<leader><leader>x', '<cmd>source %<CR>', { desc = 'Execute the current file' })

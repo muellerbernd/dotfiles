@@ -1,7 +1,3 @@
-require 'bemu.core'
-require 'bemu.lazy'
-
-require 'bemu.statusline'
 -- -- require("bemu.plugins.fidget")
 -- require 'bemu.plugins.nvim-treesitter'
 -- require 'bemu.plugins.completion'
