@@ -69,6 +69,7 @@ return {
         'hyprlang',
         'typst',
         'just',
+        'nim',
       },
       -- incremental_selection = {
       --   enable = true,
