@@ -1,6 +1,6 @@
 local opt = vim.opt
 
-opt.clipboard = "unnamedplus"
+-- opt.clipboard = "unnamedplus"
 
 if vim.env.SSH_CONNECTION then
   local function vim_paste()
