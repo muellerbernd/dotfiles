@@ -211,6 +211,9 @@ riverctl rule-add -app-id .blueman-manager-wrapped ssd
 riverctl rule-add -app-id org.pwmt.zathura ssd
 riverctl rule-add -app-id org.gajim.Gajim ssd
 
+# riverctl rule-add -app-id Enter name of file to save ssd
+riverctl rule-add -app-id firefox no-float
+
 riverctl rule-add -app-id float float
 
 # Make all views with app-id "bar" and any title use client-side decorations
