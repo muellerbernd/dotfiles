@@ -4,6 +4,7 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
+      'saghen/blink.cmp',
       -- { 'antosha417/nvim-lsp-file-operations', config = true },
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -21,6 +22,9 @@ return {
       local capabilities = nil
       if pcall(require, 'cmp_nvim_lsp') then
         capabilities = require('cmp_nvim_lsp').default_capabilities()
+      end
+      if pcall(require, 'blick.cmp') then
+        capabilities = require('blick.cmp').get_lsp_capabilities()
       end
       --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
       --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
