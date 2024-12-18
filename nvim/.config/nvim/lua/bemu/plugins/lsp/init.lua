@@ -238,14 +238,14 @@ return {
                 formatting = {
                   command = { 'alejandra' },
                 },
-                options = {
-                  nixos = {
-                    expr = '(builtins.getFlake ("git+file://" + toString ./.)).nixosConfigurations.ammerapad.options',
-                  },
-                  home_manager = {
-                    expr = '(builtins.getFlake ("git+file://" + toString ./.)).homeConfigurations."bernd@ammerapad".options',
-                  },
-                },
+                -- options = {
+                --   nixos = {
+                --     expr = '(builtins.getFlake ("git+file://" + toString ./.)).nixosConfigurations.ammerapad.options',
+                --   },
+                --   home_manager = {
+                --     expr = '(builtins.getFlake ("git+file://" + toString ./.)).homeConfigurations."bernd@ammerapad".options',
+                --   },
+                -- },
               },
             },
           }
