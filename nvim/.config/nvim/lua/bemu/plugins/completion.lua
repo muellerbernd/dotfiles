@@ -226,6 +226,7 @@ return {
       dependencies = {
         'rafamadriz/friendly-snippets', -- useful snippets
         'honza/vim-snippets',
+        'onsails/lspkind.nvim',
       },
       config = function()
         require('luasnip.loaders.from_vscode').lazy_load()
@@ -330,16 +331,6 @@ return {
     --   https://cmp.saghen.dev/configuration/keymap.html#enter
     keymap = { preset = 'enter' },
 
-    appearance = {
-      -- Sets the fallback highlight groups to nvim-cmp's highlight groups
-      -- Useful for when your theme doesn't support blink.cmp
-      -- will be removed in a future release
-      use_nvim_cmp_as_default = true,
-      -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-      -- Adjusts spacing to ensure icons are aligned
-      nerd_font_variant = 'mono',
-    },
-
     -- default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, via `opts_extend`
     sources = {
@@ -347,13 +338,80 @@ return {
       default = { 'lsp', 'path', 'luasnip', 'buffer' },
       -- optionally disable cmdline completions
       -- cmdline = {},
+      cmdline = function()
+        local type = vim.fn.getcmdtype()
+        -- Search forward and backward
+        if type == '/' or type == '?' then
+          return { 'buffer' }
+        end
+        -- Commands
+        if type == ':' then
+          return { 'cmdline' }
+        end
+        return {}
+      end,
     },
 
     -- experimental signature help support
     signature = { enabled = true },
 
-    -- show documentation
-    completion = { documentation = { auto_show = true } },
+    appearance = {
+      use_nvim_cmp_as_default = false,
+      nerd_font_variant = 'mono',
+    },
+    completion = {
+      accept = { auto_brackets = { enabled = true } },
+      documentation = {
+        auto_show = true,
+        auto_show_delay_ms = 250,
+        update_delay_ms = 50,
+        treesitter_highlighting = true,
+        window = { border = 'rounded' },
+      },
+      list = {
+        selection = function(ctx)
+          return ctx.mode == 'cmdline' and 'auto_insert' or 'preselect'
+        end,
+      },
+      menu = {
+        border = 'rounded',
+        cmdline_position = function()
+          if vim.g.ui_cmdline_pos ~= nil then
+            local pos = vim.g.ui_cmdline_pos -- (1, 0)-indexed
+            return { pos[1] - 1, pos[2] }
+          end
+          local height = (vim.o.cmdheight == 0) and 1 or vim.o.cmdheight
+          return { vim.o.lines - height, 0 }
+        end,
+        draw = {
+          columns = {
+            { 'kind_icon', 'label', gap = 1 },
+            { 'kind' },
+          },
+          components = {
+            kind_icon = {
+              text = function(item)
+                local kind = require('lspkind').symbol_map[item.kind] or ''
+                return kind .. ' '
+              end,
+              highlight = 'CmpItemKind',
+            },
+            label = {
+              text = function(item)
+                return item.label
+              end,
+              highlight = 'CmpItemAbbr',
+            },
+            kind = {
+              text = function(item)
+                return item.kind
+              end,
+              highlight = 'CmpItemKind',
+            },
+          },
+        },
+      },
+    },
   },
   -- allows extending the providers array elsewhere in your config
   -- without having to redefine it
