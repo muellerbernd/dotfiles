@@ -54,7 +54,6 @@ vim.opt.listchars = { eol = '↲', tab = '▸ ', trail = '·' }
 -- vim.opt.listchars = { eol = "↲", tab = "▸ ", trail = "·" , space = "⋅"}
 -- set system clipboard as default clipboard
 -- set.clipboard = "unnamedplus"
-opt.formatoptions = 'l'
 -- set.noswapfile = true
 -- no wrap, but if wrap enabled only wrap in white space
 opt.lbr = true
@@ -71,11 +70,6 @@ opt.lbr = true
 opt.wildmenu = true
 -- Ignore files
 opt.wildignore = { '*/cache/*', '*/tmp/*', '*.pyc', '*_build/*', '**/.git/*' }
-
-
--- Don't have `o` add a comment
-opt.formatoptions:remove "o"
-
 
 -- spell check
 opt.spell = true

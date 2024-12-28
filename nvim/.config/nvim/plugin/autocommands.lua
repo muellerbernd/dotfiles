@@ -105,3 +105,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 --     vim.bo[event.buf].commentstring = cs:gsub('(%S)%%s', '%1 %%s'):gsub('%%s(%S)', '%%s %1')
 --   end,
 -- })
+
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+  group = vim.api.nvim_create_augroup('FormatOptions', { clear = true }),
+  pattern = { '*' },
+  callback = function()
+    vim.opt_local.fo:remove 'o'
+    vim.opt_local.fo:remove 'r'
+  end,
+})
