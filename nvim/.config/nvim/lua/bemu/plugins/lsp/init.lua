@@ -1,14 +1,22 @@
 return {
   {
     'neovim/nvim-lspconfig',
-    event = { 'BufReadPre', 'BufNewFile' },
+    -- event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'saghen/blink.cmp',
-      -- { 'antosha417/nvim-lsp-file-operations', config = true },
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', opts = {} },
+      {
+        'folke/lazydev.nvim',
+        ft = "lua", -- only load on lua files
+        opts = {
+          library = {
+            { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+          },
+        },
+      },
     },
     config = function()
       _ = require 'bemu.plugins.lsp.handlers'
@@ -156,6 +164,7 @@ return {
         -- 'nil_ls',        -- needs nil
         'nixd',
         'lemminx',
+        'lua_ls'
       }
       -- local servers = { "pylsp", "clangd", "gopls", "rust_analyzer" }
       for _, lsp in ipairs(servers) do
@@ -266,30 +275,30 @@ return {
           }
         end
       end
-      lspconfig.lua_ls.setup {
-        capabilities = capabilities,
-        settings = {
-          Lua = {
-            runtime = { version = 'LuaJIT' },
-            workspace = {
-              checkThirdParty = false,
-              -- Tells lua_ls where to find all the Lua files that you have loaded
-              -- for your neovim configuration.
-              library = {
-                '${3rd}/luv/library',
-                unpack(vim.api.nvim_get_runtime_file('', true)),
-              },
-              -- If lua_ls is really slow on your computer, you can try this instead:
-              -- library = { vim.env.VIMRUNTIME },
-            },
-            completion = {
-              callSnippet = 'Replace',
-            },
-            -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-            -- diagnostics = { disable = { 'missing-fields' } },
-          },
-        },
-      }
+      -- lspconfig.lua_ls.setup {
+      --   capabilities = capabilities,
+      --   settings = {
+      --     Lua = {
+      --       runtime = { version = 'LuaJIT' },
+      --       workspace = {
+      --         checkThirdParty = false,
+      --         -- Tells lua_ls where to find all the Lua files that you have loaded
+      --         -- for your neovim configuration.
+      --         library = {
+      --           '${3rd}/luv/library',
+      --           unpack(vim.api.nvim_get_runtime_file('', true)),
+      --         },
+      --         -- If lua_ls is really slow on your computer, you can try this instead:
+      --         -- library = { vim.env.VIMRUNTIME },
+      --       },
+      --       completion = {
+      --         callSnippet = 'Replace',
+      --       },
+      --       -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+      --       -- diagnostics = { disable = { 'missing-fields' } },
+      --     },
+      --   },
+      -- }
     end,
   },
   -- A neovim plugin that preview code with LSP code actions applied.

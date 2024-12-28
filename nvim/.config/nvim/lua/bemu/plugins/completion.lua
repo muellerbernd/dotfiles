@@ -217,21 +217,8 @@ return {
   'saghen/blink.cmp',
   -- optional: provides snippets for the snippet source
   dependencies = {
-  --   {
-  --     'L3MON4D3/LuaSnip',
-  --     -- follow latest release.
-  --     version = 'v2.*', -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-  --     -- install jsregexp (optional!).
-  --     build = 'make install_jsregexp',
-  --     dependencies = {
-  --       'rafamadriz/friendly-snippets', -- useful snippets
-  --     },
-  --     config = function()
-  --       require('luasnip.loaders.from_vscode').lazy_load()
-  --       require('luasnip.loaders.from_vscode').load { paths = { '~/.config/nvim/snippets' } } -- Load snippets from my-snippets folder
-  --     end,
-  --   },
     'onsails/lspkind.nvim',
+    'rafamadriz/friendly-snippets', -- useful snippets
   },
   -- use a release tag to download pre-built binaries
   version = 'v0.*',
@@ -244,20 +231,6 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
-    -- snippets = {
-    --   expand = function(snippet)
-    --     require('luasnip').lsp_expand(snippet)
-    --   end,
-    --   active = function(filter)
-    --     if filter and filter.direction then
-    --       return require('luasnip').jumpable(filter.direction)
-    --     end
-    --     return require('luasnip').in_snippet()
-    --   end,
-    --   jump = function(direction)
-    --     require('luasnip').jump(direction)
-    --   end,
-    -- },
     --   https://cmp.saghen.dev/configuration/keymap.html#enter
     keymap = {
       -- preset = 'default',
@@ -279,9 +252,7 @@ return {
     -- default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, via `opts_extend`
     sources = {
-      -- default = { 'lsp', 'path', 'snippets', 'buffer' },
       -- optionally disable cmdline completions
-      -- cmdline = {},
       cmdline = function()
         local type = vim.fn.getcmdtype()
         -- Search forward and backward
