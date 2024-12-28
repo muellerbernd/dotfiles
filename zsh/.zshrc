@@ -45,6 +45,7 @@ git
 zsh-users/zsh-completions
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-syntax-highlighting
+BronzeDeer/zsh-completion-sync
 EOBUNDLES
 
 # Tell Antigen that you're done.
@@ -92,32 +93,6 @@ export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 # https://starship.rs/faq/#why-do-i-see-executing-command-timed-out-warnings
 export STARSHIP_LOG='error'
 
-# RPROMPT='[%D{%L:%M:%S}] '$RPROMPT
-# RPROMPT='[%D{%L:%M:%S %p}]'
-# taken from here: https://stackoverflow.com/questions/2187829/constantly-updated-clock-in-zsh-prompt
-# RPROMPT='[%D{%H:%M:%S %p}]'
-# schedprompt() {
-#   emulate -L zsh
-#   zmodload -i zsh/sched
-#
-#   # Remove existing event, so that multiple calls to
-#   # "schedprompt" work OK.  (You could put one in precmd to push
-#   # the timer 30 seconds into the future, for example.)
-#   integer i=${"${(@)zsh_scheduled_events#*:*:}"[(I)schedprompt]}
-#   (( i )) && sched -$i
-#
-#   # Test that zle is running before calling the widget (recommended
-#   # to avoid error messages).
-#   # Otherwise it updates on entry to zle, so there's no loss.
-#   zle && zle reset-prompt
-#
-#   # This ensures we're not too far off the start of the minute
-#   sched +30 schedprompt
-# }
-#
-# schedprompt
-
-
 ZSH_HIGHLIGHT_STYLES[comment]=fg=245
 
 # load aliases
@@ -144,22 +119,22 @@ if [ -f /usr/share/vcstool-completion/vcs.zsh ]; then
     source /usr/share/vcstool-completion/vcs.zsh
 fi
 
-function ros2_on() {
-    # export ROS_DOMAIN_ID=42
-    # export ROS_VERSION=2
-    # export ROS_PYTHON_VERSION=3
-    # export ROS_DISTRO=git
-    source /opt/ros2/humble/setup.zsh
-    # argcomplete for ros2 & colcon
-    # https://github.com/ros2/ros2cli/issues/534
-    eval "$(register-python-argcomplete ros2)"
-    eval "$(register-python-argcomplete colcon)"
-}
-
-function ros1_on() {
-    rosexport
-    source /opt/ros/noetic/setup.zsh
-}
+# function ros2_on() {
+#     # export ROS_DOMAIN_ID=42
+#     # export ROS_VERSION=2
+#     # export ROS_PYTHON_VERSION=3
+#     # export ROS_DISTRO=git
+#     source /opt/ros2/humble/setup.zsh
+#     # argcomplete for ros2 & colcon
+#     # https://github.com/ros2/ros2cli/issues/534
+#     eval "$(register-python-argcomplete ros2)"
+#     eval "$(register-python-argcomplete colcon)"
+# }
+#
+# function ros1_on() {
+#     rosexport
+#     source /opt/ros/noetic/setup.zsh
+# }
 
 # custom funcs
 function gitaur() {echo $1 | awk '{print "git clone https://aur.archlinux.org/"$1".git"}' | xargs -I % sh -c %}
@@ -265,7 +240,7 @@ eval "$(atuin init zsh --disable-up-arrow)"
 
 eval "$(just --completions zsh)"
 
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=1000
+SAVEHIST=1000
 setopt appendhistory
