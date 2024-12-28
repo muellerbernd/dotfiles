@@ -106,6 +106,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 --   end,
 -- })
 
+-- remove auto comment feature
+-- Don't have `o` add a comment
 vim.api.nvim_create_autocmd({ 'FileType' }, {
   group = vim.api.nvim_create_augroup('FormatOptions', { clear = true }),
   pattern = { '*' },
