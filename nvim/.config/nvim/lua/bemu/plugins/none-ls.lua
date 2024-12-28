@@ -23,9 +23,9 @@ return {
       },
     }
 
-    vim.keymap.set('n', '<space>f', function()
+    vim.keymap.set('n', '<space>ff', function()
       vim.lsp.buf.format { async = true }
-    end, { desc = '[f]ormat buffer' })
+    end, { desc = '[f]ormat [f]ile' })
   end,
   --   { -- Autoformat
   --   'stevearc/conform.nvim',
