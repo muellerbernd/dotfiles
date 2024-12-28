@@ -81,38 +81,16 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- vim.api.nvim_create_autocmd({ "BufNewFile", "BufFilePre", "BufRead" }, {
---     group = group,
---     pattern = { "*.html.hbs" },
---     command = "set filetype=handlebars",
--- })
+-- Turn off "auto comment next line"
+local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
 
--- customize cmp_docs to be rendered as markdown
--- vim.api.nvim_create_autocmd('FileType', {
---     pattern = 'cmp_docs',
---     callback = function()
---         vim.treesitter.start(0, 'markdown')
---     end,
--- })
+local general = augroup("General Settings", { clear = true })
 
--- commentstring
--- https://github.com/neovim/neovim/pull/28176
--- vim.api.nvim_create_autocmd('FileType', {
---   group = group,
---   pattern = { 'hyprlang', 'dosini' },
---   callback = function(event)
---     local cs = '#%s'
---     vim.bo[event.buf].commentstring = cs:gsub('(%S)%%s', '%1 %%s'):gsub('%%s(%S)', '%%s %1')
---   end,
--- })
-
--- remove auto comment feature
--- Don't have `o` add a comment
-vim.api.nvim_create_autocmd({ 'FileType' }, {
-  group = vim.api.nvim_create_augroup('FormatOptions', { clear = true }),
-  pattern = { '*' },
-  callback = function()
-    vim.opt_local.fo:remove 'o'
-    vim.opt_local.fo:remove 'r'
-  end,
+autocmd("BufEnter", {
+    callback = function()
+        vim.opt.formatoptions:remove({ "c", "r", "o" })
+    end,
+    group = general,
+    desc = "Disable new line comment",
 })
