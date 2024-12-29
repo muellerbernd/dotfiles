@@ -20,36 +20,82 @@ autoload -U bashcompinit
 bashcompinit
 
 # antigen setup
-if [ -f /usr/share/zsh/share/antigen.zsh ]; then
-    source /usr/share/zsh/share/antigen.zsh
-elif [ -f ~/antigen.zsh ]; then
-    source ~/antigen.zsh
-else
-    curl -L git.io/antigen >~/antigen.zsh
-    source ~/antigen.zsh
-    print "Installed Antigen from main repository with the latest stable version available!"
-fi
+# if [ -f /usr/share/zsh/share/antigen.zsh ]; then
+#     source /usr/share/zsh/share/antigen.zsh
+# elif [ -f ~/antigen.zsh ]; then
+#     source ~/antigen.zsh
+# else
+#     curl -L git.io/antigen >~/antigen.zsh
+#     source ~/antigen.zsh
+#     print "Installed Antigen from main repository with the latest stable version available!"
+# fi
 
 # Load the oh-my-zsh's library.
-antigen use oh-my-zsh
-
-# Bundles from the default repo (robbyrussell's oh-my-zsh).
-antigen bundles <<EOBUNDLES
-#command-not-found
-#colored-man-pages
-#magic-enter
-#extract
-# tmux
-# tmuxinator
-git
-zsh-users/zsh-completions
-zsh-users/zsh-autosuggestions
-zsh-users/zsh-syntax-highlighting
-BronzeDeer/zsh-completion-sync
-EOBUNDLES
+# antigen use oh-my-zsh
+#
+# # Bundles from the default repo (robbyrussell's oh-my-zsh).
+# antigen bundles <<EOBUNDLES
+# #command-not-found
+# #colored-man-pages
+# #magic-enter
+# #extract
+# # tmux
+# # tmuxinator
+# git
+# zsh-users/zsh-completions
+# zsh-users/zsh-autosuggestions
+# zsh-users/zsh-syntax-highlighting
+# BronzeDeer/zsh-completion-sync
+# EOBUNDLES
 
 # Tell Antigen that you're done.
-antigen apply
+# antigen apply
+
+# zgen setup
+
+if [ -f $HOME/.zgen/zgen.zsh ]; then
+else
+    git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen"
+    print "Installed zgen from main repository with the latest stable version available!"
+fi
+
+# https://github.com/tarjoilija/zgen
+# load zgen
+source "${HOME}/.zgen/zgen.zsh"
+
+# if the init scipt doesn't exist
+if ! zgen saved; then
+    echo "Creating a zgen save"
+
+    # zgen oh-my-zsh
+
+    # plugins
+    # zgen oh-my-zsh plugins/git
+    # zgen oh-my-zsh plugins/sudo
+    # zgen oh-my-zsh plugins/command-not-found
+    # zgen load zsh-users/zsh-syntax-highlighting
+    # zgen load /path/to/super-secret-private-plugin
+    zgen load zsh-users/zsh-completions
+    zgen load zsh-users/zsh-autosuggestions
+    zgen load zsh-users/zsh-syntax-highlighting
+    zgen load BronzeDeer/zsh-completion-sync
+
+    # bulk load
+#     zgen loadall <<EOPLUGINS
+#         zsh-users/zsh-history-substring-search
+#         /path/to/local/plugin
+# EOPLUGINS
+    # ^ can't indent this EOPLUGINS
+
+    # completions
+    # zgen load zsh-users/zsh-completions src
+
+    # theme
+    # zgen oh-my-zsh themes/arrow
+
+    # save all to init script
+    zgen save
+fi
 
 # use starship as prompt
 eval "$(starship init zsh)"
@@ -66,7 +112,7 @@ export FZF_DEFAULT_COMMAND="fd --color=always --strip-cwd-prefix --hidden --foll
 export FZF_DEFAULT_OPTS="--ansi"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-source <(fzf --zsh)
+# source <(fzf --zsh)
 
 # enable control-s and control-q
 stty start undef
@@ -106,17 +152,6 @@ if [ -f ~/.zsh_aliases_work ]; then
     source ~/.zsh_aliases_work
 else
     # print "404: ~/.zsh_aliases_work not found."
-fi
-
-# setup nix
-if [ -f /usr/share/zsh/plugins/zsh-nix-shell/nix-shell.plugin.zsh ]; then
-    source /usr/share/zsh/plugins/zsh-nix-shell/nix-shell.plugin.zsh
-else
-fi
-
-# vcs setup autocompletion
-if [ -f /usr/share/vcstool-completion/vcs.zsh ]; then
-    source /usr/share/vcstool-completion/vcs.zsh
 fi
 
 # function ros2_on() {
