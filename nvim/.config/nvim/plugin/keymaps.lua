@@ -1,6 +1,7 @@
 
-vim.keymap.set('n', '<leader><leader>e', '<cmd>.lua<CR>', { desc = 'Execute the current line' })
-vim.keymap.set('n', '<leader><leader>x', '<cmd>source %<CR>', { desc = 'Execute the current file' })
+vim.keymap.set('n', '<leader><leader>e', ':.lua<CR>', { desc = 'Execute the current line' })
+vim.keymap.set('v', '<leader><leader>e', ':lua<CR>', { desc = 'Execute the current selection' })
+vim.keymap.set('n', '<leader><leader>x', ':source %<CR>', { desc = 'Execute the current file' })
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
