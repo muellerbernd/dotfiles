@@ -14,3 +14,92 @@ alias tm="tmux a || tmux"
 alias rosexport='export ROS_HOSTNAME=localhost; export ROS_MASTER_URI=http://localhost:11311'
 # alias joshuto='joshuto --output-file /tmp/joshutodir; LASTDIR=`cat /tmp/joshutodir`; cd "$LASTDIR"'
 alias l='eza -l --git -O'
+
+# function ros2_on() {
+#     # export ROS_DOMAIN_ID=42
+#     # export ROS_VERSION=2
+#     # export ROS_PYTHON_VERSION=3
+#     # export ROS_DISTRO=git
+#     source /opt/ros2/humble/setup.zsh
+#     # argcomplete for ros2 & colcon
+#     # https://github.com/ros2/ros2cli/issues/534
+#     eval "$(register-python-argcomplete ros2)"
+#     eval "$(register-python-argcomplete colcon)"
+# }
+#
+# function ros1_on() {
+#     rosexport
+#     source /opt/ros/noetic/setup.zsh
+# }
+
+# custom funcs
+function gitaur() {echo $1 | awk '{print "git clone https://aur.archlinux.org/"$1".git"}' | xargs -I % sh -c %}
+
+function safedelete() {
+    if command -v gio >/dev/null; then
+        for f in "$@"; do
+            gio trash -f "$f"
+        done
+
+    elif command -v gvfs-trash >/dev/null; then
+        for f in "$@"; do
+            gvfs-trash "$f"
+        done
+
+    elif [ -d "$HOME/.local/share/Trash/files" ]; then
+        for f in "$@"; do
+            mv "$f" "$HOME/.local/share/Trash/files"
+        done
+
+    else
+        for f in "$@"; do
+            # shellcheck disable=SC1012
+            \rm "$f"
+        done
+    fi
+}
+
+# nvidia_offload() {
+#     export __NV_PRIME_RENDER_OFFLOAD=1
+#     export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+#     export __GLX_VENDOR_LIBRARY_NAME=nvidia
+#     export __VK_LAYER_NV_optimus=NVIDIA_only
+#     exec "$@"
+# }
+
+function rr() {
+    temp_file="$(mktemp -t "ranger_cd.XXXXXXXXXX")"
+    ranger --choosedir="$temp_file" -- "${@:-$PWD}"
+    if chosen_dir="$(cat -- "$temp_file")" && [ -n "$chosen_dir" ] && [ "$chosen_dir" != "$PWD" ]; then
+        cd -- "$chosen_dir"
+    fi
+    rm -f -- "$temp_file"
+}
+
+function jj() {
+    temp_file="$(mktemp -t "joshuto_cd.XXXXXXXXXX")"
+    # ~/.config/joshuto/uberzug/joshuto.sh --output-file "$temp_file" -- "${@:-$PWD}"
+    joshuto --output-file "$temp_file" -- "${@:-$PWD}"
+    if chosen_dir="$(cat -- "$temp_file")" && [ -n "$chosen_dir" ] && [ "$chosen_dir" != "$PWD" ]; then
+        cd -- "$chosen_dir"
+    fi
+    rm -f -- "$temp_file"
+}
+
+function ya() {
+    temp_file="$(mktemp -t "yazi_cd.XXXXXXXXXX")"
+    yazi --cwd-file "$temp_file" -- "${@:-$PWD}"
+    if chosen_dir="$(cat -- "$temp_file")" && [ -n "$chosen_dir" ] && [ "$chosen_dir" != "$PWD" ]; then
+        cd -- "$chosen_dir"
+    fi
+    rm -f -- "$temp_file"
+}
+
+function man() {
+    local cols=$(tput cols || echo ${COLUMNS:-80})
+    if [[ cols -gt 100 ]]; then
+        MANWIDTH=100 command man "$@"
+    else
+        MANWIDTH="${cols}" command man "$@"
+    fi
+}
