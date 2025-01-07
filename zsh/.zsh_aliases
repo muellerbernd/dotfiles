@@ -103,3 +103,8 @@ function man() {
         MANWIDTH="${cols}" command man "$@"
     fi
 }
+
+function timezsh() {
+  shell=${1-$SHELL}
+  for i in $(seq 1 4); do time $shell -i -c exit; done
+}

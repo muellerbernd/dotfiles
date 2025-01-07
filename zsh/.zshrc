@@ -11,84 +11,6 @@ COMPLETION_WAITING_DOTS="true"
 # do this once, if you are already loading completions you don't need to add this again
 # autoload -U compinit && compinit
 
-# antigen setup
-# if [ -f /usr/share/zsh/share/antigen.zsh ]; then
-#     source /usr/share/zsh/share/antigen.zsh
-# elif [ -f ~/antigen.zsh ]; then
-#     source ~/antigen.zsh
-# else
-#     curl -L git.io/antigen >~/antigen.zsh
-#     source ~/antigen.zsh
-#     print "Installed Antigen from main repository with the latest stable version available!"
-# fi
-
-# Load the oh-my-zsh's library.
-# antigen use oh-my-zsh
-#
-# # Bundles from the default repo (robbyrussell's oh-my-zsh).
-# antigen bundles <<EOBUNDLES
-# #command-not-found
-# #colored-man-pages
-# #magic-enter
-# #extract
-# # tmux
-# # tmuxinator
-# git
-# zsh-users/zsh-completions
-# zsh-users/zsh-autosuggestions
-# zsh-users/zsh-syntax-highlighting
-# BronzeDeer/zsh-completion-sync
-# EOBUNDLES
-
-# Tell Antigen that you're done.
-# antigen apply
-
-# zgen setup
-
-if [ -f $HOME/.zgen/zgen.zsh ]; then
-else
-    git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen"
-    echo "Installed zgen from main repository with the latest stable version available!"
-fi
-
-# https://github.com/tarjoilija/zgen
-# load zgen
-source "${HOME}/.zgen/zgen.zsh"
-
-# if the init scipt doesn't exist
-if ! zgen saved; then
-    echo "Creating a zgen save"
-
-    # zgen oh-my-zsh
-
-    # plugins
-    # zgen oh-my-zsh plugins/git
-    # zgen oh-my-zsh plugins/sudo
-    # zgen oh-my-zsh plugins/command-not-found
-    # zgen load zsh-users/zsh-syntax-highlighting
-    # zgen load /path/to/super-secret-private-plugin
-    zgen load zsh-users/zsh-completions
-    zgen load zsh-users/zsh-autosuggestions
-    zgen load zsh-users/zsh-syntax-highlighting
-    zgen load BronzeDeer/zsh-completion-sync
-
-    # bulk load
-#     zgen loadall <<EOPLUGINS
-#         zsh-users/zsh-history-substring-search
-#         /path/to/local/plugin
-# EOPLUGINS
-    # ^ can't indent this EOPLUGINS
-
-    # completions
-    # zgen load zsh-users/zsh-completions src
-
-    # theme
-    # zgen oh-my-zsh themes/arrow
-
-    # save all to init script
-    zgen save
-fi
-
 
 # export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
 # export PATH=$HOME/bin:/usr/local/bin:/sbin:/usr/sbin:$PATH
@@ -186,3 +108,30 @@ HISTFILE=$HOME/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
 setopt appendhistory
+
+# zplug setup
+if [ -f $HOME/.zplug/init.zsh ]; then
+else
+    git clone https://github.com/zplug/zplug "${HOME}/.zplug"
+    echo "Installed zplug from main repository with the latest stable version available!"
+fi
+
+source ~/.zplug/init.zsh
+
+# zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-syntax-highlighting"
+# zplug "BronzeDeer/zsh-completion-sync", \
+#     at:v0.3.0, \
+#     defer:3
+zplug "BronzeDeer/zsh-completion-sync"
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+zplug load
