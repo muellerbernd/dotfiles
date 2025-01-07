@@ -11,7 +11,7 @@ return {
       neogen.setup {}
       vim.keymap.set('n', '<Leader>ng', function()
         neogen.generate {}
-      end, { desc = '[n]eogen generate' })
+      end, { desc = '[n]eogen [g]enerate' })
     end,
   },
 }
