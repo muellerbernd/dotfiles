@@ -210,6 +210,7 @@ riverctl rule-add -app-id firefox ssd
 riverctl rule-add -app-id .blueman-manager-wrapped ssd
 riverctl rule-add -app-id org.pwmt.zathura ssd
 riverctl rule-add -app-id org.gajim.Gajim ssd
+riverctl rule-add -app-id thunar ssd
 
 # riverctl rule-add -app-id Enter name of file to save ssd
 riverctl rule-add -app-id firefox no-float
