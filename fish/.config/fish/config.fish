@@ -4,8 +4,9 @@ end
 
 set fish_greeting # Disable greeting
 starship init fish | source
-atuin init fish | source
+atuin init fish --disable-up-arrow | source
 zoxide init fish | source
+direnv hook fish | source
 
 # functions
 
