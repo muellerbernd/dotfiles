@@ -52,15 +52,15 @@ else
     print "404: ~/.zsh_aliases not found."
 fi
 
-if [ -f ~/.zsh_aliases_work ]; then
-    source ~/.zsh_aliases_work
-else
-    # print "404: ~/.zsh_aliases_work not found."
-fi
+# if [ -f ~/.zsh_aliases_work ]; then
+#     source ~/.zsh_aliases_work
+# else
+#     # print "404: ~/.zsh_aliases_work not found."
+# fi
 
 
 # terminal settings
-export TERM='tmux-256color'
+export TERM='xterm-256color'
 # [[ -n $TMUX ]] && export TERM="tmux-256color"
 
 # WINDOW TITLE
@@ -92,46 +92,46 @@ eval "$(direnv hook zsh)"
 # atuin
 eval "$(atuin init zsh --disable-up-arrow)"
 
-eval "$(just --completions zsh)"
+# eval "$(just --completions zsh)"
 
 # keybinds
-bindkey '\e[1~' beginning-of-line # Linux console
-bindkey '\e[H' beginning-of-line  # xterm
-bindkey '\eOH' beginning-of-line  # gnome-terminal
-bindkey '\e[2~' overwrite-mode    # Linux console, xterm, gnome-terminal
-bindkey '\e[3~' delete-char       # Linux console, xterm, gnome-terminal
-bindkey '\e[4~' end-of-line       # Linux console
-bindkey '\e[F' end-of-line        # xterm
-bindkey '\eOF' end-of-line        # gnome-terminal
+# bindkey '\e[1~' beginning-of-line # Linux console
+# bindkey '\e[H' beginning-of-line  # xterm
+# bindkey '\eOH' beginning-of-line  # gnome-terminal
+# bindkey '\e[2~' overwrite-mode    # Linux console, xterm, gnome-terminal
+# bindkey '\e[3~' delete-char       # Linux console, xterm, gnome-terminal
+# bindkey '\e[4~' end-of-line       # Linux console
+# bindkey '\e[F' end-of-line        # xterm
+# bindkey '\eOF' end-of-line        # gnome-terminal
 
-HISTFILE=$HOME/.zsh_history
-HISTSIZE=1000
-SAVEHIST=1000
-setopt appendhistory
+# HISTFILE=$HOME/.zsh_history
+# HISTSIZE=1000
+# SAVEHIST=1000
+# setopt appendhistory
 
 # zplug setup
-if [ -f $HOME/.zplug/init.zsh ]; then
-else
-    git clone https://github.com/zplug/zplug "${HOME}/.zplug"
-    echo "Installed zplug from main repository with the latest stable version available!"
-fi
-
-source ~/.zplug/init.zsh
-
-# zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-syntax-highlighting"
-# zplug "BronzeDeer/zsh-completion-sync", \
-#     at:v0.3.0, \
-#     defer:3
-# zplug "BronzeDeer/zsh-completion-sync"
-# zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-zplug load
+# if [ -f $HOME/.zplug/init.zsh ]; then
+# else
+#     git clone https://github.com/zplug/zplug "${HOME}/.zplug"
+#     echo "Installed zplug from main repository with the latest stable version available!"
+# fi
+#
+# source ~/.zplug/init.zsh
+#
+# # zplug "zsh-users/zsh-completions"
+# zplug "zsh-users/zsh-autosuggestions"
+# zplug "zsh-users/zsh-syntax-highlighting"
+# # zplug "BronzeDeer/zsh-completion-sync", \
+# #     at:v0.3.0, \
+# #     defer:3
+# # zplug "BronzeDeer/zsh-completion-sync"
+# # zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+#
+# # Install plugins if there are plugins that have not been installed
+# if ! zplug check --verbose; then
+#     printf "Install? [y/N]: "
+#     if read -q; then
+#         echo; zplug install
+#     fi
+# fi
+# zplug load
