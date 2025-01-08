@@ -13,7 +13,7 @@ delete:
 	make delete-${HOSTNAME}
 
 install-default:
-	gpg --output ./zsh/.zsh_aliases_work --decrypt ./zsh/.zsh_aliases_work.gpg
+	# gpg --output ./zsh/.zsh_aliases_work --decrypt ./zsh/.zsh_aliases_work.gpg
 	gpg --output ./gitconf-work/.gitconfig-job --decrypt ./gitconf-work/.gitconfig-job.gpg
 	stow --no-folding --restow -v -t $$HOME i3-common \
 		sway-common \
