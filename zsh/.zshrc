@@ -124,8 +124,8 @@ zplug "zsh-users/zsh-syntax-highlighting"
 # zplug "BronzeDeer/zsh-completion-sync", \
 #     at:v0.3.0, \
 #     defer:3
-zplug "BronzeDeer/zsh-completion-sync"
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+# zplug "BronzeDeer/zsh-completion-sync"
+# zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
