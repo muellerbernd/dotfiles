@@ -34,6 +34,7 @@ install-default:
 		alacritty \
 		wezterm \
 		zsh \
+		fish \
 		nvim \
 		tmux \
 		ranger \
@@ -75,6 +76,7 @@ delete-default:
 		alacritty \
 		wezterm \
 		zsh \
+		fish \
 		nvim \
 		tmux \
 		ranger \
