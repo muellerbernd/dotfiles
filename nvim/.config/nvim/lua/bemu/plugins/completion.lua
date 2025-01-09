@@ -268,7 +268,7 @@ return {
     -- default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, via `opts_extend`
     sources = {
-      default = { 'lsp', 'path', 'luasnip', 'buffer' },
+      default = { 'lsp', 'path','snippets', 'buffer' },
       -- optionally disable cmdline completions
       cmdline = function()
         local type = vim.fn.getcmdtype()
@@ -283,6 +283,7 @@ return {
         return {}
       end,
     },
+    snippets = {preset = 'luasnip'},
 
     -- experimental signature help support
     signature = { enabled = true },
