@@ -300,11 +300,6 @@ return {
         treesitter_highlighting = true,
         window = { border = 'rounded' },
       },
-      list = {
-        selection = function(ctx)
-          return ctx.mode == 'cmdline' and 'auto_insert' or 'preselect'
-        end,
-      },
       menu = {
         border = 'rounded',
         cmdline_position = function()
