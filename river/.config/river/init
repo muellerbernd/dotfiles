@@ -206,14 +206,15 @@ riverctl set-repeat 50 300
 
 # Make all views with an app-id that starts with "float" and title "foo" start floating.
 # riverctl rule-add -app-id 'float*' -title 'foo' float
-riverctl rule-add -app-id firefox ssd
-riverctl rule-add -app-id .blueman-manager-wrapped ssd
-riverctl rule-add -app-id org.pwmt.zathura ssd
-riverctl rule-add -app-id org.gajim.Gajim ssd
-riverctl rule-add -app-id thunar ssd
+# riverctl rule-add -app-id firefox ssd
+# riverctl rule-add -app-id .blueman-manager-wrapped ssd
+# riverctl rule-add -app-id org.pwmt.zathura ssd
+# riverctl rule-add -app-id org.gajim.Gajim ssd
+# riverctl rule-add -app-id thunar ssd
+riverctl rule-add -app-id '*' ssd
 
 # riverctl rule-add -app-id Enter name of file to save ssd
-riverctl rule-add -app-id firefox no-float
+# riverctl rule-add -app-id firefox no-float
 riverctl rule-add -app-id '*' no-float
 
 riverctl rule-add -app-id float float
