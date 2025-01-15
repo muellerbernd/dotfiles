@@ -300,3 +300,7 @@ on   = "O"
 run  = "plugin open-with-cmd"
 desc = "Open with command"
 
+[[manager.prepend_keymap]]
+on   = [ "c", "a" ]
+run  = "plugin compress"
+desc = "Archive selected files"
