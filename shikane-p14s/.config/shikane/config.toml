@@ -1,6 +1,6 @@
 [[profile]]
 name = "ast-work"
-exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec ~/.config/shikane/move_workspaces_work.py","exec killall -SIGUSR2 waybar","hyprctl dispatch workspace -- 1"]
+exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec ~/.config/shikane/move_workspaces_work.py","exec killall -SIGUSR2 waybar"]
     [[profile.output]]
     enable = true
     search = ["m=0xD291", "s=", "v=AU Optronics"]
@@ -28,7 +28,7 @@ exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\""
 
 [[profile]]
 name = "ilmbase"
-exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec killall -SIGUSR2 waybar","hyprctl dispatch workspace -- 1"]
+exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec killall -SIGUSR2 waybar"]
     [[profile.output]]
     enable = true
     search = ["m=DELL P2317H", "s=HH77Y7B4AM6L", "v=Dell Inc."]
@@ -57,7 +57,7 @@ exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\""
 
 [[profile]]
 name = "ammera"
-exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec ~/.config/shikane/move_workspaces_ammera_office.py","exec killall -SIGUSR2 waybar","hyprctl dispatch workspace -- 1"]
+exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec ~/.config/shikane/move_workspaces_ammera_office.py","exec killall -SIGUSR2 waybar"]
     [[profile.output]]
     enable = true
     search = ["m=0xD291", "s=", "v=AU Optronics"]
@@ -77,7 +77,7 @@ exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\""
 
 [[profile]]
 name = "denkraum"
-exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec killall -SIGUSR2 waybar","hyprctl dispatch workspace -- 1"]
+exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec killall -SIGUSR2 waybar","exec wl-present mirror eDP-1"]
     [[profile.output]]
     enable = true
     search = ["m=0xD291", "s=", "v=AU Optronics"]
@@ -97,7 +97,7 @@ exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\""
 
 [[profile]]
 name = "undock"
-exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec killall -SIGUSR2 waybar","hyprctl dispatch workspace -- 1"]
+exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec killall -SIGUSR2 waybar"]
     [[profile.output]]
     enable = true
     search = ["m=0xD291", "s=", "v=AU Optronics"]
