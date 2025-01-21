@@ -54,3 +54,4 @@ x-scheme-handler/about=firefox.desktop
 x-scheme-handler/unknown=firefox.desktop
 x-scheme-handler/msteams=teams-for-linux.desktop
 image/x-photo-cd=CloudCompare.desktop
+application/x-virt-viewer=remote-viewer.desktop
