@@ -15,6 +15,29 @@ alias rosexport='export ROS_HOSTNAME=localhost; export ROS_MASTER_URI=http://loc
 # alias joshuto='joshuto --output-file /tmp/joshutodir; LASTDIR=`cat /tmp/joshutodir`; cd "$LASTDIR"'
 alias l='eza -l --git -O'
 
+function nff() {
+    filename=$(tv)
+
+    if [ -n "$filename" ]; then
+        nvim "$filename"
+    else
+        echo "No file found."
+    fi
+}
+
+function nfg() {
+    output=$(tv text)
+    filename=$(echo "$output" | awk -F':' '{print $1}')
+    line_number=$(echo "$output" | awk -F':' '{print $2}')
+
+
+    if [ -n "$filename" ]; then
+        nvim +$line_number "$filename"
+    else
+        echo "No file found."
+    fi
+}
+
 # function ros2_on() {
 #     # export ROS_DOMAIN_ID=42
 #     # export ROS_VERSION=2
