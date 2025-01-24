@@ -34,7 +34,7 @@ return {
   opts = {
     --   https://cmp.saghen.dev/configuration/keymap.html#enter
     keymap = {
-      -- preset = 'default',
+      preset = 'none',
 
       ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
       ['<C-e>'] = { 'hide' },
@@ -53,7 +53,7 @@ return {
     -- default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, via `opts_extend`
     sources = {
-      default = { 'lsp', 'path','snippets', 'buffer' },
+      default = { 'lsp', 'path', 'snippets', 'buffer' },
       -- optionally disable cmdline completions
       cmdline = function()
         local type = vim.fn.getcmdtype()
@@ -68,7 +68,7 @@ return {
         return {}
       end,
     },
-    snippets = {preset = 'luasnip'},
+    snippets = { preset = 'luasnip' },
 
     -- experimental signature help support
     signature = { enabled = true },
@@ -78,7 +78,7 @@ return {
       nerd_font_variant = 'mono',
     },
     completion = {
-      accept = { auto_brackets = { enabled = true } },
+      accept = { auto_brackets = { enabled = false } },
       documentation = {
         auto_show = true,
         auto_show_delay_ms = 250,
@@ -86,6 +86,7 @@ return {
         treesitter_highlighting = true,
         window = { border = 'rounded' },
       },
+      list = { selection = { preselect = false, auto_insert = true } },
       menu = {
         border = 'rounded',
         cmdline_position = function()
