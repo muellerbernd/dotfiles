@@ -58,16 +58,47 @@ custom_funcs.retab = function()
   end
 end
 
--- camelCase to snake_case
-custom_funcs.snake_case = function()
+custom_funcs.ToggleWord = function()
+  local word = vim.fn.expand '<cword>'
+
+  local word_mapping = {
+    ['true'] = 'false',
+    ['True'] = 'False',
+    ['yes'] = 'no',
+    ['on'] = 'off',
+    ['ON'] = 'OFF',
+  }
+
+  -- add reversed key value pairs to table
+  for k, v in pairs(word_mapping) do
+    word_mapping[v] = k
+  end
+
+  local new_word = word_mapping[word] or word
+
+  vim.cmd('normal ciw' .. new_word)
+end
+
+custom_funcs.ToggleCase = function()
   -- expand('<cword>') to get the current word under cursor
   local current_word = vim.call('expand', '<cword>')
-  -- change case
-  local snake_case_word = string.gsub(current_word, '(%u)', '_%1')
-  -- diw delete in word
-  -- i insert
-  -- and add snake_case_word
-  vim.cmd('normal! diwi' .. snake_case_word)
+  local function toggle_case_v2(str)
+    if str:match '_' then
+      -- Convert snake_case (including uppercase letters) to camelCase
+      return (str
+        :gsub('_(%u)', function(c)
+          return c
+        end)
+        :gsub('_(%l)', function(c)
+          return c:upper()
+        end)):gsub('^(%l)', string.upper)
+    else
+      -- Convert camelCase to snake_case, while preserving the first character
+      return (str:gsub('(%u)', '_%1')):lower():gsub('^_', '')
+    end
+  end
+  local new_word = toggle_case_v2(current_word)
+  vim.cmd('normal! ciw' .. new_word)
 end
 
 -- https://www.rockyourcode.com/vim-create-a-directory/

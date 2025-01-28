@@ -1,4 +1,3 @@
-
 vim.keymap.set('n', '<leader><leader>e', ':.lua<CR>', { desc = 'Execute the current line' })
 vim.keymap.set('v', '<leader><leader>e', ':lua<CR>', { desc = 'Execute the current selection' })
 vim.keymap.set('n', '<leader><leader>x', ':source %<CR>', { desc = 'Execute the current file' })
@@ -132,33 +131,15 @@ vim.keymap.set('n', '<M-down>', '<C-W>-')
 -- correct spell with ctrl+l
 -- vim.keymap.set('i',"<C-l>", "<c-g>u<Esc>[s1z=`]a<c-g>u", { desc = "correct spell" })
 
+local core_funcs = require 'bemu.core.funcs'
 -- toggle custom stuff
-vim.keymap.set('n', '<leader><leader>t', function()
-  local word = vim.fn.expand '<cword>'
-
-  local word_mapping = {
-    ['true'] = 'false',
-    ['True'] = 'False',
-    ['yes'] = 'no',
-    ['on'] = 'off',
-    ['ON'] = 'OFF',
-  }
-
-  -- add reversed key value pairs to table
-  for k, v in pairs(word_mapping) do
-    word_mapping[v] = k
-  end
-
-  local new_word = word_mapping[word]
-
-  if not new_word then
-    return
-  end
-
-  local cmd = 'normal ciw' .. new_word
-
-  vim.cmd(cmd)
+vim.keymap.set('n', '<leader>tw', function()
+  core_funcs.ToggleWord()
 end, { desc = '[t]oggle words to opposite' })
+
+vim.keymap.set('n', '<leader>tc', function()
+  core_funcs.ToggleCase()
+end, { desc = '[t]oggle [c]ase' })
 
 vim.keymap.set('n', '<leader>qf', function()
   local qf_test = vim.fn.getqflist({ winid = 0 }).winid
