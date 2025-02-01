@@ -13,3 +13,4 @@
 --
 -- require 'bemu.plugins.mk-preview'
 --
+-- require 'bemu.core.builtin-compl'
