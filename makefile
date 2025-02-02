@@ -34,6 +34,7 @@ install-default:
 		alacritty \
 		wezterm \
 		zsh \
+		bash \
 		fish \
 		nvim \
 		tmux \
@@ -76,6 +77,7 @@ delete-default:
 		alacritty \
 		wezterm \
 		zsh \
+		bash \
 		fish \
 		nvim \
 		tmux \
