@@ -1,7 +1,3 @@
-bind 'set show-all-if-ambiguous on'
-bind 'TAB:menu-complete'
-
-
 export FZF_DEFAULT_COMMAND="fd --color=always --strip-cwd-prefix --hidden --follow --exclude .git"
 export FZF_DEFAULT_OPTS="--ansi"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
