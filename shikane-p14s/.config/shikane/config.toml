@@ -2,7 +2,7 @@
 name = "ast-work"
 exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec ~/.config/shikane/move_workspaces_work.py","exec killall -SIGUSR2 waybar"]
     [[profile.output]]
-    enable = true
+    enable = false
     search = ["m=0xD291", "s=", "v=AU Optronics"]
     mode = "1920x1200@60.026Hz"
     position = "0,0"
@@ -48,7 +48,7 @@ exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\""
     transform = "90"
 
     [[profile.output]]
-    enable = true
+    enable = false
     search = ["m=0xD291", "s=", "v=AU Optronics"]
     mode = "1920x1200@60.026Hz"
     position = "3000,0"
