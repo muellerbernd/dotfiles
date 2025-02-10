@@ -10,7 +10,7 @@ return {
       { 'j-hui/fidget.nvim', opts = {} },
       {
         'folke/lazydev.nvim',
-        ft = "lua", -- only load on lua files
+        ft = 'lua', -- only load on lua files
         opts = {
           library = {
             { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
@@ -164,7 +164,7 @@ return {
         -- 'nil_ls',        -- needs nil
         'nixd',
         'lemminx',
-        'lua_ls'
+        'lua_ls',
       }
       -- local servers = { "pylsp", "clangd", "gopls", "rust_analyzer" }
       for _, lsp in ipairs(servers) do
@@ -258,15 +258,13 @@ return {
               },
             },
           }
-        elseif lsp == 'typst_lsp' then
+        elseif lsp == 'tinymist' then
           lspconfig[lsp].setup {
             capabilities = capabilities,
             settings = {
-              exportPdf = 'never', -- Choose onType, onSave or never.
-              -- serverPath = "" -- Normally, there is no need to uncomment it.
-              formatting = {
-                command = { 'typstyle' },
-              },
+              formatterMode = 'typstyle',
+              exportPdf = 'disable',
+              semanticTokens = 'disable',
             },
           }
         else
