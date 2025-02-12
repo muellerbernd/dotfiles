@@ -3,7 +3,7 @@ return {
     'neovim/nvim-lspconfig',
     -- event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
-      'hrsh7th/cmp-nvim-lsp',
+      -- 'hrsh7th/cmp-nvim-lsp',
       'saghen/blink.cmp',
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -28,9 +28,9 @@ return {
       -- LSP servers and clients are able to communicate to each other what features they support.
       --  By default, Neovim doesn't support everything that is in the LSP Specification.
       local capabilities = nil
-      if pcall(require, 'cmp_nvim_lsp') then
-        capabilities = require('cmp_nvim_lsp').default_capabilities()
-      end
+      -- if pcall(require, 'cmp_nvim_lsp') then
+      --   capabilities = require('cmp_nvim_lsp').default_capabilities()
+      -- end
       if pcall(require, 'blick.cmp') then
         capabilities = require('blick.cmp').get_lsp_capabilities()
       end
