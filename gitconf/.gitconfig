@@ -30,6 +30,7 @@
 [user]
     email = github@muellerbernd.de
     name = Bernd Müller
+    signingkey = BA9C6A01
 [includeIf "gitdir:~/git/fhg/"] # job needs, like workspace/* so all included projects
     path = ~/.gitconfig-job
 [includeIf "gitdir:~/work/"] # job needs, like workspace/* so all included projects
@@ -52,3 +53,5 @@
     clean = git-lfs clean -- %f
 [http]
     postBuffer = 157286400
+[commit]
+    gpgsign = true
