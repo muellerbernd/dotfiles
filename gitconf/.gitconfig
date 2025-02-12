@@ -30,7 +30,7 @@
 [user]
     email = github@muellerbernd.de
     name = Bernd Müller
-    signingkey = BA9C6A01
+    signingkey = 5A0324162B9C122127245B0493D117F0550F25C5
 [includeIf "gitdir:~/git/fhg/"] # job needs, like workspace/* so all included projects
     path = ~/.gitconfig-job
 [includeIf "gitdir:~/work/"] # job needs, like workspace/* so all included projects
