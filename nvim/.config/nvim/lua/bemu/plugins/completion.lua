@@ -86,7 +86,7 @@ return {
         treesitter_highlighting = true,
         window = { border = 'rounded' },
       },
-      list = { selection = { preselect = false, auto_insert = true } },
+      list = { selection = { preselect = false, auto_insert = false } },
       menu = {
         border = 'rounded',
         cmdline_position = function()
