@@ -78,6 +78,7 @@ return {
       nerd_font_variant = 'mono',
     },
     completion = {
+      ghost_text = { enabled = true },
       accept = { auto_brackets = { enabled = false } },
       documentation = {
         auto_show = true,
@@ -88,6 +89,7 @@ return {
       },
       list = { selection = { preselect = false, auto_insert = false } },
       menu = {
+        auto_show = true,
         border = 'rounded',
         cmdline_position = function()
           if vim.g.ui_cmdline_pos ~= nil then
