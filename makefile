@@ -34,7 +34,6 @@ install-default:
 		alacritty \
 		wezterm \
 		zsh \
-		bash \
 		fish \
 		nvim \
 		tmux \
