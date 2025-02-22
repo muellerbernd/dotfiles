@@ -54,6 +54,7 @@ install-default:
 		mime-apps \
 		foot \
 		contour \
+		strawberry \
 		wallpapers
 
 delete-default:
@@ -97,6 +98,7 @@ delete-default:
 		mime-apps \
 		foot \
 		contour \
+		strawberry \
 		wallpapers
 
 install-mue-p14s:
