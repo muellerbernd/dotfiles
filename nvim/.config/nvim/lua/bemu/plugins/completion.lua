@@ -40,7 +40,6 @@ return {
       ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
       ['<C-e>'] = { 'hide' },
       ['<C-y>'] = { 'select_and_accept' },
-      ['<CR>'] = { 'select_and_accept' },
 
       ['<C-p>'] = { 'select_prev', 'fallback' },
       ['<C-n>'] = { 'select_next', 'fallback' },
@@ -99,7 +98,7 @@ return {
     -- experimental signature help support
     signature = { enabled = true },
     -- Disable command line completion:
-    cmdline = { enabled = false },
+    cmdline = { enabled = true },
     sources = {
 
       -- Disable some sources in comments and strings.
