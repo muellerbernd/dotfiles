@@ -58,7 +58,7 @@ riverctl map normal Super Z zoom
 
 riverctl declare-mode float
 riverctl declare-mode resize
-riverctl map normal Super F enter-mode float # Super+F to enter float mode
+riverctl map normal Super T enter-mode float # Super+F to enter float mode
 riverctl map normal Super R enter-mode resize # Super+R to enter resize mode
 
 ### Floating window mappings but note that these also apply to tiled windows.
@@ -217,7 +217,7 @@ riverctl rule-add -app-id '*' ssd
 # riverctl rule-add -app-id firefox no-float
 riverctl rule-add -app-id '*' no-float
 
-riverctl rule-add -app-id float float
+# riverctl rule-add -app-id float float
 
 # Make all views with app-id "bar" and any title use client-side decorations
 # riverctl rule-add -app-id "bar" csd
