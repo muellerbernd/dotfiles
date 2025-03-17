@@ -40,61 +40,6 @@ local mode_map = {
   ['!'] = 'SHELL',
   ['t'] = 'TERMINAL',
 }
---
--- vim.cmd([[
---   highlight WinBar           guifg=#BBBBBB gui=bold
---   highlight WinBarNC         guifg=#888888 gui=bold
---   highlight WinBarLocation   guifg=#888888 gui=bold
---   highlight WinBarModified   guifg=#d7d787 gui=bold
---   highlight WinBarGitDirty   guifg=#d7afd7 gui=bold
---   highlight WinBarIndicator  guifg=#5fafd7 gui=bold
---   highlight WinBarInactive   guibg=#3a3a3a guifg=#777777 gui=bold
---   highlight ModeC guibg=#dddddd guifg=#101010 gui=bold " COMMAND
---   highlight ModeI guibg=#ffff5f guifg=#353535 gui=bold " INSERT
---   highlight ModeT guibg=#95e454 guifg=#353535 gui=bold " TERMINAL
---   highlight ModeN guibg=#87d7ff guifg=#353535 gui=bold " NORMAL
---   highlight ModeN guibg=#5fafd7 guifg=#262626 gui=bold " NORMAL
---   highlight ModeV guibg=#c586c0 guifg=#353535 gui=bold " VISUAL
---   highlight ModeR guibg=#f44747 guifg=#353535 gui=bold " REPLACE
---   highlight StatusLine              guibg=#303030 guifg=#999999
---   highlight StatusLineGit  gui=bold guibg=#3a3a3a guifg=#c586c0
---   highlight StatusLineCwd  gui=bold guibg=#3a3a3a guifg=#999999
---   highlight StatusLineFile gui=bold guibg=#303030 guifg=#bbbbbb
---   highlight StatusLineMod           guibg=#303030 guifg=#d7d787
---   highlight StatusLineError         guibg=#303030 guifg=#ff0000
---   highlight StatusLineInfo          guibg=#303030 guifg=#87d7ff
---   highlight StatusLineHint          guibg=#303030 guifg=#ffffd7
---   highlight StatusLineWarn          guibg=#303030 guifg=#d7d700
---   highlight StatusLineChanges       guibg=#303030 guifg=#c586c0
---   highlight StatusLineOutside       guibg=#3a3a3a guifg=#999999
---   highlight StatusLineTransition1   guibg=#303030 guifg=#1c1c1c
---   highlight StatusLineTransition2   guibg=#3a3a3a guifg=#1c1c1c
--- ]])
---
--- function M.mode()
---     local current_mode = vim.api.nvim_get_mode().mode
---     return string.format(" %s ", modes[current_mode]):upper()
--- end
---
--- function M.get_mode()
---     local mode_code = vim.api.nvim_get_mode().mode
---     local mode = mode_map[mode_code] or string.upper(mode_code)
---     return "%#Mode" .. mode:sub(1, 1) .. "# " .. mode .. " %*"
--- end
---
--- function M.get_lines()
---     return tostring(vim.api.nvim_win_get_cursor(0)[1]) .. "/" .. tostring(vim.api.nvim_buf_line_count(0))
--- end
---
--- function M.statusline()
---     local parts = {
---         [[%<» %{luaeval("require'bemu.statusline.statusline'.get_mode()")} %=]],
---         [[%<» %{luaeval("require'bemu.statusline.statusline'.get_lines()")} %=]],
---     }
---     return table.concat(parts, "")
--- end
---
--- return M
 local M = {}
 
 local api = vim.api
@@ -108,15 +53,6 @@ local function highlight(num, active)
     end
   else
     return '%#StatusLineNC#'
-  end
-end
-
-local function hldefs()
-  local bg = api.nvim_get_hl_by_name('StatusLine', true).background
-  for _, ty in ipairs { 'Warn', 'Error', 'Info', 'Hint' } do
-    local hl = api.nvim_get_hl_by_name('Diagnostic' .. ty, true)
-    local name = ('Diagnostic%sStatus'):format(ty)
-    api.nvim_set_hl(0, name, { fg = hl.foreground, bg = bg })
   end
 end
 
@@ -210,49 +146,18 @@ function M.filetype()
   }, ' ')
 end
 
-function M.encodingAndFormat()
-  local e = vim.bo.fileencoding and vim.bo.fileencoding or vim.o.encoding
-
-  local r = {}
-  if e ~= 'utf-8' then
-    r[#r + 1] = e
-  end
-
-  local f = vim.bo.fileformat
-  if f ~= 'unix' then
-    r[#r + 1] = '[' .. f .. ']'
-    local ok, res = pcall(api.nvim_call_function, 'WebDevIconsGetFileFormatSymbol')
-    if ok then
-      r[#r + 1] = res
-    end
-  end
-
-  return table.concat(r, ' ')
-end
-
-local function recording()
-  local reg = vim.fn.reg_recording()
-  if reg ~= '' then
-    return '%#ModeMsg#  RECORDING[' .. reg .. ']  '
-  else
-    return ''
-  end
-end
-
 function M.bufname()
   ---@diagnostic disable-next-line: undefined-field
   local name = vim.api.nvim_eval_statusline('%f', {}).str
   local buf_name = vim.api.nvim_buf_get_name(0)
-  if vim.startswith(buf_name, 'fugitive://') then
-    local _, _, commit, relpath = buf_name:find [[^fugitive://.*/%.git.*/(%x-)/(.*)]]
-    name = relpath .. '@' .. commit:sub(1, 7)
-  end
   if vim.startswith(buf_name, 'gitsigns://') then
     local _, _, revision, relpath = buf_name:find [[^gitsigns://.*/%.git.*/(.*):(.*)]]
     name = relpath .. '@' .. revision:sub(1, 7)
   end
 
   return name
+  -- local buf_name = vim.api.nvim_buf_get_name(0)
+  -- return buf_name ~= '' and buf_name or '[No Name]'
 end
 
 local function pad(x)
@@ -282,21 +187,19 @@ function M.set(active, global)
   vim[scope].statusline = parse_sections {
     {
       highlight(1, active),
-      recording(),
       pad(func 'hunks'),
       highlight(2, active),
       pad(func('lsp_status', active)),
       highlight(2, active),
     },
     {
-      '%<',
+      -- '%<',
       pad(func('bufname', nil, '0.60') .. '%m%r%h%q'),
     },
     {
       pad(func 'filetype'),
-      pad(func 'encodingAndFormat'),
       highlight(1, active),
-      ' %3p%% %2l(%02c)/%-3L ', -- 80% 65[12]/120
+      ' %3p%% %2l[%02c]/%-3L ', -- 80% 65[12]/120
     },
   }
 end
@@ -323,109 +226,6 @@ api.nvim_create_autocmd('VimEnter', {
   end,
 })
 
-api.nvim_create_autocmd('ColorScheme', {
-  group = 'statusline',
-  callback = hldefs,
-})
-
 _G.statusline = M
 
 return M
-
--- local group = vim.api.nvim_create_augroup("StatusLine", { clear = true })
---
--- local icons = {
---     diagnostics = {
---         error = "",
---         warning = "",
---         hint = "",
---         info = "",
---     },
---     buffers = {
---         readonly = "󰌾",
---         modified = "●",
---         unsaved_others = "○",
---     },
--- }
---
--- local diagnostics_attrs = {
---     { "Error", icons.diagnostics.error },
---     { "Warn", icons.diagnostics.warning },
---     { "Hint", icons.diagnostics.hint },
---     { "Info", icons.diagnostics.info },
--- }
---
--- local diagnostics = ""
--- local function diagnostics_section()
---     local results = {}
---
---     for _, attr in pairs(diagnostics_attrs) do
---         local n = vim.diagnostic.get(0, { severity = attr[1] })
---         if #n > 0 then
---             table.insert(results, string.format(" %d %s", #n, attr[2]))
---         end
---     end
---
---     return table.concat(results)
--- end
---
--- vim.api.nvim_create_autocmd({ "DiagnosticChanged", "BufWinEnter" }, {
---     group = group,
---     callback = function()
---         diagnostics = diagnostics_section()
---     end,
--- })
---
--- local function unsaved_buffers()
---     for _, buf in pairs(vim.api.nvim_list_bufs()) do
---         if vim.api.nvim_get_current_buf() == buf then
---             goto continue
---         end
---         if vim.api.nvim_buf_get_option(buf, "modified") then
---             return string.format(" %s ", icons.buffers.unsaved_others)
---         end
---         ::continue::
---     end
---
---     return ""
--- end
---
--- local function file_section()
---     local name, ext = vim.fn.expand "%:t", vim.fn.expand "%:e"
---     local attr, icon = "", ""
---
---     local ok, nvim_devicons = pcall(require, "nvim-web-devicons")
---     if ok then
---         icon = nvim_devicons.get_icon("", ext, { default = true })
---     end
---
---     if vim.bo.modified and vim.bo.readonly then
---         attr = icons.buffers.modified .. " " .. icons.buffers.readonly
---     elseif vim.bo.readonly then
---         attr = icons.buffers.readonly
---     elseif vim.bo.modified then
---         attr = icons.buffers.modified
---     end
---
---     if attr ~= "" then
---         attr = " " .. attr
---     end
---
---     if name == "" then
---         name = "No Name"
---     end
---
---     return string.format("%s %s%s", icon, name, attr)
--- end
---
--- local function left_section()
---     return file_section() .. unsaved_buffers() .. diagnostics
--- end
---
--- local function right_section()
---     return "%l:%L"
--- end
---
--- _G.set_statusline = function()
---     return " " .. left_section() .. "%=" .. right_section() .. " "
--- end
