@@ -193,7 +193,7 @@ function M.set(active, global)
       highlight(2, active),
     },
     {
-      -- '%<',
+      '%<',
       pad(func('bufname', nil, '0.60') .. '%m%r%h%q'),
     },
     {
