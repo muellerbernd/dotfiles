@@ -215,6 +215,8 @@ riverctl rule-add -app-id '*' ssd
 
 # riverctl rule-add -app-id Enter name of file to save ssd
 riverctl rule-add -app-id firefox no-float
+riverctl rule-add -app-id PrusaSlicer -title 'Choose one or more files *' no-float
+
 # riverctl rule-add -app-id '*' no-float
 
 # riverctl rule-add -app-id float float
