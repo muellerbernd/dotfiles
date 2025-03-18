@@ -144,8 +144,8 @@ return {
       -- Use a loop to conveniently call 'setup' on multiple servers and
       -- map buffer local keybindings when the language server attaches
       local servers = {
-        -- "pylsp", -- needs python-lsp-server
-        'pyright', -- needs pyright
+        'pylsp', -- needs python-lsp-server
+        -- 'pyright', -- needs pyright
         -- "jedi-language-server",
         -- "ccls", -- needs ccls
         'clangd',        -- needs clangd
@@ -266,6 +266,22 @@ return {
               formatterMode = 'typstyle',
               exportPdf = 'disable',
               semanticTokens = 'disable',
+            },
+          }
+        elseif lsp == 'pylsp' then
+          lspconfig[lsp].setup {
+            capabilities = capabilities,
+            settings = {
+              settings = {
+                pylsp = {
+                  plugins = {
+                    pycodestyle = {
+                      ignore = { 'W391' },
+                      maxLineLength = 100,
+                    },
+                  },
+                },
+              },
             },
           }
         else
