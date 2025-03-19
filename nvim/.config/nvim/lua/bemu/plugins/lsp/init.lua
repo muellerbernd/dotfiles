@@ -144,8 +144,8 @@ return {
       -- Use a loop to conveniently call 'setup' on multiple servers and
       -- map buffer local keybindings when the language server attaches
       local servers = {
-        'pylsp', -- needs python-lsp-server
-        -- 'pyright', -- needs pyright
+        -- 'pylsp', -- needs python-lsp-server
+        'pyright', -- needs pyright
         -- "jedi-language-server",
         -- "ccls", -- needs ccls
         'clangd',        -- needs clangd
