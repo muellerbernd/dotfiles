@@ -115,6 +115,10 @@ suppress_preload = false
 #     { mime = "application/xz",              run = "archive.lua" },
 # ]
 
+[[plugin.prepend_preloaders]]
+name = "/mnt/EIS/**"
+run  = "noop"
+
 [input]
 # cd
 cd_title  = "Change directory:"
