@@ -1,0 +1,137 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family:
+    Hack Nerd Font,
+    monospace;
+  font-weight: bold;
+  font-size: 12px;
+  min-height: 0;
+}
+
+window#waybar {
+  background-color: rgba(21, 18, 27, 0.1);
+  /* background-color: rgba(59, 59, 59, 0.3); */
+  color: #cdd6f4;
+}
+
+tooltip {
+  background: #343434;
+  border-radius: 10px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #cdd6f4;
+}
+
+
+#window,
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#workspaces,
+#mode,
+#layout,
+#tray,
+#keyboard-state,
+#privacy,
+#backlight {
+  background: #343434;
+  padding: 0px 10px;
+  margin: 3px 0px;
+  /* margin-top: 10px; */
+  /* border: 1px solid #181825; */
+}
+
+#workspaces button {
+  padding: 5px;
+  color: #cdd6f4;
+  /* margin-right: 5px; */
+}
+
+/*#workspaces button.occupied {*/
+/*  background: #5f5f4f;*/
+/*  color: #cdd6f4;*/
+/*  border-radius: 10px;*/
+/*}*/
+
+#workspaces button.focused {
+  background: #5f5f4f;
+  color: #cdd6f4;
+  border-radius: 10px;
+}
+
+#workspaces button.urgent {
+  color: #111111;
+  background: #a6e3a1;
+  border-radius: 10px;
+}
+
+#workspaces button:hover {
+  /* background: #111111; */
+  background: #5f5f4f;
+  color: #cdd6f4;
+  border-radius: 10px;
+}
+
+#workspaces {
+  border-radius: 10px;
+  margin-left: 10px;
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+#mode {
+  color: #ff55ff;
+  border-radius: 10px 0px 0px 10px;
+  margin-left: 10px;
+}
+
+#layout {
+  border-radius: 0px 10px 10px 0px;
+  margin-right: 10px;
+}
+
+#tray {
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+#window {
+  border-radius: 10px;
+  margin-left: 60px;
+  margin-right: 60px;
+}
+
+#clock {
+  color: #fab387;
+  border-radius: 10px 10px 10px 10px;
+  margin-left: 5px;
+  border-right: 0px;
+}
+
+#battery {
+  color: #a6e3a1;
+  border-radius: 10px 10px 10px 10px;
+  margin-right: 10px;
+  border-left: 0px;
+}
+
+#battery.bat2 {
+  color: #a6e3a1;
+  border-radius: 10px 10px 10px 10px;
+  margin-right: 10px;
+  border-left: 0px;
+}
+
+#privacy,
+#privacy-item,
+#privacy-item.screenshare,
+#privacy-item.audio-in,
+#privacy-item.audio-out {
+  color: #cba6f7;
+  border-radius: 10px 10px 10px 10px;
+  margin-right: 10px;
+}
+
+/* vim: ts=2 sw=2: */

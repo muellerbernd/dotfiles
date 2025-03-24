@@ -70,6 +70,7 @@ return {
         'typst',
         'just',
         'nim',
+        'kdl',
       },
       -- incremental_selection = {
       --   enable = true,

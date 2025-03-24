@@ -2,22 +2,6 @@
 // "/-" comments out the following node.
 // Check the wiki for a full description of the configuration:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Overview
-spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
-spawn-at-startup "waybar"
-spawn-at-startup "gnome-keyring-daemon" "--start" "--components=ssh,secrets,pkcs11"
-spawn-at-startup "lxpolkit"
-spawn-at-startup "nm-applet" "--indicator"
-spawn-at-startup "cage" "--" "nextcloud"
-spawn-at-startup "blueman-applet"
-spawn-at-startup "dunst"
-spawn-at-startup "xbindkeys"
-spawn-at-startup "~/scripts/check-dotfiles.sh"
-spawn-at-startup "hyprpaper"
-// spawn-at-startup "kanshi"
-spawn-at-startup "shikane"
-spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store" // Stores only text data
-spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store" // Stores only image data
-spawn-at-startup "hypridle"
 
 // This flag will make niri ask the applications to omit their client-side decorations.
 // If an application will specifically ask for CSD, the request will be honored. Additionally, clients will be informed that they are tiled, removing some rounded corners.
@@ -50,6 +34,9 @@ input {
             layout "de"
             // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
         }
+
+        repeat-rate 50
+        repeat-delay 300
     }
 
     // Next sections include libinput settings.
@@ -277,6 +264,17 @@ window-rule {
     //default-column-width {}
 }
 
+layer-rule {
+    match namespace="^launcher$"
+
+    shadow {
+        on
+    }
+
+    // Fuzzel defaults to 10 px rounded corners.
+    geometry-corner-radius 10
+}
+
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
 /-window-rule {
@@ -307,7 +305,8 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return { spawn "foot"; }
-    Mod+D { spawn "fuzzel"; }
+    // Mod+D { spawn "fuzzel"; }
+    Mod+D { spawn "rofi-script"; }
     Mod+Escape { spawn "loginctl" "lock-session"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
@@ -316,13 +315,13 @@ binds {
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
-    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "bash" "-c" "~/scripts/controlVolumePipewire.py up"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "bash" "-c" "~/scripts/controlVolumePipewire.py down"; }
+    XF86AudioMute        allow-when-locked=true { spawn "bash" "-c" "~/scripts/controlVolumePipewire.py mute"; }
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 
-    XF86MonBrightnessDown { spawn "light" "-T" "0.9"; }
-    XF86MonBrightnessUp   { spawn "light" "-T" "1.1"; }
+    XF86MonBrightnessDown { spawn "bash" "-c" "light -U 1 && ~/scripts/notifyBrightness.sh"; }
+    XF86MonBrightnessUp { spawn "bash" "-c" "light -A 1 && ~/scripts/notifyBrightness.sh"; }
 
     Mod+Shift+Q { close-window; }
 
@@ -457,8 +456,8 @@ binds {
     Mod+Period { expel-window-from-column; }
 
     // There are also commands that consume or expel a single window to the side.
-    // Mod+BracketLeft  { consume-or-expel-window-left; }
-    // Mod+BracketRight { consume-or-expel-window-right; }
+    Mod+BracketLeft  { consume-or-expel-window-left; }
+    Mod+BracketRight { consume-or-expel-window-right; }
 
     Mod+R { switch-preset-column-width; }
     Mod+Shift+R { reset-window-height; }
@@ -495,9 +494,36 @@ binds {
 
     // The quit action will show a confirmation dialog to avoid accidental exits.
     // Mod+Shift+E { quit; }
-    Mod+Shift+E { spawn "~/.config/fuzzel/scripts/powermenu.sh"; }
+    // Mod+Shift+E { spawn "~/.config/fuzzel/scripts/powermenu.sh"; }
+    Mod+Shift+E { spawn "~/.config/rofi/scripts/powermenu/run.sh"; }
 
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
+
+    XF86PowerOff { spawn "~/scripts/toggleLaptopKeyboard.sh"; }
+
 }
+
+spawn-at-startup "mako"
+spawn-at-startup "lxpolkit"
+spawn-at-startup "foot --server"
+spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store" // Stores only text data
+spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store" // Stores only image data
+spawn-at-startup "wl-paste --primary --watch cliphist store"
+spawn-at-startup "nm-applet" "--indicator"
+spawn-at-startup "blueman-applet"
+// spawn-at-startup "dbus-update-activation-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+spawn-at-startup "gnome-keyring-daemon" "--start" "--components=ssh,secrets,pkcs11"
+spawn-at-startup "shikane"
+spawn-at-startup "hypridle"
+
+spawn-at-startup "~/scripts/check-dotfiles.sh"
+
+spawn-at-startup "xwayland-satellite" ":0"
+
+spawn-at-startup "xdg-desktop-portal"
+spawn-at-startup "xdg-desktop-portal-wlr"
+// spawn-at-startup "xdg-desktop-portal-gnome"
+
+spawn-at-startup "bash" "-c" "waybar --config ~/.config/waybar/config-niri.jsonc --style ~/.config/waybar/style-niri.css"
