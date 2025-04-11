@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
-HOSTNAME=$(hostname)
+host=$(hostname)
+case $host in
+"fw13")
+    wallpaper=$HOME/wallpapers/framework-explode.jpeg
+    ;;
+*)
+    wallpaper=$HOME/wallpapers/black-hole.png
+    ;;
+esac
 
-# if [[ $HOSTNAME == "mue-p14s" ]]; then
-#     swaybg -m fill -i ~/wallpapers/work-wallpaper.png
-# else
-    swaybg -m fill -i ~/wallpapers/black-hole.png
-# fi
+swaybg --image "$wallpaper" --mode fill &
