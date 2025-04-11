@@ -29,6 +29,9 @@ case $host in
 "fw13")
     wallpaper=$HOME/wallpapers/framework-explode.jpeg
     ;;
+"mue-p14s")
+    wallpaper=$HOME/wallpapers/space.jpg
+    ;;
 *)
     wallpaper=$HOME/wallpapers/black-hole.png
     ;;
