@@ -22,7 +22,6 @@ install-default:
 		jay \
 		river \
 		waybar \
-		yambar \
 		dunst \
 		mako \
 		rofi \
@@ -53,7 +52,6 @@ install-default:
 		thunar \
 		mime-apps \
 		foot \
-		contour \
 		prusa-slicer \
 		wallpapers
 
@@ -65,7 +63,6 @@ delete-default:
 		jay \
 		river \
 		waybar \
-		yambar \
 		dunst \
 		mako \
 		rofi \
@@ -97,7 +94,6 @@ delete-default:
 		thunar \
 		mime-apps \
 		foot \
-		contour \
 		prusa-slicer \
 		wallpapers
 
