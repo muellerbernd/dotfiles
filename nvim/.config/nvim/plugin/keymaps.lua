@@ -157,9 +157,7 @@ vim.keymap.set('n', '<leader>gf', function()
 end, { desc = '[g]oto [f]ile, create if not exist' })
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
-vim.keymap.set('n', '<leader>dd', function()
+vim.keymap.set('n', '<leader>dl', function()
   require('telescope.builtin').diagnostics()
-end, { desc = 'Open [d]iagnostic list' })
+end, { desc = 'Open [d]iagnostic [l]ist' })
