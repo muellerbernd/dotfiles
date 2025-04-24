@@ -152,3 +152,5 @@ setopt append_history
 setopt inc_append_history
 
 ZSH_HIGHLIGHT_STYLES[comment]=fg=245
+
+export MANPAGER="nvim +Man!"
