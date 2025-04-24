@@ -100,8 +100,7 @@ vim.keymap.set('v', '<', '<gv^')
 -- buffer management
 -- Previous/next buffer
 vim.keymap.set('n', '<C-PageDown>', '<cmd>if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>')
-vim.keymap.set('n', '<C-PageUp>',
-  '<cmd>if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>')
+vim.keymap.set('n', '<C-PageUp>', '<cmd>if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>')
 
 -- Close the current buffer and move to the previous one
 -- This replicates the idea of closing a tab
@@ -112,8 +111,7 @@ vim.keymap.set('n', '<M-x>', '<cmd>bp <BAR> bd! #<CR>')
 -- This replaces :tabnew which I used to bind to this mapping
 -- vim.keymap.set('n',"<leader>T", "<cmd>enew<cr>", { desc = "open new empty buffer" })
 
-vim.keymap.set('n', '<leader><leader>ca', '<cmd>w <bar> %bd <bar> e# <bar> bd#<cr>',
-  { desc = '[c]lose [a]ll buffers except this one' })
+vim.keymap.set('n', '<leader><leader>ca', '<cmd>w <bar> %bd <bar> e# <bar> bd#<cr>', { desc = '[c]lose [a]ll buffers except this one' })
 
 -- Go on top of a word you want to change
 -- Press cn or cN
@@ -161,3 +159,16 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagn
 vim.keymap.set('n', '<leader>dl', function()
   require('telescope.builtin').diagnostics()
 end, { desc = 'Open [d]iagnostic [l]ist' })
+
+--search within visual selection - this is magic
+vim.keymap.set('x', '/', '<Esc>/\\%V')
+
+-- Keep cursor in place when joining lines
+vim.keymap.set('n', 'J', 'mzJ`z:delmarks z<cr>')
+
+-- tabs in insert mode to increase indent, like in ms office stuff, I set this in markdown files.
+vim.keymap.set('i', '<Tab>', '<C-o>>><C-o>A', { buffer = buf })
+vim.keymap.set('i', '<S-Tab>', '<C-o><<<C-o>A', { buffer = buf })
+
+-- Start replacement in the visual selected region
+vim.keymap.set('x', 'R', ':s###g<left><left><left>', { desc = 'Start replacement in the visual selected region' })
