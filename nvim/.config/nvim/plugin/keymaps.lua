@@ -167,8 +167,8 @@ vim.keymap.set('x', '/', '<Esc>/\\%V')
 vim.keymap.set('n', 'J', 'mzJ`z:delmarks z<cr>')
 
 -- tabs in insert mode to increase indent, like in ms office stuff, I set this in markdown files.
-vim.keymap.set('i', '<Tab>', '<C-o>>><C-o>A', { buffer = buf })
-vim.keymap.set('i', '<S-Tab>', '<C-o><<<C-o>A', { buffer = buf })
+-- vim.keymap.set('i', '<Tab>', '<C-o>>><C-o>A', { buffer = buf })
+-- vim.keymap.set('i', '<S-Tab>', '<C-o><<<C-o>A', { buffer = buf })
 
 -- Start replacement in the visual selected region
 vim.keymap.set('x', 'R', ':s###g<left><left><left>', { desc = 'Start replacement in the visual selected region' })
