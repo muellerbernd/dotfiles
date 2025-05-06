@@ -24,6 +24,7 @@ text/csv=nvim.desktop;libreoffice-calc.desktop;
 application/json=nvim.desktop;
 text/markdown=nvim.desktop;
 video/mp4=vlc.desktop;
+x-scheme-handler/element=element-desktop.desktop
 
 [Default Applications]
 application/pdf=org.pwmt.zathura.desktop
