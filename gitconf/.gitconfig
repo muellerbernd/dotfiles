@@ -55,3 +55,7 @@
     postBuffer = 157286400
 [commit]
     gpgsign = true
+[push]
+	recurseSubmodules = on-demand
+[submodule]
+	recurse = true
