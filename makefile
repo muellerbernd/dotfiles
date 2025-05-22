@@ -53,6 +53,7 @@ install-default:
 		mime-apps \
 		foot \
 		prusa-slicer \
+		FreeCAD \
 		wallpapers
 
 delete-default:
@@ -95,6 +96,7 @@ delete-default:
 		mime-apps \
 		foot \
 		prusa-slicer \
+		FreeCAD \
 		wallpapers
 
 install-mue-p14s:
