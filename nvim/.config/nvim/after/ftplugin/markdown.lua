@@ -43,7 +43,34 @@ vim.api.nvim_create_autocmd('BufWritePost', {
           string.format('root_path=%s', cwd),
         },
         on_stdout = function(j, return_val)
-          print(return_val)
+          -- Split return_val into lines
+          local lines = vim.split(return_val, '\n')
+          local new_entries = {}
+
+          for _, line in ipairs(lines) do
+            -- Create a quickfix entry for each line
+            table.insert(new_entries, { text = line })
+          end
+
+          vim.schedule(function()
+            -- Get the current quickfix list
+            local current_qflist = vim.fn.getqflist()
+
+            -- Append new entries to the existing quickfix list
+            for _, entry in ipairs(new_entries) do
+              table.insert(current_qflist, entry)
+            end
+
+            -- Set the updated quickfix list
+            vim.fn.setqflist(current_qflist)
+            -- Optionally open the quickfix window
+            -- vim.cmd 'copen'
+            -- Move the cursor to the last entry
+            local count = #current_qflist
+            if count > 0 then
+              vim.fn.setqflist({}, 'r', { idx = count }) -- Focus the last entry
+            end
+          end)
         end,
         -- on_exit = function(j, return_val)
         --     if zathura[bufnr] == nil then
