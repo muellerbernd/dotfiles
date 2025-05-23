@@ -1,3 +1,5 @@
+vim.opt_local.commentstring = '// %s'
+
 local Job = require 'plenary.job'
 -- local Path = require "plenary.path"
 
