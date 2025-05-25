@@ -13,3 +13,7 @@ end, {})
 vim.api.nvim_create_user_command('NvimReload', function()
   require('bemu.core.funcs').reload_nvim_conf()
 end, {})
+
+vim.api.nvim_create_user_command('UpdateDate', function()
+  require('bemu.core.funcs').update_markdown_date()
+end, {})

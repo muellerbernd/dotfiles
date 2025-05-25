@@ -136,4 +136,11 @@ custom_funcs.horiz_term = function()
   vim.api.nvim_exec2('bel' .. term_height .. 'sp | term', {})
 end
 
+custom_funcs.update_markdown_date = function()
+  local current_date = os.date '%Y-%m-%dT%H:%M:%S%z'
+  -- Add the colon in the timezone
+  current_date = current_date:sub(1, -3) .. ':' .. current_date:sub(-2)
+  vim.cmd('%s/\\(date = \\)\\(.*\\)/\\1' .. current_date .. '/')
+end
+
 return custom_funcs
