@@ -39,7 +39,8 @@
             "---",
             "",
             "## TODO:",
-            ""
+            "",
+            "[modeline]: # \" vim: set fenc=utf-8 spell spl=de: \""
         ],
         "description": "Put in my diary template"
     }
