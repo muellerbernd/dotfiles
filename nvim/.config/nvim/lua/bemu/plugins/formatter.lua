@@ -29,22 +29,24 @@ return {
     end, { desc = '[f]ormat [f]ile' })
   end,
   --   { -- Autoformat
-  --   'stevearc/conform.nvim',
-  --   opts = {
-  --     notify_on_error = false,
-  --     format_on_save = {
-  --       timeout_ms = 500,
-  --       lsp_fallback = true,
-  --     },
-  --     formatters_by_ft = {
-  --       lua = { 'stylua' },
-  --       -- Conform can also run multiple formatters sequentially
-  --       -- python = { "isort", "black" },
-  --       --
-  --       -- You can use a sub-list to tell conform to run *until* a formatter
-  --       -- is found.
-  --       -- javascript = { { "prettierd", "prettier" } },
-  --     },
+  -- 'stevearc/conform.nvim',
+  -- opts = {
+  --   notify_on_error = true,
+  --   -- format_on_save = {
+  --   --   timeout_ms = 500,
+  --   --   lsp_fallback = true,
+  --   -- },
+  --   formatters_by_ft = {
+  --     lua = { 'stylua' },
+  --     -- Conform will run multiple formatters sequentially
+  --     -- python = { 'black', lsp_format = 'fallback' },
+  --     -- You can customize some of the format options for the filetype (:help conform.format)
+  --     -- rust = { 'rustfmt', lsp_format = 'fallback' },
+  --     -- Conform will run the first available formatter
+  --     -- javascript = { 'prettierd', 'prettier', stop_after_first = true },
   --   },
+  --   vim.keymap.set('n', '<space>ff', function()
+  --     vim.lsp.buf.format { async = true }
+  --   end, { desc = '[f]ormat [f]ile' }),
   -- },
 }
