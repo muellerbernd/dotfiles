@@ -3,9 +3,7 @@ local api = vim.api
 Statusline = {}
 
 local function filetype_symbol()
-  local name = api.nvim_buf_get_name(0)
   local filetype = vim.bo.filetype
-  -- print('Current file:', name, 'Filetype:', filetype) -- Debugging line
 
   local res = vim.F.npcall(api.nvim_call_function, 'WebDevIconsGetFileTypeSymbol', {})
   if res then
@@ -13,8 +11,7 @@ local function filetype_symbol()
   end
   local devicons = vim.F.npcall(require, 'nvim-web-devicons')
   if devicons then
-    local icon = devicons.get_icon(name, filetype, { default = true })
-    -- print('Devicon result:', icon) -- Debugging line
+    local icon = devicons.get_icon_by_filetype(filetype, { default = true })
     return icon
   end
   return ''
@@ -32,7 +29,7 @@ local function statusline_filetype()
     filetype_symbol(),
     -- Causes artifacts in ruler section
     -- is_treesitter() and '🌴' or nil
-    is_treesitter() and '' or nil,
+    -- is_treesitter() and '' or nil,
   }, ' ')
 end
 
