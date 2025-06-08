@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 set -e
-set -u
+set +u
 
 # Current Theme
 dir="$HOME/.config/rofi/scripts/powermenu/"
