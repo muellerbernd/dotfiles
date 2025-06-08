@@ -17,6 +17,23 @@ if not vim.loop.fs_stat(lazypath) then
   }
 end
 
+-- taken from here: https://github.com/nvim-telescope/telescope.nvim/issues/3439
+-- Silence the specific position encoding message
+local notify_original = vim.notify
+vim.notify = function(msg, ...)
+  if
+      msg
+      and (
+        msg:match 'position_encoding param is required'
+        or msg:match 'Defaulting to position encoding of the first client'
+        or msg:match 'multiple different client offset_encodings'
+      )
+  then
+    return
+  end
+  return notify_original(msg, ...)
+end
+
 -- Add lazy to the `runtimepath`, this allows us to `require` it.
 ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
@@ -31,4 +48,3 @@ require('lazy').setup({ { import = 'bemu/plugins' } }, {
     notify = false,
   },
 })
-
