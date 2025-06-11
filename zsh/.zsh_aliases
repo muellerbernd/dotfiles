@@ -16,6 +16,7 @@ alias tm="tmux a || tmux"
 alias rosexport='export ROS_HOSTNAME=localhost; export ROS_MASTER_URI=http://localhost:11311'
 # alias joshuto='joshuto --output-file /tmp/joshutodir; LASTDIR=`cat /tmp/joshutodir`; cd "$LASTDIR"'
 alias l='eza -l --git -O'
+alias screenshot='grim -g "$(slurp)"'
 
 function nff() {
     filename=$(tv)
