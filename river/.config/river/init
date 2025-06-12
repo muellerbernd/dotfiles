@@ -239,8 +239,10 @@ done
 
 # riverctl input pointer-2-7-SynPS/2_Synaptics_TouchPad tap enabled
 # riverctl input pointer-2-7-SynPS/2_Synaptics_TouchPad natural-scroll enabled
+# cursor settings
 riverctl focus-follows-cursor always
 riverctl set-cursor-warp on-focus-change
+riverctl hide-cursor when-typing enabled
 
 # Set app-ids and titles of views which should use client side decorations
 # riverctl csd-filter-add app-id "firefox"
