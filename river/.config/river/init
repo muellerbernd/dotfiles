@@ -205,7 +205,7 @@ riverctl border-width 2
 riverctl set-repeat 50 300
 
 # Make all views with an app-id that starts with "float" and title "foo" start floating.
-# riverctl rule-add -app-id 'float*' -title 'foo' float
+riverctl rule-add -app-id 'float*' float
 # riverctl rule-add -app-id firefox ssd
 # riverctl rule-add -app-id .blueman-manager-wrapped ssd
 # riverctl rule-add -app-id org.pwmt.zathura ssd
@@ -217,9 +217,9 @@ riverctl rule-add -app-id '*' ssd
 riverctl rule-add -app-id firefox no-float
 riverctl rule-add -app-id PrusaSlicer -title 'Choose one or more files *' no-float
 
-riverctl rule-add -app-id '*' no-float
+# riverctl rule-add -app-id '*' no-float
 
-# riverctl rule-add -app-id float float
+riverctl rule-add -app-id float float
 
 # Make all views with app-id "bar" and any title use client-side decorations
 # riverctl rule-add -app-id "bar" csd
