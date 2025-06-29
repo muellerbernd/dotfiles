@@ -154,8 +154,6 @@ vim.keymap.set('n', '<leader>gf', function()
   require('bemu.core.funcs').goto_file()
 end, { desc = '[g]oto [f]ile, create if not exist' })
 
--- Diagnostic keymaps
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>dl', function()
   require('telescope.builtin').diagnostics()
 end, { desc = 'Open [d]iagnostic [l]ist' })
