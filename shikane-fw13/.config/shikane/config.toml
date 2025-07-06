@@ -49,7 +49,7 @@ exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\""
 
 [[profile]]
 name = "ilmbase-tv"
-exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec killall -SIGUSR2 waybar"]
+exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec killall -SIGUSR2 waybar", "exec wl-present mirror eDP-1"]
     [[profile.output]]
     enable = true
     search = ["m=TV"]
