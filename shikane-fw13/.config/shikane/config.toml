@@ -1,6 +1,6 @@
 [[profile]]
 name = "ilmbase"
-exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec killall -SIGUSR2 waybar","hyprctl dispatch workspace -- 1"]
+exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec killall -SIGUSR2 waybar"]
     [[profile.output]]
     enable = true
     search = ["m=DELL P2317H", "s=HH77Y7B4AM6L", "v=Dell Inc."]
@@ -29,7 +29,7 @@ exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\""
 
 [[profile]]
 name = "ammera"
-exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec ~/.config/shikane/move_workspaces_ammera.py","exec killall -SIGUSR2 waybar","hyprctl dispatch workspace -- 1"]
+exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec ~/.config/shikane/move_workspaces_ammera.py","exec killall -SIGUSR2 waybar"]
     [[profile.output]]
     enable = true
     search = ["n/eDP-1"]
@@ -46,6 +46,27 @@ exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\""
     scale = 1.0
     transform = "normal"
     adaptive_sync = false
+
+[[profile]]
+name = "ilmbase-tv"
+exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec killall -SIGUSR2 waybar"]
+    [[profile.output]]
+    enable = true
+    search = ["m=TV"]
+    mode = "3840x2160@30Hz"
+    # mode = "1920x1080@60Hz"
+    position = "0,0"
+    scale = 1.0
+    transform = "normal"
+    adaptive_sync = false
+
+    [[profile.output]]
+    enable = true
+    search = ["n/eDP-1"]
+    mode = "2256x1504@59.999001"
+    position = "3840,0"
+    scale = 1.0
+    transform = "normal"
 
 
 [[profile]]
