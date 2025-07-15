@@ -51,3 +51,5 @@ do
   ${drycmd[@]} tagutil set:title="$title" "$file"
 
 done
+
+# find . -type f \( -name "*.mp3" -o -name "*.flac" \) -exec sh ~/scripts/fixMusicTitle.sh {} +
