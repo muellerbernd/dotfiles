@@ -16,13 +16,9 @@ install-default:
 	# gpg --output ./zsh/.zsh_aliases_work --decrypt ./zsh/.zsh_aliases_work.gpg
 	gpg --output ./gitconf-work/.gitconfig-job --decrypt ./gitconf-work/.gitconfig-job.gpg
 	stow --no-folding --restow -v -t $$HOME i3-common \
-		sway-common \
 		niri \
-		hypr-common \
-		jay \
 		river \
 		waybar \
-		dunst \
 		mako \
 		rofi \
 		fuzzel \
@@ -31,12 +27,10 @@ install-default:
 		clang-format \
 		prettier-format \
 		alacritty \
-		wezterm \
 		zsh \
 		fish \
 		nvim \
 		tmux \
-		ranger \
 		neofetch \
 		zathura \
 		latexmk \
@@ -46,7 +40,6 @@ install-default:
 		locale \
 		code-templates \
 		scripts \
-		joshuto \
 		yazi \
 		xbindkeys \
 		thunar \
@@ -59,12 +52,9 @@ install-default:
 delete-default:
 	# stow --verbose --target=$$HOME --delete */
 	stow --no-folding -v -t $$HOME --delete i3-common \
-		sway-common \
-		hypr-common \
-		jay \
+		niri \
 		river \
 		waybar \
-		dunst \
 		mako \
 		rofi \
 		fuzzel \
@@ -73,13 +63,10 @@ delete-default:
 		clang-format \
 		prettier-format \
 		alacritty \
-		wezterm \
 		zsh \
-		bash \
 		fish \
 		nvim \
 		tmux \
-		ranger \
 		neofetch \
 		zathura \
 		latexmk \
@@ -89,7 +76,6 @@ delete-default:
 		locale \
 		code-templates \
 		scripts \
-		joshuto \
 		yazi \
 		xbindkeys \
 		thunar \
@@ -113,27 +99,27 @@ install-ilmpad:
 
 install-t480:
 	stow --no-folding --restow -v -t $$HOME i3-t480 hypr-t480 shikane-t480
-	stow --no-folding --restow -v -t $$HOME i3status-rust
+	# stow --no-folding --restow -v -t $$HOME i3status-rust
 
 delete-t480:
 	stow --no-folding -v -t $$HOME --delete i3-t480 hypr-t480 shikane-t480
-	stow --no-folding -v -t $$HOME --delete i3status-rust
+	# stow --no-folding -v -t $$HOME --delete i3status-rust
 
 install-fw13:
 	stow --no-folding --restow -v -t $$HOME i3-t480 hypr-t480 shikane-fw13
-	stow --no-folding --restow -v -t $$HOME i3status-rust
+	# stow --no-folding --restow -v -t $$HOME i3status-rust
 
 delete-fw13:
 	stow --no-folding -v -t $$HOME --delete i3-t480 hypr-t480 shikane-fw13
-	stow --no-folding -v -t $$HOME --delete i3status-rust
+	# stow --no-folding -v -t $$HOME --delete i3status-rust
 
 install-x240:
 	stow --no-folding --restow -v -t $$HOME i3-x240 hypr-t480
-	stow --no-folding --restow -v -t $$HOME i3status-rust hypr-t480
+	# stow --no-folding --restow -v -t $$HOME i3status-rust hypr-t480
 
 delete-x240:
 	stow --no-folding -v -t $$HOME --delete i3-x240
-	stow --no-folding -v -t $$HOME --delete i3status-rust
+	# stow --no-folding -v -t $$HOME --delete i3status-rust
 
 install-biltower:
 	stow --no-folding --restow -v -t $$HOME i3-biltower hypr-biltower shikane-biltower
