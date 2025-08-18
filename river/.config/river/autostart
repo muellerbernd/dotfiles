@@ -21,6 +21,8 @@ gnome-keyring-daemon --start --components=ssh,secrets,pkcs11 &
 waybar --config ~/.config/waybar/config-river.jsonc --style ~/.config/waybar/style-river.css &
 shikane &
 
+sh ~/scripts/battery-notify.sh &
+
 # hypridle &
 # hyprpaper &
 # wallpaper="$(fd . ~/Pictures/wallpapers -t f | shuf -n 1)"
