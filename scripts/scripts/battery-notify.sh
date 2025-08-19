@@ -10,8 +10,8 @@ while true; do
 
     if [ $cur_bat -le $min_bat ] && [ "$status" = "Discharging" ]; then
         notify-send "Low Battery Level" "Battery is at $cur_bat%. Please plug in the charger"
-    elif [ $cur_bat -ge $max_bat ] && [ "$status" = "Charging" ]; then
-        notify-send "High Battery Level" "Battery is at $cur_bat%. Please unplug the charger"
+    # elif [ $cur_bat -ge $max_bat ] && [ "$status" = "Charging" ]; then
+    #     notify-send "High Battery Level" "Battery is at $cur_bat%. Please unplug the charger"
     fi
 
     sleep $seconds
