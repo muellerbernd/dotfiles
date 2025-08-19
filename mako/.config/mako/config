@@ -13,6 +13,7 @@ border-size=2
 ignore-timeout=1
 default-timeout=5000
 margin=8
+layer=overlay
 
 [hidden]
 format=(and %h more)
@@ -25,3 +26,4 @@ border-color=#cdd6f4
 # background-color=#002b36
 # red
 border-color=#dc322f
+layer=overlay
