@@ -129,6 +129,9 @@ eval "$(direnv hook zsh)"
 # atuin
 eval "$(atuin init zsh --disable-up-arrow)"
 
+# television
+# eval "$(tv init zsh)"
+
 # eval "$(just --completions zsh)"
 
 # keybinds
