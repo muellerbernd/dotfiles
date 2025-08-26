@@ -167,8 +167,8 @@ for mode in normal locked; do
     riverctl map $mode None XF86Eject spawn 'eject -T'
 
     # Control pulse audio volume with pamixer (https://github.com/cdemoulins/pamixer)
-    riverctl map $mode None XF86AudioRaiseVolume spawn "$HOME/scripts/controlVolumePipewire.py up"
-    riverctl map $mode None XF86AudioLowerVolume spawn "$HOME/scripts/controlVolumePipewire.py down"
+    riverctl map -repeat $mode None XF86AudioRaiseVolume spawn "$HOME/scripts/controlVolumePipewire.py up"
+    riverctl map -repeat $mode None XF86AudioLowerVolume spawn "$HOME/scripts/controlVolumePipewire.py down"
     riverctl map $mode None XF86AudioMute spawn "$HOME/scripts/controlVolumePipewire.py mute"
 
     # Control MPRIS aware media players with playerctl (https://github.com/altdesktop/playerctl)
@@ -179,8 +179,8 @@ for mode in normal locked; do
     riverctl map $mode None XF86AudioMicMute spawn "wpctl set-mute @DEFAULT_SOURCE@ toggle"
 
     # Control screen backlight brightness with brightnessctl (https://github.com/Hummer12007/brightnessctl)
-    riverctl map $mode None XF86MonBrightnessUp spawn 'light -A 1 && sh ~/scripts/notifyBrightness.sh'
-    riverctl map $mode None XF86MonBrightnessDown spawn 'light -U 1 && sh ~/scripts/notifyBrightness.sh'
+    riverctl map -repeat $mode None XF86MonBrightnessUp spawn 'light -A 1 && sh ~/scripts/notifyBrightness.sh'
+    riverctl map -repeat $mode None XF86MonBrightnessDown spawn 'light -U 1 && sh ~/scripts/notifyBrightness.sh'
 
     # disable laptop keyboard
     riverctl map $mode None XF86PowerOff spawn "$HOME/scripts/toggleLaptopKeyboard.sh"
