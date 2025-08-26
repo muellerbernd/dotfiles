@@ -41,39 +41,42 @@ def notify_mute():
 def main(args):
     print(args.vol_type)
     dump_output = json.loads(subprocess.getoutput("pw-dump"))
-    sink_volumes = []
-    sink_muted = []
+    sink_ids = []
+    # First, collect all sink IDs and apply requested operation to each
     for e in reversed(dump_output):
-        is_sink, id = node_parsing(e)
+        is_sink, sid = node_parsing(e)
         if is_sink:
-            match args.vol_type:
-                case "up":
-                    os.popen(f"wpctl set-volume {id} 1%+").read()
-                case "down":
-                    os.popen(f"wpctl set-volume {id} 1%-").read()
-                case "mute":
-                    os.popen(f"wpctl set-mute {id} toggle").read()
-                case _:
-                    print("unknown")
-            volume, is_muted = get_sink_volume(id)
-            sink_volumes.append(volume)
-            sink_muted.append(is_muted)
-    # if sum(sink_muted) == 5 or sum(sink_volumes) == 0:
-    #     notify_mute()
-    # else:
-    #     notify_volume(max(sink_volumes))
-    volume, is_muted = get_sink_volume("@DEFAULT_AUDIO_SINK@")
-    if is_muted:
+            sink_ids.append(sid)
+            if args.vol_type == "up":
+                os.popen(f"wpctl set-volume {sid} 1%+").read()
+            elif args.vol_type == "down":
+                os.popen(f"wpctl set-volume {sid} 1%-").read()
+            elif args.vol_type == "mute":
+                os.popen(f"wpctl set-mute {sid} toggle").read()
+            else:
+                print("unknown")
+
+    # Synchronize all sinks to the final volume of the default sink
+    default_vol, default_muted = get_sink_volume("@DEFAULT_AUDIO_SINK@")
+    target = default_vol
+
+    for sid in sink_ids:
+        # Set to the target absolute volume
+        os.popen(f"wpctl set-volume {sid} {target}%").read()
+        # If default is muted, also mute the others to follow
+        if default_muted:
+            os.popen(f"wpctl set-mute {sid} toggle").read()
+
+    if default_muted:
         notify_mute()
     else:
-        notify_volume(volume)
+        notify_volume(target)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         prog="controlVolumePipewire",
         description="This Program changes the volume of pipewire sinks",
-        # epilog="Text at the bottom of help",
     )
     parser.add_argument(
         "vol_type", choices=["up", "down", "mute"], help="control volume"
