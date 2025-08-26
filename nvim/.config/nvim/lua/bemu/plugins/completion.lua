@@ -102,7 +102,7 @@ return {
     -- Disable command line completion:
     cmdline = {
       enabled = true,
-      keymap = { preset = 'cmdline' },
+      keymap = { preset = 'inherit' },
       sources = function()
         local type = vim.fn.getcmdtype()
         -- Search forward and backward
