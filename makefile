@@ -46,6 +46,7 @@ install-default:
 		foot \
 		prusa-slicer \
 		FreeCAD \
+		hypr-common \
 		wallpapers
 		# fonts \
 
@@ -82,6 +83,7 @@ delete-default:
 		foot \
 		prusa-slicer \
 		FreeCAD \
+		hypr-common \
 		wallpapers
 		# fonts \
 
