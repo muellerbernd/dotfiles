@@ -35,7 +35,6 @@ install-default:
 		zathura \
 		latexmk \
 		starship \
-		fonts \
 		xinit \
 		locale \
 		code-templates \
@@ -48,6 +47,7 @@ install-default:
 		prusa-slicer \
 		FreeCAD \
 		wallpapers
+		# fonts \
 
 delete-default:
 	# stow --verbose --target=$$HOME --delete */
@@ -71,7 +71,6 @@ delete-default:
 		zathura \
 		latexmk \
 		starship \
-		fonts \
 		xinit \
 		locale \
 		code-templates \
@@ -84,6 +83,7 @@ delete-default:
 		prusa-slicer \
 		FreeCAD \
 		wallpapers
+		# fonts \
 
 install-mue-p14s:
 	stow --no-folding --restow -v -t $$HOME i3-p14s hypr-p14s shikane-p14s
