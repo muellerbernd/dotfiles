@@ -26,7 +26,7 @@
         "spacing": 10
     },
     "clock": {
-        "format": "{:%A, %B %d, %Y (%R)}  ",
+        "format": "{:%A, %B %d, %Y (%R)}",
         "format-alt": " {:%H:%M}",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "calendar": {
@@ -64,17 +64,9 @@
         "format-plugged": " {capacity}%",
         "format-alt": "{time} {icon}",
         "format-icons": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
+            "󱊡",
+            "󱊢",
+            "󱊣"
         ]
     },
     "battery#bat2": {
@@ -90,17 +82,9 @@
         "format-plugged": " {capacity}%",
         "format-alt": "{time} {icon}",
         "format-icons": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
+            "󱊡",
+            "󱊢",
+            "󱊣"
         ]
     },
     "cpu": {

@@ -16,14 +16,14 @@ return {
       -- [[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
     }
     dashboard.section.buttons.val = {
-      dashboard.button('f', '  Find file', "<cmd>lua require('bemu.plugins.telescope.funcs').search_all_files() <cr>"),
+      dashboard.button('f', '󰈞 Find file', "<cmd>lua require('bemu.plugins.telescope.funcs').search_all_files() <cr>"),
       dashboard.button('e', '  New file', ':ene <BAR> startinsert <CR>'),
       -- dashboard.button("p", "  Vimwikis", "<cmd>lua require('bemu.telescope').list_vimwikis() <CR>"),
       dashboard.button('p', '  My-Wikis', "<cmd>lua require('bemu.plugins.telescope.funcs').list_mywikis() <CR>"),
-      dashboard.button('r', '  Recently used files', ':Telescope oldfiles <CR>'),
-      dashboard.button('t', '  Find text', ':Telescope live_grep <CR>'),
+      dashboard.button('r', '󱝏  Recently used files', ':Telescope oldfiles <CR>'),
+      dashboard.button('t', '󱩾  Find text', ':Telescope live_grep <CR>'),
       dashboard.button('c', '  Configuration', "<cmd>lua require('bemu.plugins.telescope.funcs').edit_neovim() <CR>"),
-      dashboard.button('q', '  Quit Neovim', ':qa<CR>'),
+      dashboard.button('q', '󰅙  Quit Neovim', ':qa<CR>'),
     }
 
     local function footer()
