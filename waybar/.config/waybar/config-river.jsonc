@@ -120,8 +120,8 @@
     "river/tags": {
         "format": "{}",
         "num-tags": 9
-    },
-    "custom/title": {
-        "exec": "./scripts/river-title.sh"
     }
+    // "custom/title": {
+    //     "exec": "./scripts/river-title.sh"
+    // }
 }
