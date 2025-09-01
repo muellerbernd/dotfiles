@@ -25,6 +25,7 @@ application/json=nvim.desktop;
 text/markdown=nvim.desktop;
 video/mp4=vlc.desktop;
 x-scheme-handler/element=element-desktop.desktop
+text/html=firefox.desktop
 
 [Default Applications]
 application/pdf=org.pwmt.zathura.desktop
@@ -127,3 +128,5 @@ application/x-tar=org.gnome.FileRoller.desktop
 application/x-ms-wim=org.gnome.FileRoller.desktop
 application/vnd.efi.iso=org.gnome.FileRoller.desktop
 application/vnd.ms-cab-compressed=org.gnome.FileRoller.desktop
+x-scheme-handler/mailto=thunderbird.desktop
+text/html=firefox.desktop
