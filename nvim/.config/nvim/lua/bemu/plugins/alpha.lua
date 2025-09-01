@@ -16,7 +16,7 @@ return {
       -- [[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
     }
     dashboard.section.buttons.val = {
-      dashboard.button('f', '󰈞 Find file', "<cmd>lua require('bemu.plugins.telescope.funcs').search_all_files() <cr>"),
+      dashboard.button('f', '󰈞  Find file', "<cmd>lua require('bemu.plugins.telescope.funcs').search_all_files() <cr>"),
       dashboard.button('e', '  New file', ':ene <BAR> startinsert <CR>'),
       -- dashboard.button("p", "  Vimwikis", "<cmd>lua require('bemu.telescope').list_vimwikis() <CR>"),
       dashboard.button('p', '  My-Wikis', "<cmd>lua require('bemu.plugins.telescope.funcs').list_mywikis() <CR>"),
