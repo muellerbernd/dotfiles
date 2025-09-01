@@ -26,6 +26,7 @@ text/markdown=nvim.desktop;
 video/mp4=vlc.desktop;
 x-scheme-handler/element=element-desktop.desktop
 text/html=firefox.desktop
+x-scheme-handler/unknown=nvim.desktop
 
 [Default Applications]
 application/pdf=org.pwmt.zathura.desktop
