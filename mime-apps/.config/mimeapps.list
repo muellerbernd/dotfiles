@@ -27,6 +27,7 @@ video/mp4=vlc.desktop;
 x-scheme-handler/element=element-desktop.desktop
 text/html=firefox.desktop
 x-scheme-handler/unknown=nvim.desktop
+application/x-zerosize=nvim.desktop
 
 [Default Applications]
 application/pdf=org.pwmt.zathura.desktop
@@ -131,3 +132,4 @@ application/vnd.efi.iso=org.gnome.FileRoller.desktop
 application/vnd.ms-cab-compressed=org.gnome.FileRoller.desktop
 x-scheme-handler/mailto=thunderbird.desktop
 text/html=firefox.desktop
+application/x-zerosize=nvim.desktop
