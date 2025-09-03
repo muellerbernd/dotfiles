@@ -203,18 +203,6 @@ return {
               },
             },
           }
-        elseif lsp == 'nil_ls' then
-          lspconfig[lsp].setup {
-            capabilities = capabilities,
-            settings = {
-              ['nil'] = {
-                testSetting = 42,
-                formatting = {
-                  command = { 'alejandra' },
-                },
-              },
-            },
-          }
         elseif lsp == 'nixd' then
           lspconfig[lsp].setup {
             capabilities = capabilities,
