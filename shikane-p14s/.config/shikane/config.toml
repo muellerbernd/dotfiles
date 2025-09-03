@@ -1,6 +1,6 @@
 [[profile]]
 name = "ast-work"
-exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec ~/.config/shikane/move_workspaces_work.py","exec killall -SIGUSR2 waybar"]
+exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec ~/.config/shikane/move_workspaces_work.py","exec killall -SIGUSR2 waybar", "exec ./p14s-audio-sink.sh"]
     [[profile.output]]
     enable = true
     search = ["m=0xD291", "s=", "v=AU Optronics"]
