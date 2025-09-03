@@ -19,7 +19,7 @@ return {
       },
     },
     config = function()
-      _ = require 'bemu.plugins.lsp.handlers'
+      -- _ = require 'bemu.plugins.lsp.handlers'
       local has_lsp, lspconfig = pcall(require, 'lspconfig')
       if not has_lsp then
         return

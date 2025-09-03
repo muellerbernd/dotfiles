@@ -1,16 +1,36 @@
--- Enable workspace diagnostics
+-- -- Enable workspace diagnostics
+--
+-- vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+--   virtual_text = true,
+--   signs = true,
+--   update_in_insert = false,
+-- })
+-- --just copied from nvim doc lol
+-- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+--   border = 'rounded',
+--   focusable = true,
+-- })
+--
+-- vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+--   border = 'rounded',
+-- })
 
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-  virtual_text = true,
-  signs = true,
-  update_in_insert = false,
-})
---just copied from nvim doc lol
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = 'rounded',
-  focusable = true,
-})
-
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  border = 'rounded',
-})
+-- local _border = "rounded"
+--
+-- local function bordered_hover(_opts)
+--     _opts = _opts or {}
+--     return vim.lsp.buf.hover(vim.tbl_deep_extend("force", _opts, {
+--         border = _border
+--     }))
+-- end
+--
+-- local function bordered_signature_help(_opts)
+--     _opts = _opts or {}
+--     return vim.lsp.buf.signature_help(vim.tbl_deep_extend("force", _opts, {
+--         border = _border
+--     }))
+-- end
+--
+-- -- opts and _opts aren't the same
+-- vim.keymap.set("Mode", "Bind", bordered_hover, opts)
+-- vim.keymap.set("Mode", "Bind", bordered_signature_help, opts)

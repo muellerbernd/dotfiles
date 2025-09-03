@@ -73,3 +73,9 @@ opt.wildignore = { '*/cache/*', '*/tmp/*', '*.pyc', '*_build/*', '**/.git/*' }
 
 -- spell check
 opt.spell = true
+
+opt.termguicolors = true
+opt.background = 'dark'
+opt.cursorline = true
+
+opt.winborder = "rounded"
