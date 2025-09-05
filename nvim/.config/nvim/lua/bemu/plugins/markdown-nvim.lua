@@ -11,5 +11,6 @@ return {
 
       latex = { enabled = false },
     }
+    require('render-markdown').disable()
   end,
 }
