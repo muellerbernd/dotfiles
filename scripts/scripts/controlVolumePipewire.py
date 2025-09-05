@@ -55,23 +55,26 @@ def main(args):
 
     default_vol, default_muted = get_sink_volume("@DEFAULT_SINK@")
     target = default_vol
-
+    mute_toggle = False
     if args.vol_type == "up":
         target += 0.01
     elif args.vol_type == "down":
         target -= 0.01
     elif args.vol_type == "mute":
-        default_muted = not default_muted
+        mute_toggle = True
 
-    for sid in sink_ids:
-        subprocess.run(f"wpctl set-volume {sid} {target}", shell=True)
-        if default_muted:
-            subprocess.run(f"wpctl set-mute {sid} toggle", shell=True)
+    if mute_toggle:
+        subprocess.run(f"wpctl set-mute @DEFAULT_SINK@ toggle", shell=True)
+    else:
+        for sid in sink_ids:
+            subprocess.run(f"wpctl set-volume {sid} {target}", shell=True)
 
+    default_vol, default_muted = get_sink_volume("@DEFAULT_SINK@")
     if default_muted:
         notify_mute()
     else:
-        notify_volume(int(target * 100))
+        print(default_vol)
+        notify_volume(int(default_vol * 100))
 
 
 if __name__ == "__main__":
