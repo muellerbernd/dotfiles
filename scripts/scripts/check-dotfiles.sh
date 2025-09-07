@@ -15,6 +15,6 @@ function get_local_changes {
 msgId="991050"
 status=$(get_local_changes)
 echo "test $status"
-dunstify -u low -r "$msgId" " ${status}"
+notify-send -r "$msgId" " ${status}"
 
 # vim: set ts=2 sw=2:
