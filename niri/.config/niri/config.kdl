@@ -81,7 +81,7 @@ input {
 
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-    focus-follows-mouse
+    focus-follows-mouse max-scroll-amount="95%"
 }
 
 // You can configure outputs by their name, which you can find
@@ -90,44 +90,45 @@ input {
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
 // Remember to uncomment the node by removing "/-"!
-output "eDP-1" {
-    // Uncomment this line to disable this output.
-    // off
+// output "eDP-1" {
+//     // Uncomment this line to disable this output.
+//     // off
+//
+//     // Resolution and, optionally, refresh rate of the output.
+//     // The format is "<width>x<height>" or "<width>x<height>@<refresh rate>".
+//     // If the refresh rate is omitted, niri will pick the highest refresh rate
+//     // for the resolution.
+//     // If the mode is omitted altogether or is invalid, niri will pick one automatically.
+//     // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
+//     mode "1920x1080@60.001"
+//
+//     // You can use integer or fractional scale, for example use 1.5 for 150% scale.
+//     // scale 1.0
+//
+//     // Transform allows to rotate the output counter-clockwise, valid values are:
+//     // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
+//     transform "normal"
+//
+//     // Position of the output in the global coordinate space.
+//     // This affects directional monitor actions like "focus-monitor-left", and cursor movement.
+//     // The cursor can only move between directly adjacent outputs.
+//     // Output scale and rotation has to be taken into account for positioning:
+//     // outputs are sized in logical, or scaled, pixels.
+//     // For example, a 3840×2160 output with scale 2.0 will have a logical size of 1920×1080,
+//     // so to put another output directly adjacent to it on the right, set its x to 1920.
+//     // If the position is unset or results in an overlap, the output is instead placed
+//     // automatically.
+//     // position x=1280 y=0
+// }
 
-    // Resolution and, optionally, refresh rate of the output.
-    // The format is "<width>x<height>" or "<width>x<height>@<refresh rate>".
-    // If the refresh rate is omitted, niri will pick the highest refresh rate
-    // for the resolution.
-    // If the mode is omitted altogether or is invalid, niri will pick one automatically.
-    // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
-    mode "1920x1080@60.001"
-
-    // You can use integer or fractional scale, for example use 1.5 for 150% scale.
-    // scale 1.0
-
-    // Transform allows to rotate the output counter-clockwise, valid values are:
-    // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
-    transform "normal"
-
-    // Position of the output in the global coordinate space.
-    // This affects directional monitor actions like "focus-monitor-left", and cursor movement.
-    // The cursor can only move between directly adjacent outputs.
-    // Output scale and rotation has to be taken into account for positioning:
-    // outputs are sized in logical, or scaled, pixels.
-    // For example, a 3840×2160 output with scale 2.0 will have a logical size of 1920×1080,
-    // so to put another output directly adjacent to it on the right, set its x to 1920.
-    // If the position is unset or results in an overlap, the output is instead placed
-    // automatically.
-    // position x=1280 y=0
+// xwayland
+workspace "xwayland" {
 }
-
-// workspace "xwayland" {
-// }
-// // Open xwayland on the "xwayland" workspace at niri startup.
-// window-rule {
-//     match at-startup=true app-id=r#"^wlroots$"#
-//     open-on-workspace "xwayland"
-// }
+// Open xwayland on the "xwayland" workspace at niri startup.
+window-rule {
+    match at-startup=true app-id=r#"^wlroots$"#
+    open-on-workspace "xwayland"
+}
 
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
@@ -335,7 +336,7 @@ layer-rule {
 
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
-/-window-rule {
+window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
     match app-id=r#"^org\.gnome\.World\.Secrets$"#
 
@@ -372,6 +373,11 @@ binds {
     XF86AudioLowerVolume allow-when-locked=true { spawn "bash" "-c" "~/scripts/controlVolumePipewire.py down"; }
     XF86AudioMute        allow-when-locked=true { spawn "bash" "-c" "~/scripts/controlVolumePipewire.py mute"; }
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+
+    XF86AudioMedia allow-when-locked=true { spawn "playerctl" "play-pause"; }
+    XF86AudioPlay allow-when-locked=true { spawn "playerctl" "play-pause"; }
+    XF86AudioPrev allow-when-locked=true { spawn "playerctl" "previous"; }
+    XF86AudioNext allow-when-locked=true { spawn "playerctl" "next"; }
 
     XF86MonBrightnessDown { spawn "bash" "-c" "light -U 1 && ~/scripts/notifyBrightness.sh"; }
     XF86MonBrightnessUp { spawn "bash" "-c" "light -A 1 && ~/scripts/notifyBrightness.sh"; }
@@ -514,14 +520,17 @@ binds {
     // Mod+Period { expel-window-from-column; }
 
     // There are also commands that consume or expel a single window to the side.
-    Mod+BracketLeft  { consume-or-expel-window-left; }
-    Mod+BracketRight { consume-or-expel-window-right; }
+    Mod+Alt+Comma  { consume-or-expel-window-left; }
+    Mod+Alt+Period { consume-or-expel-window-right; }
+
+    Mod+T { toggle-column-tabbed-display; }
 
     Mod+R { switch-preset-column-width; }
     Mod+Shift+R { reset-window-height; }
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
     Mod+C { center-column; }
+    Mod+Ctrl+F { expand-column-to-available-width; }
 
     // Finer width adjustments.
     // This command can also:
@@ -533,10 +542,13 @@ binds {
     // set-column-width "100" will make the column occupy 200 physical screen pixels.
     Mod+Minus { set-column-width "-10%"; }
     Mod+Plus { set-column-width "+10%"; }
-
     // Finer height adjustments when in column with other windows.
     Mod+Shift+Minus { set-window-height "-10%"; }
     Mod+Shift+Plus { set-window-height "+10%"; }
+
+    // floating
+    Mod+Space { toggle-window-floating; }
+    Mod+Shift+Space { switch-focus-between-floating-and-tiling; }
 
     // Actions to switch layouts.
     // Note: if you uncomment these, make sure you do NOT have
@@ -546,6 +558,7 @@ binds {
     // Mod+Space       { switch-layout "next"; }
     // Mod+Shift+Space { switch-layout "prev"; }
 
+    // screenshots
     Print { screenshot; }
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
@@ -561,9 +574,10 @@ binds {
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
 
-    Mod+O { toggle-overview; }
+    Mod+O repeat=false { toggle-overview; }
 
     XF86PowerOff allow-when-locked=true { spawn "~/scripts/toggleLaptopKeyboard.sh"; }
+
 
     Mod+V hotkey-overlay-title="Open clipboard manager" { spawn "bash" "-c" "cliphist list | rofi -dmenu | cliphist decode | wl-copy"; }
 
