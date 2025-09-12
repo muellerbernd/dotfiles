@@ -15,8 +15,8 @@ wl-paste --primary --watch cliphist store &
 nm-applet &
 blueman-applet &
 # nextcloud &
-# xhost + local: &
-dbus-update-activation-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
+xhost + local: &
+# dbus-update-activation-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
 gnome-keyring-daemon --start --components=ssh,secrets,pkcs11 &
 shikane &
 

@@ -15,7 +15,6 @@ environment {
     // DISPLAY ":0"
     // WAYLAND_DISPLAY "wayland-0"
     CLUTTER_BACKEND "wayland"
-    ELECTRON_OZONE_PLATFORM_HINT "auto"
     ELM_DISPLAY "wl"
     GDK_BACKEND "wayland"
     NO_AT_BRIDGE "1"
@@ -28,7 +27,8 @@ environment {
     XDG_SESSION_DESKTOP "niri"
     XDG_SESSION_TYPE "wayland"
     QT_STYLE_OVERRIDE "kvantum"
-    ELECTRON_OZONE_PLATFORM_HINT "auto"
+    ELECTRON_OZONE_PLATFORM_HINT "wayland"
+    DISPLAY ":0"
 }
 
 hotkey-overlay {
