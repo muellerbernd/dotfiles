@@ -19,7 +19,6 @@ xhost + local: &
 # dbus-update-activation-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
 gnome-keyring-daemon --start --components=ssh,secrets,pkcs11 &
 shikane &
-xwayland-satellite
 
 sh ~/scripts/battery-notify.sh &
 
@@ -51,6 +50,6 @@ hypridle &
 
 "$HOME"/scripts/check-dotfiles.sh &
 
-sleep 5
-notify-send "starting waybar"
 waybar --config ~/.config/waybar/config-niri.jsonc --style ~/.config/waybar/style-niri.css &
+
+xwayland-satellite &
