@@ -214,13 +214,14 @@ layout {
         // If you enable the border, you probably want to disable the focus ring.
         off
 
-        //width 4
+        width 2
         //active-color "#ffc87f"
         //inactive-color "#505050"
 
         // active-gradient from="#ffbb66" to="#ffc880" angle=45 relative-to="workspace-view"
         // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
     }
+
     tab-indicator {
         // off
         hide-when-single-tab
@@ -309,31 +310,6 @@ animations {
     }
 }
 
-// Window rules let you adjust behavior for individual windows.
-// Find more information on the wiki:
-// https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
-
-layer-rule {
-    match namespace="^launcher$"
-
-    shadow {
-        on
-    }
-
-    // Fuzzel defaults to 10 px rounded corners.
-    geometry-corner-radius 10
-}
-
-// block out two password managers from screen capture.
-window-rule {
-    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
-    match app-id=r#"^org\.gnome\.World\.Secrets$"#
-
-    block-out-from "screen-capture"
-
-    // Use this instead if you want them visible on third-party screenshot tools.
-    // block-out-from "screencast"
-}
 
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
@@ -592,3 +568,56 @@ xwayland-satellite {
 }
 
 spawn-sh-at-startup "~/.config/niri/scripts/autostart"
+
+// Window rules let you adjust behavior for individual windows.
+// Find more information on the wiki:
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
+
+layer-rule {
+    match namespace="^launcher$"
+
+    shadow {
+        on
+    }
+
+    // Fuzzel defaults to 10 px rounded corners.
+    geometry-corner-radius 10
+}
+
+// block out two password managers from screen capture.
+window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+
+    block-out-from "screen-capture"
+
+    // Use this instead if you want them visible on third-party screenshot tools.
+    // block-out-from "screencast"
+}
+
+// Open the Firefox picture-in-picture player as floating by default.
+// window-rule {
+//     // This app-id regular expression will work for both:
+//     // - host Firefox (app-id is "firefox")
+//     // - Flatpak Firefox (app-id is "org.mozilla.firefox")
+//     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+//     open-floating true
+// }
+
+window-rule {
+    match title="Firefox"
+    match title="Thunderbird"
+    // Properties that apply continuously.
+    draw-border-with-background false
+
+    focus-ring {
+        // off
+        width 3
+        // active-color "#7fc8ff"
+        // inactive-color "#505050"
+        // urgent-color "#9b0000"
+        // active-gradient from="#80c8ff" to="#bbddff" angle=45
+        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+        // urgent-gradient from="#800" to="#a33" angle=45
+    }
+}
