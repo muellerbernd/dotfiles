@@ -20,7 +20,6 @@ environment {
     NO_AT_BRIDGE "1"
     OZONE_PLATFORM "wayland"
     QT_QPA_PLATFORM "wayland"
-    QT_STYLE_OVERRIDE "qt6ct-style"
     QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
     SDL_VIDEODRIVER "wayland"
     XDG_CURRENT_DESKTOP "niri"
@@ -32,6 +31,7 @@ environment {
 
 hotkey-overlay {
     skip-at-startup
+    hide-not-bound
 }
 
 // Input device configuration.
@@ -76,7 +76,7 @@ input {
     }
 
     // Uncomment this to make the mouse warp to the center of newly focused windows.
-    warp-mouse-to-focus
+    warp-mouse-to-focus mode="center-xy-always"
 
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
