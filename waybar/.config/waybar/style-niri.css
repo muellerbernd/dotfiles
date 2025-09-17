@@ -62,7 +62,7 @@ tooltip {
 }
 
 #workspaces button.empty {
-  background: #5f5f4f;
+  /* background: #5f5f4f; */
   color: #FFC5D3;
   border-radius: 10px;
 }
