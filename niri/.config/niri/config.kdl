@@ -490,7 +490,7 @@ binds {
     Mod+T { toggle-column-tabbed-display; }
 
     Mod+R { switch-preset-column-width; }
-    Mod+Shift+R { reset-window-height; }
+    Mod+Ctrl+R { reset-window-height; }
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
     Mod+C { center-column; }
@@ -533,6 +533,8 @@ binds {
     Mod+Shift+E { spawn "~/.config/rofi/scripts/powermenu/run.sh"; }
 
     Mod+Shift+N { spawn "~/scripts/nightmode.sh"; }
+
+    Mod+Shift+R { spawn "~/.config/niri/scripts/autostart"; }
 
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.

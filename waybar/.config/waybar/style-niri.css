@@ -61,6 +61,12 @@ tooltip {
   border-radius: 10px;
 }
 
+#workspaces button.empty {
+  background: #5f5f4f;
+  color: #FFC5D3;
+  border-radius: 10px;
+}
+
 #workspaces button.urgent {
   color: #111111;
   background: #a6e3a1;
