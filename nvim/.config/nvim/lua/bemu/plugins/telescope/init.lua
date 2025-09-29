@@ -181,9 +181,9 @@ return {
       require('telescope').extensions.asynctasks.all()
     end, { desc = '[s]earch in configured async[t]asks' })
     -- telescope wiki
-    vim.keymap.set('n', '<leader>fw', custom.list_mywikis, { desc = '[f]ind configured [w]ikis' })
+    vim.keymap.set('n', '<leader>w', custom.list_mywikis, { desc = 'find configured [w]ikis' })
     -- fix spell
-    vim.keymap.set('n', '<leader>fS', builtin.spell_suggest, { desc = '[f]ix [S]pell' })
+    vim.keymap.set('n', '<leader>S', builtin.spell_suggest, { desc = 'fix [S]pell' })
     -- search in neovim config
     vim.keymap.set('n', '<leader>sn', custom.edit_neovim, { desc = '[s]earch [n]eovim config' })
     -- file_browser
