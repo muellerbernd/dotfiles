@@ -44,6 +44,7 @@ install-default:
 		thunar \
 		mime-apps \
 		foot \
+		ghostty \
 		prusa-slicer \
 		FreeCAD \
 		hypr-common \
@@ -81,6 +82,7 @@ delete-default:
 		thunar \
 		mime-apps \
 		foot \
+		ghostty \
 		prusa-slicer \
 		FreeCAD \
 		hypr-common \
