@@ -6,15 +6,14 @@
 # ---------------------------------------------------------------------------------------------------------------------
 # %% Imports
 
-import socket
+import argparse
 import json
 import os
 import signal
-import argparse
+import socket
+from collections import deque
 from dataclasses import dataclass
 from time import perf_counter, sleep
-from collections import deque
-
 
 # ---------------------------------------------------------------------------------------------------------------------
 # %% Args
@@ -264,20 +263,30 @@ def make_workspace_state_from_WorkspacesChanged(event_data: dict) -> dict[int, d
     return {info_dict["id"]: info_dict for info_dict in event_data["workspaces"]}
 
 
-def make_window_state_from_WindowsChanged(event_data: dict, workspace_state, output_width_lut: dict) -> dict[int, dict]:
+def make_window_state_from_WindowsChanged(
+    event_data: dict, workspace_state, output_width_lut: dict
+) -> dict[int, dict]:
     state = {}
     for info_dict in event_data["windows"]:
         win_id = info_dict["id"]
-        win_aug_data = get_additional_window_data(info_dict, workspace_state, output_width_lut)
+        win_aug_data = get_additional_window_data(
+            info_dict, workspace_state, output_width_lut
+        )
         info_dict.update(win_aug_data)
         state[win_id] = info_dict
     return state
 
 
-def get_windows_by_conditions(window_state: dict[int, dict], **conditions) -> dict[int, dict]:
+def get_windows_by_conditions(
+    window_state: dict[int, dict], **conditions
+) -> dict[int, dict]:
     """Function used to filter window state data according to key-value conditions"""
     meets_conditions = lambda data: all(data[k] == v for k, v in conditions.items())
-    return {winid: windata for winid, windata in window_state.items() if meets_conditions(windata)}
+    return {
+        winid: windata
+        for winid, windata in window_state.items()
+        if meets_conditions(windata)
+    }
 
 
 def get_additional_window_data(
@@ -320,7 +329,9 @@ def toggle_window_maximization(target_window_id: int, focused_window_id: int):
     return
 
 
-def maximize_window(window_state: dict, focus_state: FocusState, target_window_id: int) -> bool:
+def maximize_window(
+    window_state: dict, focus_state: FocusState, target_window_id: int
+) -> bool:
     """
     Helper used to maximize a window if it's not already maximized.
     This function assumes window state includes 'is_maximized' flag!
@@ -337,7 +348,9 @@ def maximize_window(window_state: dict, focus_state: FocusState, target_window_i
     return need_maximization
 
 
-def collapse_window(window_state: dict, focus_state: FocusState, target_window_id: int) -> bool:
+def collapse_window(
+    window_state: dict, focus_state: FocusState, target_window_id: int
+) -> bool:
     """
     Helperused to collapse a maximized window. This function assumes
     that the window state includes 'is_maximized' flag!
@@ -373,7 +386,9 @@ niri_action = NiriActions(skt_path)
 
 # Sanity check. Make sure we have the right version
 is_version_ok, version_resp = niri_reader.request("Version")
-expected_version, actual_version = "25.08 (af4b5f9)", version_resp.get("Version", "unknown")
+expected_version, actual_version = "25.08 (af4b5f9)", version_resp.get(
+    "Version", "unknown"
+)
 if actual_version != expected_version:
     print(
         "",
@@ -393,8 +408,13 @@ is_outputs_ok, outputs_resp = niri_reader.request("Outputs")
 if not is_outputs_ok:
     print("Error requesting info about monitors", outputs_resp, sep="\n")
     quit()
-output_full_info = {out_key: out_dict["logical"] for out_key, out_dict in outputs_resp["Outputs"].items()}
-output_width_lut = {out_key: out_info["width"] for out_key, out_info in output_full_info.items()}
+output_full_info = {
+    out_key: out_dict["logical"]
+    for out_key, out_dict in outputs_resp["Outputs"].items()
+}
+output_width_lut = {
+    out_key: out_info["width"] for out_key, out_info in output_full_info.items()
+}
 
 # Initialize state tracking
 prev_focus_state = FocusState()
@@ -413,7 +433,11 @@ try:
         time_elapsed_ms = timekeeper.get_time_elapsed_ms()
         if ENABLE_EVENT_NAME_DEBUG_PRINT or ENABLE_EVENT_DATA_DEBUG_PRINT:
             if time_elapsed_ms > 250:
-                print("", f"Time elapsed (sec): {(timekeeper.t2 - init_time) // 1000}", sep="\n")
+                print(
+                    "",
+                    f"Time elapsed (sec): {(timekeeper.t2 - init_time) // 1000}",
+                    sep="\n",
+                )
             if ENABLE_EVENT_NAME_DEBUG_PRINT:
                 print(evt_name)
             if ENABLE_EVENT_DATA_DEBUG_PRINT:
@@ -422,109 +446,123 @@ try:
         # Handle all IPC stream events
         prev_focus_state.copy_inplace(focus_state)
         closed_window_data, newest_window_data = None, None
-        if evt_name == "WorkspacesChanged":
-            # Replace existing workspace info
-            wspace_state = make_workspace_state_from_WorkspacesChanged(evt_data)
-            for item in wspace_state.values():
-                if item["is_focused"]:
-                    focus_state.workspace_id = item["id"]
+        match evt_data:
+            case "WorkspacesChanged":
+                # Replace existing workspace info
+                wspace_state = make_workspace_state_from_WorkspacesChanged(evt_data)
+                for item in wspace_state.values():
+                    if item["is_focused"]:
+                        focus_state.workspace_id = item["id"]
+                    pass
 
-        elif evt_name == "WorkspaceUrgencyChanged":
-            # Update our existing workspace state
-            evt_wspace_id = evt_data["id"]
-            wspace_state[evt_wspace_id]["is_urgent"] = evt_data["urgent"]
+            case "WorkspaceUrgencyChanged":
+                # Update our existing workspace state
+                evt_wspace_id = evt_data["id"]
+                wspace_state[evt_wspace_id]["is_urgent"] = evt_data["urgent"]
 
-        elif evt_name == "WorkspaceActivated":
-            # Record new focused workspace (ignore 'active' state, we don't use it)
-            if evt_data["focused"]:
-                focus_state.workspace_id = evt_data["id"]
-                wspace_state[prev_focus_state.workspace_id]["is_focused"] = False
-            pass
+            case "WorkspaceActivated":
+                # Record new focused workspace (ignore 'active' state, we don't use it)
+                if evt_data["focused"]:
+                    focus_state.workspace_id = evt_data["id"]
+                    wspace_state[prev_focus_state.workspace_id]["is_focused"] = False
+                pass
 
-        elif evt_name == "WorkspaceActiveWindowChanged":
-            # Not using this...?
-            # print(
-            #     f"DEBUG EVENT - *{evt_name}*  |  Not using...?",
-            #     "  Data:",
-            #     f"    active_window_id: {evt_data['active_window_id']}",
-            #     f"        workspace_id: {evt_data['workspace_id']}",
-            #     sep="\n",
-            # )
-            pass
+            case "WorkspaceActiveWindowChanged":
+                # Not using this...?
+                # print(
+                #     f"DEBUG EVENT - *{evt_name}*  |  Not using...?",
+                #     "  Data:",
+                #     f"    active_window_id: {evt_data['active_window_id']}",
+                #     f"        workspace_id: {evt_data['workspace_id']}",
+                #     sep="\n",
+                # )
+                pass
 
-        elif evt_name == "WindowsChanged":
-            # Replace existing window state
-            win_state = make_window_state_from_WindowsChanged(evt_data, wspace_state, output_width_lut)
-            for item in win_state.values():
-                if item["is_focused"]:
-                    focus_state.window_id = item["id"]
+            case "WindowsChanged":
+                # Replace existing window state
+                win_state = make_window_state_from_WindowsChanged(
+                    evt_data, wspace_state, output_width_lut
+                )
+                for item in win_state.values():
+                    if item["is_focused"]:
+                        focus_state.window_id = item["id"]
 
-        elif evt_name == "WindowOpenedOrChanged":
-            # Decide if we have a new/moved window
-            evt_win_id = evt_data["window"]["id"]
-            evt_win_wspace_id = evt_data["window"]["workspace_id"]
-            evt_is_new_window = evt_win_id not in win_state.keys()
-            evt_is_moved_window, prev_win_wspace_id = False, None
-            if not evt_is_new_window:
-                prev_win_wspace_id = win_state[evt_win_id]["workspace_id"]
-                evt_is_moved_window = prev_win_wspace_id != evt_win_wspace_id
+            case "WindowOpenedOrChanged":
+                # Decide if we have a new/moved window
+                evt_win_id = evt_data["window"]["id"]
+                evt_win_wspace_id = evt_data["window"]["workspace_id"]
+                evt_is_new_window = evt_win_id not in win_state.keys()
+                evt_is_moved_window, prev_win_wspace_id = False, None
+                if not evt_is_new_window:
+                    prev_win_wspace_id = win_state[evt_win_id]["workspace_id"]
+                    evt_is_moved_window = prev_win_wspace_id != evt_win_wspace_id
 
-            # Update focus, if needed
-            if evt_data["window"]["is_focused"]:
-                focus_state.window_id = evt_win_id
+                # Update focus, if needed
+                if evt_data["window"]["is_focused"]:
+                    focus_state.window_id = evt_win_id
 
-            # Replace existing window state for the target window
-            win_aug_data = get_additional_window_data(evt_data["window"], wspace_state, output_width_lut)
-            win_state[evt_win_id] = {**evt_data["window"], **win_aug_data}
-            need_check_rearrange = evt_is_new_window or (evt_is_moved_window and APPLY_TO_MOVED_WINDOWS)
-            newest_window_data = win_state[evt_win_id] if need_check_rearrange else None
+                # Replace existing window state for the target window
+                win_aug_data = get_additional_window_data(
+                    evt_data["window"], wspace_state, output_width_lut
+                )
+                win_state[evt_win_id] = {**evt_data["window"], **win_aug_data}
+                need_check_rearrange = evt_is_new_window or (
+                    evt_is_moved_window and APPLY_TO_MOVED_WINDOWS
+                )
+                newest_window_data = (
+                    win_state[evt_win_id] if need_check_rearrange else None
+                )
 
-        elif evt_name == "WindowClosed":
-            # Delete closed window state data & remove from windows-per-workspace mapping
-            evt_win_id = evt_data["id"]
-            closed_window_data = win_state.pop(evt_win_id)
+            case "WindowClosed":
+                # Delete closed window state data & remove from windows-per-workspace mapping
+                evt_win_id = evt_data["id"]
+                closed_window_data = win_state.pop(evt_win_id)
 
-        elif evt_name == "WindowFocusChanged":
-            # Update existing focus state
-            focus_state.window_id = evt_data["id"]
+            case "WindowFocusChanged":
+                # Update existing focus state
+                focus_state.window_id = evt_data["id"]
 
-        elif evt_name == "WindowUrgencyChanged":
-            # Update our existing window state
-            evt_win_id = evt_data["id"]
-            win_state[evt_win_id]["is_urgent"] = evt_data["urgent"]
+            case "WindowUrgencyChanged":
+                # Update our existing window state
+                evt_win_id = evt_data["id"]
+                win_state[evt_win_id]["is_urgent"] = evt_data["urgent"]
 
-        elif evt_name == "WindowLayoutsChanged":
-            # Replace existing window layout data
-            for evt_win_id, evt_new_layout in evt_data["changes"]:
-                win_state[evt_win_id]["layout"] = evt_new_layout
-                win_aug_data = get_additional_window_data(win_state[evt_win_id], wspace_state, output_width_lut)
-                win_state[evt_win_id].update(win_aug_data)
-            pass
+            case "WindowLayoutsChanged":
+                # Replace existing window layout data
+                for evt_win_id, evt_new_layout in evt_data["changes"]:
+                    win_state[evt_win_id]["layout"] = evt_new_layout
+                    win_aug_data = get_additional_window_data(
+                        win_state[evt_win_id], wspace_state, output_width_lut
+                    )
+                    win_state[evt_win_id].update(win_aug_data)
+                pass
 
-        elif evt_name == "KeyboardLayoutsChanged":
-            # Not doing anything with keyboard...
-            pass
+            case "KeyboardLayoutsChanged":
+                # Not doing anything with keyboard...
+                pass
 
-        elif evt_name == "KeyboardLayoutSwitched":
-            # Not doing anything with keyboard...
-            pass
+            case "KeyboardLayoutSwitched":
+                # Not doing anything with keyboard...
+                pass
 
-        elif evt_name == "OverviewOpenedOrClosed":
-            # Not doing anything with overview...
-            evt_is_overview_open = evt_data["is_open"]
+            case "OverviewOpenedOrClosed":
+                # Not doing anything with overview...
+                evt_is_overview_open = evt_data["is_open"]
 
-        elif evt_name == "ConfigLoaded":
-            # Not doing anything with config...
-            pass
+            case "ConfigLoaded":
+                # Not doing anything with config...
+                pass
 
-        else:
-            print("Unknown event:", evt_name)
+            case _:
+                print("Unknown event:", evt_name)
 
         # Handle max-on-close
         if closed_window_data is not None:
             if MAXIMIZE_SOLOS_ON_CLOSE:
                 curr_wspace_id = closed_window_data["workspace_id"]
-                curr_wins = get_windows_by_conditions(win_state, workspace_id=curr_wspace_id, is_floating=False)
+                curr_wins = get_windows_by_conditions(
+                    win_state, workspace_id=curr_wspace_id, is_floating=False
+                )
                 if len(curr_wins) == 1:
                     solo_id = tuple(curr_wins.keys())[0]
                     maximize_window(win_state, focus_state, solo_id)
@@ -541,7 +579,9 @@ try:
 
             # Don't bother trying to re-arrange/tile if we already have more than 'N' windows
             curr_wspace_id = newest_window_data["workspace_id"]
-            curr_tile_wins = get_windows_by_conditions(win_state, workspace_id=curr_wspace_id, is_floating=False)
+            curr_tile_wins = get_windows_by_conditions(
+                win_state, workspace_id=curr_wspace_id, is_floating=False
+            )
             num_tile_wins = len(curr_tile_wins)
             if num_tile_wins == 0 or num_tile_wins > TILE_TO_N:
                 continue
@@ -552,7 +592,9 @@ try:
                 maximize_window(win_state, focus_state, solo_id)
 
             # Collapse maximized windows, if needed
-            curr_max_wins: dict = get_windows_by_conditions(curr_tile_wins, is_maximized=True)
+            curr_max_wins: dict = get_windows_by_conditions(
+                curr_tile_wins, is_maximized=True
+            )
             num_max_wins = len(curr_max_wins)
             if COLLAPSE_SOLOS_ON_OPEN and num_max_wins == 1 and num_tile_wins == 2:
                 solo_max_id = tuple(curr_max_wins.keys())[0]
@@ -563,7 +605,11 @@ try:
             is_zero_max_windows = num_max_wins == 0
             if is_zero_max_windows and (2 < num_tile_wins <= TILE_TO_N):
                 is_new_win_onscreen = newest_window_data["col_idx"] == 2
-                consume_action = "ConsumeOrExpelWindowRight" if is_new_win_onscreen else "ConsumeOrExpelWindowLeft"
+                consume_action = (
+                    "ConsumeOrExpelWindowRight"
+                    if is_new_win_onscreen
+                    else "ConsumeOrExpelWindowLeft"
+                )
                 niri_action.action(consume_action, id=newest_window_data["id"])
 
             pass
