@@ -446,7 +446,7 @@ try:
         # Handle all IPC stream events
         prev_focus_state.copy_inplace(focus_state)
         closed_window_data, newest_window_data = None, None
-        match evt_data:
+        match evt_name:
             case "WorkspacesChanged":
                 # Replace existing workspace info
                 wspace_state = make_workspace_state_from_WorkspacesChanged(evt_data)
