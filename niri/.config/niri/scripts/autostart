@@ -53,3 +53,5 @@ hypridle &
 waybar --config ~/.config/waybar/config-niri.jsonc --style ~/.config/waybar/style-niri.css &
 
 xwayland-satellite &
+
+python ~/.config/niri/scripts/niri_tile_to_n.py -n 2 &
