@@ -8,6 +8,10 @@
 // With prefer-no-csd set, applications that negotiate server-side decorations through the xdg-decoration protocol will have focus ring and border drawn around them without a solid colored background.
 prefer-no-csd
 
+// workspace "1"
+// workspace "2"
+// workspace "3"
+
 environment {
     QT_QPA_PLATFORM "wayland"
     XDG_CURRENT_DESKTOP "niri"
@@ -81,6 +85,10 @@ input {
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
     focus-follows-mouse max-scroll-amount="95%"
+}
+
+switch-events {
+    lid-close {spawn "loginctl" "lock-session";}
 }
 
 // You can configure outputs by their name, which you can find
