@@ -583,7 +583,12 @@ gestures {
     }
 }
 
-spawn-sh-at-startup "~/.config/niri/scripts/autostart"
+// workspace "teams" {
+//     open-on-output "*"
+// }
+// workspace "mail" {
+//     open-on-output "*"
+// }
 
 // Window rules let you adjust behavior for individual windows.
 // Find more information on the wiki:
@@ -637,3 +642,11 @@ window-rule {
         // urgent-gradient from="#800" to="#a33" angle=45
     }
 }
+
+// Open Thunderbird on the "mail" workspace, if it runs at niri startup.
+// window-rule {
+//     match title="Thunderbird"
+//     open-on-workspace "mail"
+// }
+
+spawn-sh-at-startup "~/.config/niri/scripts/autostart"
