@@ -59,12 +59,6 @@ EOBUNDLES
 # Tell Antigen that you're done.
 antigen apply
 
-# zstyle ':completion:*' menu select
-
-# loads the zsh completion initialization module, only
-# do this once, if you are already loading completions you don't need to add this again
-# autoload -U compinit && compinit
-
 # You can use fd to generate input for the command-line fuzzy finder fzf:
 # export FZF_DEFAULT_COMMAND="fd --type file --color=always --strip-cwd-prefix --hidden --follow --exclude .git"
 export FZF_DEFAULT_COMMAND="fd --color=always --strip-cwd-prefix --hidden --follow --exclude .git"
@@ -157,3 +151,5 @@ setopt inc_append_history
 ZSH_HIGHLIGHT_STYLES[comment]=fg=245
 
 export MANPAGER="nvim +Man!"
+
+# autoload compinit; compinit; . <(niri completions zsh)
