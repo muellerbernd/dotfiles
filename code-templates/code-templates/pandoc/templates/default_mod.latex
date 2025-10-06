@@ -285,7 +285,7 @@ $if(listings)$
 \crefname{listing}{code}{codes}
 \Crefname{listing}{Code}{Codes}
 
-\usepackage[outputdir=/tmp/slides]{minted}
+\usepackage[]{minted}
 % \usemintedstyle{vs}
 \usepackage{etoolbox}
 \usepackage{mdframed}
