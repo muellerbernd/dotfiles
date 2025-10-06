@@ -1,6 +1,6 @@
 [[profile]]
 name = "ilmbase"
-exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec killall -SIGUSR2 waybar"]
+exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"", "exec  niri msg action focus-monitor \"Dell Inc. DELL P2317H HH77Y7B4AM6L\""]
     [[profile.output]]
     enable = true
     search = ["m=DELL P2317H", "s=HH77Y7B4AM6L", "v=Dell Inc."]
