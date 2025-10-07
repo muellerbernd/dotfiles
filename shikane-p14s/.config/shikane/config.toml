@@ -1,6 +1,6 @@
 [[profile]]
 name = "ast-work"
-exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec ~/.config/shikane/move_workspaces_work.py", "exec ./p14s-audio-sink.sh"]
+exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"", "exec ./p14s-audio-sink.sh", "exec  niri msg action focus-monitor \"Dell Inc. DELL U2415 7MT018B3062L\""]
     [[profile.output]]
     enable = true
     search = ["m=0xD291", "s=", "v=AU Optronics"]
@@ -28,7 +28,7 @@ exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\""
 
 [[profile]]
 name = "ilmbase"
-exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\""]
+exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"", "exec  niri msg action focus-monitor \"Dell Inc. DELL P2317H HH77Y7B4AM6L\""]
     [[profile.output]]
     enable = true
     search = ["m=DELL P2317H", "s=HH77Y7B4AM6L", "v=Dell Inc."]
@@ -57,7 +57,7 @@ exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\""
 
 [[profile]]
 name = "ammera"
-exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec ~/.config/shikane/move_workspaces_ammera_office.py"]
+exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"","exec  niri msg action focus-monitor \"PNP(BNQ) BenQ GW2780 ETFAL03748SL0\""]
     [[profile.output]]
     enable = true
     search = ["m=0xD291", "s=", "v=AU Optronics"]
