@@ -240,8 +240,8 @@ return {
               expr = 'import <nixpkgs> { }',
             },
             formatting = {
-              command = { 'alejandra' },
-              -- command = { 'nixfmt' },
+              -- command = { 'alejandra' },
+              command = { 'nixfmt' },
             },
             -- options = {
             --   nixos = {
