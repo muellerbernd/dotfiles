@@ -574,7 +574,8 @@ try:
             # Ignore newly created maximized or floating windows
             # -> Assume opened maximized windows are done by user window rules (don't want to interfere)
             # -> Tiling logic shouldn't apply to floating windows
-            if newest_window_data["is_maximized"] or newest_window_data["is_floating"]:
+            # if newest_window_data["is_maximized"] or newest_window_data["is_floating"]:
+            if newest_window_data["is_floating"]:
                 continue
 
             # Don't bother trying to re-arrange/tile if we already have more than 'N' windows
