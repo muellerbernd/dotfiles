@@ -54,4 +54,4 @@ waybar --config ~/.config/waybar/config-niri.jsonc --style ~/.config/waybar/styl
 
 xwayland-satellite &
 
-python ~/.config/niri/scripts/niri_tile_to_n.py -n 2 -m &
+# python ~/.config/niri/scripts/niri_tile_to_n.py -n 2 -m &
