@@ -97,7 +97,7 @@ exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\""
 
 [[profile]]
 name = "undock"
-exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"", "exec killall wl-mirror"]
+exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"", "exec killall wl-mirror", "exec niri msg action focus-workspace 1"]
     [[profile.output]]
     enable = true
     search = ["m=0xD291", "s=", "v=AU Optronics"]
