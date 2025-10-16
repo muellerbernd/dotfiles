@@ -625,6 +625,12 @@ window-rule {
 //     open-floating true
 // }
 
+// workspaces
+// workspace "1"
+// workspace "2"
+// workspace "3"
+//
+//
 window-rule {
     match title="Firefox"
     match title="Thunderbird"
@@ -646,7 +652,12 @@ window-rule {
 // Open Thunderbird on the "mail" workspace, if it runs at niri startup.
 // window-rule {
 //     match title="Thunderbird"
-//     open-on-workspace "mail"
+//     open-on-workspace "3"
+// }
+// window-rule {
+//     match app-id=r#"teams"#
+//     // open-on-workspace "chat"
+//     open-on-workspace "2"
 // }
 
 spawn-sh-at-startup "~/.config/niri/scripts/autostart"
