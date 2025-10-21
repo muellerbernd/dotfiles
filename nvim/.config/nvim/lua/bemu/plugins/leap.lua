@@ -1,15 +1,17 @@
 return {
   'ggandor/leap.nvim',
-  event = 'BufReadPost',
   config = function()
     local leap = require 'leap'
     leap.add_default_mappings()
     leap.opts.case_sensitive = true
-    leap.opts.max_phase_one_targets = 5
-    leap.opts.highlight_unlabeled_phase_one_targets = true
-    leap.opts.preview_filter = function(ch0, ch1, ch2)
-      return not (ch1:match '%s' or ch0:match '%w' and ch1:match '%w' and ch2:match '%w')
-    end
+    -- Disable auto-jumping to the first match
+    -- leap.opts.safe_labels = ''
+
+    -- leap.opts.max_phase_one_targets = 5
+    -- leap.opts.highlight_unlabeled_phase_one_targets = true
+    -- leap.opts.preview_filter = function(ch0, ch1, ch2)
+    --   return not (ch1:match '%s' or ch0:match '%w' and ch1:match '%w' and ch2:match '%w')
+    -- end
 
     -- Highly recommended: define a preview filter to reduce visual noise
     -- and the blinking effect after the first keypress
@@ -35,5 +37,7 @@ return {
     -- Use the traversal keys to repeat the previous motion without
     -- explicitly invoking Leap:
     require('leap.user').set_repeat_keys('<enter>', '<backspace>')
+
+    vim.api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Comment' })
   end,
 }
