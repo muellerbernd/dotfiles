@@ -151,5 +151,6 @@ setopt inc_append_history
 ZSH_HIGHLIGHT_STYLES[comment]=fg=245
 
 export MANPAGER="nvim +Man!"
+export PATH=$HOME/.local/bin:$PATH
 
 # autoload compinit; compinit; . <(niri completions zsh)

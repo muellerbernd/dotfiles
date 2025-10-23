@@ -39,6 +39,7 @@ install-default:
 		locale \
 		code-templates \
 		scripts \
+		bin \
 		yazi \
 		xbindkeys \
 		thunar \
@@ -77,6 +78,7 @@ delete-default:
 		locale \
 		code-templates \
 		scripts \
+		bin \
 		yazi \
 		xbindkeys \
 		thunar \
