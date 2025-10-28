@@ -40,6 +40,7 @@ return {
       lua = { 'stylua' },
       markdown = { 'prettier' },
       json = { 'prettier' },
+      just = { 'just' },
       python = { 'black', 'isort' },
       -- tex = { 'tex-fmt' },
       yaml = { 'yamlfmt' },
