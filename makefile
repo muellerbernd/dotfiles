@@ -18,6 +18,7 @@ install-default:
 	stow --no-folding --restow -v -t $$HOME i3-common \
 		niri \
 		river \
+		mango \
 		waybar \
 		mako \
 		rofi \
@@ -57,6 +58,7 @@ delete-default:
 	stow --no-folding -v -t $$HOME --delete i3-common \
 		niri \
 		river \
+		mango \
 		waybar \
 		mako \
 		rofi \

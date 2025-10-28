@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+cleaner=("lxpolkit" "dunst" "wl-paste" "nm-applet" "waybar" "blueman" "nextcloud" "hyprpaper" "hypridle" "shikane" "eww" "yambar" "mako" "nextcloud" "swayidle" "swaybg" "sway-audio-idle-inhibit" "niri_tile")
+
+for str in "${cleaner[@]}"; do
+    kill -SIGTERM $(pgrep -f "$str")
+done
+
+mako &
+# lxpolkit &
+foot --server &
+wl-paste --type text --watch cliphist store &
+wl-paste --type image --watch cliphist store &
+wl-paste --primary --watch cliphist store &
+nm-applet &
+blueman-applet &
+# nextcloud &
+xhost + local: &
+# dbus-update-activation-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
+dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots
+gnome-keyring-daemon --start --components=ssh,secrets,pkcs11 &
+shikane &
+
+sh ~/scripts/battery-notify.sh &
+
+# wallpaper="$(fd . ~/Pictures/wallpapers -t f | shuf -n 1)"
+host=$(hostname)
+case $host in
+"fw13")
+    wallpaper=$HOME/wallpapers/framework-explode.jpeg
+    ;;
+"mue-p14s")
+    wallpaper=$HOME/wallpapers/space.jpg
+    ;;
+*)
+    wallpaper=$HOME/wallpapers/black-hole.png
+    ;;
+esac
+
+swaybg --image "$wallpaper" --mode fill &
+
+hypridle &
+# sway-audio-idle-inhibit &
+# swayidle -w \
+#     lock "$HOME/scripts/lock_sway.sh" \
+#     timeout 1200 'notify-send -u critical -t 9000 "Locking Screen in 10 seconds"' \
+#     timeout 1210 "$HOME/scripts/lock_sway.sh" idlehint 1210 \
+#     timeout 1500 "niri msg action power-off-monitors" &
+
+"$HOME"/scripts/check-dotfiles.sh &
+
+waybar --config ~/.config/waybar/config-mango.jsonc --style ~/.config/waybar/style-mango.css &
+
+xwayland-satellite &
