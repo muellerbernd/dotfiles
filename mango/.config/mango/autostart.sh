@@ -52,3 +52,5 @@ hypridle &
 waybar --config ~/.config/waybar/config-mango.jsonc --style ~/.config/waybar/style-mango.css &
 
 xwayland-satellite &
+
+mmsg -s -l "T"
