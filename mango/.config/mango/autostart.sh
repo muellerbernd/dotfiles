@@ -17,7 +17,7 @@ blueman-applet &
 # nextcloud &
 xhost + local: &
 # dbus-update-activation-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
-dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots
+dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots &
 gnome-keyring-daemon --start --components=ssh,secrets,pkcs11 &
 shikane &
 
