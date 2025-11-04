@@ -50,7 +50,8 @@ install-default:
 		prusa-slicer \
 		FreeCAD \
 		hypr-common \
-		wallpapers
+		wallpapers \
+		mpd-notification
 		# fonts \
 
 delete-default:
@@ -90,7 +91,8 @@ delete-default:
 		prusa-slicer \
 		FreeCAD \
 		hypr-common \
-		wallpapers
+		wallpapers \
+		mpd-notification
 		# fonts \
 
 install-mue-p14s:
