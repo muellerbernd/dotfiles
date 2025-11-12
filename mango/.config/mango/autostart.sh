@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-cleaner=("lxpolkit" "dunst" "wl-paste" "nm-applet" "waybar" "blueman" "nextcloud" "hyprpaper" "hypridle" "shikane" "eww" "yambar" "mako" "nextcloud" "swayidle" "swaybg" "sway-audio-idle-inhibit" "niri_tile")
+cleaner=("lxpolkit" "dunst" "wl-paste" "nm-applet" "waybar" "blueman" "nextcloud" "hyprpaper" "hypridle" "shikane" "eww" "yambar" "mako" "nextcloud" "swayidle" "swaybg" "sway-audio-idle-inhibit" "niri_tile" "mpd-notification")
+
 
 for str in "${cleaner[@]}"; do
     kill -SIGTERM $(pgrep -f "$str")
@@ -20,6 +21,7 @@ xhost + local: &
 dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots &
 gnome-keyring-daemon --start --components=ssh,secrets,pkcs11 &
 shikane &
+mpd-notification &
 
 sh ~/scripts/battery-notify.sh &
 
