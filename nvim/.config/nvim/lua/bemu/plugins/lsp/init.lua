@@ -313,41 +313,41 @@ return {
         on_attach = on_lsp_attach,
         handlers = handlers,
       })
-      vim.lsp.enable 'ltex_plus'
-      vim.lsp.config('ltex_plus', {
-        capabilities = capabilities,
-        on_attach = on_lsp_attach,
-        handlers = handlers,
-        settings = {
-          ltex = {
-            language = 'de-DE',
-            filetypes = {
-              'bib',
-              'context',
-              'gitcommit',
-              'html',
-              'markdown',
-              'org',
-              'pandoc',
-              'plaintex',
-              'quarto',
-              'mail',
-              'mdx',
-              'rmd',
-              'rnoweb',
-              'rst',
-              'tex',
-              'text',
-              'typst',
-              'xhtml',
-            },
-            additionalRules = {
-              enablePickyRules = true,
-              motherTongue = 'de-DE',
-            },
-          },
-        },
-      })
+      -- vim.lsp.enable 'ltex_plus'
+      -- vim.lsp.config('ltex_plus', {
+      --   capabilities = capabilities,
+      --   on_attach = on_lsp_attach,
+      --   handlers = handlers,
+      --   settings = {
+      --     ltex = {
+      --       language = 'de-DE',
+      --       filetypes = {
+      --         'bib',
+      --         'context',
+      --         'gitcommit',
+      --         'html',
+      --         'markdown',
+      --         'org',
+      --         'pandoc',
+      --         'plaintex',
+      --         'quarto',
+      --         'mail',
+      --         'mdx',
+      --         'rmd',
+      --         'rnoweb',
+      --         'rst',
+      --         'tex',
+      --         'text',
+      --         'typst',
+      --         'xhtml',
+      --       },
+      --       additionalRules = {
+      --         enablePickyRules = true,
+      --         motherTongue = 'de-DE',
+      --       },
+      --     },
+      --   },
+      -- })
     end,
   },
 }
