@@ -515,8 +515,8 @@ binds {
     Mod+Minus { set-column-width "-10%"; }
     Mod+Plus { set-column-width "+10%"; }
     // Finer height adjustments when in column with other windows.
-    Mod+Shift+Minus { set-window-height "-10%"; }
-    Mod+Shift+Plus { set-window-height "+10%"; }
+    Mod+Alt+Minus { set-window-height "-10%"; }
+    Mod+Alt+Plus { set-window-height "+10%"; }
 
     // floating
     Mod+Space { toggle-window-floating; }
