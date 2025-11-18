@@ -1,6 +1,6 @@
 [[profile]]
 name = "ilmbase"
-exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"", "exec  niri msg action focus-monitor \"Dell Inc. DELL P2317H HH77Y7B4AM6L\"", "exec ~/.config/mango/scripts/set_layout.sh"]
+exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"", "exec  niri msg action focus-monitor \"Dell Inc. DELL P2317H HH77Y7B4AM6L\""]
     [[profile.output]]
     enable = true
     search = ["m=DELL P2317H", "s=HH77Y7B4AM6L", "v=Dell Inc."]
@@ -18,3 +18,4 @@ exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\""
     scale = 1.0
     adaptive_sync = false
     transform = "90"
+# exec = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"", "exec  niri msg action focus-monitor \"Dell Inc. DELL P2317H HH77Y7B4AM6L\"", "exec ~/.config/mango/scripts/set_layout.sh"]
