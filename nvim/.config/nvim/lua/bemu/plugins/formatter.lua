@@ -41,7 +41,15 @@ return {
       markdown = { 'prettier' },
       json = { 'prettier' },
       just = { 'just' },
-      python = { 'black', 'isort' },
+      -- python = { 'black', 'isort' },
+      python = {
+        -- To fix auto-fixable lint errors.
+        'ruff_fix',
+        -- To run the Ruff formatter.
+        'ruff_format',
+        -- To organize the imports.
+        'ruff_organize_imports',
+      },
       -- tex = { 'tex-fmt' },
       yaml = { 'yamlfmt' },
       toml = { 'yamlfmt' },
@@ -53,7 +61,7 @@ return {
     },
     vim.keymap.set('n', '<space>ff', function()
       -- vim.lsp.buf.format { async = true }
-      require("conform").format()
+      require('conform').format()
     end, { desc = '[f]ormat [f]ile' }),
   },
   -- }
