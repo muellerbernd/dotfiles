@@ -8,9 +8,9 @@ return {
     {
       'L3MON4D3/LuaSnip',
       -- follow latest release.
-      version = 'v2.*', -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+      -- version = 'v2.*', -- Replace <CurrentMajor> by the latest released major (first number of latest release)
       -- install jsregexp (optional!).
-      build = 'make install_jsregexp',
+      -- build = 'make install_jsregexp',
       dependencies = {
         'rafamadriz/friendly-snippets', -- useful snippets
         'honza/vim-snippets',
@@ -139,16 +139,16 @@ return {
       -- Disable some sources in comments and strings.
       default = function()
         local sources = { 'lsp', 'snippets', 'buffer' }
-        local ok, node = pcall(vim.treesitter.get_node)
+        -- local ok, node = pcall(vim.treesitter.get_node)
 
-        if ok and node then
-          if not vim.tbl_contains({ 'comment', 'line_comment', 'block_comment' }, node:type()) then
-            table.insert(sources, 'path')
-          end
-          if node:type() ~= 'string' then
-            table.insert(sources, 'snippets')
-          end
-        end
+        -- if ok and node then
+        --   if not vim.tbl_contains({ 'comment', 'line_comment', 'block_comment' }, node:type()) then
+        --     table.insert(sources, 'path')
+        --   end
+        --   if node:type() ~= 'string' then
+        --     table.insert(sources, 'snippets')
+        --   end
+        -- end
 
         return sources
       end,
