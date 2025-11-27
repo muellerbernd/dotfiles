@@ -138,7 +138,7 @@ return {
 
       -- Disable some sources in comments and strings.
       default = function()
-        local sources = { 'lsp', 'snippets', 'buffer' }
+        local sources = { 'lsp', 'snippets', 'buffer', 'path' }
         -- local ok, node = pcall(vim.treesitter.get_node)
 
         -- if ok and node then
