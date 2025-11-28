@@ -37,6 +37,7 @@ return {
     formatters_by_ft = {
       -- bib = { 'bibtex-tidy' },
       html = { 'prettier' },
+      css = { 'prettier' },
       lua = { 'stylua' },
       markdown = { 'prettier' },
       json = { 'prettier' },
