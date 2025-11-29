@@ -4,7 +4,6 @@ return {
   -- optional: provides snippets for the snippet source
   dependencies = {
     'onsails/lspkind.nvim',
-    'rafamadriz/friendly-snippets', -- useful snippets
     {
       'L3MON4D3/LuaSnip',
       -- follow latest release.
@@ -18,7 +17,10 @@ return {
       config = function()
         require('luasnip.loaders.from_vscode').lazy_load()
         require('luasnip.loaders.from_snipmate').lazy_load()
-        require('luasnip.loaders.from_vscode').load { paths = { '~/.config/nvim/snippets/' } } -- Load snippets from my-snippets folder
+        -- Load my custom snippets:
+        require('luasnip.loaders.from_vscode').lazy_load {
+          paths = vim.fn.stdpath 'config' .. '/snippets',
+        }
       end,
     },
   },

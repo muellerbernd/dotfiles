@@ -1,4 +1,4 @@
--- leader to ,
+-- leader
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -19,20 +19,20 @@ end
 
 -- taken from here: https://github.com/nvim-telescope/telescope.nvim/issues/3439
 -- Silence the specific position encoding message
-local notify_original = vim.notify
-vim.notify = function(msg, ...)
-  if
-      msg
-      and (
-        msg:match 'position_encoding param is required'
-        or msg:match 'Defaulting to position encoding of the first client'
-        or msg:match 'multiple different client offset_encodings'
-      )
-  then
-    return
-  end
-  return notify_original(msg, ...)
-end
+-- local notify_original = vim.notify
+-- vim.notify = function(msg, ...)
+--   if
+--       msg
+--       and (
+--         msg:match 'position_encoding param is required'
+--         or msg:match 'Defaulting to position encoding of the first client'
+--         or msg:match 'multiple different client offset_encodings'
+--       )
+--   then
+--     return
+--   end
+--   return notify_original(msg, ...)
+-- end
 
 -- Add lazy to the `runtimepath`, this allows us to `require` it.
 ---@diagnostic disable-next-line: undefined-field
@@ -46,5 +46,19 @@ require('lazy').setup({ { import = 'bemu/plugins' } }, {
   },
   change_detection = {
     notify = false,
+  },
+  performance = {
+    rtp = {
+      -- see full list:
+      -- https://github.com/neovim/neovim/tree/master/runtime/plugin
+      disabled_plugins = {
+        'tohtml.lua',
+        'gzip.vim',
+        'man.lua',
+        'tarPlugin.vim',
+        'zipPlugin.vim',
+        'rplugin.vim',
+      },
+    },
   },
 })

@@ -21,16 +21,12 @@ return {
     dependencies = {
       'windwp/nvim-ts-autotag',
       'lewis6991/spellsitter.nvim',
-      -- 'JoosepAlviste/nvim-ts-context-commentstring',
-      -- 'nvim-treesitter/nvim-treesitter-textobjects',
     },
     -- configure treesitter
     opts = { -- enable syntax highlighting
       highlight = {
         enable = true,
       },
-      -- enable indentation
-      indent = { enable = true },
       -- enable autotagging (w/ nvim-ts-autotag plugin)
       autotag = {
         enable = true,
@@ -72,69 +68,33 @@ return {
         'nim',
         'kdl',
       },
-      -- incremental_selection = {
-      --   enable = true,
-      --   keymaps = {
-      --     init_selection = '<cr>',
-      --     node_incremental = '<leader>n',
-      --     scope_incremental = false,
-      --     node_decremental = '<leader>tsp',
-      --   },
-      -- },
-      -- enable nvim-ts-context-commentstring plugin for commenting tsx and jsx
-      -- context_commentstring = {
-      --   enable = true,
-      --   enable_autocmd = false,
-      -- },
-      -- textobjects = {
-      --   select = {
-      --     enable = true,
-      --     lookahead = true,
-      --     kahead = true,
-      --     selection_modes = {
-      --       ['@parameter.outer'] = 'v', -- charwise
-      --       ['@function.outer'] = 'V',  -- linewise
-      --       ['@class.outer'] = '<c-v>', -- blockwise
-      --     },
-      --     keymaps = {
-      --
-      --       ['aa'] = { query = '@parameter.outer', desc = '🌲select around function' },
-      --       ['ia'] = { query = '@parameter.inner', desc = '🌲select inside function' },
-      --
-      --       ['af'] = { query = '@function.outer', desc = '🌲select around function' },
-      --       ['if'] = { query = '@function.inner', desc = '🌲select inside function' },
-      --       ['ac'] = { query = '@class.outer', desc = '🌲select around class' },
-      --       ['ic'] = { query = '@class.inner', desc = '🌲select inside class' },
-      --       ['al'] = { query = '@loop.outer', desc = '🌲select around loop' },
-      --       ['il'] = { query = '@loop.inner', desc = '🌲select inside loop' },
-      --       ['ab'] = { query = '@block.outer', desc = '🌲select around block' },
-      --       ['ib'] = { query = '@block.inner', desc = '🌲select inside block' },
-      --     },
-      --   },
-      --   move = {
-      --     enable = true,
-      --     set_jumps = true,
-      --     goto_next_start = {},
-      --     goto_previous_start = {},
-      --   },
-      --   lsp_interop = {
-      --     enable = true,
-      --     border = 'rounded',
-      --     peek_definition_code = {},
-      --   },
-      -- },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = '<cr>',
+          node_incremental = '<cr>',
+          scope_incremental = false,
+          node_decremental = '<bs>',
+        },
+      },
+      indent = {
+        enable = true,
+        -- Treesitter unindents Yaml lists for some reason.
+        disable = { 'yaml' },
+      },
     },
     config = function(_, opts)
-      -- local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
-      --
-      -- parser_config.hypr = {
-      --   install_info = {
-      --     url = 'https://github.com/luckasranarison/tree-sitter-hypr',
-      --     files = { 'src/parser.c' },
-      --     branch = 'master',
-      --   },
-      --   filetype = 'hypr',
-      -- }
+      local toggle_inc_selection_group = vim.api.nvim_create_augroup('bemu/toggle_inc_selection', { clear = true })
+      vim.api.nvim_create_autocmd('CmdwinEnter', {
+        desc = 'Disable incremental selection when entering the cmdline window',
+        group = toggle_inc_selection_group,
+        command = 'TSBufDisable incremental_selection',
+      })
+      vim.api.nvim_create_autocmd('CmdwinLeave', {
+        desc = 'Enable incremental selection when leaving the cmdline window',
+        group = toggle_inc_selection_group,
+        command = 'TSBufEnable incremental_selection',
+      })
 
       require('nvim-treesitter.configs').setup(opts)
 
@@ -144,6 +104,31 @@ return {
   {
     'nvim-treesitter/nvim-treesitter-context',
     enabled = true,
-    opts = { mode = 'cursor', max_lines = 3 },
+    opts = {
+      mode = 'cursor',
+      max_lines = 3,
+      -- Match the context lines to the source code.
+      multiline_threshold = 1,
+      -- Disable it when the window is too small.
+      min_window_height = 20,
+    },
+    keys = {
+      {
+        '[c',
+        function()
+          -- Jump to previous change when in diffview.
+          if vim.wo.diff then
+            return '[c'
+          else
+            vim.schedule(function()
+              require('treesitter-context').go_to_context()
+            end)
+            return '<Ignore>'
+          end
+        end,
+        desc = 'Jump to upper context',
+        expr = true,
+      },
+    },
   },
 }

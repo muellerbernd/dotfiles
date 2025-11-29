@@ -1,63 +1,62 @@
 -- Defining alias for vim.opt.
-local opt = vim.opt
+local o = vim.opt
+local g = vim.g
 HOME = os.getenv 'HOME'
-opt.encoding = 'UTF-8'
--- set.termencoding = "UTF-8"
-opt.showcmd = true
-opt.termguicolors = true
--- Redraw when needed
--- set.lazyredraw = true
-opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
-opt.undofile = true -- set undotree to save to file
-opt.number = true
-opt.numberwidth = 2
-opt.relativenumber = true -- set line number
+
+--- general
+o.iskeyword = '@,48-57,_,192-255,-' -- Treat dash as `word` textobject part
+o.encoding = 'UTF-8'
+o.showcmd = true
+o.undodir = os.getenv 'HOME' .. '/.vim/undodir'
+o.undofile = true -- set undotree to save to file
 -- set.wrap = true -- set no soft wrap
-opt.linebreak = true      -- only break at words
-opt.list = false          -- so softwrapping works
-opt.tabstop = 4
-opt.softtabstop = 4       -- set tab size
-opt.shiftwidth = 4        -- affect amount of indentation
-opt.expandtab = true      -- set that tab will insert softabstop amount of space characters
-opt.mouse = 'a'           -- enable clicking with the mouse
-opt.writebackup = false   -- set to never save backup
-opt.swapfile = false      -- set no swap file
-opt.backup = false        -- set no backup file
-opt.breakindent = true    -- set every wrapped line will continue visually indented
-opt.smartindent = true    -- set smart indentation
-opt.ignorecase = true     -- set search to case insensitive
-opt.smartcase = true      -- set to be case sensitive when there is capital letter, this needs set incsearch to work
-opt.incsearch = true      -- for smartcase
-opt.hidden = true         -- so multiple buffers can be open
-opt.updatetime = 250      -- update faster for autocompletion
--- Decrease mapped sequence wait time
--- Displays which-key popup sooner
-opt.timeoutlen = 300
-opt.showmode = true    -- set that vim mode is hidden, to incorporate for lightline plugin
-opt.modeline = true
-opt.signcolumn = 'yes' -- set the line numbers on a even width
-opt.scrolloff = 10
-opt.colorcolumn = '80'
+o.mouse = 'a' -- enable clicking with the mouse
+o.writebackup = false -- set to never save backup
+o.swapfile = false -- set no swap file
+o.backup = false -- set no backup file
+o.termguicolors = true
+o.autoread = true
+
+-- indenting
+o.expandtab = true -- convert tabs to spaces
+o.shiftwidth = 2 -- number of space inserted for indentation
+o.softtabstop = 2 -- number of spaces that a <Tab> counts for.
+o.tabstop = 2 -- number of space in a tab
+o.smartindent = true -- do smart auto indenting.
+o.breakindent = true -- set every wrapped line will continue visually indented
+
+--- searching
+o.ignorecase = true -- set search to case insensitive
+o.smartcase = true -- set to be case sensitive when there is capital letter, this needs set incsearch to work
+o.incsearch = true -- for smartcase
+
+-- editing
+o.updatetime = 200 -- length of time to wait before triggering the plugin
+o.timeoutlen = 250 -- shorten key timeout length for which-key
+o.inccommand = 'split' -- preview substitutions live
+
+--- scrolling
+o.scrolloff = 10
+
 -- vim.opt.isfname:append '@-@'
 -- Always show the status line at the bottom, even if you only have one window open. global statusline
-opt.laststatus = 3
+o.laststatus = 3
 -- vim.o.ls = 0 -- laststatus
 -- vim.o.ch = 0 -- command height
--- The backspace key has slightly unintuitive behavior by default. For example,
--- by default, you can't backspace before the insertion point set with 'i'.
--- This configuration makes backspace behave more reasonably, in that you can
--- backspace over anything.
--- set.backspace = {'indent', 'eol', 'start'}
--- Show hidden characters, tabs, trailing whitespace
-opt.list = true
-vim.opt.listchars = { eol = '↲', tab = '▸ ', trail = '·' }
--- vim.opt.listchars = { eol = "↲", tab = "▸ ", trail = "·" , space = "⋅"}
--- set system clipboard as default clipboard
--- set.clipboard = "unnamedplus"
--- set.noswapfile = true
+
+-- wrapping
+o.wrap = true -- soft wrap lines
+o.showbreak = '↪ '
+o.breakindent = true -- make wrapped lines continue visually indented
 -- no wrap, but if wrap enabled only wrap in white space
-opt.lbr = true
+o.lbr = true
 -- set.nowrap = true
+
+-- special UI symbols
+o.list = true -- show invisible characters.
+-- o.listchars = 'extends:…,nbsp:␣,precedes:…,tab:> ,trail:·'
+o.listchars = { eol = '↲', tab = '▸ ', trail = '·' }
+-- o.fillchars = 'eob: ,fold:┄,foldclose:,foldopen:'
 
 -- FINDING FILES:
 -- Search down into subfolders
@@ -67,15 +66,25 @@ opt.lbr = true
 -- Display all matching files when we tab complete
 -- Nice menu when typing `:find *.py`
 -- set wildmode=longest,list,full
-opt.wildmenu = true
+o.wildmenu = true
 -- Ignore files
-opt.wildignore = { '*/cache/*', '*/tmp/*', '*.pyc', '*_build/*', '**/.git/*' }
+o.wildignore = { '*/cache/*', '*/tmp/*', '*.pyc', '*_build/*', '**/.git/*' }
 
 -- spell check
-opt.spell = true
+o.spell = true
+o.spelllang = 'en_us,de_de'
 
-opt.termguicolors = true
-opt.background = 'dark'
-opt.cursorline = true
+-- ui
+o.winborder = 'solid'
+o.cursorline = true -- highlight the text line of the cursor
+o.number = true -- show number line
+o.relativenumber = true -- show relative number line
+o.signcolumn = 'yes' -- set the line numbers on a even width
+o.cmdheight = 1 -- height of the command bar, default: 1
+o.numberwidth = 2
 
-opt.winborder = "rounded"
+-- disable some default provider
+g.loaded_node_provider = 0
+g.loaded_python3_provider = 0
+g.loaded_perl_provider = 0
+g.loaded_ruby_provider = 0

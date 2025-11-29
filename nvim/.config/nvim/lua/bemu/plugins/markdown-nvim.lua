@@ -1,16 +1,29 @@
 return {
-  'MeanderingProgrammer/markdown.nvim',
-  main = 'render-markdown',
-  opts = {},
-  name = 'render-markdown',                             -- Only needed if you have another plugin named markdown.nvim
-  dependencies = { 'nvim-treesitter/nvim-treesitter' }, -- if you use the mini.nvim suite
-  -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
-  -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+  'MeanderingProgrammer/render-markdown.nvim',
+  dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  ft = { 'markdown' },
   config = function()
-    require('render-markdown').setup {
-
+    require('render-markdown').setup({
+      file_types = { 'markdown' },
+      heading = {
+        sign = false,
+        position = 'overlay',
+        icons = { '󰲠  ', '󰲢  ', '󰲤  ', '󰲦  ', '󰲨  ', '󰲪  ' },
+      },
+      code = {
+        language_icon = false,
+        language_name = false,
+        language_info = false,
+        left_pad = 1,
+        right_pad = 1,
+        language_pad = 0,
+        width = 'block',
+        border = 'thin',
+      },
+      pipe_table = { preset = 'heavy', style = 'normal' },
       latex = { enabled = false },
-    }
+      checkbox = { checked = { scope_highlight = '@markup.strikethrough' } },
+    })
     require('render-markdown').disable()
   end,
 }

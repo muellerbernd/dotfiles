@@ -41,7 +41,13 @@ return {
       },
     },
     config = function()
-      local lsp = require 'lspconfig'
+      -- ╭──────────────────────────────────────────────────────────╮
+      -- │ ⬇️ disable default keybinds                              │
+      -- ╰──────────────────────────────────────────────────────────╯
+      for _, bind in ipairs { 'grn', 'gra', 'gri', 'grr', 'grt' } do
+        pcall(vim.keymap.del, 'n', bind)
+      end
+
       local on_lsp_attach = function(client, bufnr)
         local lsp_map = function(keys, func, desc)
           if desc then
@@ -50,37 +56,6 @@ return {
 
           vim.keymap.set('n', keys, func, { remap = true, buffer = bufnr, desc = desc, silent = true })
         end
-
-        -- lsp_map('<D-.>', require('tiny-code-action').code_action, 'Code Action')
-        -- lsp_map('<D-i>', function()
-        --   if client.name == 'rust-analyzer' then
-        --     vim.cmd.RustLsp { 'hover', 'actions' }
-        --   else
-        --     vim.lsp.buf.hover()
-        --   end
-        -- end, 'Hover Documentation')
-        -- lsp_map('<D-r>', vim.lsp.buf.rename, 'Rename')
-        -- lsp_map('gD', vim.lsp.buf.definition, 'Goto Declaration')
-        -- lsp_map('gi', vim.lsp.buf.implementation, 'Goto Implementation')
-        -- lsp_map('<D-g>', '<C-]>', '[G]oto [D]efinition')
-        -- lsp_map('<D-u>', vim.lsp.buf.signature_help, 'Signature Documentation')
-        --
-        -- -- Various picker for lsp related stuff
-        -- lsp_map('gr', Snacks.picker.lsp_references, '[G]oto [R]eferences')
-        -- lsp_map('gi', Snacks.picker.lsp_implementations, '[G]oto [I]mplementations')
-        -- lsp_map('gt', Snacks.picker.lsp_type_definitions, '[G]oto [T]ype Definitions')
-        -- lsp_map('<D-l>', Snacks.picker.lsp_workspace_symbols, 'Search workspace symbols')
-        -- lsp_map('<leader>ss', Snacks.picker.lsp_symbols, '[S]earch [S]ymbols')
-        --
-        -- lsp_map('<leader>lr', function()
-        --   vim.cmd 'LspRestart'
-        -- end, 'Lsp [R]eload')
-        -- lsp_map('<leader>li', function()
-        --   vim.cmd 'LspInfo'
-        -- end, 'Lsp [R]eload')
-        -- lsp_map('<leader>lh', function()
-        --   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(filter), { bufnr })
-        -- end, 'Lsp toggle inlay [h]ints')
 
         -- Jump to the definition of the word under your cursor.
         --  This is where a variable was first declared, or where a function is defined, etc.
@@ -112,37 +87,62 @@ return {
         lsp_map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
       end
 
-      -- vim.diagnostic.config { virtual_lines = true }
-      vim.diagnostic.config { virtual_text = true }
+      -- ╭──────────────────────────────────────────────────────────╮
+      -- │ ⬇️ setup vim.diagnostic.Config                           │
+      -- ╰──────────────────────────────────────────────────────────╯
 
-      -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities({}, false))
-      -- optimizes cpu usage source https://github.com/neovim/neovim/issues/23291
-      capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
-
-      vim.diagnostic.config {
+      local diagnostic_opts = {
         signs = {
           text = {
-            [vim.diagnostic.severity.ERROR] = '󰚌 ',
-            [vim.diagnostic.severity.WARN] = ' ',
-            [vim.diagnostic.severity.INFO] = ' ',
-            [vim.diagnostic.severity.HINT] = '󱧡 ',
+            [vim.diagnostic.severity.ERROR] = ' ',
+            [vim.diagnostic.severity.WARN] = ' ',
+            [vim.diagnostic.severity.HINT] = ' ',
+            [vim.diagnostic.severity.INFO] = ' ',
           },
           numhl = {
-            [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',
-            [vim.diagnostic.severity.WARN] = 'DiagnosticSignWarn',
-            [vim.diagnostic.severity.INFO] = 'DiagnosticSignInfo',
-            [vim.diagnostic.severity.HINT] = 'DiagnosticSignHint',
-          },
-          texthl = {
-            [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',
-            [vim.diagnostic.severity.WARN] = 'DiagnosticSignWarn',
-            [vim.diagnostic.severity.INFO] = 'DiagnosticSignInfo',
-            [vim.diagnostic.severity.HINT] = 'DiagnosticSignHint',
+            [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
+            [vim.diagnostic.severity.WARN] = 'DiagnosticWarn',
+            [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
+            [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
           },
         },
+        virtual_text = {
+          virt_text_pos = 'eol_right_align',
+        },
+        update_in_insert = false,
+        underline = true,
+        severity_sort = true,
+        float = {
+          border = 'rounded',
+          header = '',
+        },
       }
+
+      vim.diagnostic.config(diagnostic_opts)
+
+      -- -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
+      -- local capabilities = vim.lsp.protocol.make_client_capabilities()
+      -- capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities({}, false))
+      -- -- optimizes cpu usage source https://github.com/neovim/neovim/issues/23291
+      -- capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
+
+      -- ╭──────────────────────────────────────────────────────────╮
+      -- │ ⬇️ server specific capabilities                          │
+      -- ╰──────────────────────────────────────────────────────────╯
+
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+      local has_blink = require('lazy.core.config').plugins['blink.cmp'] ~= nil
+      if has_blink then
+        capabilities = vim.tbl_deep_extend('force', capabilities, {
+          textDocument = {
+            foldingRange = {
+              dynamicRegistration = false,
+              lineFoldingOnly = true,
+            },
+          },
+        })
+      end
 
       local border = {
         { '╭', 'FloatBorder' },
@@ -153,15 +153,6 @@ return {
         { '─', 'FloatBorder' },
         { '╰', 'FloatBorder' },
         { '│', 'FloatBorder' },
-      }
-
-      local handlers = {
-        ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-          border = border,
-        }),
-        ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-          border = border,
-        }),
       }
 
       -- Your existing floating preview override
@@ -183,7 +174,6 @@ return {
         },
         capabilities = capabilities,
         on_attach = on_lsp_attach,
-        handlers = handlers,
       })
 
       vim.lsp.enable 'lua_ls'
@@ -197,7 +187,6 @@ return {
         },
         capabilities = capabilities,
         on_attach = on_lsp_attach,
-        handlers = handlers,
       })
 
       vim.lsp.enable 'bashls'
@@ -205,34 +194,29 @@ return {
         settings = { includeAllWorkspaceSymbols = true },
         capabilities = capabilities,
         on_attach = on_lsp_attach,
-        handlers = handlers,
       })
 
       vim.lsp.enable 'marksman'
       vim.lsp.config('marksman', {
         capabilities = capabilities,
         on_attach = on_lsp_attach,
-        handlers = handlers,
       })
 
       vim.lsp.enable 'taplo'
       vim.lsp.config('taplo', {
         capabilities = capabilities,
         on_attach = on_lsp_attach,
-        handlers = handlers,
       })
 
       -- vim.lsp.enable 'pyright'
       -- vim.lsp.config('pyright', {
       --   capabilities = capabilities,
       --   on_attach = on_lsp_attach,
-      --   handlers = handlers,
       -- })
       -- vim.lsp.enable 'ruff'
       -- vim.lsp.config('ruff', {
       --   capabilities = capabilities,
       --   on_attach = on_lsp_attach,
-      --   handlers = handlers,
       --   init_options = {
       --     settings = {
       --       -- Ruff language server settings go here
@@ -242,7 +226,6 @@ return {
       vim.lsp.config('pyright', {
         capabilities = capabilities,
         on_attach = on_lsp_attach,
-        handlers = handlers,
         settings = {
           pyright = {
             -- Using Ruff's import organizer.
@@ -263,7 +246,6 @@ return {
         },
         capabilities = capabilities,
         on_attach = on_lsp_attach,
-        handlers = handlers,
       })
 
       -- vim.api.nvim_create_autocmd('LspAttach', {
@@ -287,7 +269,6 @@ return {
       vim.lsp.config('nixd', {
         capabilities = capabilities,
         on_attach = on_lsp_attach,
-        handlers = handlers,
         settings = {
           ['nixd'] = {
             nixpkgs = {
@@ -312,49 +293,41 @@ return {
       vim.lsp.config('cmake', {
         capabilities = capabilities,
         on_attach = on_lsp_attach,
-        handlers = handlers,
       })
       vim.lsp.enable 'rust_analyzer'
       vim.lsp.config('rust_analyzer', {
         capabilities = capabilities,
         on_attach = on_lsp_attach,
-        handlers = handlers,
       })
       vim.lsp.enable 'texlab'
       vim.lsp.config('texlab', {
         capabilities = capabilities,
         on_attach = on_lsp_attach,
-        handlers = handlers,
       })
       vim.lsp.enable 'html'
       vim.lsp.config('html', {
         capabilities = capabilities,
         on_attach = on_lsp_attach,
-        handlers = handlers,
       })
       vim.lsp.enable 'hls'
       vim.lsp.config('hls', {
         capabilities = capabilities,
         on_attach = on_lsp_attach,
-        handlers = handlers,
       })
       vim.lsp.enable 'jsonls'
       vim.lsp.config('jsonls', {
         capabilities = capabilities,
         on_attach = on_lsp_attach,
-        handlers = handlers,
       })
       vim.lsp.enable 'eslint'
       vim.lsp.config('eslint', {
         capabilities = capabilities,
         on_attach = on_lsp_attach,
-        handlers = handlers,
       })
       vim.lsp.enable 'tinymist'
       vim.lsp.config('tinymist', {
         capabilities = capabilities,
         on_attach = on_lsp_attach,
-        handlers = handlers,
         settings = {
           formatterMode = 'typstyle',
           exportPdf = 'disable',
@@ -365,13 +338,15 @@ return {
       vim.lsp.config('lemminx', {
         capabilities = capabilities,
         on_attach = on_lsp_attach,
-        handlers = handlers,
+      })
+      vim.lsp.config('*', {
+        capabilities = capabilities,
+        on_attach = on_lsp_attach,
       })
       -- vim.lsp.enable 'ltex_plus'
       -- vim.lsp.config('ltex_plus', {
       --   capabilities = capabilities,
       --   on_attach = on_lsp_attach,
-      --   handlers = handlers,
       --   settings = {
       --     ltex = {
       --       language = 'de-DE',
@@ -405,47 +380,3 @@ return {
     end,
   },
 }
---         if lsp == 'clangd' then
---           vim.lsp.config(lsp, {
---             capabilities = capabilities,
---             on_attach = on_lsp_attach,
---             handlers = handlers,
---             cmd = {
---               'clangd',
---               '--background-index',
---               '--suggest-missing-includes',
---               '--clang-tidy',
---               '--header-insertion=iwyu',
---             },
---           })
---         elseif lsp == 'rust_analyzer' then
---           vim.lsp.config(lsp, {
---             capabilities = capabilities,
---             on_attach = on_lsp_attach,
---             handlers = handlers,
---             settings = {
---               ['rust-analyzer'] = {
---                 assist = {
---                   importGranularity = 'module',
---                   importPrefix = 'self',
---                 },
---                 inlayHints = {
---                   enable = true,
---                   chainingHints = true,
---                   maxLength = 25,
---                   parameterHints = true,
---                   typeHints = true,
---                   hideNamedConstructorHints = false,
---                   typeHintsSeparator = '‣',
---                   typeHintsWithVariable = true,
---                   chainingHintsSeparator = '‣',
---                 },
---                 cargo = {
---                   loadOutDirsFromCheck = true,
---                 },
---                 procMacro = {
---                   enable = true,
---                 },
---               },
---             },
---           })
