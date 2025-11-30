@@ -44,9 +44,9 @@ return {
       -- ╭──────────────────────────────────────────────────────────╮
       -- │ ⬇️ disable default keybinds                              │
       -- ╰──────────────────────────────────────────────────────────╯
-      for _, bind in ipairs { 'grn', 'gra', 'gri', 'grr', 'grt' } do
-        pcall(vim.keymap.del, 'n', bind)
-      end
+      -- for _, bind in ipairs { 'grn', 'gra', 'gri', 'grr', 'grt' } do
+      --   pcall(vim.keymap.del, 'n', bind)
+      -- end
 
       local on_lsp_attach = function(client, bufnr)
         local lsp_map = function(keys, func, desc)
