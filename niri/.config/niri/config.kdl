@@ -336,8 +336,8 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return { spawn "footclient"; }
-    // Mod+D { spawn "fuzzel"; }
-    Mod+D { spawn "rofi-script"; }
+    Mod+D { spawn "fuzzel"; }
+    // Mod+D { spawn "rofi-script"; }
     Mod+Escape { spawn "loginctl" "lock-session"; }
 
     // The allow-when-locked=true property makes them work even when the session is locked.
@@ -537,8 +537,8 @@ binds {
 
     // The quit action will show a confirmation dialog to avoid accidental exits.
     // Mod+Shift+E { quit; }
-    // Mod+Shift+E { spawn "~/.config/fuzzel/scripts/powermenu.sh"; }
-    Mod+Shift+E { spawn "~/.config/rofi/scripts/powermenu/run.sh"; }
+    Mod+Shift+E { spawn "~/.config/fuzzel/scripts/powermenu.sh"; }
+    // Mod+Shift+E { spawn "~/.config/rofi/scripts/powermenu/run.sh"; }
 
     Mod+Shift+N { spawn "~/scripts/nightmode.sh"; }
 
@@ -553,7 +553,8 @@ binds {
     XF86PowerOff allow-when-locked=true { spawn ".local/bin/toggleLaptopKeyboard"; }
 
 
-    Mod+V hotkey-overlay-title="Open clipboard manager" { spawn "bash" "-c" "cliphist list | rofi -dmenu | cliphist decode | wl-copy"; }
+    // Mod+V hotkey-overlay-title="Open clipboard manager" { spawn "bash" "-c" "cliphist list | rofi -dmenu | cliphist decode | wl-copy"; }
+    Mod+V hotkey-overlay-title="Open clipboard manager" { spawn "bash" "-c" "cliphist list | fuzzel --dmenu --counter --index | cliphist decode | wl-copy"; }
 
     Mod+W hotkey-overlay-title="Toggle waybar" { spawn "bash" "-c" "pkill -SIGUSR1 waybar"; }
 }
