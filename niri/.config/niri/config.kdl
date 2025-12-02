@@ -336,7 +336,7 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return { spawn "footclient"; }
-    Mod+D { spawn "bash" "-c" "fuzzel -D no"; }
+    Mod+D { spawn "bash" "-c" "fuzzel"; }
     // Mod+D { spawn "rofi-script"; }
     Mod+Escape { spawn "loginctl" "lock-session"; }
 
@@ -554,7 +554,7 @@ binds {
 
 
     // Mod+V hotkey-overlay-title="Open clipboard manager" { spawn "bash" "-c" "cliphist list | rofi -dmenu | cliphist decode | wl-copy"; }
-    Mod+V hotkey-overlay-title="Open clipboard manager" { spawn "bash" "-c" "cliphist list | fuzzel -D no --dmenu --counter --index | cliphist decode | wl-copy"; }
+    Mod+V hotkey-overlay-title="Open clipboard manager" { spawn "bash" "-c" "cliphist list | fuzzel --dmenu --counter --index | cliphist decode | wl-copy"; }
 
     Mod+W hotkey-overlay-title="Toggle waybar" { spawn "bash" "-c" "pkill -SIGUSR1 waybar"; }
 }

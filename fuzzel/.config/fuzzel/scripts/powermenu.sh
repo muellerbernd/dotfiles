@@ -19,7 +19,7 @@ no='no'
 
 # fuzzel CMD
 fuzzel_cmd() {
-    fuzzel -D no --dmenu \
+    fuzzel --dmenu \
         -p "Uptime: $uptime"
 }
 

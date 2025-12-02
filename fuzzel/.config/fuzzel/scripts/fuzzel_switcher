@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+window_ids=()
+window_titles=()
+
+# Existing: list windows
+
+while read i; do
+  declare -a line_array="($i)"
+  window_ids+=(${line_array[0]})
+  window_titles+=("${line_array[1]} - ${line_array[2]} \0icon\x1f${line_array[1]}")
+done <<<$(niri msg --json windows | jq -r '.[] | [ .id, .app_id, .title] | "\""+join ("\" \"")+"\""')
+
+result=$(printf "%b\n" "${window_titles[@]}" | fuzzel --counter --dmenu --index)
+
+if [ "x$result" != "x" ] && [ $result != -1 ]; then
+  niri msg action focus-window --id ${window_ids[result]}
+fi
+
+# ===== New: show all available desktop apps (from .desktop files) =====
+
+declare -a app_names
+declare -a app_cmds
+declare -a app_keys  # optional: to distinguish duplicates
+
+# Collect .desktop entries
+
+desktop_dirs=(/usr/share/applications "$HOME/.local/share/applications" "$HOME/.local/share/applications")  # include both local and system
+for d in /usr/share/applications "$HOME/.local/share/applications" "$HOME/.local/share/applications"; do
+  [ -d "$d" ] && for f in "$d"/*.desktop; do
+    [ -f "$f" ] || continue
+    name=$(grep -m1 '^Name=' "$f" | cut -d'=' -f2-)
+    exec_line=$(grep -m1 '^Exec=' "$f" | cut -d'=' -f2-)
+    # Skip if no name or exec
+    [ -z "$name" ] && continue
+    [ -z "$exec_line" ] && continue
+
+    # Normalize Exec: remove placeholders like %U %f %F %i %c etc.
+    cmd=$(echo "$exec_line" | sed -E 's/ %[_A-Za-z]+//g' | sed -E 's/%//g' | xargs)
+    # Some Exec lines contain %U or %F with arguments; the above should strip placeholders
+
+    app_names+=("$name")
+    app_cmds+=("$cmd")
+  done
+done
+
+# If there are apps, present them
+
+if [ ${#app_names[@]} -gt 0 ]; then
+  app_selection=$(printf "%b\n" "${app_names[@]}" | fuzzel --counter --dmenu --index)
+
+  if [ "x$app_selection" != "x" ] && [ "$app_selection" != "-1" ]; then
+    # Find first matching index (simple exact match; adjust if duplicates exist)
+    idx=$(printf "%s\n" "${app_names[@]}" | awk -v tgt="$app_selection" '$0==tgt{print NR-1; exit}' | tr -d '[:space:]')
+    if [ -n "$idx" ]; then
+      # Launch the selected app
+      cmd="${app_cmds[$idx]}"
+      # Run in background; optionally replace with exec or focus logic
+      (nohup bash -lc "$cmd" >/dev/null 2>&1 &)
+    fi
+  fi
+fi
