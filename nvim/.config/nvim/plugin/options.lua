@@ -75,7 +75,7 @@ o.spell = true
 o.spelllang = 'en_us,de_de'
 
 -- ui
-o.winborder = 'solid'
+o.winborder = 'rounded'
 o.cursorline = true -- highlight the text line of the cursor
 o.number = true -- show number line
 o.relativenumber = true -- show relative number line
