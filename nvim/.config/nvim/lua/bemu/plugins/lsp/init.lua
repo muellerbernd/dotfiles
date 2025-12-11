@@ -144,18 +144,22 @@ return {
         })
       end
 
-      vim.lsp.enable 'clangd'
-      vim.lsp.config('clangd', {
-        filetypes = { 'c', 'cpp', 'proto' },
-        cmd = {
-          'clangd',
-          -- "--background-index",
-          -- "--query-driver=/Users/dmtrkovalenko/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gcc",
-          '--offset-encoding=utf-16',
-        },
-        capabilities = capabilities,
-        on_attach = on_lsp_attach,
-      })
+      if vim.fn.executable 'clangd' == 1 then
+        vim.lsp.enable 'clangd'
+      end
+      -- vim.lsp.config('clangd', {
+      --   -- filetypes = { 'c', 'cpp', 'proto' },
+      --   cmd = {
+      --     'clangd',
+      --     '--offset-encoding=utf-16',
+      --     '--background-index',
+      --     '--suggest-missing-includes',
+      --     '--clang-tidy',
+      --     '--header-insertion=iwyu',
+      --   },
+      --   capabilities = capabilities,
+      --   on_attach = on_lsp_attach,
+      -- })
 
       vim.lsp.enable 'lua_ls'
       vim.lsp.config('lua_ls', {
