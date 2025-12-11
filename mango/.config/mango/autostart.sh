@@ -2,9 +2,8 @@
 
 cleaner=("lxpolkit" "dunst" "wl-paste" "nm-applet" "waybar" "blueman" "nextcloud" "hyprpaper" "hypridle" "shikane" "eww" "yambar" "mako" "nextcloud" "swayidle" "swaybg" "sway-audio-idle-inhibit" "niri_tile" "mpd-notification")
 
-
 for str in "${cleaner[@]}"; do
-    kill -SIGTERM $(pgrep -f "$str")
+  kill -SIGTERM $(pgrep -f "$str")
 done
 
 mako &
@@ -18,25 +17,26 @@ blueman-applet &
 # nextcloud &
 xhost + local: &
 # dbus-update-activation-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
-dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots &
 gnome-keyring-daemon --start --components=ssh,secrets,pkcs11 &
 shikane &
 mpd-notification &
 
 sh ~/scripts/battery-notify.sh &
 
+# hypridle &
+# hyprpaper &
 # wallpaper="$(fd . ~/Pictures/wallpapers -t f | shuf -n 1)"
 host=$(hostname)
 case $host in
 "fw13")
-    wallpaper=$HOME/wallpapers/framework-explode.jpeg
-    ;;
+  wallpaper=$HOME/wallpapers/framework-explode.jpeg
+  ;;
 "mue-p14s")
-    wallpaper=$HOME/wallpapers/space.jpg
-    ;;
+  wallpaper=$HOME/wallpapers/space.jpg
+  ;;
 *)
-    wallpaper=$HOME/wallpapers/black-hole.png
-    ;;
+  wallpaper=$HOME/wallpapers/black-hole.png
+  ;;
 esac
 
 swaybg --image "$wallpaper" --mode fill &
@@ -54,5 +54,7 @@ hypridle &
 waybar --config ~/.config/waybar/config-mango.jsonc --style ~/.config/waybar/style-mango.css &
 
 xwayland-satellite &
+
+# python ~/.config/niri/scripts/niri_tile_to_n.py -n 2 -m &
 
 mmsg -s -l "T"
