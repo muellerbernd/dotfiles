@@ -144,22 +144,16 @@ return {
         })
       end
 
-      if vim.fn.executable 'clangd' == 1 then
-        vim.lsp.enable 'clangd'
-      end
       -- vim.lsp.config('clangd', {
-      --   -- filetypes = { 'c', 'cpp', 'proto' },
-      --   cmd = {
-      --     'clangd',
-      --     '--offset-encoding=utf-16',
-      --     '--background-index',
-      --     '--suggest-missing-includes',
-      --     '--clang-tidy',
-      --     '--header-insertion=iwyu',
-      --   },
       --   capabilities = capabilities,
       --   on_attach = on_lsp_attach,
       -- })
+      -- if vim.fn.executable 'clangd' == 1 then
+      --   vim.lsp.enable 'clangd'
+      -- end
+      if vim.fn.executable 'ccls' == 1 then
+        vim.lsp.enable 'ccls'
+      end
 
       vim.lsp.enable 'lua_ls'
       vim.lsp.config('lua_ls', {
