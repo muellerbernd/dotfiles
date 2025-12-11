@@ -1,5 +1,7 @@
 -- https://yazi-rs.github.io/docs/tips/
 
+require("folder-rules"):setup()
+
 -- Show symlink in status bar
 Status:children_add(function(self)
   local h = self._current.hovered
