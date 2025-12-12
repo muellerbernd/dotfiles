@@ -52,7 +52,6 @@ install-default:
       yazi \
       xbindkeys \
       thunar \
-      mime-apps \
       foot \
       ghostty \
       prusa-slicer \
@@ -94,7 +93,6 @@ delete-default:
       yazi \
       xbindkeys \
       thunar \
-      mime-apps \
       foot \
       ghostty \
       prusa-slicer \
