@@ -336,7 +336,8 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return { spawn "footclient"; }
-    Mod+D { spawn "bash" "-c" "fuzzel"; }
+    Mod+D { spawn "bash" "-c" "anyrun"; }
+    // Mod+D { spawn "bash" "-c" "fuzzel"; }
     // Mod+D { spawn "rofi-script"; }
     Mod+Escape { spawn "loginctl" "lock-session"; }
 
