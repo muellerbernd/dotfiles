@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+usage() {
+  cat <<EOF
+Usage: $(basename "$0") [OPTIONS]
+
+Options:
+  --value 0|1              Directly set keyboard state (0 = enabled, 1 = disabled)
+  --help                   Show this help message
+EOF
+}
+
+# Parse CLI options
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+  --value)
+    VALUE="$2"
+    shift 2
+    ;;
+  --help)
+    usage
+    exit 0
+    ;;
+  *)
+    echo "Unknown option: $1" >&2
+    usage
+    exit 1
+    ;;
+  esac
+done
+
+pipe=/tmp/laptopKeyboardState
+# target=/sys/devices/platform/i8042/serio0/input/input0/inhibited
+
+host=$(hostname)
+case $host in
+"fw13")
+  target=/sys/devices/platform/i8042/serio0/input/input1/inhibited
+  ;;
+*)
+  target=/sys/devices/platform/i8042/serio0/input/input0/inhibited
+  ;;
+esac
+echo "$target"
+
+# toggle_keyboard() {
+#   if [ "$1" = "0" ]; then
+#     notify-send -u normal "Keyboard disabled"
+#     echo 1 >"$pipe"
+#   else
+#     notify-send -u normal "Keyboard enabled"
+#     echo 0 >"$pipe"
+#   fi
+# }
+#
+# toggle_keyboard "$(cat $target)"
+
+
+toggle_keyboard() {
+  local value="$1"
+  if [[ "$value" == "0" ]]; then
+    notify-send -u normal "Keyboard disabled"
+    echo 1 >"$pipe"
+  else
+    notify-send -u normal "Keyboard enabled"
+    echo 0 >"$pipe"
+  fi
+}
+
+# If --value was provided, use it; otherwise read from target
+
+if [[ -n "${VALUE:-}" ]]; then
+  toggle_keyboard "$VALUE"
+else
+  if [[ -e "$target" ]]; then
+    read_target="$(cat "$target")"
+    toggle_keyboard "$read_target"
+  else
+    echo "Warning: target '$target' does not exist. Exiting." >&2
+    exit 1
+  fi
+fi

@@ -70,6 +70,7 @@ run_cmd() {
       # dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
       # playerctl pause
       # run_lock_cmd
+      .local/bin/controlLaptopKeyboard --value 1
       systemctl suspend
     elif [[ $1 == '--hibernate' ]]; then
       # mpc -q pause
@@ -77,6 +78,7 @@ run_cmd() {
       # dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
       # playerctl pause
       # run_lock_cmd
+      .local/bin/controlLaptopKeyboard --value 1
       systemctl hibernate
     elif [[ $1 == '--logout' ]]; then
       if [[ "$XDG_CURRENT_DESKTOP" == 'i3' ]]; then

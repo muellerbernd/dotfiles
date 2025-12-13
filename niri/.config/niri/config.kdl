@@ -551,7 +551,7 @@ binds {
 
     Mod+O repeat=false { toggle-overview; }
 
-    XF86PowerOff allow-when-locked=true { spawn ".local/bin/toggleLaptopKeyboard"; }
+    XF86PowerOff allow-when-locked=true { spawn ".local/bin/controlLaptopKeyboard"; }
 
 
     // Mod+V hotkey-overlay-title="Open clipboard manager" { spawn "bash" "-c" "cliphist list | rofi -dmenu | cliphist decode | wl-copy"; }
