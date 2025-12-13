@@ -499,7 +499,6 @@ binds {
     Mod+T { toggle-column-tabbed-display; }
 
     Mod+R { switch-preset-column-width; }
-    Mod+Ctrl+R { reset-window-height; }
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
     Mod+C { center-column; }
@@ -518,6 +517,7 @@ binds {
     // Finer height adjustments when in column with other windows.
     Mod+Alt+Minus { set-window-height "-10%"; }
     Mod+Alt+Plus { set-window-height "+10%"; }
+    Mod+Alt+R { reset-window-height; }
 
     // floating
     Mod+Space { toggle-window-floating; }
