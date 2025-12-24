@@ -41,11 +41,6 @@
     rebase = false
 [init]
     defaultBranch = main
-
-
-; [url "archlinux-aur:"]
-;     insteadOf = https://aur.archlinux.org/
-
 [filter "lfs"]
     smudge = git-lfs smudge -- %f
     process = git-lfs filter-process
@@ -56,6 +51,8 @@
 [commit]
     gpgsign = true
 [push]
-	recurseSubmodules = on-demand
+  recurseSubmodules = on-demand
 [submodule]
-	recurse = true
+  recurse = true
+[credential]
+  helper = store
