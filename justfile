@@ -55,11 +55,9 @@ install-default:
       foot \
       ghostty \
       prusa-slicer \
-      FreeCAD \
       hypr-common \
       wallpapers \
       mpd-notification
-    # fonts
 
 # Default delete targets
 delete-default:
@@ -100,7 +98,6 @@ delete-default:
       hypr-common \
       wallpapers \
       mpd-notification
-    # fonts
 
 [group('Hosts install')]
 install-mue-p14s:
