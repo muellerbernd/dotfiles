@@ -1,0 +1,123 @@
+// Window rules let you adjust behavior for individual windows.
+// Find more information on the wiki:
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
+
+layer-rule {
+    match namespace="^launcher$"
+
+    shadow {
+        on
+    }
+
+    // Fuzzel defaults to 10 px rounded corners.
+    geometry-corner-radius 10
+}
+
+// block out two password managers from screen capture.
+window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+
+    block-out-from "screen-capture"
+
+    // Use this instead if you want them visible on third-party screenshot tools.
+    // block-out-from "screencast"
+}
+
+window-rule {
+    match is-floating=true
+    focus-ring {
+        active-color "#f38ba8"
+        inactive-color "#7d0d2d"
+    }
+
+    border {
+        inactive-color "#7d0d2d"
+    }
+    // clip-to-geometry false
+    // tiled-state false
+}
+
+// Indicate screencasted windows with red colors.
+window-rule {
+    match is-window-cast-target=true
+
+    focus-ring {
+        active-color "#f38ba8"
+        inactive-color "#7d0d2d"
+    }
+
+    border {
+        inactive-color "#7d0d2d"
+    }
+
+    shadow {
+        color "#7d0d2d70"
+    }
+
+    tab-indicator {
+        active-color "#f38ba8"
+        inactive-color "#7d0d2d"
+    }
+}
+
+window-rule {
+    match app-id="firefox$" title="^Enter name of file to save to…$"
+    match app-id="firefox$" title="^Picture-in-Picture$"
+    match app-id="firefox$" title="^Library$"
+    match app-id="firefox$" title="^Save Image$"
+    match app-id="firefox$" title="^File Upload$"
+    default-column-width { proportion 0.5; }
+    default-window-height { proportion 0.5; }
+    open-floating false
+}
+
+// Always focus the KeePassXC-Browser unlock dialog.
+//
+// This dialog opens parented to the KeePassXC window rather than the browser,
+// so it doesn't get auto-focused by default.
+window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"# title="^KeePassXC - Browser Access Request$"
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"# title="^Unlock Database - KeePassXC$"
+
+    open-focused true
+}
+
+// workspaces
+// workspace "1"
+// workspace "2"
+// workspace "3"
+//
+//
+
+window-rule {
+    match title="Firefox"
+    match title="Thunderbird"
+    // Properties that apply continuously.
+    draw-border-with-background false
+
+    focus-ring {
+        // off
+        width 3
+        // active-color "#7fc8ff"
+        // inactive-color "#505050"
+        // urgent-color "#9b0000"
+        // active-gradient from="#80c8ff" to="#bbddff" angle=45
+        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+        // urgent-gradient from="#800" to="#a33" angle=45
+    }
+}
+
+// window-rule {
+//     open-maximized-to-edges false
+// }
+// Open Thunderbird on the "mail" workspace, if it runs at niri startup.
+// window-rule {
+//     match title="Thunderbird"
+//     open-on-workspace "3"
+// }
+// window-rule {
+//     match app-id=r#"teams"#
+//     // open-on-workspace "chat"
+//     open-on-workspace "2"
+// }

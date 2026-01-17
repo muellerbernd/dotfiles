@@ -1,0 +1,72 @@
+// Input device configuration.
+// Find the full list of options on the wiki:
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Input
+input {
+    disable-power-key-handling
+    keyboard {
+        xkb {
+            // You can set rules, model, layout, variant and options.
+            // For more information, see xkeyboard-config(7).
+
+            // For example:
+            layout "de"
+            // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
+        }
+
+        repeat-rate 50
+        repeat-delay 300
+    }
+
+    // Next sections include libinput settings.
+    // Omitting settings disables them, or leaves them at their default values.
+    touchpad {
+        // off
+        tap
+        // dwt
+        // dwtp
+        natural-scroll
+        // accel-speed 0.2
+        // accel-profile "flat"
+        // scroll-method "two-finger"
+        // disabled-on-external-mouse
+    }
+
+    mouse {
+        // off
+        // natural-scroll
+        // accel-speed 0.2
+        // accel-profile "flat"
+        // scroll-method "no-scroll"
+    }
+
+    tablet {
+        // map-to-output "eDP-1"
+        // map-to-output "eDP-2"
+        // map-to-output "HDMI-A-1"
+        // map-to-output "DP-1"
+        map-to-output "Acer Technologies XV320QU LV 420615FCD4200"
+        // map-to-output "Dell Inc. Dell S2716DG #ASOwvAqQj0Dd"
+        // left-handed
+        /-calibration-matrix 0.0 -1.0 1.0 \
+                           1.0  0.0 0.0
+        /-calibration-matrix 1.0 0.0 0.0 0.0 1.0 0.0
+    }
+
+    touch {
+        // off
+        // map-to-output "DP-3"
+        map-to-output "Interaction Systems, Inc TYPE-C TCH00562020"
+        // calibration-matrix 1.0 0.0 0.0 0.0 2.0 0.0
+    }
+
+    // Uncomment this to make the mouse warp to the center of newly focused windows.
+    warp-mouse-to-focus mode="center-xy-always"
+
+    // Focus windows and outputs automatically when moving the mouse into them.
+    // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
+    focus-follows-mouse max-scroll-amount="95%"
+}
+
+switch-events {
+    lid-close {spawn "loginctl" "lock-session";}
+}
