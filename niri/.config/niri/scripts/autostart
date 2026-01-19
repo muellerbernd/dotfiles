@@ -12,8 +12,8 @@ foot --server &
 # wl-paste --type text --watch cliphist store &
 # wl-paste --type image --watch cliphist store &
 # wl-paste --primary --watch cliphist store &
-nm-applet &
-blueman-applet &
+# nm-applet &
+# blueman-applet &
 # nextcloud &
 # xhost + local: &
 # dbus-update-activation-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
