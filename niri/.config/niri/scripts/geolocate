@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+# ip-based geolocation (fast, simple)
+
+# Requires: curl. Optional: jq for pretty output.
+
+API="${IPINFO_TOKEN:+https://ipinfo.io/json?token=$IPINFO_TOKEN}"
+API="${API:-https://ipinfo.io/json}"
+
+# fetch location data
+
+resp=$(curl -s "$API")
+if [[ -z "$resp" ]]; then
+  echo "Could not fetch geolocation."
+  exit 1
+fi
+
+if command -v jq >/dev/null 2>&1; then
+  city=$(echo "$resp" | jq -r '.city')
+  region=$(echo "$resp" | jq -r '.region')
+  country=$(echo "$resp" | jq -r '.country')
+  loc=$(echo "$resp" | jq -r '.loc')
+  echo "City: $city"
+  echo "Region: $region"
+  echo "Country: $country"
+  echo "Coordinates: $loc"  # lat,lon
+else
+  # Fallback parsing (less robust)
+  city=$(echo "$resp" | sed -n 's/.*"city":"\([^"]*\)".*/\1/p')
+  region=$(echo "$resp" | sed -n 's/.*"region":"\([^"]*\)".*/\1/p')
+  country=$(echo "$resp" | sed -n 's/.*"country":"\([^"]*\)".*/\1/p')
+  loc=$(echo "$resp" | sed -n 's/.*"loc":"\([^"]*\)".*/\1/p')
+  echo "City: ${city:-N/A}"
+  echo "Region: ${region:-N/A}"
+  echo "Country: ${country:-N/A}"
+  echo "Coordinates: ${loc:-N/A}"
+fi

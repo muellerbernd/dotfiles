@@ -70,11 +70,17 @@ def main(args):
             subprocess.run(f"wpctl set-volume {sid} {target}", shell=True)
 
     default_vol, default_muted = get_sink_volume("@DEFAULT_SINK@")
+
+    # Respect the notify flag
+    notify_enabled = getattr(args, "notify", True)
+
     if default_muted:
-        notify_mute()
+        if notify_enabled:
+            notify_mute()
     else:
         print(default_vol)
-        notify_volume(int(default_vol * 100))
+        if notify_enabled:
+            notify_volume(int(default_vol * 100))
 
 
 if __name__ == "__main__":
@@ -85,5 +91,14 @@ if __name__ == "__main__":
     parser.add_argument(
         "vol_type", choices=["up", "down", "mute"], help="control volume"
     )
+
+    # Add toggleable notifications
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument("--notify", dest="notify", action="store_true",
+                       help="Enable notifications (default)")
+    group.add_argument("--no-notify", dest="notify", action="store_false",
+                       help="Disable notifications")
+    parser.set_defaults(notify=True)
+
     args = parser.parse_args()
     main(args)

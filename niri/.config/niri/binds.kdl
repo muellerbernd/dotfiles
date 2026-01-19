@@ -20,16 +20,17 @@ binds {
     Mod+D { spawn "bash" "-c" "anyrun"; }
     // Mod+D { spawn "bash" "-c" "fuzzel"; }
     // Mod+D { spawn "rofi-script"; }
-    Mod+Escape { spawn "loginctl" "lock-session"; }
+    // Mod+Escape { spawn "loginctl" "lock-session"; }
+    Mod+Escape { spawn "bash" "-c" "noctalia-shell ipc call lockScreen lock"; }
 
     // The allow-when-locked=true property makes them work even when the session is locked.
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "bash" "-c" "~/scripts/controlVolumePipewire.py up"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn "bash" "-c" "~/scripts/controlVolumePipewire.py down"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "bash" "-c" "~/scripts/controlVolumePipewire.py up --no-notify"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "bash" "-c" "~/scripts/controlVolumePipewire.py down --no-notify"; }
 
-    Mod+TouchpadScrollUp   allow-when-locked=true { spawn "bash" "-c" "~/scripts/controlVolumePipewire.py up"; }
-    Mod+TouchpadScrollDown allow-when-locked=true { spawn "bash" "-c" "~/scripts/controlVolumePipewire.py down"; }
+    Mod+TouchpadScrollUp   allow-when-locked=true { spawn "bash" "-c" "~/scripts/controlVolumePipewire.py down --no-notify"; }
+    Mod+TouchpadScrollDown allow-when-locked=true { spawn "bash" "-c" "~/scripts/controlVolumePipewire.py up --no-notify"; }
 
-    XF86AudioMute        allow-when-locked=true { spawn "bash" "-c" "~/scripts/controlVolumePipewire.py mute"; }
+    XF86AudioMute        allow-when-locked=true { spawn "bash" "-c" "~/scripts/controlVolumePipewire.py mute --no-notify"; }
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 
     XF86AudioMedia allow-when-locked=true { spawn "playerctl" "play-pause"; }
@@ -37,11 +38,14 @@ binds {
     XF86AudioPrev allow-when-locked=true { spawn "playerctl" "previous"; }
     XF86AudioNext allow-when-locked=true { spawn "playerctl" "next"; }
 
-    XF86MonBrightnessDown { spawn "bash" "-c" "light -U 1 && ~/scripts/notifyBrightness.sh"; }
-    XF86MonBrightnessUp { spawn "bash" "-c" "light -A 1 && ~/scripts/notifyBrightness.sh"; }
+    // XF86MonBrightnessDown { spawn "bash" "-c" "light -U 1 && ~/scripts/notifyBrightness.sh"; }
+    // XF86MonBrightnessUp { spawn "bash" "-c" "light -A 1 && ~/scripts/notifyBrightness.sh"; }
+    XF86MonBrightnessDown { spawn "bash" "-c" "noctalia-shell ipc call brightness decrease"; }
+    XF86MonBrightnessUp { spawn "bash" "-c" "noctalia-shell ipc call brightness increase"; }
 
     Mod+Shift+Q { close-window; }
-    Mod+Q { spawn "bash" "-c" "makoctl dismiss --all"; }
+    // Mod+Q { spawn "bash" "-c" "makoctl dismiss --all"; }
+    Mod+Q { spawn "bash" "-c" "noctalia-shell ipc call notifications toggleDND"; }
 
     Mod+Left  { focus-column-left; }
     Mod+Down  { focus-window-down; }
@@ -223,7 +227,8 @@ binds {
 
     // The quit action will show a confirmation dialog to avoid accidental exits.
     // Mod+Shift+E { quit; }
-    Mod+Shift+E { spawn "~/.config/fuzzel/scripts/powermenu.sh"; }
+    // Mod+Shift+E { spawn "~/.config/fuzzel/scripts/powermenu.sh"; }
+    Mod+Shift+E { spawn "bash" "-c" "noctalia-shell ipc call sessionMenu toggle"; }
     // Mod+Shift+E { spawn "~/.config/rofi/scripts/powermenu/run.sh"; }
 
     Mod+Shift+N { spawn "~/scripts/nightmode.sh"; }
@@ -242,5 +247,6 @@ binds {
     // Mod+V hotkey-overlay-title="Open clipboard manager" { spawn "bash" "-c" "cliphist list | rofi -dmenu | cliphist decode | wl-copy"; }
     Mod+V hotkey-overlay-title="Open clipboard manager" { spawn "bash" "-c" "cliphist list | fuzzel --dmenu --counter --index | cliphist decode | wl-copy"; }
 
-    Mod+W hotkey-overlay-title="Toggle waybar" { spawn "bash" "-c" "pkill -SIGUSR1 waybar"; }
+    // Mod+W hotkey-overlay-title="Toggle waybar" { spawn "bash" "-c" "pkill -SIGUSR1 waybar"; }
+    Mod+W hotkey-overlay-title="Toggle Bar" { spawn "bash" "-c" "noctalia-shell ipc call bar toggle"; }
 }

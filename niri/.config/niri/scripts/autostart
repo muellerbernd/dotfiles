@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-cleaner=("lxpolkit" "dunst" "wl-paste" "nm-applet" "waybar" "blueman" "nextcloud" "hyprpaper" "hypridle" "shikane" "eww" "yambar" "mako" "nextcloud" "swayidle" "swaybg" "sway-audio-idle-inhibit" "niri_tile" "mpd-notification")
+cleaner=("lxpolkit" "dunst" "wl-paste" "nm-applet" "waybar" "blueman" "nextcloud" "hyprpaper" "hypridle" "shikane" "eww" "yambar" "mako" "nextcloud" "swayidle" "swaybg" "sway-audio-idle-inhibit" "niri_tile" "mpd-notification" "noctalia-shell")
 
 for str in "${cleaner[@]}"; do
     kill -SIGTERM $(pgrep -f "$str")
 done
 
-mako &
+# mako &
 # lxpolkit &
 foot --server &
 wl-paste --type text --watch cliphist store &
@@ -15,11 +15,11 @@ wl-paste --primary --watch cliphist store &
 nm-applet &
 blueman-applet &
 # nextcloud &
-xhost + local: &
+# xhost + local: &
 # dbus-update-activation-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
 gnome-keyring-daemon --start --components=ssh,secrets,pkcs11 &
 shikane &
-mpd-notification &
+# mpd-notification &
 
 sh ~/scripts/battery-notify.sh &
 
@@ -41,7 +41,7 @@ esac
 
 swaybg --image "$wallpaper" --mode fill &
 
-hypridle &
+# hypridle &
 # sway-audio-idle-inhibit &
 # swayidle -w \
 #     lock "$HOME/scripts/lock_sway.sh" \
@@ -51,7 +51,11 @@ hypridle &
 
 "$HOME"/scripts/check-dotfiles.sh &
 
-waybar --config ~/.config/waybar/config-niri.jsonc --style ~/.config/waybar/style-niri.css &
+# waybar --config ~/.config/waybar/config-niri.jsonc --style ~/.config/waybar/style-niri.css &
+noctalia-shell
+
+name=$(./geolocate | grep City | awk '{print $2}')
+noctalia-shell ipc call location set "$name"
 
 xwayland-satellite &
 
