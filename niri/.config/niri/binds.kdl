@@ -245,7 +245,8 @@ binds {
 
 
     // Mod+V hotkey-overlay-title="Open clipboard manager" { spawn "bash" "-c" "cliphist list | rofi -dmenu | cliphist decode | wl-copy"; }
-    Mod+V hotkey-overlay-title="Open clipboard manager" { spawn "bash" "-c" "cliphist list | fuzzel --dmenu --counter --index | cliphist decode | wl-copy"; }
+    // Mod+V hotkey-overlay-title="Open clipboard manager" { spawn "bash" "-c" "cliphist list | fuzzel --dmenu --counter --index | cliphist decode | wl-copy"; }
+    Mod+V hotkey-overlay-title="Open clipboard manager" { spawn "bash" "-c" "noctalia-shell ipc call launcher clipboard"; }
 
     // Mod+W hotkey-overlay-title="Toggle waybar" { spawn "bash" "-c" "pkill -SIGUSR1 waybar"; }
     Mod+W hotkey-overlay-title="Toggle Bar" { spawn "bash" "-c" "noctalia-shell ipc call bar toggle"; }
