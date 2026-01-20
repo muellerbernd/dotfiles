@@ -231,7 +231,8 @@ binds {
     Mod+Shift+E { spawn "bash" "-c" "noctalia-shell ipc call sessionMenu toggle"; }
     // Mod+Shift+E { spawn "~/.config/rofi/scripts/powermenu/run.sh"; }
 
-    Mod+Shift+N { spawn "~/scripts/nightmode.sh"; }
+    // Mod+Shift+N { spawn "~/scripts/nightmode.sh"; }
+    Mod+Shift+N { spawn "bash" "-c" "noctalia-shell ipc call nightLight toggle"; }
 
     Mod+Shift+R { spawn "~/.config/niri/scripts/autostart"; }
 
