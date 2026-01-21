@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+# Temporary files for entries
+
+tmp_file=$(mktemp)
+
+# Get open windows from niri
+
+if command -v niri &> /dev/null && niri msg windows &> /dev/null; then
+    niri msg windows | jq -r '.[] | "[Window] \(.title) (\(.app_id))\t__WINDOW__\(.id)"' >> "$tmp_file"
+fi
+
+# Get desktop applications
+
+for desktop_file in /usr/share/applications/*.desktop ~/.local/share/applications/*.desktop; do
+    [ -f "$desktop_file" ] || continue
+
+    name=$(grep -m 1 "^Name=" "$desktop_file" | cut -d'=' -f2)
+    exec=$(grep -m 1 "^Exec=" "$desktop_file" | cut -d'=' -f2)
+    nodisplay=$(grep -m 1 "^NoDisplay=" "$desktop_file" | cut -d'=' -f2)
+
+    # Skip if NoDisplay=true or no name/exec
+    [[ "$nodisplay" == "true" ]] && continue
+    [[ -z "$name" || -z "$exec" ]] && continue
+
+    echo -e "[App] $name\t__APP__$exec" >> "$tmp_file"
+done
+
+# Show in fuzzel and get selection
+
+selection=$(cat "$tmp_file" | fuzzel --dmenu --width 60)
+rm "$tmp_file"
+
+# Handle selection
+
+if [ -n "$selection" ]; then
+    if [[ "$selection" == *"__WINDOW__"* ]]; then
+        # Focus window
+        window_id=$(echo "$selection" | sed 's/.*__WINDOW__//')
+        niri msg action focus-window --id "$window_id"
+    elif [[ "$selection" == *"__APP__"* ]]; then
+        # Launch application
+        exec_cmd=$(echo "$selection" | sed 's/.*__APP__//')
+        # Clean up exec field codes (%U, %F, etc.)
+        exec_cmd=$(echo "$exec_cmd" | sed 's/ %[A-Za-z]//g')
+        eval "$exec_cmd" &
+    fi
+fi
